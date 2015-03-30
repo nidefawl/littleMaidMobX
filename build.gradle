@@ -44,74 +44,74 @@ allprojects {
 	}
 }
 
-	dependencies {
-		// you may put jars on which you depend on in ./libs
-		// or you may define them like so..
-		//compile "some.group:artifact:version:classifier"
-		//compile "some.group:artifact:version"
+dependencies {
+	// you may put jars on which you depend on in ./libs
+	// or you may define them like so..
+	//compile "some.group:artifact:version:classifier"
+	//compile "some.group:artifact:version"
 
-		// real examples
-		//compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
-		//compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
+	// real examples
+	//compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
+	//compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
 
-		// for more info...
-		// http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
-		// http://www.gradle.org/docs/current/userguide/dependency_management.html
+	// for more info...
+	// http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
+	// http://www.gradle.org/docs/current/userguide/dependency_management.html
 
-	}
-
-	sourceSets {
-		main {
-			java {
-				srcDirs = ['src/main/java']
-				exclude '**/main/resources/'
-			}
-			resources {
-				srcDirs = ['src/main/resources']
-				exclude '**/java'
-			}
-		}
-	}
-
- //Creates a compiled de-obfuscated jar
-task deobfJar(type: Jar) {
-    from sourceSets.main.output
-    appendix = 'deobf'
-	
-	manifest.attributes(
-            'FMLCorePlugin': 'mmmlibx.lib.multiModel.MMMLoader.MMMCoremod',
-                        'FMLCorePluginContainsFMLMod': 'true'
-    )
 }
-	//creates a jar containing only the src
-	task sourceJar(type: Jar) {
-		from sourceSets.main.allSource
-		appendix = 'src'
-	}
 
-	tasks.build.dependsOn('sourceJar', 'deobfJar')
-
-	processResources {
-		//First we just copy in the mcmod.info file
-		from(sourceSets.main.resources.srcDirs) {
-			include '**/*.info'
-			include '**/*.prop'
-
-			// replaces
-			expand([
-				'mod_version': version,
-				'minecraft_version': project.config.minecraft_version, ])
+sourceSets {
+	main {
+		java {
+			srcDirs = ['src/main/java']
+			exclude '**/main/resources/'
 		}
-		// copy everything else, thats we didnt do before
-		from(sourceSets.main.resources.srcDirs) {
-			exclude '**/*.info'
-			exclude '**/*.prop'
+		resources {
+			srcDirs = ['src/main/resources']
+			exclude '**/java'
 		}
 	}
+}
+
+//Creates a compiled de-obfuscated jar
+task deobfJar(type: Jar) {
+	from sourceSets.main.output
+	appendix = 'deobf'
+
+	manifest.attributes(
+		'FMLCorePlugin': 'mmmlibx.lib.multiModel.MMMLoader.MMMCoremod',
+		'FMLCorePluginContainsFMLMod': 'littleMaidMobX.LMM_LittleMaidMobX',
+		'FMLCorePluginContainsFMLMod': 'mmmlibx.lib.MMMLib')
+}
+//creates a jar containing only the src
+task sourceJar(type: Jar) {
+	from sourceSets.main.allSource
+	appendix = 'src'
+}
+
+tasks.build.dependsOn('sourceJar', 'deobfJar')
+
+processResources {
+	//First we just copy in the mcmod.info file
+	from(sourceSets.main.resources.srcDirs) {
+		include '**/*.info'
+		include '**/*.prop'
+
+		// replaces
+		expand([
+			'mod_version': version,
+			'minecraft_version': project.config.minecraft_version, ])
+	}
+	// copy everything else, thats we didnt do before
+	from(sourceSets.main.resources.srcDirs) {
+		exclude '**/*.info'
+		exclude '**/*.prop'
+	}
+}
 
 jar {
-    manifest.attributes(
-            'FMLCorePlugin': 'mmmlibx.lib.multiModel.MMMLoader.MMMCoremod',
-                        'FMLCorePluginContainsFMLMod': 'true'
-    )
+	manifest.attributes(
+		'FMLCorePlugin': 'mmmlibx.lib.multiModel.MMMLoader.MMMCoremod',
+		'FMLCorePluginContainsFMLMod': 'littleMaidMobX.LMM_LittleMaidMobX',
+		'FMLCorePluginContainsFMLMod': 'mmmlibx.lib.MMMLib')
 }
