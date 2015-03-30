@@ -42,6 +42,7 @@ allprojects {
 			runDir = ""
 		}
 	}
+}
 
 	dependencies {
 		// you may put jars on which you depend on in ./libs
