@@ -16,8 +16,6 @@ buildscript {
 }
 
 
-apply plugin: 'forge'
-
 // define the properties file
 ext.configFile = file "build.prop"
 
@@ -28,9 +26,21 @@ configFile.withReader {
     project.ext.config = new ConfigSlurper().parse prop
 }
 
-minecraft {
-    version = "1.7.10-10.13.2.1291"
-    runDir = "eclipse"
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'forge'
+    apply plugin: 'maven'
+    group = config.group_name
+    version = config.mod_version
+	archivesBaseName = "[${config.minecraft_version}]${config.mod_id}"
+
+    minecraft {
+    version = config.minecraft_version + "-" + config.forge_version
+	if(file('../run').exists()){
+	runDir = "../run"
+	} else {
+    runDir = ""
+	}
 }
 
 dependencies {
@@ -48,6 +58,31 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
 }
+
+sourceSets {
+   main {
+     java {
+       srcDirs = [ 'src/main/java' ]
+	   exclude '**/main/resources/'
+     }
+	 resources {
+       srcDirs = [ 'src/resources' ]
+	   exclude '**/java'
+     }
+   }
+ }
+ //Creates a compiled de-obfuscated jar
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    appendix = 'deobf'
+}
+ //creates a jar containing only the src
+task sourceJar(type: Jar) {
+    from sourceSets.main.allSource
+    appendix = 'src'
+}
+
+tasks.build.dependsOn('sourceJar', 'deobfJar')
 
 processResources {
 //First we just copy in the mcmod.info file
