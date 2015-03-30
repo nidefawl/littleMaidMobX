@@ -15,15 +15,6 @@ buildscript {
     }
 }
 
-task sourceJar(type: Jar) {
-    from sourceSets.main.allSource
-    appendix = 'src'
-}
-
-task deobfJar(type: Jar) {
-    from sourceSets.main.output
-    appendix = 'deobf'
-}
 
 apply plugin: 'forge'
 
