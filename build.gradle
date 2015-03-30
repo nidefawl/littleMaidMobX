@@ -1,18 +1,18 @@
 buildscript {
-    repositories {
-        mavenCentral()
-        maven {
-            name = "forge"
-            url = "http://files.minecraftforge.net/maven"
-        }
-        maven {
-            name = "sonatype"
-            url = "https://oss.sonatype.org/content/repositories/snapshots/"
-        }
-    }
-    dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
-    }
+	repositories {
+		mavenCentral()
+		maven {
+			name = "forge"
+			url = "http://files.minecraftforge.net/maven"
+		}
+		maven {
+			name = "sonatype"
+			url = "https://oss.sonatype.org/content/repositories/snapshots/"
+		}
+	}
+	dependencies {
+		classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+	}
 }
 
 
@@ -20,85 +20,85 @@ buildscript {
 ext.configFile = file "build.prop"
 
 configFile.withReader {
-    // read config.  it shall from now on be referenced as simply config or as project.config
-    def prop = new Properties()
-    prop.load(it)
-    project.ext.config = new ConfigSlurper().parse prop
+	// read config.  it shall from now on be referenced as simply config or as project.config
+	def prop = new Properties()
+	prop.load(it)
+	project.ext.config = new ConfigSlurper().parse prop
 }
 
 allprojects {
-    apply plugin: 'java'
-    apply plugin: 'forge'
-    apply plugin: 'maven'
-    group = config.group_name
-    version = config.mod_version
+	apply plugin: 'java'
+	apply plugin: 'forge'
+	apply plugin: 'maven'
+	group = config.group_name
+	version = config.mod_version
 	archivesBaseName = "[${config.minecraft_version}]${config.mod_id}"
 
-    minecraft {
-    version = config.minecraft_version + "-" + config.forge_version
-	if(file('../run').exists()){
-	runDir = "../run"
-	} else {
-    runDir = ""
+	minecraft {
+		version = config.minecraft_version + "-" + config.forge_version
+		if (file('../run').exists()) {
+			runDir = "../run"
+		} else {
+			runDir = ""
+		}
 	}
-}
 
-dependencies {
-    // you may put jars on which you depend on in ./libs
-    // or you may define them like so..
-    //compile "some.group:artifact:version:classifier"
-    //compile "some.group:artifact:version"
+	dependencies {
+		// you may put jars on which you depend on in ./libs
+		// or you may define them like so..
+		//compile "some.group:artifact:version:classifier"
+		//compile "some.group:artifact:version"
 
-    // real examples
-    //compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
-    //compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
+		// real examples
+		//compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
+		//compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
 
-    // for more info...
-    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
-    // http://www.gradle.org/docs/current/userguide/dependency_management.html
+		// for more info...
+		// http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
+		// http://www.gradle.org/docs/current/userguide/dependency_management.html
 
-}
+	}
 
-sourceSets {
-   main {
-     java {
-       srcDirs = [ 'src/main/java' ]
-	   exclude '**/main/resources/'
-     }
-	 resources {
-       srcDirs = [ 'src/resources' ]
-	   exclude '**/java'
-     }
-   }
- }
- //Creates a compiled de-obfuscated jar
-task deobfJar(type: Jar) {
-    from sourceSets.main.output
-    appendix = 'deobf'
-}
- //creates a jar containing only the src
-task sourceJar(type: Jar) {
-    from sourceSets.main.allSource
-    appendix = 'src'
-}
+	sourceSets {
+		main {
+			java {
+				srcDirs = ['src/main/java']
+				exclude '**/main/resources/'
+			}
+			resources {
+				srcDirs = ['src/resources']
+				exclude '**/java'
+			}
+		}
+	}
 
-tasks.build.dependsOn('sourceJar', 'deobfJar')
+	//Creates a compiled de-obfuscated jar
+	task deobfJar(type: Jar) {
+		from sourceSets.main.output
+		appendix = 'deobf'
+	}
+	//creates a jar containing only the src
+	task sourceJar(type: Jar) {
+		from sourceSets.main.allSource
+		appendix = 'src'
+	}
 
-processResources {
-//First we just copy in the mcmod.info file
-from(sourceSets.main.resources.srcDirs) {
-        include '**/*.info'
-        include '**/*.prop'
+	tasks.build.dependsOn('sourceJar', 'deobfJar')
 
-        // replaces
-        expand ([
-            'mod_version': version,
-            'minecraft_version': project.config.minecraft_version,
-        ])
-    }
-     // copy everything else, thats we didnt do before
-    from(sourceSets.main.resources.srcDirs) {
-        exclude '**/*.info'
-        exclude '**/*.prop'
-    }
-}
+	processResources {
+		//First we just copy in the mcmod.info file
+		from(sourceSets.main.resources.srcDirs) {
+			include '**/*.info'
+			include '**/*.prop'
+
+			// replaces
+			expand([
+				'mod_version': version,
+				'minecraft_version': project.config.minecraft_version, ])
+		}
+		// copy everything else, thats we didnt do before
+		from(sourceSets.main.resources.srcDirs) {
+			exclude '**/*.info'
+			exclude '**/*.prop'
+		}
+	}
