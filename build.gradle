@@ -73,11 +73,17 @@ allprojects {
 		}
 	}
 
-	//Creates a compiled de-obfuscated jar
-	task deobfJar(type: Jar) {
-		from sourceSets.main.output
-		appendix = 'deobf'
-	}
+ //Creates a compiled de-obfuscated jar
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    appendix = 'deobf'
+	
+	manifest.attributes(
+            'FMLCorePlugin': 'mmmlibx.lib.multiModel.MMMLoader.MMMCoremod',
+			'FMLCorePluginContainsFMLMod': 'littleMaidMobX.LMM_LittleMaidMobX',
+			'FMLCorePluginContainsFMLMod': 'mmmlibx.lib.MMMLib'
+    )
+}
 	//creates a jar containing only the src
 	task sourceJar(type: Jar) {
 		from sourceSets.main.allSource
@@ -103,3 +109,11 @@ allprojects {
 			exclude '**/*.prop'
 		}
 	}
+
+jar {
+    manifest.attributes(
+            'FMLCorePlugin': 'mmmlibx.lib.multiModel.MMMLoader.MMMCoremod',
+			'FMLCorePluginContainsFMLMod': 'littleMaidMobX.LMM_LittleMaidMobX',
+			'FMLCorePluginContainsFMLMod': 'mmmlibx.lib.MMMLib'
+    )
+}
