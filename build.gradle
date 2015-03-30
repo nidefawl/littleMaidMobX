@@ -80,8 +80,7 @@ task deobfJar(type: Jar) {
 
 	manifest.attributes(
 		'FMLCorePlugin': 'mmmlibx.lib.multiModel.MMMLoader.MMMCoremod',
-		'FMLCorePluginContainsFMLMod': 'littleMaidMobX.LMM_LittleMaidMobX',
-		'FMLCorePluginContainsFMLMod': 'mmmlibx.lib.MMMLib')
+		'FMLCorePluginContainsFMLMod': 'littleMaidMobX.LMM_LittleMaidMobX' 'mmmlibx.lib.MMMLib')
 }
 //creates a jar containing only the src
 task sourceJar(type: Jar) {
@@ -112,6 +111,5 @@ processResources {
 jar {
 	manifest.attributes(
 		'FMLCorePlugin': 'mmmlibx.lib.multiModel.MMMLoader.MMMCoremod',
-		'FMLCorePluginContainsFMLMod': 'littleMaidMobX.LMM_LittleMaidMobX',
-		'FMLCorePluginContainsFMLMod': 'mmmlibx.lib.MMMLib')
+		'FMLCorePluginContainsFMLMod': 'littleMaidMobX.LMM_LittleMaidMobX' 'mmmlibx.lib.MMMLib')
 }
