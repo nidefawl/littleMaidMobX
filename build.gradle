@@ -67,7 +67,7 @@ allprojects {
 				exclude '**/main/resources/'
 			}
 			resources {
-				srcDirs = ['src/resources']
+				srcDirs = ['src/main/resources']
 				exclude '**/java'
 			}
 		}
