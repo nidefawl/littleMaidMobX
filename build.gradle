@@ -95,7 +95,7 @@ processResources {
 		// replaces
 		expand([
 			'mod_version': version,
-			'minecraft_version': project.config.minecraft_version, ])
+			'minecraft_version': project.minecraft_version, ])
 	}
 	// copy everything else, thats we didnt do before
 	from(sourceSets.main.resources.srcDirs) {
