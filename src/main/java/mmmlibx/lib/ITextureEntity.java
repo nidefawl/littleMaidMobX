@@ -2,37 +2,56 @@ package mmmlibx.lib;
 
 import net.minecraft.util.ResourceLocation;
 
-public abstract interface ITextureEntity
-{
-  public abstract void setTexturePackIndex(int paramInt, int[] paramArrayOfInt);
-  
-  public abstract void setTexturePackName(MMM_TextureBox[] paramArrayOfMMM_TextureBox);
-  
-  public abstract void setColor(int paramInt);
-  
-  public abstract int getColor();
-  
-  public abstract void setContract(boolean paramBoolean);
-  
-  public abstract boolean isContract();
-  
-  public abstract void setTextureBox(MMM_TextureBoxBase[] paramArrayOfMMM_TextureBoxBase);
-  
-  public abstract MMM_TextureBoxBase[] getTextureBox();
-  
-  public abstract void setTextureIndex(int[] paramArrayOfInt);
-  
-  public abstract int[] getTextureIndex();
-  
-  public abstract void setTextures(int paramInt, ResourceLocation[] paramArrayOfResourceLocation);
-  
-  public abstract ResourceLocation[] getTextures(int paramInt);
-  
-  public abstract MMM_TextureData getTextureData();
-}
-
-
-/* Location:              /home/kongou/Downloads/littleMaidMobX-1.7.x_0.0.8 (1)-deobf.jar!/mmmlibx/lib/ITextureEntity.class
- * Java compiler version: 6 (50.0)
- * JD-Core Version:       0.7.1-SNAPSHOT-20140817
+/**
+ * MMM_Texture仕様のテクスチャパック設定に対応しているEntityへ継承させる。
  */
+public interface ITextureEntity {
+
+	/**
+	 * Server用。
+	 * TextureManagerがサーバー側のEntityへテクスチャ変更の通知を行う。
+	 * @param pIndex
+	 * 設定されるテクスチャパックのインデックス（TextureBoxServer）
+	 */
+	public void setTexturePackIndex(int pColor, int[] pIndex);
+
+	/**
+	 * Client用。
+	 * TextureManagerがクライアント側のEntityへテクスチャ変更の通知を行う。
+	 * @param pPackName
+	 * 設定されるテクスチャパックの名称（TextureBoxClient）
+	 */
+	public void setTexturePackName(MMM_TextureBox[] pTextureBox);
+
+	/**
+	 * 現在のEntityに色を設定する。
+	 * @param pColor
+	 */
+	public void setColor(int pColor);
+
+	/**
+	 * 現在のEntityに設定されている色を返す。
+	 * @return
+	 */
+	public int getColor();
+
+	public void setContract(boolean pContract);
+	public boolean isContract();
+
+	public void setTextureBox(MMM_TextureBoxBase[] pTextureBox);
+	public MMM_TextureBoxBase[] getTextureBox();
+
+	public void setTextureIndex(int[] pTextureIndex);
+	public int[] getTextureIndex();
+
+	public void setTextures(int pIndex, ResourceLocation[] pNames);
+	public ResourceLocation[] getTextures(int pIndex);
+	
+	/**
+	 * 仕様変更により、これ以外は必要無くなる予定。
+	 * @return
+	 */
+	public MMM_TextureData getTextureData();
+
+
+}

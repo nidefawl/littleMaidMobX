@@ -1,110 +1,105 @@
-/*     */ package mmmlibx.lib.multiModel.MMMLoader;
-/*     */ 
-/*     */ import com.google.common.collect.ImmutableSet;
-/*     */ import cpw.mods.fml.common.ModContainer;
-/*     */ import java.awt.image.BufferedImage;
-/*     */ import java.io.FileNotFoundException;
-/*     */ import java.io.IOException;
-/*     */ import java.io.InputStream;
-/*     */ import java.util.Set;
-/*     */ import javax.imageio.ImageIO;
-/*     */ import littleMaidMobX.LMM_SoundManager;
-/*     */ import mmmlibx.lib.MMMLib;
-/*     */ import net.minecraft.client.resources.DefaultResourcePack;
-/*     */ import net.minecraft.client.resources.IResourcePack;
-/*     */ import net.minecraft.client.resources.data.IMetadataSection;
-/*     */ import net.minecraft.client.resources.data.IMetadataSerializer;
-/*     */ import net.minecraft.util.ResourceLocation;
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ public class MMMResourcePack
-/*     */   implements IResourcePack
-/*     */ {
-/*     */   protected ModContainer ownerContainer;
-/*     */   
-/*     */   public MMMResourcePack(ModContainer pContainer)
-/*     */   {
-/*  37 */     this.ownerContainer = pContainer;
-/*     */   }
-/*     */   
-/*     */   public InputStream getInputStream(ResourceLocation par1ResourceLocation) throws IOException
-/*     */   {
-/*  42 */     InputStream inputstream = getResourceStream(par1ResourceLocation, true);
-/*     */     
-/*  44 */     if (inputstream != null) {
-/*  45 */       return inputstream;
-/*     */     }
-/*  47 */     throw new FileNotFoundException(par1ResourceLocation.getResourcePath());
-/*     */   }
-/*     */   
-/*     */   private InputStream getResourceStream(ResourceLocation resource, boolean b)
-/*     */   {
-/*  52 */     String path = resource.getResourcePath();
-/*  53 */     InputStream lis = MMMResourcePack.class.getResourceAsStream(path);
-/*  54 */     if (resource.getResourceDomain().equalsIgnoreCase("lmmx"))
-/*     */     {
-/*  56 */       if (lis == null)
-/*     */       {
-/*  58 */         lis = LMM_SoundManager.getResourceStream(resource);
-/*     */       }
-/*     */       
-/*  61 */       MMMLib.Debug("getResource:" + b + ":%s : %s", new Object[] { resource, lis });
-/*     */     }
-/*  63 */     return lis;
-/*     */   }
-/*     */   
-/*     */   public boolean resourceExists(ResourceLocation par1ResourceLocation)
-/*     */   {
-/*  68 */     InputStream is = getResourceStream(par1ResourceLocation, false);
-/*     */     
-/*     */ 
-/*     */ 
-/*  72 */     return is != null;
-/*     */   }
-/*     */   
-/*  75 */   public static final Set lmmxResourceDomains = ImmutableSet.of("lmmx");
-/*     */   
-/*     */   public Set getResourceDomains()
-/*     */   {
-/*  79 */     return lmmxResourceDomains;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */   public IMetadataSection getPackMetadata(IMetadataSerializer par1MetadataSerializer, String par2Str)
-/*     */   {
-/*  85 */     return null;
-/*     */   }
-/*     */   
-/*     */   public BufferedImage getPackImage()
-/*     */   {
-/*     */     try
-/*     */     {
-/*  92 */       return ImageIO.read(DefaultResourcePack.class.getResourceAsStream("/" + new ResourceLocation("pack.png").getResourcePath()));
-/*     */     }
-/*     */     catch (IOException e) {
-/*  95 */       e.printStackTrace();
-/*     */     }
-/*  97 */     return null;
-/*     */   }
-/*     */   
-/*     */   public String getPackName()
-/*     */   {
-/* 102 */     return "Default";
-/*     */   }
-/*     */ }
+package mmmlibx.lib.multiModel.MMMLoader;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Set;
 
-/* Location:              /home/kongou/Downloads/littleMaidMobX-1.7.x_0.0.8 (1)-deobf.jar!/mmmlibx/lib/multiModel/MMMLoader/MMMResourcePack.class
- * Java compiler version: 6 (50.0)
- * JD-Core Version:       0.7.1-SNAPSHOT-20140817
+import javax.imageio.ImageIO;
+
+import littleMaidMobX.LMM_LittleMaidMobX;
+import littleMaidMobX.LMM_SoundManager;
+import mmmlibx.lib.MMMLib;
+import net.minecraft.client.resources.DefaultResourcePack;
+import net.minecraft.client.resources.IResourcePack;
+import net.minecraft.client.resources.data.IMetadataSection;
+import net.minecraft.client.resources.data.IMetadataSerializer;
+import net.minecraft.util.ResourceLocation;
+
+import com.google.common.collect.ImmutableSet;
+
+import cpw.mods.fml.common.ModContainer;
+
+/**
+ * 旧リソースを扱えるようにするクラス。<br>
+ * 基本的にクラスローダーでマップされたリソースにアクセスできるようにするだけなので、特殊なマップ方法でロードされている場合は対応できない。
+ *
  */
+public class MMMResourcePack implements IResourcePack {
+
+	protected ModContainer ownerContainer;
+
+
+	public MMMResourcePack(ModContainer pContainer) {
+		ownerContainer = pContainer;
+	}
+
+	@Override
+	public InputStream getInputStream(ResourceLocation par1ResourceLocation) throws IOException {
+		InputStream inputstream = getResourceStream(par1ResourceLocation, true);
+		
+		if (inputstream != null) {
+			return inputstream;
+		} else {
+			throw new FileNotFoundException(par1ResourceLocation.getResourcePath());
+		}
+	}
+
+	private InputStream getResourceStream(ResourceLocation resource, boolean b) {
+		String path = resource.getResourcePath();
+		InputStream lis = MMMResourcePack.class.getResourceAsStream(path);
+		if(resource.getResourceDomain().equalsIgnoreCase(LMM_LittleMaidMobX.DOMAIN))
+		{
+			if(lis==null)
+			{
+				lis = LMM_SoundManager.getResourceStream(resource);
+			}
+
+			MMMLib.Debug("getResource:"+b+":%s : %s", resource, lis);
+		}
+		return lis;
+	}
+
+	@Override
+	public boolean resourceExists(ResourceLocation par1ResourceLocation) {
+		InputStream is = getResourceStream(par1ResourceLocation, false);
+		
+		// TODO ★ このInputStream はクローズしなくていいの？
+		
+		return is != null;
+	}
+
+	public static final Set lmmxResourceDomains = ImmutableSet.of(LMM_LittleMaidMobX.DOMAIN);
+	@Override
+	@SuppressWarnings("rawtypes")
+	public Set getResourceDomains() {
+		return lmmxResourceDomains;
+	}
+
+	@Override
+	public IMetadataSection getPackMetadata(IMetadataSerializer par1MetadataSerializer, String par2Str)
+	{ //throws IOException {
+		return null;
+	}
+
+	// 未使用
+	@Override
+	public BufferedImage getPackImage() {// throws IOException {
+		try {
+			return ImageIO.read(DefaultResourcePack.class.getResourceAsStream("/"
+					+ (new ResourceLocation("pack.png")).getResourcePath()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public String getPackName() {
+		return "Default";
+	}
+
+}

@@ -1,85 +1,80 @@
-/*    */ package mmmlibx.lib.multiModel.texture;
-/*    */ 
-/*    */ import java.io.FileInputStream;
-/*    */ import java.util.HashMap;
-/*    */ import java.util.Map;
-/*    */ import mmmlibx.lib.multiModel.model.AbstractModelBase;
-/*    */ import net.minecraft.util.ResourceLocation;
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ public class MultiModelContainer
-/*    */ {
-/* 19 */   public int[] defaultVisivles = new int[16];
-/*    */   
-/*    */ 
-/*    */   protected AbstractModelBase[] defaultModel;
-/*    */   
-/*    */ 
-/*    */   protected Map<Integer, AbstractModelBase[]> models;
-/*    */   
-/*    */   protected Map<Integer, ResourceLocation> textures;
-/*    */   
-/*    */   protected boolean isDecodeJSON;
-/*    */   
-/*    */ 
-/*    */   public MultiModelContainer()
-/*    */   {
-/* 34 */     this.models = new HashMap();
-/* 35 */     this.textures = new HashMap();
-/* 36 */     this.isDecodeJSON = false;
-/*    */   }
-/*    */   
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */   public boolean loadJSON(FileInputStream pStream)
-/*    */   {
-/* 45 */     this.isDecodeJSON = true;
-/* 46 */     return false;
-/*    */   }
-/*    */   
-/*    */   public void addTexture(int pIndex, ResourceLocation pResource) {
-/* 50 */     this.textures.put(Integer.valueOf(pIndex), pResource);
-/*    */   }
-/*    */   
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */   public ResourceLocation getTexture(int pIndex)
-/*    */   {
-/* 59 */     return (ResourceLocation)this.textures.get(Integer.valueOf(pIndex));
-/*    */   }
-/*    */   
-/*    */   public AbstractModelBase[] getModelClass(int pIndex) {
-/* 63 */     if (this.models.containsKey(Integer.valueOf(pIndex))) {
-/* 64 */       return (AbstractModelBase[])this.models.get(Integer.valueOf(pIndex));
-/*    */     }
-/* 66 */     return this.defaultModel;
-/*    */   }
-/*    */   
-/* 69 */   public AbstractModelBase[] getModelClass() { return this.defaultModel; }
-/*    */   
-/*    */   public MultiModelEntry getMultiModel()
-/*    */   {
-/* 73 */     return new MultiModelEntry();
-/*    */   }
-/*    */   
-/*    */   public int getTextureCount() {
-/* 77 */     return this.textures.size();
-/*    */   }
-/*    */ }
+package mmmlibx.lib.multiModel.texture;
 
+import java.io.FileInputStream;
+import java.util.HashMap;
+import java.util.Map;
 
-/* Location:              /home/kongou/Downloads/littleMaidMobX-1.7.x_0.0.8 (1)-deobf.jar!/mmmlibx/lib/multiModel/texture/MultiModelContainer.class
- * Java compiler version: 6 (50.0)
- * JD-Core Version:       0.7.1-SNAPSHOT-20140817
+import mmmlibx.lib.multiModel.model.AbstractModelBase;
+import net.minecraft.util.ResourceLocation;
+
+/**
+ * 個別のマルチテクスチャ・モデルを管理する。
+ *
  */
+public class MultiModelContainer {
+
+	/**
+	 * 標準のパーツ表示状況を設定する
+	 */
+	public int[] defaultVisivles = new int[16];
+	
+	/**
+	 * バインドされているモデルクラス
+	 */
+	protected AbstractModelBase[] defaultModel;
+	protected Map<Integer, AbstractModelBase[]> models;
+	/**
+	 * バインドされているテクスチャ
+	 */
+	protected Map<Integer, ResourceLocation> textures;
+	protected boolean isDecodeJSON;
+
+
+	public MultiModelContainer() {
+		models = new HashMap<Integer, AbstractModelBase[]>();
+		textures = new HashMap<Integer, ResourceLocation>();
+		isDecodeJSON = false;
+	}
+
+	/**
+	 * 渡されたストリームをJSONとして読み込む
+	 * @param pStream
+	 * @return
+	 */
+	public boolean loadJSON(FileInputStream pStream) {
+		isDecodeJSON = true;
+		return false;
+	}
+
+	public void addTexture(int pIndex, ResourceLocation pResource) {
+		textures.put(pIndex, pResource);
+	}
+
+	/**
+	 * インデックスに応じたテクスチャを返す
+	 * @param pIndex
+	 * @return
+	 */
+	public ResourceLocation getTexture(int pIndex) {
+		return textures.get(pIndex);
+	}
+
+	public AbstractModelBase[] getModelClass(int pIndex) {
+		if (models.containsKey(pIndex)) {
+			return models.get(pIndex);
+		}
+		return defaultModel;
+	}
+	public AbstractModelBase[] getModelClass() {
+		return defaultModel;
+	}
+
+	public MultiModelEntry getMultiModel() {
+		return new MultiModelEntry();
+	}
+
+	public int getTextureCount() {
+		return textures.size();
+	}
+
+}

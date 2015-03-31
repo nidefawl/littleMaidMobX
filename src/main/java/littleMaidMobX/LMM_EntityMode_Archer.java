@@ -1,214 +1,210 @@
-/*     */ package littleMaidMobX;
-/*     */ 
-/*     */ import java.util.List;
-/*     */ import java.util.Random;
-/*     */ import net.minecraft.block.Block;
-/*     */ import net.minecraft.entity.Entity;
-/*     */ import net.minecraft.entity.EntityLivingBase;
-/*     */ import net.minecraft.entity.ai.EntityAITasks;
-/*     */ import net.minecraft.entity.player.EntityPlayer;
-/*     */ import net.minecraft.init.Blocks;
-/*     */ import net.minecraft.init.Items;
-/*     */ import net.minecraft.item.ItemBow;
-/*     */ import net.minecraft.item.ItemStack;
-/*     */ import net.minecraft.util.AxisAlignedBB;
-/*     */ import net.minecraft.world.World;
-/*     */ 
-/*     */ public class LMM_EntityMode_Archer extends LMM_EntityModeBase
-/*     */ {
-/*     */   public static final int mmode_Archer = 131;
-/*     */   public static final int mmode_Blazingstar = 195;
-/*     */   
-/*     */   public int priority()
-/*     */   {
-/*  24 */     return 3200;
-/*     */   }
-/*     */   
-/*     */   public LMM_EntityMode_Archer(LMM_EntityLittleMaid pEntity) {
-/*  28 */     super(pEntity);
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public void init()
-/*     */   {
-/*  46 */     LMM_TriggerSelect.appendTriggerItem(null, "Bow", "");
-/*  47 */     LMM_TriggerSelect.appendTriggerItem(null, "Arrow", "");
-/*     */   }
-/*     */   
-/*     */ 
-/*     */   public void addEntityMode(EntityAITasks pDefaultMove, EntityAITasks pDefaultTargeting)
-/*     */   {
-/*  53 */     EntityAITasks[] ltasks = new EntityAITasks[2];
-/*  54 */     ltasks[0] = pDefaultMove;
-/*  55 */     ltasks[1] = new EntityAITasks(this.owner.aiProfiler);
-/*     */     
-/*     */ 
-/*     */ 
-/*  59 */     ltasks[1].addTask(3, new LMM_EntityAIHurtByTarget(this.owner, true));
-/*  60 */     ltasks[1].addTask(4, new LMM_EntityAINearestAttackableTarget(this.owner, EntityLivingBase.class, 0, true));
-/*     */     
-/*  62 */     this.owner.addMaidMode(ltasks, "Archer", 131);
-/*     */     
-/*     */ 
-/*     */ 
-/*  66 */     EntityAITasks[] ltasks2 = new EntityAITasks[2];
-/*  67 */     ltasks2[0] = pDefaultMove;
-/*  68 */     ltasks2[1] = new EntityAITasks(this.owner.aiProfiler);
-/*     */     
-/*  70 */     ltasks2[1].addTask(1, new LMM_EntityAIHurtByTarget(this.owner, true));
-/*  71 */     ltasks2[1].addTask(2, new LMM_EntityAINearestAttackableTarget(this.owner, EntityLivingBase.class, 0, true));
-/*     */     
-/*  73 */     this.owner.addMaidMode(ltasks2, "Blazingstar", 195);
-/*     */   }
-/*     */   
-/*     */   public boolean changeMode(EntityPlayer pentityplayer)
-/*     */   {
-/*  78 */     ItemStack litemstack = this.owner.maidInventory.getStackInSlot(0);
-/*  79 */     if ((litemstack != null) && (
-/*  80 */       ((litemstack.getItem() instanceof ItemBow)) || (LMM_TriggerSelect.checkWeapon(this.owner.getMaidMaster(), "Bow", litemstack)))) {
-/*  81 */       if (this.owner.maidInventory.getInventorySlotContainItem(net.minecraft.item.ItemFlintAndSteel.class) > -1) {
-/*  82 */         this.owner.setMaidMode("Blazingstar");
-/*     */       } else {
-/*  84 */         this.owner.setMaidMode("Archer");
-/*     */       }
-/*  86 */       return true;
-/*     */     }
-/*     */     
-/*  89 */     return false;
-/*     */   }
-/*     */   
-/*     */   public boolean setMode(int pMode)
-/*     */   {
-/*  94 */     switch (pMode) {
-/*     */     case 131: 
-/*  96 */       this.owner.aiAttack.setEnable(false);
-/*  97 */       this.owner.aiShooting.setEnable(true);
-/*  98 */       this.owner.setBloodsuck(false);
-/*  99 */       return true;
-/*     */     case 195: 
-/* 101 */       this.owner.aiAttack.setEnable(false);
-/* 102 */       this.owner.aiShooting.setEnable(true);
-/* 103 */       this.owner.setBloodsuck(true);
-/* 104 */       return true;
-/*     */     }
-/*     */     
-/* 107 */     return false;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public int getNextEquipItem(int pMode)
-/*     */   {
-/* 116 */     switch (pMode) {
-/*     */     case 131: 
-/*     */     case 195: 
-/* 119 */       for (int li = 0; li < 18; li++) {
-/* 120 */         ItemStack litemstack = this.owner.maidInventory.getStackInSlot(li);
-/* 121 */         if (litemstack != null)
-/*     */         {
-/*     */ 
-/* 124 */           if (((litemstack.getItem() instanceof ItemBow)) || (LMM_TriggerSelect.checkWeapon(this.owner.getMaidMaster(), "Bow", litemstack))) {
-/* 125 */             return li;
-/*     */           }
-/*     */         }
-/*     */       }
-/*     */     }
-/*     */     
-/* 131 */     return -1;
-/*     */   }
-/*     */   
-/*     */   public boolean checkItemStack(ItemStack pItemStack)
-/*     */   {
-/* 136 */     String ls = this.owner.getMaidMaster();
-/* 137 */     return ((pItemStack.getItem() instanceof ItemBow)) || (pItemStack.getItem() == Items.arrow) || (LMM_TriggerSelect.checkWeapon(ls, "Bow", pItemStack)) || (LMM_TriggerSelect.checkWeapon(ls, "Arrow", pItemStack));
-/*     */   }
-/*     */   
-/*     */ 
-/*     */   public void onUpdate(int pMode)
-/*     */   {
-/* 143 */     switch (pMode) {
-/*     */     case 131: 
-/*     */     case 195: 
-/* 146 */       this.owner.getWeaponStatus();
-/*     */     }
-/*     */     
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */   public void updateAITick(int pMode)
-/*     */   {
-/* 155 */     switch (pMode)
-/*     */     {
-/*     */     case 131: 
-/* 158 */       updateGuns();
-/* 159 */       break;
-/*     */     
-/*     */     case 195: 
-/* 162 */       updateGuns();
-/*     */       
-/* 164 */       World lworld = this.owner.worldObj;
-/* 165 */       List<Entity> llist = lworld.getEntitiesWithinAABB(Entity.class, this.owner.boundingBox.expand(16.0D, 16.0D, 16.0D));
-/* 166 */       for (int li = 0; li < llist.size(); li++) {
-/* 167 */         Entity lentity = (Entity)llist.get(li);
-/* 168 */         if ((lentity.isEntityAlive()) && (lentity.isBurning()) && (this.owner.getRNG().nextFloat() > 0.9F))
-/*     */         {
-/* 170 */           int lx = (int)this.owner.posX;
-/* 171 */           int ly = (int)this.owner.posY;
-/* 172 */           int lz = (int)this.owner.posZ;
-/* 173 */           if ((lworld.getBlock(lx, ly, lz) == Blocks.air) || (lworld.getBlock(lx, ly, lz).getMaterial().getCanBurn())) {
-/* 174 */             lworld.playSoundEffect(lx + 0.5D, ly + 0.5D, lz + 0.5D, "fire.ignite", 1.0F, this.owner.getRNG().nextFloat() * 0.4F + 0.8F);
-/* 175 */             lworld.setBlock(lx, ly, lz, Blocks.fire);
-/*     */           }
-/*     */         }
-/*     */       }
-/*     */     }
-/*     */   }
-/*     */   
-/*     */   protected void updateGuns()
-/*     */   {
-/* 184 */     if ((this.owner.getAttackTarget() == null) || (!this.owner.getAttackTarget().isEntityAlive()))
-/*     */     {
-/* 186 */       if (!this.owner.weaponReload) {
-/* 187 */         if (this.owner.maidAvatar.isUsingItem())
-/*     */         {
-/* 189 */           if (this.owner.maidAvatar.isItemReload) {
-/* 190 */             this.owner.maidAvatar.stopUsingItem();
-/* 191 */             LMM_LittleMaidMobX.Debug(String.format("id:%d cancel reload.", new Object[] { Integer.valueOf(this.owner.getEntityId()) }), new Object[0]);
-/*     */           } else {
-/* 193 */             this.owner.maidAvatar.clearItemInUse();
-/* 194 */             LMM_LittleMaidMobX.Debug(String.format("id:%d clear.", new Object[] { Integer.valueOf(this.owner.getEntityId()) }), new Object[0]);
-/*     */           }
-/*     */         }
-/*     */       } else {
-/* 198 */         this.owner.mstatAimeBow = true;
-/*     */       }
-/*     */     }
-/* 201 */     if ((this.owner.weaponReload) && (!this.owner.maidAvatar.isUsingItem()))
-/*     */     {
-/* 203 */       this.owner.maidInventory.getCurrentItem().useItemRightClick(this.owner.worldObj, this.owner.maidAvatar);
-/* 204 */       LMM_LittleMaidMobX.Debug("id:%d force reload.", new Object[] { Integer.valueOf(this.owner.getEntityId()) });
-/* 205 */       this.owner.mstatAimeBow = true;
-/*     */     }
-/*     */   }
-/*     */ }
+package littleMaidMobX;
 
+import java.util.List;
 
-/* Location:              /home/kongou/Downloads/littleMaidMobX-1.7.x_0.0.8 (1)-deobf.jar!/littleMaidMobX/LMM_EntityMode_Archer.class
- * Java compiler version: 6 (50.0)
- * JD-Core Version:       0.7.1-SNAPSHOT-20140817
- */
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.EntityAITasks;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemBow;
+import net.minecraft.item.ItemFlintAndSteel;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
+
+public class LMM_EntityMode_Archer extends LMM_EntityModeBase {
+
+	public static final int mmode_Archer		= 0x0083;
+	public static final int mmode_Blazingstar	= 0x00c3;
+	
+	
+	@Override
+	public int priority() {
+		return 3200;
+	}
+
+	public LMM_EntityMode_Archer(LMM_EntityLittleMaid pEntity) {
+		super(pEntity);
+	}
+
+	@Override
+	public void init() {
+		// 登録モードの名称追加
+		/* langファイルに移動
+		ModLoader.addLocalization("littleMaidMob.mode.Archer", "Archer");
+		ModLoader.addLocalization("littleMaidMob.mode.F-Archer", "F-Archer");
+		ModLoader.addLocalization("littleMaidMob.mode.T-Archer", "T-Archer");
+		ModLoader.addLocalization("littleMaidMob.mode.D-Archer", "D-Archer");
+//		ModLoader.addLocalization("littleMaidMob.mode.Archer", "ja_JP", "射手");
+		ModLoader.addLocalization("littleMaidMob.mode.Blazingstar", "Blazingstar");
+		ModLoader.addLocalization("littleMaidMob.mode.F-Blazingstar", "F-Blazingstar");
+		ModLoader.addLocalization("littleMaidMob.mode.T-Blazingstar", "T-Blazingstar");
+		ModLoader.addLocalization("littleMaidMob.mode.D-Blazingstar", "D-Blazingstar");
+//		ModLoader.addLocalization("littleMaidMob.mode.Blazingstar", "ja_JP", "刃鳴散らす者");
+		*/
+		LMM_TriggerSelect.appendTriggerItem(null, "Bow", "");
+		LMM_TriggerSelect.appendTriggerItem(null, "Arrow", "");
+	}
+
+	@Override
+	public void addEntityMode(EntityAITasks pDefaultMove, EntityAITasks pDefaultTargeting) {
+		// Archer:0x0083
+		EntityAITasks[] ltasks = new EntityAITasks[2];
+		ltasks[0] = pDefaultMove;
+		ltasks[1] = new EntityAITasks(owner.aiProfiler);
+		
+//		ltasks[1].addTask(1, new EntityAIOwnerHurtByTarget(owner));
+//		ltasks[1].addTask(2, new EntityAIOwnerHurtTarget(owner));
+		ltasks[1].addTask(3, new LMM_EntityAIHurtByTarget(owner, true));
+		ltasks[1].addTask(4, new LMM_EntityAINearestAttackableTarget(owner, EntityLivingBase.class, 0, true));
+		
+		owner.addMaidMode(ltasks, "Archer", mmode_Archer);
+		
+		
+		// Blazingstar:0x00c3
+		EntityAITasks[] ltasks2 = new EntityAITasks[2];
+		ltasks2[0] = pDefaultMove;
+		ltasks2[1] = new EntityAITasks(owner.aiProfiler);
+		
+		ltasks2[1].addTask(1, new LMM_EntityAIHurtByTarget(owner, true));
+		ltasks2[1].addTask(2, new LMM_EntityAINearestAttackableTarget(owner, EntityLivingBase.class, 0, true));
+		
+		owner.addMaidMode(ltasks2, "Blazingstar", mmode_Blazingstar);
+	}
+
+	@Override
+	public boolean changeMode(EntityPlayer pentityplayer) {
+		ItemStack litemstack = owner.maidInventory.getStackInSlot(0);
+		if (litemstack != null) {
+			if (litemstack.getItem() instanceof ItemBow || LMM_TriggerSelect.checkWeapon(owner.getMaidMaster(), "Bow", litemstack)) {
+				if (owner.maidInventory.getInventorySlotContainItem(ItemFlintAndSteel.class) > -1) {
+					owner.setMaidMode("Blazingstar");
+				} else {
+					owner.setMaidMode("Archer");
+				}
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public boolean setMode(int pMode) {
+		switch (pMode) {
+		case mmode_Archer :
+			owner.aiAttack.setEnable(false);
+			owner.aiShooting.setEnable(true);
+			owner.setBloodsuck(false);
+			return true;
+		case mmode_Blazingstar :
+			owner.aiAttack.setEnable(false);
+			owner.aiShooting.setEnable(true);
+			owner.setBloodsuck(true);
+			return true;
+		}
+		
+		return false;
+	}
+	
+	@Override
+	public int getNextEquipItem(int pMode) {
+		int li;
+		ItemStack litemstack;
+
+		// モードに応じた識別判定、速度優先
+		switch (pMode) {
+		case mmode_Archer :
+		case mmode_Blazingstar :
+			for (li = 0; li < owner.maidInventory.maxInventorySize; li++) {
+				litemstack = owner.maidInventory.getStackInSlot(li);
+				if (litemstack == null) continue;
+
+				// 射手
+				if (litemstack.getItem() instanceof ItemBow || LMM_TriggerSelect.checkWeapon(owner.getMaidMaster(), "Bow", litemstack)) {
+					return li;
+				}
+			}
+			break;
+		}
+
+		return -1;
+	}
+	
+	@Override
+	public boolean checkItemStack(ItemStack pItemStack) {
+		String ls = owner.getMaidMaster();
+		return (pItemStack.getItem() instanceof ItemBow) || (pItemStack.getItem() == Items.arrow) 
+				|| LMM_TriggerSelect.checkWeapon(ls, "Bow", pItemStack) || LMM_TriggerSelect.checkWeapon(ls, "Arrow", pItemStack);
+	}
+
+	@Override
+	public void onUpdate(int pMode) {
+		switch (pMode) {
+		case mmode_Archer:
+		case mmode_Blazingstar:
+			owner.getWeaponStatus();
+//			updateGuns();
+			break;
+		}
+
+	}
+
+	@Override
+	public void updateAITick(int pMode) {
+		switch (pMode) {
+		case mmode_Archer:
+//			owner.getWeaponStatus();
+			updateGuns();
+			break;
+		case mmode_Blazingstar:
+//			owner.getWeaponStatus();
+			updateGuns();
+			// Blazingstarの特殊効果
+			World lworld = owner.worldObj;
+			List<Entity> llist = lworld.getEntitiesWithinAABB(Entity.class, owner.boundingBox.expand(16D, 16D, 16D));
+			for (int li = 0; li < llist.size(); li++) {
+				Entity lentity = llist.get(li); 
+				if (lentity.isEntityAlive() && lentity.isBurning() && owner.getRNG().nextFloat() > 0.9F) {
+					// 発火！
+					int lx = (int)owner.posX;
+					int ly = (int)owner.posY;
+					int lz = (int)owner.posZ;
+					if (lworld.getBlock(lx, ly, lz) == Blocks.air || lworld.getBlock(lx, ly, lz).getMaterial().getCanBurn()) {
+						lworld.playSoundEffect((double)lx + 0.5D, (double)ly + 0.5D, (double)lz + 0.5D, "fire.ignite", 1.0F, owner.getRNG().nextFloat() * 0.4F + 0.8F);
+						lworld.setBlock(lx, ly, lz, Blocks.fire);
+					}
+				}
+			}
+			break;
+		}
+	}
+
+	protected void updateGuns() {
+		if (owner.getAttackTarget() == null || !owner.getAttackTarget().isEntityAlive()) {
+			// 対象が死んだ
+			if (!owner.weaponReload) {
+				if (owner.maidAvatar.isUsingItem()) {
+					// ターゲットが死んでいる時はアイテムの使用をクリア
+					if (owner.maidAvatar.isItemReload) {
+						owner.maidAvatar.stopUsingItem();
+						LMM_LittleMaidMobX.Debug(String.format("id:%d cancel reload.", owner.getEntityId()));
+					} else {
+						owner.maidAvatar.clearItemInUse();
+						LMM_LittleMaidMobX.Debug(String.format("id:%d clear.", owner.getEntityId()));
+					}
+				}
+			} else {
+				owner.mstatAimeBow = true;
+			}
+		}
+		if (owner.weaponReload && !owner.maidAvatar.isUsingItem()) {
+			// 特殊リロード
+			owner.maidInventory.getCurrentItem().useItemRightClick(owner.worldObj, owner.maidAvatar);
+			LMM_LittleMaidMobX.Debug("id:%d force reload.", owner.getEntityId());
+			owner.mstatAimeBow = true;
+		}
+
+	}
+	
+}

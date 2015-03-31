@@ -1,92 +1,87 @@
-/*    */ package littleMaidMobX;
-/*    */ 
-/*    */ import java.lang.reflect.Constructor;
-/*    */ import java.util.ArrayList;
-/*    */ import java.util.List;
-/*    */ import mmmlibx.lib.FileManager;
-/*    */ import mmmlibx.lib.MMM_ManagerBase;
-/*    */ 
-/*    */ public class LMM_EntityModeManager extends MMM_ManagerBase
-/*    */ {
-/*    */   public static final String prefix = "EntityMode";
-/* 12 */   public static List<LMM_EntityModeBase> maidModeList = new ArrayList();
-/*    */   
-/*    */ 
-/*    */   public static void init()
-/*    */   {
-/* 17 */     FileManager.getModFile("EntityMode", "EntityMode");
-/*    */   }
-/*    */   
-/*    */   public static void loadEntityMode() {
-/* 21 */     new LMM_EntityModeManager().load();
-/*    */   }
-/*    */   
-/*    */   protected String getPreFix()
-/*    */   {
-/* 26 */     return "EntityMode";
-/*    */   }
-/*    */   
-/*    */ 
-/*    */ 
-/*    */   protected boolean append(Class pclass)
-/*    */   {
-/* 33 */     if (!LMM_EntityModeBase.class.isAssignableFrom(pclass)) {
-/* 34 */       return false;
-/*    */     }
-/*    */     try
-/*    */     {
-/* 38 */       LMM_EntityModeBase lemb = null;
-/* 39 */       lemb = (LMM_EntityModeBase)pclass.getConstructor(new Class[] { LMM_EntityLittleMaid.class }).newInstance(new Object[] { (LMM_EntityLittleMaid)null });
-/* 40 */       lemb.init();
-/*    */       
-/* 42 */       if ((maidModeList.isEmpty()) || (lemb.priority() >= ((LMM_EntityModeBase)maidModeList.get(maidModeList.size() - 1)).priority())) {
-/* 43 */         maidModeList.add(lemb);
-/*    */       } else {
-/* 45 */         for (int li = 0; li < maidModeList.size(); li++) {
-/* 46 */           if (lemb.priority() < ((LMM_EntityModeBase)maidModeList.get(li)).priority()) {
-/* 47 */             maidModeList.add(li, lemb);
-/* 48 */             break;
-/*    */           }
-/*    */         }
-/*    */       }
-/*    */       
-/* 53 */       return true;
-/*    */     }
-/*    */     catch (Exception e) {}catch (Error e) {}
-/*    */     
-/*    */ 
-/* 58 */     return false;
-/*    */   }
-/*    */   
-/*    */ 
-/*    */ 
-/*    */   public static List<LMM_EntityModeBase> getModeList(LMM_EntityLittleMaid pentity)
-/*    */   {
-/* 65 */     List<LMM_EntityModeBase> llist = new ArrayList();
-/* 66 */     for (LMM_EntityModeBase lmode : maidModeList) {
-/*    */       try {
-/* 68 */         llist.add(lmode.getClass().getConstructor(new Class[] { LMM_EntityLittleMaid.class }).newInstance(new Object[] { pentity }));
-/*    */       }
-/*    */       catch (Exception e) {}catch (Error e) {}
-/*    */     }
-/*    */     
-/*    */ 
-/* 74 */     return llist;
-/*    */   }
-/*    */   
-/*    */ 
-/*    */ 
-/*    */   public static void showLoadedModes()
-/*    */   {
-/* 81 */     LMM_LittleMaidMobX.Debug("Loaded Mode lists(%d)", new Object[] { Integer.valueOf(maidModeList.size()) });
-/* 82 */     for (LMM_EntityModeBase lem : maidModeList) {
-/* 83 */       LMM_LittleMaidMobX.Debug("%04d : %s", new Object[] { Integer.valueOf(lem.priority()), lem.getClass().getSimpleName() });
-/*    */     }
-/*    */   }
-/*    */ }
+package littleMaidMobX;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import mmmlibx.lib.FileManager;
+import mmmlibx.lib.MMM_ManagerBase;
+
+public class LMM_EntityModeManager extends MMM_ManagerBase {
+
+	public static final String prefix = "EntityMode";
+	public static List<LMM_EntityModeBase> maidModeList = new ArrayList<LMM_EntityModeBase>();
 
 
-/* Location:              /home/kongou/Downloads/littleMaidMobX-1.7.x_0.0.8 (1)-deobf.jar!/littleMaidMobX/LMM_EntityModeManager.class
- * Java compiler version: 6 (50.0)
- * JD-Core Version:       0.7.1-SNAPSHOT-20140817
- */
+	public static void init() {
+		// 特定名称をプリフィックスに持つmodファイをを獲得
+		FileManager.getModFile("EntityMode", prefix);
+	}
+	
+	public static void loadEntityMode() {
+		(new LMM_EntityModeManager()).load();
+	}
+
+	@Override
+	protected String getPreFix() {
+		return prefix;
+	}
+
+	@Override
+	protected boolean append(Class pclass) {
+		// プライオリティー順に追加
+		// ソーター使う？
+		if (!LMM_EntityModeBase.class.isAssignableFrom(pclass)) {
+			return false;
+		}
+		
+		try {
+			LMM_EntityModeBase lemb = null;
+			lemb = (LMM_EntityModeBase)pclass.getConstructor(LMM_EntityLittleMaid.class).newInstance((LMM_EntityLittleMaid)null);
+			lemb.init();
+			
+			if (maidModeList.isEmpty() || lemb.priority() >= maidModeList.get(maidModeList.size() - 1).priority()) {
+				maidModeList.add(lemb);
+			} else {
+				for (int li = 0; li < maidModeList.size(); li++) {
+					if (lemb.priority() < maidModeList.get(li).priority()) {
+						maidModeList.add(li, lemb);
+						break;
+					}
+				}
+			}
+
+			return true;
+		} catch (Exception e) {
+		} catch (Error e) {
+		}
+
+		return false;
+	}
+
+	/**
+	 * AI追加用のリストを獲得。 
+	 */
+	public static List<LMM_EntityModeBase> getModeList(LMM_EntityLittleMaid pentity) {
+		List<LMM_EntityModeBase> llist = new ArrayList<LMM_EntityModeBase>();
+		for (LMM_EntityModeBase lmode : maidModeList) {
+			try {
+				llist.add(lmode.getClass().getConstructor(LMM_EntityLittleMaid.class).newInstance(pentity));
+			} catch (Exception e) {
+			} catch (Error e) {
+			}
+		}
+		
+		return llist;
+	}
+
+	/**
+	 * ロードされているモードリストを表示する。
+	 */
+	public static void showLoadedModes() {
+		LMM_LittleMaidMobX.Debug("Loaded Mode lists(%d)", maidModeList.size());
+		for (LMM_EntityModeBase lem : maidModeList) {
+			LMM_LittleMaidMobX.Debug("%04d : %s", lem.priority(), lem.getClass().getSimpleName());
+		}
+	}
+
+}

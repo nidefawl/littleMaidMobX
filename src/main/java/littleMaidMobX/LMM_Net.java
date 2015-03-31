@@ -1,187 +1,181 @@
-/*     */ package littleMaidMobX;
-/*     */ 
-/*     */ import mmmlibx.lib.MMM_Helper;
-/*     */ import net.minecraft.entity.Entity;
-/*     */ import net.minecraft.entity.EntityTracker;
-/*     */ import net.minecraft.entity.player.EntityPlayer;
-/*     */ import net.minecraft.entity.player.InventoryPlayer;
-/*     */ import net.minecraft.entity.player.PlayerCapabilities;
-/*     */ import net.minecraft.init.Items;
-/*     */ import net.minecraft.item.ItemStack;
-/*     */ import net.minecraft.world.World;
-/*     */ import net.minecraft.world.WorldServer;
-/*     */ import network.W_Message;
-/*     */ import network.W_Network;
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ public class LMM_Net
-/*     */ {
-/*     */   public static void sendToAllEClient(LMM_EntityLittleMaid pEntity, byte[] pData)
-/*     */   {
-/*  27 */     MMM_Helper.setInt(pData, 1, pEntity.getEntityId());
-/*     */     
-/*  29 */     EntityTracker et = ((WorldServer)pEntity.worldObj).getEntityTracker();
-/*  30 */     for (EntityPlayer player : et.getTrackingPlayers(pEntity))
-/*     */     {
-/*  32 */       W_Network.sendPacketToPlayer(2, player, pData);
-/*     */     }
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public static void sendToClient(EntityPlayer player, byte[] pData)
-/*     */   {
-/*  48 */     W_Network.sendPacketToPlayer(2, player, pData);
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public static void sendToEServer(LMM_EntityLittleMaid pEntity, byte[] pData)
-/*     */   {
-/*  57 */     MMM_Helper.setInt(pData, 1, pEntity.getEntityId());
-/*  58 */     W_Network.sendPacketToServer(2, pData);
-/*     */     
-/*  60 */     LMM_LittleMaidMobX.Debug(String.format("LMM|Upd:send:%2x:%d", new Object[] { Byte.valueOf(pData[0]), Integer.valueOf(pEntity.getEntityId()) }), new Object[0]);
-/*     */   }
-/*     */   
-/*     */   public static void sendToServer(byte[] pData) {
-/*  64 */     W_Network.sendPacketToServer(2, pData);
-/*     */     
-/*  66 */     LMM_LittleMaidMobX.Debug(String.format("LMM|Upd:%2x:NOEntity", new Object[] { Byte.valueOf(pData[0]) }), new Object[0]);
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */   public static void saveIFF()
-/*     */   {
-/*  73 */     sendToServer(new byte[] { 6 });
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public static LMM_EntityLittleMaid getLittleMaid(byte[] pData, int pIndex, World pWorld)
-/*     */   {
-/*  81 */     Entity lentity = MMM_Helper.getEntity(pData, pIndex, pWorld);
-/*  82 */     if ((lentity instanceof LMM_EntityLittleMaid))
-/*     */     {
-/*  84 */       return (LMM_EntityLittleMaid)lentity;
-/*     */     }
-/*     */     
-/*     */ 
-/*  88 */     return null;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public static void serverCustomPayload(EntityPlayer playerEntity, W_Message pPayload)
-/*     */   {
-/*  97 */     byte lmode = pPayload.data[0];
-/*  98 */     int leid = 0;
-/*  99 */     LMM_EntityLittleMaid lemaid = null;
-/* 100 */     if ((lmode & 0x80) != 0) {
-/* 101 */       leid = MMM_Helper.getInt(pPayload.data, 1);
-/* 102 */       lemaid = getLittleMaid(pPayload.data, 1, playerEntity.worldObj);
-/* 103 */       if (lemaid == null) return;
-/*     */     }
-/* 105 */     LMM_LittleMaidMobX.Debug(String.format("LMM|Upd Srv Call[%2x:%d].", new Object[] { Byte.valueOf(lmode), Integer.valueOf(leid) }), new Object[0]);
-/*     */     
-/*     */     int lval;
-/*     */     
-/*     */     int lindex;
-/*     */     String lname;
-/* 111 */     switch (lmode)
-/*     */     {
-/*     */ 
-/*     */     case -128: 
-/* 115 */       lemaid.maidInventory.clearChanged();
-/* 116 */       for (LMM_SwingStatus lswing : lemaid.mstatSwingStatus) {
-/* 117 */         lswing.lastIndex = -1;
-/*     */       }
-/* 119 */       break;
-/*     */     
-/*     */ 
-/*     */ 
-/*     */     case 2: 
-/* 124 */       int lcolor2 = pPayload.data[1];
-/* 125 */       if (!playerEntity.capabilities.isCreativeMode) {
-/* 126 */         for (int li = 0; li < playerEntity.inventory.mainInventory.length; li++) {
-/* 127 */           ItemStack lis = playerEntity.inventory.mainInventory[li];
-/* 128 */           if ((lis != null) && (lis.getItem() == Items.dye) && 
-/* 129 */             (lis.getItemDamage() == 15 - lcolor2)) {
-/* 130 */             MMM_Helper.decPlayerInventory(playerEntity, li, 1);
-/*     */           }
-/*     */         }
-/*     */       }
-/*     */       
-/*     */ 
-/*     */ 
-/*     */       break;
-/*     */     case 4: 
-/* 139 */       lval = pPayload.data[1];
-/* 140 */       lindex = MMM_Helper.getInt(pPayload.data, 2);
-/* 141 */       lname = MMM_Helper.getStr(pPayload.data, 6);
-/* 142 */       LMM_LittleMaidMobX.Debug("setIFF-SV user:%s %s(%d)=%d", new Object[] { MMM_Helper.getPlayerName(playerEntity), lname, Integer.valueOf(lindex), Integer.valueOf(lval) });
-/* 143 */       LMM_IFF.setIFFValue(MMM_Helper.getPlayerName(playerEntity), lname, lval);
-/* 144 */       sendIFFValue(playerEntity, lval, lindex);
-/* 145 */       break;
-/*     */     
-/*     */     case 5: 
-/* 148 */       lindex = MMM_Helper.getInt(pPayload.data, 1);
-/* 149 */       lname = MMM_Helper.getStr(pPayload.data, 5);
-/* 150 */       lval = LMM_IFF.getIFF(MMM_Helper.getPlayerName(playerEntity), lname, playerEntity.worldObj);
-/* 151 */       LMM_LittleMaidMobX.Debug("getIFF-SV user:%s %s(%d)=%d", new Object[] { MMM_Helper.getPlayerName(playerEntity), lname, Integer.valueOf(lindex), Integer.valueOf(lval) });
-/* 152 */       sendIFFValue(playerEntity, lval, lindex);
-/* 153 */       break;
-/*     */     
-/*     */     case 6: 
-/* 156 */       LMM_IFF.saveIFF(MMM_Helper.getPlayerName(playerEntity));
-/* 157 */       if (!playerEntity.worldObj.isRemote) {
-/* 158 */         LMM_IFF.saveIFF("");
-/*     */       }
-/*     */       
-/*     */ 
-/*     */ 
-/*     */       break;
-/*     */     }
-/*     */     
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */   protected static void sendIFFValue(EntityPlayer player, int pValue, int pIndex)
-/*     */   {
-/* 172 */     byte[] ldata = { 4, 0, 0, 0, 0, 0 };
-/*     */     
-/*     */ 
-/*     */ 
-/*     */ 
-/* 177 */     ldata[1] = ((byte)pValue);
-/* 178 */     MMM_Helper.setInt(ldata, 2, pIndex);
-/* 179 */     sendToClient(player, ldata);
-/*     */   }
-/*     */ }
+package littleMaidMobX;
 
+import static littleMaidMobX.LMM_Statics.LMN_Client_SetIFFValue;
+import static littleMaidMobX.LMM_Statics.LMN_Server_DecDyePowder;
+import static littleMaidMobX.LMM_Statics.LMN_Server_GetIFFValue;
+import static littleMaidMobX.LMM_Statics.LMN_Server_SaveIFF;
+import static littleMaidMobX.LMM_Statics.LMN_Server_SetIFFValue;
+import static littleMaidMobX.LMM_Statics.LMN_Server_UpdateSlots;
+import mmmlibx.lib.MMM_Helper;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityTracker;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
+import network.W_Message;
+import network.W_Network;
 
-/* Location:              /home/kongou/Downloads/littleMaidMobX-1.7.x_0.0.8 (1)-deobf.jar!/littleMaidMobX/LMM_Net.class
- * Java compiler version: 6 (50.0)
- * JD-Core Version:       0.7.1-SNAPSHOT-20140817
- */
+public class LMM_Net {
+	
+	/**
+	 * 渡されたデータの先頭に自分のEntityIDを付与して全てのクライアントへ送信
+	 */
+	public static void sendToAllEClient(LMM_EntityLittleMaid pEntity, byte[] pData)
+	{
+		MMM_Helper.setInt(pData, 1, pEntity.getEntityId());
+		
+		EntityTracker et = ((WorldServer)pEntity.worldObj).getEntityTracker();
+		for(EntityPlayer player : et.getTrackingPlayers(pEntity))
+		{
+			W_Network.sendPacketToPlayer(2, player, pData);
+		}
+//		((WorldServer)pEntity.worldObj).getEntityTracker().func_151248_b(pEntity, new Packet250CustomPayload("LMM|Upd", pData));
+	}
+
+	/**
+	 * 渡されたデータの先頭に自分のEntityIDを付与して特定ののクライアントへ送信
+	 *
+	public static void sendToEClient(EntityPlayer player, LMM_EntityLittleMaid pEntity, byte[] pData) {
+		MMM_Helper.setInt(pData, 1, pEntity.getEntityId());
+		W_Network.sendPacketToPlayer(player, pData);
+//		ModLoader.serverSendPacket(pHandler, new Packet250CustomPayload("LMM|Upd", pData));
+	}
+	*/
+
+	public static void sendToClient(EntityPlayer player, byte[] pData) {
+		W_Network.sendPacketToPlayer(2, player, pData);
+//		ModLoader.serverSendPacket(pHandler, new Packet250CustomPayload("LMM|Upd", pData));
+	}
+
+	/**
+	 * 渡されたデータの先頭にEntityIDを付与してサーバーへ送信。
+	 * 0:Mode, 1-4:EntityID, 5-:Data
+	 */
+	public static void sendToEServer(LMM_EntityLittleMaid pEntity, byte[] pData) {
+		MMM_Helper.setInt(pData, 1, pEntity.getEntityId());
+		W_Network.sendPacketToServer(2,pData);
+//		ModLoader.clientSendPacket(new Packet250CustomPayload("LMM|Upd", pData));
+		LMM_LittleMaidMobX.Debug(String.format("LMM|Upd:send:%2x:%d", pData[0], pEntity.getEntityId()));
+	}
+
+	public static void sendToServer(byte[] pData) {
+		W_Network.sendPacketToServer(2, pData);
+//		ModLoader.clientSendPacket(new Packet250CustomPayload("LMM|Upd", pData));
+		LMM_LittleMaidMobX.Debug(String.format("LMM|Upd:%2x:NOEntity", pData[0]));
+	}
+
+	/**
+	 * サーバーへIFFのセーブをリクエスト
+	 */
+	public static void saveIFF() {
+		sendToServer(new byte[] {LMN_Server_SaveIFF});
+	}
+
+	/**
+	 * littleMaidのEntityを返す。
+	 */
+	public static LMM_EntityLittleMaid getLittleMaid(byte[] pData, int pIndex, World pWorld)
+	{
+		Entity lentity = MMM_Helper.getEntity(pData, pIndex, pWorld);
+		if (lentity instanceof LMM_EntityLittleMaid)
+		{
+			return (LMM_EntityLittleMaid)lentity;
+		}
+		else
+		{
+			return null;
+		}
+	}
+
+	// 受信パケットの処理
+	
+	public static void serverCustomPayload(EntityPlayer playerEntity, W_Message pPayload)
+	{
+		// サーバ側の動作
+		byte lmode = pPayload.data[0];
+		int leid = 0;
+		LMM_EntityLittleMaid lemaid = null;
+		if ((lmode & 0x80) != 0) {
+			leid = MMM_Helper.getInt(pPayload.data, 1);
+			lemaid = getLittleMaid(pPayload.data, 1, playerEntity.worldObj);
+			if (lemaid == null) return;
+		}
+		LMM_LittleMaidMobX.Debug(String.format("LMM|Upd Srv Call[%2x:%d].", lmode, leid));
+		byte[] ldata;
+		int lindex;
+		int lval;
+		String lname;
+		
+		switch (lmode) {
+		case LMN_Server_UpdateSlots : 
+			// 初回更新とか
+			// インベントリの更新
+			lemaid.maidInventory.clearChanged();
+			for (LMM_SwingStatus lswing : lemaid.mstatSwingStatus) {
+				lswing.lastIndex = -1;
+			}
+			break;
+			
+		case LMN_Server_DecDyePowder:
+			// カラー番号をクライアントから受け取る
+			// インベントリから染料を減らす。
+			int lcolor2 = pPayload.data[1];
+			if (!playerEntity.capabilities.isCreativeMode) {
+				for (int li = 0; li < playerEntity.inventory.mainInventory.length; li++) {
+					ItemStack lis = playerEntity.inventory.mainInventory[li];
+					if (lis != null && lis.getItem() == Items.dye) {
+						if (lis.getItemDamage() == (15 - lcolor2)) {
+							MMM_Helper.decPlayerInventory(playerEntity, li, 1);
+						}
+					}
+				}
+			}
+			break;
+			
+		case LMN_Server_SetIFFValue:
+			// IFFの設定値を受信
+			lval = pPayload.data[1];
+			lindex = MMM_Helper.getInt(pPayload.data, 2);
+			lname = MMM_Helper.getStr(pPayload.data, 6);
+			LMM_LittleMaidMobX.Debug("setIFF-SV user:%s %s(%d)=%d", MMM_Helper.getPlayerName(playerEntity), lname, lindex, lval);
+			LMM_IFF.setIFFValue(MMM_Helper.getPlayerName(playerEntity), lname, lval);
+			sendIFFValue(playerEntity, lval, lindex);
+			break;
+		case LMN_Server_GetIFFValue:
+			// IFFGUI open
+			lindex = MMM_Helper.getInt(pPayload.data, 1);
+			lname = MMM_Helper.getStr(pPayload.data, 5);
+			lval = LMM_IFF.getIFF(MMM_Helper.getPlayerName(playerEntity), lname, playerEntity.worldObj);
+			LMM_LittleMaidMobX.Debug("getIFF-SV user:%s %s(%d)=%d", MMM_Helper.getPlayerName(playerEntity), lname, lindex, lval);
+			sendIFFValue(playerEntity, lval, lindex);
+			break;
+		case LMN_Server_SaveIFF:
+			// IFFファイルの保存
+			LMM_IFF.saveIFF(MMM_Helper.getPlayerName(playerEntity));
+			if (!playerEntity.worldObj.isRemote) {
+				LMM_IFF.saveIFF("");
+			}
+			break;
+			
+		}
+	}
+
+	/**
+	 * クライアントへIFFの設定値を通知する。
+	 * @param pNetHandler
+	 * @param pValue
+	 * @param pIndex
+	 */
+	protected static void sendIFFValue(EntityPlayer player, int pValue, int pIndex) {
+		byte ldata[] = new byte[] {
+				LMN_Client_SetIFFValue,
+				0,
+				0, 0, 0, 0
+		};
+		ldata[1] = (byte)pValue;
+		MMM_Helper.setInt(ldata, 2, pIndex);
+		sendToClient(player, ldata);
+	}
+}

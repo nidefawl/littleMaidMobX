@@ -1,162 +1,158 @@
-/*     */ package littleMaidMobX;
-/*     */ 
-/*     */ import mmmlibx.lib.MMM_EntityDummy;
-/*     */ import net.minecraft.entity.ai.EntityAIBase;
-/*     */ import net.minecraft.pathfinding.PathNavigate;
-/*     */ import net.minecraft.util.MathHelper;
-/*     */ import net.minecraft.world.World;
-/*     */ 
-/*     */ public class LMM_EntityAITracerMove extends EntityAIBase implements LMM_IEntityAI
-/*     */ {
-/*     */   protected LMM_EntityLittleMaid theMaid;
-/*     */   protected World world;
-/*     */   protected boolean isEnable;
-/*     */   protected int tileX;
-/*     */   protected int tileY;
-/*     */   protected int tileZ;
-/*     */   
-/*     */   public LMM_EntityAITracerMove(LMM_EntityLittleMaid pEntityLittleMaid)
-/*     */   {
-/*  20 */     this.theMaid = pEntityLittleMaid;
-/*  21 */     this.world = pEntityLittleMaid.worldObj;
-/*  22 */     this.isEnable = false;
-/*     */     
-/*  24 */     setMutexBits(1);
-/*     */   }
-/*     */   
-/*     */   public void setEnable(boolean pFlag)
-/*     */   {
-/*  29 */     this.isEnable = pFlag;
-/*     */   }
-/*     */   
-/*     */   public boolean getEnable()
-/*     */   {
-/*  34 */     return this.isEnable;
-/*     */   }
-/*     */   
-/*     */   public boolean shouldExecute()
-/*     */   {
-/*  39 */     return (this.isEnable) && (!this.theMaid.isMaidWaitEx()) && (this.theMaid.getNavigator().noPath());
-/*     */   }
-/*     */   
-/*     */   public boolean continueExecuting()
-/*     */   {
-/*  44 */     return !this.theMaid.getNavigator().noPath();
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */   public void startExecuting()
-/*     */   {
-/*  51 */     int ox = MathHelper.floor_double(this.theMaid.posX);
-/*  52 */     int oy = MathHelper.floor_double(this.theMaid.posY);
-/*  53 */     int oz = MathHelper.floor_double(this.theMaid.posZ);
-/*  54 */     int vt = MathHelper.floor_float(this.theMaid.rotationYawHead * 4.0F / 360.0F + 2.5F) & 0x3;
-/*  55 */     int xx = ox;
-/*  56 */     int yy = oy;
-/*  57 */     int zz = oz;
-/*  58 */     double lrange = Double.MAX_VALUE;
-/*     */     
-/*     */ 
-/*  61 */     MMM_EntityDummy.clearDummyEntity(this.theMaid);
-/*  62 */     boolean flagdammy = false;
-/*     */     
-/*     */ 
-/*  65 */     for (int d = 0; d < 4; d++) {
-/*  66 */       for (int a = 2; a < 14; a += 2) {
-/*  67 */         int del = a / 2;
-/*  68 */         if (vt == 0) {
-/*  69 */           xx = ox - del;
-/*  70 */           zz = oz - del;
-/*     */         }
-/*  72 */         else if (vt == 1) {
-/*  73 */           xx = ox + del;
-/*  74 */           zz = oz - del;
-/*     */         }
-/*  76 */         else if (vt == 2) {
-/*  77 */           xx = ox + del;
-/*  78 */           zz = oz + del;
-/*     */         }
-/*  80 */         else if (vt == 3) {
-/*  81 */           xx = ox - del;
-/*  82 */           zz = oz + del;
-/*     */         }
-/*     */         
-/*  85 */         if (!flagdammy) {
-/*  86 */           MMM_EntityDummy.setDummyEntity(this.theMaid, 16731983, xx, oy, zz);
-/*  87 */           flagdammy = true;
-/*     */         }
-/*  89 */         int b = 0;
-/*     */         do {
-/*  91 */           for (int c = 0; c < 3; c++) {
-/*  92 */             yy = oy + (c == 2 ? -1 : c);
-/*  93 */             if (checkBlock(xx, yy, zz))
-/*     */             {
-/*  95 */               double lr = this.theMaid.getDistanceSq(xx, yy, zz);
-/*  96 */               if ((lr < lrange) && 
-/*  97 */                 (doFindBlock(xx, yy, zz))) {
-/*  98 */                 lrange = lr;
-/*  99 */                 this.tileX = xx;
-/* 100 */                 this.tileY = yy;
-/* 101 */                 this.tileZ = zz;
-/*     */                 
-/* 103 */                 this.theMaid.setHomeArea(xx, yy, zz, 16);
-/*     */                 
-/* 105 */                 MMM_EntityDummy.setDummyEntity(this.theMaid, 5197823, xx, yy, zz);
-/* 106 */                 flagdammy = true;
-/* 107 */                 return;
-/*     */               }
-/*     */               
-/*     */ 
-/* 111 */               MMM_EntityDummy.setDummyEntity(this.theMaid, 5242703, xx, yy, zz);
-/* 112 */               flagdammy = true;
-/*     */             }
-/*     */           }
-/*     */           
-/* 116 */           if (!flagdammy) {
-/* 117 */             MMM_EntityDummy.setDummyEntity(this.theMaid, 16777167, xx, oy, zz);
-/* 118 */             flagdammy = true;
-/*     */           }
-/*     */           
-/* 121 */           flagdammy = false;
-/*     */           
-/* 123 */           if (vt == 0) {
-/* 124 */             xx++;
-/*     */           }
-/* 126 */           else if (vt == 1) {
-/* 127 */             zz++;
-/*     */           }
-/* 129 */           else if (vt == 2) {
-/* 130 */             xx--;
-/*     */           }
-/* 132 */           else if (vt == 3) {
-/* 133 */             zz--;
-/*     */           }
-/*     */           
-/* 136 */           b++; } while (b < a);
-/*     */       }
-/* 138 */       vt = vt + 1 & 0x3;
-/*     */     }
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */   protected boolean checkBlock(int px, int py, int pz)
-/*     */   {
-/* 146 */     return (this.world.getBlockPowerInput(px, py, pz) > 0) && (this.world.getBlock(px, py + 1, pz).getMaterial() == net.minecraft.block.material.Material.air);
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   protected boolean doFindBlock(int px, int py, int pz)
-/*     */   {
-/* 154 */     return this.theMaid.getNavigator().tryMoveToXYZ(px, py, pz, 1.0D);
-/*     */   }
-/*     */ }
+package littleMaidMobX;
+
+import mmmlibx.lib.MMM_EntityDummy;
+import net.minecraft.block.material.Material;
+import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.World;
+
+public class LMM_EntityAITracerMove extends EntityAIBase implements LMM_IEntityAI {
+	
+	protected LMM_EntityLittleMaid theMaid; 
+	protected World world;
+	protected boolean isEnable;
+	protected int tileX;
+	protected int tileY;
+	protected int tileZ;
 
 
-/* Location:              /home/kongou/Downloads/littleMaidMobX-1.7.x_0.0.8 (1)-deobf.jar!/littleMaidMobX/LMM_EntityAITracerMove.class
- * Java compiler version: 6 (50.0)
- * JD-Core Version:       0.7.1-SNAPSHOT-20140817
- */
+	public LMM_EntityAITracerMove(LMM_EntityLittleMaid pEntityLittleMaid) {
+		theMaid = pEntityLittleMaid;
+		world = pEntityLittleMaid.worldObj;
+		isEnable = false;
+		
+		setMutexBits(1);
+	}
+
+	@Override
+	public void setEnable(boolean pFlag) {
+		isEnable = pFlag;
+	}
+
+	@Override
+	public boolean getEnable() {
+		return isEnable;
+	}
+
+	@Override
+	public boolean shouldExecute() {
+		return isEnable && !theMaid.isMaidWaitEx() &&  theMaid.getNavigator().noPath();
+	}
+
+	@Override
+	public boolean continueExecuting() {
+		return !theMaid.getNavigator().noPath();
+	}
+
+	@Override
+	public void startExecuting() {
+		// ルート策定
+		// ターゲットをサーチ
+		int ox = MathHelper.floor_double(theMaid.posX);
+		int oy = MathHelper.floor_double(theMaid.posY);
+		int oz = MathHelper.floor_double(theMaid.posZ);
+		int vt = MathHelper.floor_float(((theMaid.rotationYawHead * 4F) / 360F) + 2.5F) & 3;
+		int xx = ox;
+		int yy = oy;
+		int zz = oz;
+		double lrange = Double.MAX_VALUE;
+		
+		// TODO:Dummy
+		MMM_EntityDummy.clearDummyEntity(theMaid);
+		boolean flagdammy = false;
+		
+		// CW方向に検索領域を広げる 
+		for (int d = 0; d < 4; d++) {
+			for (int a = 2; a < 14; a += 2) {
+				int del = a / 2;
+				if (vt == 0) {
+					xx = ox - del;
+					zz = oz - del;
+				}
+				else if (vt == 1) { 
+					xx = ox + del;
+					zz = oz - del;
+				}
+				else if (vt == 2) { 
+					xx = ox + del;
+					zz = oz + del;
+				}
+				else if (vt == 3) { 
+					xx = ox - del;
+					zz = oz + del;
+				}
+				// TODO:Dummay
+				if (!flagdammy) {
+					MMM_EntityDummy.setDummyEntity(theMaid, 0x00ff4f4f, xx, oy, zz);
+					flagdammy = true;
+				}
+				int b = 0;
+				do {
+					for (int c = 0; c < 3; c++) {
+						yy = oy + (c == 2 ? -1 : c);
+						if (checkBlock(xx, yy, zz)) {
+							// 最も近いポイントの判定
+							double lr = theMaid.getDistanceSq(xx, yy, zz);
+							if (lr < lrange) {
+								if (doFindBlock(xx, yy, zz)) {
+									lrange = lr;
+									tileX = xx;
+									tileY = yy;
+									tileZ = zz;
+//									theMaid.func_110171_b(xx, yy, zz, 16);
+									theMaid.setHomeArea(xx, yy, zz, 16);
+									// TODO:Dummay
+									MMM_EntityDummy.setDummyEntity(theMaid, 0x004f4fff, xx, yy, zz);
+									flagdammy = true;
+									return;
+								}
+							}
+							// TODO:Dummay
+							MMM_EntityDummy.setDummyEntity(theMaid, 0x004fff4f, xx, yy, zz);
+							flagdammy = true;
+						}
+					}
+					// TODO:Dummay
+					if (!flagdammy) {
+						MMM_EntityDummy.setDummyEntity(theMaid, 0x00ffffcf, xx, oy, zz);
+						flagdammy = true;
+					}
+					// TODO:dammy
+					flagdammy = false;
+					
+					if (vt == 0) {
+						xx++;
+					}
+					else if (vt == 1) { 
+						zz++;
+					}
+					else if (vt == 2) { 
+						xx--;
+					}
+					else if (vt == 3) { 
+						zz--;
+					}
+					
+				} while(++b < a);
+			}
+			vt = (vt + 1) & 3;
+		}
+	}
+
+	/**
+	 * 指定座標のブロックは探しているものか？
+	 */
+	protected boolean checkBlock(int px, int py, int pz) {
+		return world.getBlockPowerInput(px, py, pz) > 0 && (world.getBlock(px, py + 1, pz).getMaterial() == Material.air);
+	}
+
+	/**
+	 * 見つけたブロックに対する動作。
+	 * trueを返すとループ終了。
+	 */
+	protected boolean doFindBlock(int px, int py, int pz) {
+		return theMaid.getNavigator().tryMoveToXYZ(px, py, pz, 1.0F);
+//		return theMaid.getNavigator().tryMoveToXYZ(px, py, pz, theMaid.getAIMoveSpeed());
+	}
+
+}

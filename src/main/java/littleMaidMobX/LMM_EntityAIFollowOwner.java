@@ -1,126 +1,121 @@
-/*     */ package littleMaidMobX;
-/*     */ 
-/*     */ import net.minecraft.entity.Entity;
-/*     */ import net.minecraft.entity.ai.EntityAIBase;
-/*     */ import net.minecraft.entity.ai.EntityLookHelper;
-/*     */ import net.minecraft.pathfinding.PathNavigate;
-/*     */ 
-/*     */ public class LMM_EntityAIFollowOwner extends EntityAIBase implements LMM_IEntityAI
-/*     */ {
-/*     */   private LMM_EntityLittleMaid theMaid;
-/*     */   private Entity theOwner;
-/*     */   private net.minecraft.world.World theWorld;
-/*     */   private float moveSpeed;
-/*     */   private PathNavigate petPathfinder;
-/*     */   private int field_48310_h;
-/*     */   protected double maxDist;
-/*     */   protected double minDist;
-/*     */   protected double sprintDist;
-/*     */   protected double toDistance;
-/*     */   private boolean lastAvoidWater;
-/*     */   protected boolean isEnable;
-/*     */   
-/*     */   public LMM_EntityAIFollowOwner(LMM_EntityLittleMaid par1EntityLittleMaid, float pSpeed, double pMin, double pMax, double pSprintDistSQ)
-/*     */   {
-/*  25 */     this.theMaid = par1EntityLittleMaid;
-/*  26 */     this.theWorld = par1EntityLittleMaid.worldObj;
-/*  27 */     this.moveSpeed = pSpeed;
-/*  28 */     this.petPathfinder = par1EntityLittleMaid.getNavigator();
-/*  29 */     this.minDist = pMin;
-/*  30 */     this.maxDist = pMax;
-/*  31 */     this.sprintDist = pSprintDistSQ;
-/*  32 */     this.isEnable = true;
-/*  33 */     setMutexBits(3);
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */   public boolean shouldExecute()
-/*     */   {
-/*  40 */     if (!this.isEnable) {
-/*  41 */       return false;
-/*     */     }
-/*  43 */     Entity entityliving = this.theMaid.getOwner();
-/*  44 */     if (entityliving == null) {
-/*  45 */       return false;
-/*     */     }
-/*     */     
-/*  48 */     if (this.theMaid.isSitting()) {
-/*  49 */       return false;
-/*     */     }
-/*     */     
-/*  52 */     this.toDistance = this.theMaid.getDistanceSqToEntity(entityliving);
-/*  53 */     if (this.toDistance < this.minDist) {
-/*  54 */       return false;
-/*     */     }
-/*  56 */     this.theOwner = entityliving;
-/*  57 */     return true;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public boolean continueExecuting()
-/*     */   {
-/*  65 */     this.toDistance = this.theMaid.getDistanceSqToEntity(this.theOwner);
-/*  66 */     return (!this.petPathfinder.noPath()) && (this.toDistance > this.maxDist) && (!this.theMaid.isSitting());
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public void startExecuting()
-/*     */   {
-/*  75 */     this.field_48310_h = 0;
-/*  76 */     this.lastAvoidWater = this.petPathfinder.getAvoidsWater();
-/*  77 */     this.petPathfinder.setAvoidsWater(false);
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */   public void resetTask()
-/*     */   {
-/*  84 */     this.theMaid.setSprinting(false);
-/*  85 */     this.theOwner = null;
-/*  86 */     this.petPathfinder.clearPathEntity();
-/*  87 */     this.petPathfinder.setAvoidsWater(this.lastAvoidWater);
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */   public void updateTask()
-/*     */   {
-/*  94 */     this.theMaid.getLookHelper().setLookPositionWithEntity(this.theOwner, 10.0F, this.theMaid.getVerticalFaceSpeed());
-/*     */     
-/*     */ 
-/*  97 */     if (this.theMaid.isSitting()) {
-/*  98 */       return;
-/*     */     }
-/*     */     
-/* 101 */     this.theMaid.setSprinting(this.toDistance > this.sprintDist);
-/* 102 */     if (--this.field_48310_h > 0) {
-/* 103 */       return;
-/*     */     }
-/*     */     
-/* 106 */     this.field_48310_h = 10;
-/*     */     
-/* 108 */     this.petPathfinder.tryMoveToEntityLiving(this.theOwner, this.moveSpeed);
-/*     */   }
-/*     */   
-/*     */   public void setEnable(boolean pFlag)
-/*     */   {
-/* 113 */     this.isEnable = pFlag;
-/*     */   }
-/*     */   
-/*     */   public boolean getEnable()
-/*     */   {
-/* 118 */     return this.isEnable;
-/*     */   }
-/*     */ }
+package littleMaidMobX;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.pathfinding.PathNavigate;
+import net.minecraft.world.World;
 
-/* Location:              /home/kongou/Downloads/littleMaidMobX-1.7.x_0.0.8 (1)-deobf.jar!/littleMaidMobX/LMM_EntityAIFollowOwner.class
- * Java compiler version: 6 (50.0)
- * JD-Core Version:       0.7.1-SNAPSHOT-20140817
- */
+public class LMM_EntityAIFollowOwner extends EntityAIBase implements LMM_IEntityAI {
+
+	private LMM_EntityLittleMaid theMaid;
+	private Entity theOwner;
+	private World theWorld;
+	private float moveSpeed;
+	private PathNavigate petPathfinder;
+	private int field_48310_h;
+	protected double maxDist;
+	protected double minDist;
+	protected double sprintDist;
+	protected double toDistance;
+	private boolean lastAvoidWater;
+	protected boolean isEnable;
+
+	public LMM_EntityAIFollowOwner(LMM_EntityLittleMaid par1EntityLittleMaid,
+			float pSpeed, double pMin, double pMax, double pSprintDistSQ) {
+		theMaid = par1EntityLittleMaid;
+		theWorld = par1EntityLittleMaid.worldObj;
+		moveSpeed = pSpeed;
+		petPathfinder = par1EntityLittleMaid.getNavigator();
+		minDist = pMin;
+		maxDist = pMax;
+		sprintDist = pSprintDistSQ;
+		isEnable = true;
+		setMutexBits(3);
+	}
+
+	/**
+	 * Returns whether the EntityAIBase should begin execution.
+	 */
+	public boolean shouldExecute() {
+		if (!isEnable)
+			return false;
+		
+		Entity entityliving = theMaid.getOwner();
+		if (entityliving == null) {
+			return false;
+		}
+		
+		if (theMaid.isSitting()) {
+			return false;
+		}
+		
+		toDistance = theMaid.getDistanceSqToEntity(entityliving);
+		if (toDistance < minDist) {
+			return false;
+		} else {
+			theOwner = entityliving;
+			return true;
+		}
+	}
+
+	/**
+	 * Returns whether an in-progress EntityAIBase should continue executing
+	 */
+	public boolean continueExecuting() {
+		toDistance = theMaid.getDistanceSqToEntity(theOwner);
+		return !petPathfinder.noPath()
+				&& toDistance > maxDist
+				&& !theMaid.isSitting();
+	}
+
+	/**
+	 * Execute a one shot task or start executing a continuous task
+	 */
+	public void startExecuting() {
+		field_48310_h = 0;
+		lastAvoidWater = petPathfinder.getAvoidsWater();
+		petPathfinder.setAvoidsWater(false);
+	}
+
+	/**
+	 * Resets the task
+	 */
+	public void resetTask() {
+		theMaid.setSprinting(false);
+		theOwner = null;
+		petPathfinder.clearPathEntity();
+		petPathfinder.setAvoidsWater(lastAvoidWater);
+	}
+
+	/**
+	 * Updates the task
+	 */
+	public void updateTask() {
+		theMaid.getLookHelper().setLookPositionWithEntity(theOwner, 10F,
+				theMaid.getVerticalFaceSpeed());
+		
+		if (theMaid.isSitting()) {
+			return;
+		}
+		// 指定距離以上ならダッシュ
+		theMaid.setSprinting(toDistance > sprintDist);
+		if (--field_48310_h > 0) {
+			return;
+		}
+		
+		field_48310_h = 10;
+		
+		petPathfinder.tryMoveToEntityLiving(theOwner, moveSpeed);
+	}
+
+	@Override
+	public void setEnable(boolean pFlag) {
+		isEnable = pFlag;
+	}
+
+	@Override
+	public boolean getEnable() {
+		return isEnable;
+	}
+
+}

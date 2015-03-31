@@ -1,83 +1,78 @@
-/*    */ package mmmlibx.lib;
-/*    */ 
-/*    */ import net.minecraft.client.renderer.RenderHelper;
-/*    */ import net.minecraft.client.renderer.Tessellator;
-/*    */ import net.minecraft.client.renderer.entity.Render;
-/*    */ import net.minecraft.entity.Entity;
-/*    */ import net.minecraft.util.MathHelper;
-/*    */ import net.minecraft.util.ResourceLocation;
-/*    */ import org.lwjgl.opengl.GL11;
-/*    */ 
-/*    */ public class MMM_RenderDummy
-/*    */   extends Render
-/*    */ {
-/*    */   public MMM_RenderDummy()
-/*    */   {
-/* 16 */     this.shadowSize = 0.0F;
-/*    */   }
-/*    */   
-/*    */ 
-/*    */   public void doRender(Entity entity, double d, double d1, double d2, float f, float f1)
-/*    */   {
-/* 22 */     GL11.glPushMatrix();
-/* 23 */     GL11.glDisable(2896);
-/* 24 */     GL11.glEnable(32826);
-/* 25 */     GL11.glEnable(2903);
-/*    */     
-/* 27 */     GL11.glEnable(3042);
-/* 28 */     GL11.glDisable(2884);
-/* 29 */     GL11.glBlendFunc(770, 771);
-/* 30 */     GL11.glDisable(3553);
-/* 31 */     GL11.glDepthMask(false);
-/* 32 */     GL11.glTranslatef((float)d, (float)d1, (float)d2);
-/*    */     
-/* 34 */     RenderHelper.disableStandardItemLighting();
-/* 35 */     Tessellator tessellator = Tessellator.instance;
-/* 36 */     tessellator.startDrawingQuads();
-/*    */     
-/* 38 */     GL11.glColor3f(1.0F, 1.0F, 1.0F);
-/* 39 */     if ((entity instanceof MMM_EntityDummy)) {
-/* 40 */       int cc = ((MMM_EntityDummy)entity).getColor();
-/* 41 */       int cr = cc >> 16 & 0xFF;
-/* 42 */       int cg = cc >> 8 & 0xFF;
-/* 43 */       int cb = cc & 0xFF;
-/* 44 */       int ca = MathHelper.floor_float(((MMM_EntityDummy)entity).getAlpha(1.0F) * 256.0F);
-/*    */       
-/* 46 */       tessellator.setColorRGBA_I(cc, ca);
-/*    */     }
-/* 48 */     double xa = 0.3D;
-/* 49 */     double xb = 0.7D;
-/*    */     
-/* 51 */     double yy = 0.015625D;
-/* 52 */     double za = 0.3D;
-/* 53 */     double zb = 0.7D;
-/* 54 */     tessellator.addVertex(xa, yy, za);
-/* 55 */     tessellator.addVertex(xa, yy, zb);
-/* 56 */     tessellator.addVertex(xb, yy, zb);
-/* 57 */     tessellator.addVertex(xb, yy, za);
-/*    */     
-/* 59 */     tessellator.draw();
-/* 60 */     RenderHelper.disableStandardItemLighting();
-/* 61 */     GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-/* 62 */     GL11.glEnable(3553);
-/* 63 */     GL11.glDisable(3042);
-/* 64 */     GL11.glEnable(2884);
-/* 65 */     GL11.glDepthMask(true);
-/* 66 */     GL11.glEnable(2896);
-/* 67 */     GL11.glDisable(32826);
-/* 68 */     GL11.glPopMatrix();
-/*    */   }
-/*    */   
-/*    */ 
-/*    */ 
-/*    */   protected ResourceLocation getEntityTexture(Entity var1)
-/*    */   {
-/* 75 */     return null;
-/*    */   }
-/*    */ }
+package mmmlibx.lib;
 
+import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
 
-/* Location:              /home/kongou/Downloads/littleMaidMobX-1.7.x_0.0.8 (1)-deobf.jar!/mmmlibx/lib/MMM_RenderDummy.class
- * Java compiler version: 6 (50.0)
- * JD-Core Version:       0.7.1-SNAPSHOT-20140817
- */
+import org.lwjgl.opengl.EXTRescaleNormal;
+import org.lwjgl.opengl.GL11;
+
+public class MMM_RenderDummy extends Render {
+
+	public MMM_RenderDummy() {
+		shadowSize = 0.0F;
+	}
+
+	@Override
+	public void doRender(Entity entity, double d, double d1, double d2,
+			float f, float f1) {
+		GL11.glPushMatrix();
+		GL11.glDisable(GL11.GL_LIGHTING);
+		GL11.glEnable(EXTRescaleNormal.GL_RESCALE_NORMAL_EXT);
+		GL11.glEnable(GL11.GL_COLOR_MATERIAL);
+		
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glDisable(GL11.GL_CULL_FACE);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		GL11.glDisable(GL11.GL_TEXTURE_2D);
+		GL11.glDepthMask(false);
+		GL11.glTranslatef((float) d, (float) d1, (float) d2);
+		// RenderHelper.enableStandardItemLighting();
+		RenderHelper.disableStandardItemLighting();
+		Tessellator tessellator = Tessellator.instance;
+		tessellator.startDrawingQuads();
+		
+		GL11.glColor3f(1F, 1F, 1F);
+		if (entity instanceof MMM_EntityDummy) {
+			int cc = ((MMM_EntityDummy) entity).getColor();
+			int cr = (cc >> 16) & 0xff;
+			int cg = (cc >> 8) & 0xff;
+			int cb = (cc & 0xff);
+			int ca = MathHelper.floor_float(((MMM_EntityDummy) entity)
+					.getAlpha(1.0F) * 256);
+			tessellator.setColorRGBA_I(cc, ca);
+		}
+		double xa = 0.3D;
+		double xb = 0.7D;
+		// double yy = 0D + 0.10D;// + 0.015625D;
+		double yy = 0D + 0.015625D;
+		double za = 0.3D;
+		double zb = 0.7D;
+		tessellator.addVertex(xa, yy, za);
+		tessellator.addVertex(xa, yy, zb);
+		tessellator.addVertex(xb, yy, zb);
+		tessellator.addVertex(xb, yy, za);
+		
+		tessellator.draw();
+		RenderHelper.disableStandardItemLighting();
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		GL11.glDisable(GL11.GL_BLEND);
+		GL11.glEnable(GL11.GL_CULL_FACE);
+		GL11.glDepthMask(true);
+		GL11.glEnable(GL11.GL_LIGHTING);
+		GL11.glDisable(EXTRescaleNormal.GL_RESCALE_NORMAL_EXT);
+		GL11.glPopMatrix();
+		
+	}
+
+	@Override
+	protected ResourceLocation getEntityTexture(Entity var1) {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+
+}

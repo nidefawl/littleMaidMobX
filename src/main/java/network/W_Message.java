@@ -1,58 +1,52 @@
-/*    */ package network;
-/*    */ 
-/*    */ import cpw.mods.fml.common.network.simpleimpl.IMessage;
-/*    */ import io.netty.buffer.ByteBuf;
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ public class W_Message
-/*    */   implements IMessage
-/*    */ {
-/*    */   public byte ch;
-/*    */   public byte[] data;
-/*    */   
-/*    */   public W_Message() {}
-/*    */   
-/*    */   public W_Message(int ch, byte[] sendData)
-/*    */   {
-/* 21 */     this.ch = ((byte)ch);
-/* 22 */     this.data = sendData;
-/*    */   }
-/*    */   
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */   public void fromBytes(ByteBuf buf)
-/*    */   {
-/* 33 */     int len = buf.array().length;
-/* 34 */     if (len > 2)
-/*    */     {
-/* 36 */       this.data = new byte[len - 2];
-/* 37 */       this.ch = buf.getByte(0);
-/* 38 */       buf.getBytes(1, this.data);
-/*    */     }
-/*    */     else
-/*    */     {
-/* 42 */       this.data = new byte[] { 0 };
-/*    */     }
-/*    */   }
-/*    */   
-/*    */ 
-/*    */   public void toBytes(ByteBuf buf)
-/*    */   {
-/* 49 */     buf.writeByte(this.ch);
-/* 50 */     buf.writeBytes(this.data);
-/*    */   }
-/*    */ }
+package network;
 
+import io.netty.buffer.ByteBuf;
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
 
-/* Location:              /home/kongou/Downloads/littleMaidMobX-1.7.x_0.0.8 (1)-deobf.jar!/network/W_Message.class
- * Java compiler version: 6 (50.0)
- * JD-Core Version:       0.7.1-SNAPSHOT-20140817
- */
+public class W_Message implements IMessage
+{
+	/** チャネル番号 */
+	public byte   ch;
+	/** 実データ */
+	public byte[] data;
+	
+	public W_Message(){}
+
+	/** 
+	 * @param ch どこ宛かを示すチャネル番号。LMM宛か、MMMLib宛かを区別するために追加した
+	 * @param sendData 送信する実データ
+	 *  */
+	public W_Message(int ch, byte[] sendData)
+	{
+		this.ch		= (byte)ch;
+		this.data	= sendData;
+	}
+
+	/** IMessageのメソッド。ByteBufからデータを読み取る。
+	 * data[0] ... 通信パケットに勝手につくMOD側から見ればゴミ
+	 * data[1] ... チャネル番号
+	 * data[2] ... 以降が実データ
+	 * */
+	@Override
+	public void fromBytes(ByteBuf buf)
+	{
+		int len = buf.array().length;
+		if(len > 2)
+		{
+			this.data = new byte[len-2];
+			this.ch =  buf.getByte(0);
+			buf.getBytes(1, this.data);
+		}
+		else
+		{
+			this.data = new byte[]{0};
+		}
+	}
+
+	@Override//IMessageのメソッド。ByteBufにデータを書き込む。
+	public void toBytes(ByteBuf buf)
+	{
+		buf.writeByte(this.ch);
+		buf.writeBytes(this.data);
+	}
+}

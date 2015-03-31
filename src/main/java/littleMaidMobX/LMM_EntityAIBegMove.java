@@ -1,56 +1,50 @@
-/*    */ package littleMaidMobX;
-/*    */ 
-/*    */ import net.minecraft.pathfinding.PathNavigate;
-/*    */ 
-/*    */ public class LMM_EntityAIBegMove extends net.minecraft.entity.ai.EntityAIBase
-/*    */ {
-/*    */   private LMM_EntityLittleMaid theMaid;
-/*    */   private net.minecraft.entity.player.EntityPlayer thePlayer;
-/*    */   private float moveSpeed;
-/*    */   
-/*    */   public LMM_EntityAIBegMove(LMM_EntityLittleMaid pEntityLittleMaid, float pmoveSpeed)
-/*    */   {
-/* 13 */     this.theMaid = pEntityLittleMaid;
-/* 14 */     this.moveSpeed = pmoveSpeed;
-/*    */     
-/* 16 */     setMutexBits(1);
-/*    */   }
-/*    */   
-/*    */   public boolean shouldExecute()
-/*    */   {
-/* 21 */     return this.theMaid.isLookSuger();
-/*    */   }
-/*    */   
-/*    */   public void startExecuting()
-/*    */   {
-/* 26 */     this.thePlayer = this.theMaid.aiBeg.getPlayer();
-/*    */   }
-/*    */   
-/*    */   public void resetTask()
-/*    */   {
-/* 31 */     this.thePlayer = null;
-/*    */   }
-/*    */   
-/*    */   public boolean continueExecuting()
-/*    */   {
-/* 36 */     return shouldExecute();
-/*    */   }
-/*    */   
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */   public void updateTask()
-/*    */   {
-/* 44 */     if ((this.theMaid.aiBeg.getDistanceSq() < 3.5D) || (this.thePlayer == null)) {
-/* 45 */       this.theMaid.getNavigator().clearPathEntity();
-/*    */     } else {
-/* 47 */       this.theMaid.getNavigator().tryMoveToEntityLiving(this.thePlayer, this.moveSpeed);
-/*    */     }
-/*    */   }
-/*    */ }
+package littleMaidMobX;
 
+import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.player.EntityPlayer;
 
-/* Location:              /home/kongou/Downloads/littleMaidMobX-1.7.x_0.0.8 (1)-deobf.jar!/littleMaidMobX/LMM_EntityAIBegMove.class
- * Java compiler version: 6 (50.0)
- * JD-Core Version:       0.7.1-SNAPSHOT-20140817
- */
+public class LMM_EntityAIBegMove extends EntityAIBase {
+
+	private LMM_EntityLittleMaid theMaid;
+	private EntityPlayer thePlayer;
+	private float moveSpeed;
+	
+	public LMM_EntityAIBegMove(LMM_EntityLittleMaid pEntityLittleMaid, float pmoveSpeed) {
+		theMaid = pEntityLittleMaid;
+		moveSpeed = pmoveSpeed;
+
+		setMutexBits(1);
+	}
+	
+	@Override
+	public boolean shouldExecute() {
+		return theMaid.isLookSuger();
+	}
+
+	@Override
+	public void startExecuting() {
+		thePlayer = theMaid.aiBeg.getPlayer();
+	}
+	
+	@Override
+	public void resetTask() {
+		thePlayer = null;
+	}
+	
+	@Override
+	public boolean continueExecuting() {
+		return shouldExecute();
+	}
+	
+	@Override
+	public void updateTask() {
+		// 不具合対応。
+		// http://forum.minecraftuser.jp/viewtopic.php?f=13&t=23347&start=220
+		// 這い寄れ！
+		if (theMaid.aiBeg.getDistanceSq() < 3.5D || thePlayer==null) {
+			theMaid.getNavigator().clearPathEntity();
+		} else {
+			theMaid.getNavigator().tryMoveToEntityLiving(thePlayer, moveSpeed);
+		}
+	}
+}
