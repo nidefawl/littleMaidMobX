@@ -1,100 +1,105 @@
-package mmmlibx.lib.gui;
+/*    */ package mmmlibx.lib.gui;
+/*    */ 
+/*    */ import net.minecraft.client.Minecraft;
+/*    */ import net.minecraft.client.gui.GuiButton;
+/*    */ import org.lwjgl.opengl.GL11;
+/*    */ 
+/*    */ public class GuiRangedSlider
+/*    */   extends GuiButton
+/*    */ {
+/*    */   public String prefixStr;
+/*    */   public float sliderValue;
+/*    */   public boolean dragging;
+/* 13 */   public String strFormat = "%s : %.2f";
+/* 14 */   public float sliderMultiply = 1.0F;
+/* 15 */   public float sliderOffset = 0.0F;
+/* 16 */   public float sliderStep = 0.0F;
+/*    */   
+/*    */   public GuiRangedSlider(int i, int j, int k, String s, float f)
+/*    */   {
+/* 20 */     super(i, j, k, 100, 20, "");
+/* 21 */     this.sliderValue = 1.0F;
+/* 22 */     this.dragging = false;
+/* 23 */     this.sliderValue = f;
+/* 24 */     this.prefixStr = s;
+/*    */   }
+/*    */   
+/*    */   public GuiRangedSlider(int i, int j, int k, String s, float f, float m, float o) {
+/* 28 */     this(i, j, k, s, f);
+/* 29 */     this.sliderMultiply = m;
+/* 30 */     this.sliderOffset = o;
+/*    */   }
+/*    */   
+/*    */   public int getHoverState(boolean p_146114_1_)
+/*    */   {
+/* 35 */     return 0;
+/*    */   }
+/*    */   
+/*    */   protected void mouseDragged(Minecraft minecraft, int i, int j)
+/*    */   {
+/* 40 */     if (!this.visible) {
+/* 41 */       return;
+/*    */     }
+/* 43 */     if (this.dragging) {
+/* 44 */       this.sliderValue = ((i - (this.xPosition + 4)) / (this.width - 8));
+/* 45 */       if (this.sliderStep > 0.0F) {
+/* 46 */         this.sliderValue = ((int)(this.sliderValue / this.sliderStep) * this.sliderStep);
+/*    */       }
+/* 48 */       if (this.sliderValue < 0.0F) {
+/* 49 */         this.sliderValue = 0.0F;
+/*    */       }
+/* 51 */       if (this.sliderValue > 1.0F) {
+/* 52 */         this.sliderValue = 1.0F;
+/*    */       }
+/* 54 */       setDisplayString();
+/*    */     }
+/* 56 */     GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+/* 57 */     drawTexturedModalRect(this.xPosition + (int)(this.sliderValue * (this.width - 8)), this.yPosition, 0, 66, 4, 20);
+/*    */     
+/* 59 */     drawTexturedModalRect(this.xPosition + (int)(this.sliderValue * (this.width - 8)) + 4, this.yPosition, 196, 66, 4, 20);
+/*    */   }
+/*    */   
+/*    */ 
+/*    */   public boolean mousePressed(Minecraft minecraft, int i, int j)
+/*    */   {
+/* 65 */     if (super.mousePressed(minecraft, i, j))
+/*    */     {
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/* 74 */       this.dragging = true;
+/* 75 */       return true;
+/*    */     }
+/* 77 */     return false;
+/*    */   }
+/*    */   
+/*    */ 
+/*    */   public void mouseReleased(int i, int j)
+/*    */   {
+/* 83 */     this.dragging = false;
+/*    */   }
+/*    */   
+/*    */   public float getSliderValue() {
+/* 87 */     return this.sliderValue * this.sliderMultiply + this.sliderOffset;
+/*    */   }
+/*    */   
+/*    */   public GuiRangedSlider setDisplayString() {
+/* 91 */     this.displayString = String.format(this.strFormat, new Object[] { this.prefixStr, Float.valueOf(getSliderValue()) });
+/* 92 */     return this;
+/*    */   }
+/*    */   
+/*    */   public GuiRangedSlider setStrFormat(String s) {
+/* 96 */     this.strFormat = s;
+/* 97 */     return this;
+/*    */   }
+/*    */ }
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiButton;
 
-import org.lwjgl.opengl.GL11;
-
-public class GuiRangedSlider extends GuiButton {
-
-	public String prefixStr;
-	public float sliderValue;
-	public boolean dragging;
-	public String strFormat = "%s : %.2f";
-	public float sliderMultiply = 1.0F;
-	public float sliderOffset = 0.0F;
-	public float sliderStep = 0;
-
-
-	public GuiRangedSlider(int i, int j, int k, String s, float f) {
-		super(i, j, k, 100, 20, "");
-		sliderValue = 1.0F;
-		dragging = false;
-		sliderValue = f;
-		prefixStr = s;
-	}
-
-	public GuiRangedSlider(int i, int j, int k, String s, float f, float m, float o) {
-		this(i, j, k, s, f);
-		sliderMultiply = m;
-		sliderOffset = o;
-	}
-
-	@Override
-	public int getHoverState(boolean p_146114_1_) {
-		return 0;
-	};
-
-	@Override
-	protected void mouseDragged(Minecraft minecraft, int i, int j) {
-		if (!visible) {
-			return;
-		}
-		if (dragging) {
-			sliderValue = (float) (i - (xPosition + 4)) / (float) (width - 8);
-			if (sliderStep > 0F) {
-				sliderValue = (float)((int)(sliderValue / sliderStep)) * sliderStep;
-			}
-			if (sliderValue < 0.0F) {
-				sliderValue = 0.0F;
-			}
-			if (sliderValue > 1.0F) {
-				sliderValue = 1.0F;
-			}
-			setDisplayString();
-		}
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		drawTexturedModalRect(xPosition + (int) (sliderValue * (float) (width - 8)),
-				yPosition, 0, 66, 4, 20);
-		drawTexturedModalRect(xPosition + (int) (sliderValue * (float) (width - 8)) + 4,
-				yPosition, 196, 66, 4, 20);
-	}
-
-	@Override
-	public boolean mousePressed(Minecraft minecraft, int i, int j) {
-		if (super.mousePressed(minecraft, i, j)) {
-//			sliderValue = (float) (i - (xPosition + 4)) / (float) (width - 8);
-//			if (sliderValue < 0.0F) {
-//				sliderValue = 0.0F;
-//			}
-//			if (sliderValue > 1.0F) {
-//				sliderValue = 1.0F;
-//			}
-//			setDisplayString();
-			dragging = true;
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	@Override
-	public void mouseReleased(int i, int j) {
-		dragging = false;
-	}
-
-	public float getSliderValue() {
-		return sliderValue * sliderMultiply + sliderOffset;
-	}
-
-	public GuiRangedSlider setDisplayString() {
-		displayString = String.format(strFormat, prefixStr, getSliderValue());
-		return this;
-	}
-
-	public GuiRangedSlider setStrFormat(String s) {
-		strFormat = s;
-		return this;
-	}
-
-}
+/* Location:              /home/kongou/Downloads/littleMaidMobX-1.7.x_0.0.8 (1)-deobf.jar!/mmmlibx/lib/gui/GuiRangedSlider.class
+ * Java compiler version: 6 (50.0)
+ * JD-Core Version:       0.7.1-SNAPSHOT-20140817
+ */

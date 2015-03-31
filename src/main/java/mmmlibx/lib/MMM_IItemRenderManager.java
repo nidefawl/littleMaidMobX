@@ -4,31 +4,29 @@ import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-/**
- * アイテム用の特殊レンダーに継承させるインターフェース。
- * 現状、継承させていなくてもメソッドがItemに記述されていれば動作する。
- */
-public interface MMM_IItemRenderManager {
-
-	public static final int VM_FIRST_PERSON		= 0;
-	public static final int VM_THERD_PERSON		= 1;
-	public static final int VM_THERD_PERSON_INV	= 2;
-
-
-	/**
-	 * アイテムの描画のみ、位置補正はしない。
-	 * @param pEntity
-	 * @param pItemStack
-	 * @param pIndex
-	 * @return
-	 */
-	public boolean renderItem(Entity pEntity, ItemStack pItemStack, int pIndex);
-//	public boolean renderItemInFirstPerson(float pDeltaTimepRenderPhatialTick, MMM_ItemRenderer pItemRenderer);
-	public boolean renderItemInFirstPerson(Entity pEntity, ItemStack pItemStack, float pDeltaTimepRenderPhatialTick);
-	public boolean renderItemWorld(ItemStack pItemStack);
-	public ResourceLocation getRenderTexture(ItemStack pItemStack);
-	public boolean isRenderItem(ItemStack pItemStack);
-	public boolean isRenderItemInFirstPerson(ItemStack pItemStack);
-	public boolean isRenderItemWorld(ItemStack pItemStack);
-
+public abstract interface MMM_IItemRenderManager
+{
+  public static final int VM_FIRST_PERSON = 0;
+  public static final int VM_THERD_PERSON = 1;
+  public static final int VM_THERD_PERSON_INV = 2;
+  
+  public abstract boolean renderItem(Entity paramEntity, ItemStack paramItemStack, int paramInt);
+  
+  public abstract boolean renderItemInFirstPerson(Entity paramEntity, ItemStack paramItemStack, float paramFloat);
+  
+  public abstract boolean renderItemWorld(ItemStack paramItemStack);
+  
+  public abstract ResourceLocation getRenderTexture(ItemStack paramItemStack);
+  
+  public abstract boolean isRenderItem(ItemStack paramItemStack);
+  
+  public abstract boolean isRenderItemInFirstPerson(ItemStack paramItemStack);
+  
+  public abstract boolean isRenderItemWorld(ItemStack paramItemStack);
 }
+
+
+/* Location:              /home/kongou/Downloads/littleMaidMobX-1.7.x_0.0.8 (1)-deobf.jar!/mmmlibx/lib/MMM_IItemRenderManager.class
+ * Java compiler version: 6 (50.0)
+ * JD-Core Version:       0.7.1-SNAPSHOT-20140817
+ */

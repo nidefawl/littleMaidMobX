@@ -1,348 +1,353 @@
-package littleMaidMobX;
+/*     */ package littleMaidMobX;
+/*     */ 
+/*     */ import java.util.Random;
+/*     */ import net.minecraft.block.Block;
+/*     */ import net.minecraft.entity.Entity;
+/*     */ import net.minecraft.entity.ai.EntityAITasks;
+/*     */ import net.minecraft.entity.ai.EntityLookHelper;
+/*     */ import net.minecraft.entity.player.EntityPlayer;
+/*     */ import net.minecraft.entity.projectile.EntitySnowball;
+/*     */ import net.minecraft.init.Blocks;
+/*     */ import net.minecraft.init.Items;
+/*     */ import net.minecraft.item.ItemSnowball;
+/*     */ import net.minecraft.item.ItemStack;
+/*     */ import net.minecraft.pathfinding.PathEntity;
+/*     */ import net.minecraft.pathfinding.PathNavigate;
+/*     */ import net.minecraft.util.AxisAlignedBB;
+/*     */ import net.minecraft.util.DamageSource;
+/*     */ import net.minecraft.util.MathHelper;
+/*     */ import net.minecraft.world.World;
+/*     */ 
+/*     */ public class LMM_EntityMode_Playing extends LMM_EntityModeBase
+/*     */ {
+/*     */   public static final int mmode_Playing = 255;
+/*     */   public static final int mpr_NULL = 0;
+/*     */   public static final int mpr_QuickShooter = 16;
+/*     */   public static final int mpr_StockShooter = 32;
+/*     */   public int fcounter;
+/*     */   
+/*     */   public LMM_EntityMode_Playing(LMM_EntityLittleMaid pEntity)
+/*     */   {
+/*  31 */     super(pEntity);
+/*  32 */     this.fcounter = 0;
+/*     */   }
+/*     */   
+/*     */   public int priority()
+/*     */   {
+/*  37 */     return 900;
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */   public void init() {}
+/*     */   
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */   public void addEntityMode(EntityAITasks pDefaultMove, EntityAITasks pDefaultTargeting)
+/*     */   {
+/*  53 */     EntityAITasks[] ltasks = new EntityAITasks[2];
+/*  54 */     ltasks[0] = pDefaultMove;
+/*  55 */     ltasks[1] = pDefaultTargeting;
+/*     */     
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*  61 */     this.owner.addMaidMode(ltasks, "Playing", 255);
+/*     */   }
+/*     */   
+/*     */ 
+/*     */   protected boolean checkSnows(int x, int y, int z)
+/*     */   {
+/*  67 */     int snowCnt = 0;
+/*  68 */     snowCnt += (Block.isEqualTo(this.owner.worldObj.getBlock(x, y, z), Blocks.snow_layer) ? 3 : 0);
+/*  69 */     snowCnt += (Block.isEqualTo(this.owner.worldObj.getBlock(x + 1, y, z), Blocks.snow_layer) ? 1 : 0);
+/*  70 */     snowCnt += (Block.isEqualTo(this.owner.worldObj.getBlock(x - 1, y, z), Blocks.snow_layer) ? 1 : 0);
+/*  71 */     snowCnt += (Block.isEqualTo(this.owner.worldObj.getBlock(x, y, z + 1), Blocks.snow_layer) ? 1 : 0);
+/*  72 */     snowCnt += (Block.isEqualTo(this.owner.worldObj.getBlock(x, y, z - 1), Blocks.snow_layer) ? 1 : 0);
+/*     */     
+/*  74 */     return snowCnt >= 5;
+/*     */   }
+/*     */   
+/*     */   protected boolean movePlaying()
+/*     */   {
+/*  79 */     int x = MathHelper.floor_double(this.owner.posX);
+/*  80 */     int y = MathHelper.floor_double(this.owner.posY);
+/*  81 */     int z = MathHelper.floor_double(this.owner.posZ);
+/*  82 */     PathEntity pe = null;
+/*     */     
+/*     */ 
+/*     */ 
+/*  86 */     for (int a = 2; (a < 18) && (pe == null); a += 2) {
+/*  87 */       x--;
+/*  88 */       z--;
+/*  89 */       for (int b = 0; b < a; b++)
+/*     */       {
+/*  91 */         for (int c = 0; c < 4; c++) {
+/*  92 */           if (checkSnows(x, y, z)) {
+/*  93 */             pe = this.owner.worldObj.getEntityPathToXYZ(this.owner, x, y - 1, z, 10.0F, true, false, false, true);
+/*  94 */             if (pe != null) {
+/*     */               break label174;
+/*     */             }
+/*     */           }
+/*  98 */           if (c == 0) x++;
+/*  99 */           if (c == 1) z++;
+/* 100 */           if (c == 2) x--;
+/* 101 */           if (c == 3) z--;
+/*     */         }
+/*     */       }
+/*     */     }
+/*     */     label174:
+/* 106 */     if (pe != null) {
+/* 107 */       this.owner.getNavigator().setPath(pe, 1.0D);
+/* 108 */       LMM_LittleMaidMobX.Debug("Find Snow Area-%d:%d, %d, %d.", new Object[] { Integer.valueOf(this.owner.getEntityId()), Integer.valueOf(x), Integer.valueOf(y), Integer.valueOf(z) });
+/* 109 */       return true;
+/*     */     }
+/* 111 */     return false;
+/*     */   }
+/*     */   
+/*     */   protected void playingSnowWar()
+/*     */   {
+/* 116 */     switch (this.fcounter)
+/*     */     {
+/*     */     case 0: 
+/* 119 */       this.owner.setSitting(false);
+/* 120 */       this.owner.setSneaking(false);
+/* 121 */       if (!this.owner.getNextEquipItem()) {
+/* 122 */         this.owner.setAttackTarget(null);
+/*     */         
+/* 124 */         this.owner.getNavigator().clearPathEntity();
+/* 125 */         this.fcounter = 1;
+/* 126 */       } else if (this.owner.getAttackTarget() == null)
+/*     */       {
+/* 128 */         java.util.List<Entity> list = this.owner.worldObj.getEntitiesWithinAABBExcludingEntity(this.owner, this.owner.boundingBox.expand(16.0D, 4.0D, 16.0D));
+/* 129 */         for (Entity e : list) {
+/* 130 */           if ((e != null) && (((e instanceof EntityPlayer)) || ((e instanceof LMM_EntityLittleMaid))) && 
+/* 131 */             (this.owner.getRNG().nextBoolean())) {
+/* 132 */             this.owner.setAttackTarget((net.minecraft.entity.EntityLivingBase)e);
+/* 133 */             break;
+/*     */           }
+/*     */         }
+/*     */       }
+/* 137 */       break;
+/*     */     
+/*     */ 
+/*     */     case 1: 
+/* 141 */       this.owner.setAttackTarget(null);
+/* 142 */       if (this.owner.getNavigator().noPath()) {
+/* 143 */         this.fcounter = 2;
+/*     */       }
+/*     */       
+/*     */ 
+/*     */       break;
+/*     */     case 2: 
+/* 149 */       if ((this.owner.getAttackTarget() == null) && (this.owner.getNavigator().noPath())) {
+/* 150 */         if (movePlaying()) {
+/* 151 */           this.fcounter = 3;
+/*     */         } else {
+/* 153 */           this.owner.setPlayingRole(0);
+/* 154 */           this.fcounter = 0;
+/*     */         }
+/*     */       } else {
+/* 157 */         this.owner.setAttackTarget(null);
+/*     */       }
+/*     */       
+/* 160 */       break;
+/*     */     
+/*     */     case 3: 
+/* 163 */       if (this.owner.getNavigator().noPath()) {
+/* 164 */         if (checkSnows(MathHelper.floor_double(this.owner.posX), MathHelper.floor_double(this.owner.posY), MathHelper.floor_double(this.owner.posZ)))
+/*     */         {
+/*     */ 
+/*     */ 
+/*     */ 
+/* 169 */           this.owner.attackTime = 30;
+/* 170 */           if (this.owner.getPlayingRole() == 16) {
+/* 171 */             this.fcounter = 8;
+/*     */           } else {
+/* 173 */             this.fcounter = 4;
+/*     */           }
+/*     */         }
+/*     */         else {
+/* 177 */           this.fcounter = 2;
+/*     */         }
+/*     */       }
+/*     */       
+/*     */       break;
+/*     */     case 4: 
+/*     */     case 5: 
+/*     */     case 6: 
+/*     */     case 7: 
+/* 186 */       if (this.owner.attackTime <= 0) {
+/* 187 */         if (this.owner.maidInventory.addItemStackToInventory(new ItemStack(Items.snowball))) {
+/* 188 */           this.owner.playSound("random.pop");
+/* 189 */           if (this.owner.getPlayingRole() == 32) {
+/* 190 */             this.owner.setSwing(5, LMM_EnumSound.collect_snow);
+/* 191 */             this.fcounter = 0;
+/*     */           } else {
+/* 193 */             this.owner.setSwing(30, LMM_EnumSound.collect_snow);
+/* 194 */             this.fcounter += 1;
+/*     */           }
+/*     */         } else {
+/* 197 */           this.owner.setPlayingRole(0);
+/* 198 */           this.fcounter = 0;
+/*     */         }
+/*     */       }
+/*     */       
+/* 202 */       this.owner.setJumping(false);
+/* 203 */       this.owner.getNavigator().clearPathEntity();
+/* 204 */       this.owner.getLookHelper().setLookPosition(MathHelper.floor_double(this.owner.posX), MathHelper.floor_double(this.owner.posY - 1.0D), MathHelper.floor_double(this.owner.posZ), 30.0F, 40.0F);
+/*     */       
+/*     */ 
+/*     */ 
+/*     */ 
+/* 209 */       this.owner.setSitting(true);
+/* 210 */       break;
+/*     */     
+/*     */ 
+/*     */     case 8: 
+/* 214 */       if (this.owner.attackTime <= 0) {
+/* 215 */         if (this.owner.maidInventory.addItemStackToInventory(new ItemStack(Items.snowball))) {
+/* 216 */           this.owner.setSwing(5, LMM_EnumSound.collect_snow);
+/* 217 */           this.owner.playSound("random.pop");
+/* 218 */           this.fcounter = 0;
+/*     */         } else {
+/* 220 */           this.owner.setPlayingRole(0);
+/* 221 */           this.fcounter = 0;
+/*     */         }
+/*     */       }
+/*     */       
+/* 225 */       this.owner.setSneaking(true);
+/* 226 */       this.owner.getLookHelper().setLookPosition(MathHelper.floor_double(this.owner.posX), MathHelper.floor_double(this.owner.posY - 1.0D), MathHelper.floor_double(this.owner.posZ), 30.0F, 40.0F);
+/*     */     }
+/*     */     
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */   public void updateAITick(int pMode)
+/*     */   {
+/* 239 */     if (this.owner.isFreedom())
+/*     */     {
+/* 241 */       if (this.owner.worldObj.isDaytime())
+/*     */       {
+/*     */ 
+/*     */ 
+/* 245 */         if (!this.owner.isPlaying())
+/*     */         {
+/* 247 */           int xx = MathHelper.floor_double(this.owner.posX);
+/* 248 */           int yy = MathHelper.floor_double(this.owner.posY);
+/* 249 */           int zz = MathHelper.floor_double(this.owner.posZ);
+/*     */           
+/*     */ 
+/* 252 */           boolean f = true;
+/* 253 */           for (int z = -1; z < 2; z++) {
+/* 254 */             for (int x = -1; x < 2; x++) {
+/* 255 */               f &= Block.isEqualTo(this.owner.worldObj.getBlock(xx + x, yy, zz + z), Blocks.snow_layer);
+/*     */             }
+/*     */           }
+/* 258 */           int lpr = this.owner.getRNG().nextInt(100) - 97;
+/* 259 */           lpr = (f) && (lpr > 0) ? 32 : lpr == 1 ? 16 : 0;
+/* 260 */           this.owner.setPlayingRole(lpr);
+/* 261 */           this.fcounter = 0;
+/* 262 */           if (!f) {}
+/*     */ 
+/*     */ 
+/*     */         }
+/* 266 */         else if (this.owner.getPlayingRole() >= 32768)
+/*     */         {
+/* 268 */           this.owner.setPlayingRole(0);
+/* 269 */           this.fcounter = 0;
+/*     */ 
+/*     */         }
+/* 272 */         else if ((this.owner.getPlayingRole() == 16) || (this.owner.getPlayingRole() == 32))
+/*     */         {
+/* 274 */           playingSnowWar();
+/*     */ 
+/*     */         }
+/*     */         
+/*     */ 
+/*     */ 
+/*     */       }
+/* 281 */       else if (this.owner.isPlaying())
+/*     */       {
+/*     */ 
+/* 284 */         if (this.owner.getPlayingRole() < 32768)
+/*     */         {
+/* 286 */           this.owner.setPlayingRole(0);
+/* 287 */           this.fcounter = 0;
+/*     */         }
+/*     */       }
+/*     */       
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/* 296 */       if ((this.owner.getAttackTarget() != null) || (this.owner.maidInventory.getFirstEmptyStack() != -1)) {}
+/*     */     }
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */   public float attackEntityFrom(DamageSource par1DamageSource, float par2)
+/*     */   {
+/* 305 */     if ((par1DamageSource.getSourceOfDamage() instanceof EntitySnowball))
+/*     */     {
+/* 307 */       this.owner.maidDamegeSound = LMM_EnumSound.hurt_snow;
+/* 308 */       if ((!this.owner.isContract()) || (this.owner.isFreedom())) {
+/* 309 */         this.owner.setPlayingRole(16);
+/* 310 */         this.owner.setMaidWait(false);
+/* 311 */         this.owner.setMaidWaitCount(0);
+/* 312 */         LMM_LittleMaidMobX.Debug("playingMode Enable.", new Object[0]);
+/*     */       }
+/*     */     }
+/* 315 */     return 0.0F;
+/*     */   }
+/*     */   
+/*     */   public boolean setMode(int pMode)
+/*     */   {
+/* 320 */     switch (pMode) {
+/*     */     case 255: 
+/* 322 */       this.owner.aiAttack.setEnable(false);
+/* 323 */       this.owner.aiShooting.setEnable(true);
+/* 324 */       this.owner.setBloodsuck(false);
+/* 325 */       return true;
+/*     */     }
+/*     */     
+/* 328 */     return false;
+/*     */   }
+/*     */   
+/*     */   public int getNextEquipItem(int pMode)
+/*     */   {
+/* 333 */     ItemStack litemstack = null;
+/* 334 */     if (this.owner.getPlayingRole() != 0) {
+/* 335 */       for (int li = 0; li < 18; li++) {
+/* 336 */         litemstack = this.owner.maidInventory.getStackInSlot(li);
+/* 337 */         if (litemstack != null)
+/*     */         {
+/*     */ 
+/* 340 */           if ((litemstack.getItem() instanceof ItemSnowball))
+/* 341 */             return li;
+/*     */         }
+/*     */       }
+/*     */     }
+/* 345 */     return -1;
+/*     */   }
+/*     */ }
 
-import java.util.List;
 
-import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.ai.EntityAITasks;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntitySnowball;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemSnowball;
-import net.minecraft.item.ItemStack;
-import net.minecraft.pathfinding.PathEntity;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
-
-public class LMM_EntityMode_Playing extends LMM_EntityModeBase {
-
-	public static final int mmode_Playing	= 0x00ff;
-
-	public static final int mpr_NULL = 0;
-	public static final int mpr_QuickShooter = 0x0010;
-	public static final int mpr_StockShooter = 0x0020;
-	
-	public int fcounter;
-
-	public LMM_EntityMode_Playing(LMM_EntityLittleMaid pEntity) {
-		super(pEntity);
-		fcounter = 0;
-	}
-
-	@Override
-	public int priority() {
-		return 900;
-	}
-
-	@Override
-	public void init() {
-		/* langファイルに移動
-		ModLoader.addLocalization("littleMaidMob.mode.Playing", "Playing");
-		// ModLoader.addLocalization("littleMaidMob.mode.T-Playing", "Playing");
-		// ModLoader.addLocalization("littleMaidMob.mode.F-Playing", "Playing");
-		// ModLoader.addLocalization("littleMaidMob.mode.D-Playing", "Playing");
-		*/
-	}
-
-	@Override
-	public void addEntityMode(EntityAITasks pDefaultMove, EntityAITasks pDefaultTargeting) {
-		// Playing:0x00ff
-		EntityAITasks[] ltasks = new EntityAITasks[2];
-		ltasks[0] = pDefaultMove;
-		ltasks[1] = pDefaultTargeting;
-//		ltasks[1] = new EntityAITasks(owner.aiProfiler);
-		
-//		ltasks[1].addTask(3, new LMM_EntityAIHurtByTarget(owner, true));
-//		ltasks[1].addTask(4, new LMM_EntityAINearestAttackableTarget(owner, EntityLiving.class, 16F, 0, true));
-		
-		owner.addMaidMode(ltasks, "Playing", mmode_Playing);
-		
-	}
-
-	protected boolean checkSnows(int x, int y, int z) {
-		// 周りが雪か？
-		int snowCnt = 0;
-		snowCnt += Block.isEqualTo(owner.worldObj.getBlock(x,   y, z  ), Blocks.snow_layer) ? 3: 0;
-		snowCnt += Block.isEqualTo(owner.worldObj.getBlock(x+1, y, z  ), Blocks.snow_layer) ? 1: 0;
-		snowCnt += Block.isEqualTo(owner.worldObj.getBlock(x-1, y, z  ), Blocks.snow_layer) ? 1: 0;
-		snowCnt += Block.isEqualTo(owner.worldObj.getBlock(x,   y, z+1), Blocks.snow_layer) ? 1: 0;
-		snowCnt += Block.isEqualTo(owner.worldObj.getBlock(x,   y, z-1), Blocks.snow_layer) ? 1: 0;
-		
-		return snowCnt >= 5;
-	}
-
-	protected boolean movePlaying() {
-		//
-		int x = MathHelper.floor_double(owner.posX);
-		int y = MathHelper.floor_double(owner.posY);
-		int z = MathHelper.floor_double(owner.posZ);
-		PathEntity pe = null;
-		
-		// CW方向に検索領域を広げる 
-		loop_search:
-			for (int a = 2; a < 18 && pe == null; a += 2) {
-				x--;
-				z--;
-				for (int b = 0; b < a; b++) {
-					// N
-					for (int c = 0; c < 4; c++) {
-						if (checkSnows(x, y, z)) {
-							pe = owner.worldObj.getEntityPathToXYZ(owner, x, y - 1, z, 10F, true, false, false, true);
-							if (pe != null) {
-								break loop_search;
-							}
-						}
-						if (c == 0) x++;
-						if (c == 1) z++;
-						if (c == 2) x--;
-						if (c == 3) z--;
-					}
-				}
-			}
-		
-		if (pe != null) {
-			owner.getNavigator().setPath(pe, 1.0F);
-			LMM_LittleMaidMobX.Debug("Find Snow Area-%d:%d, %d, %d.", owner.getEntityId(), x, y, z);
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	protected void playingSnowWar() {
-		switch (fcounter) {
-		case 0:
-			// 有り玉全部投げる
-			owner.setSitting(false);
-			owner.setSneaking(false);
-			if (!owner.getNextEquipItem()) {
-				owner.setAttackTarget(null);
-				
-				owner.getNavigator().clearPathEntity();
-				fcounter = 1;
-			} else if (owner.getAttackTarget() == null) {
-				// メイドとプレーヤー（無差別）をターゲットに
-				List<Entity> list = owner.worldObj.getEntitiesWithinAABBExcludingEntity(owner, owner.boundingBox.expand(16D, 4D, 16D));
-				for (Entity e : list) {
-					if (e != null && (e instanceof EntityPlayer || e instanceof LMM_EntityLittleMaid)) {
-						if (owner.getRNG().nextBoolean()) {
-							owner.setAttackTarget((EntityLivingBase)e);
-							break;
-						}
-					}
-				}
-			}
-			break;
-		case 1:
-			// 乱数加速
-			owner.setAttackTarget(null);
-			if (owner.getNavigator().noPath()) {
-				fcounter = 2;
-			}
-			break;
-		
-		case 2:
-			// 雪原を探す
-			if (owner.getAttackTarget() == null && owner.getNavigator().noPath()) {
-				if (movePlaying()) {
-					fcounter = 3;
-				} else {
-					owner.setPlayingRole(mpr_NULL);
-					fcounter = 0;
-				}
-			} else {
-				owner.setAttackTarget(null);
-			}
-//			isMaidChaseWait = true;
-			break;
-		case 3:
-			// 雪原へ到着
-			if (owner.getNavigator().noPath()) {
-				if (checkSnows(
-						MathHelper.floor_double(owner.posX),
-						MathHelper.floor_double(owner.posY),
-						MathHelper.floor_double(owner.posZ))) {
-//					owner.isMaidChaseWait = true;
-					owner.attackTime = 30;
-					if (owner.getPlayingRole() == mpr_QuickShooter) {
-						fcounter = 8;
-					} else {
-						fcounter = 4;
-					}
-				} else {
-					// 再検索
-					fcounter = 2;
-				}
-			}
-			break;
-		case 4:
-		case 5:
-		case 6:
-		case 7:
-			// リロード
-			if (owner.attackTime <= 0) {
-				if (owner.maidInventory.addItemStackToInventory(new ItemStack(Items.snowball))) {
-					owner.playSound("random.pop");
-					if (owner.getPlayingRole() == mpr_StockShooter) {
-						owner.setSwing(5, LMM_EnumSound.collect_snow);
-						fcounter = 0;
-					} else {
-						owner.setSwing(30, LMM_EnumSound.collect_snow);
-						fcounter++;
-					}
-				} else {
-					owner.setPlayingRole(mpr_NULL);
-					fcounter = 0;
-				}
-			}
-//			owner.isMaidChaseWait = true;
-			owner.setJumping(false);
-			owner.getNavigator().clearPathEntity();
-			owner.getLookHelper().setLookPosition(
-					MathHelper.floor_double(owner.posX), 
-					MathHelper.floor_double(owner.posY - 1D), 
-					MathHelper.floor_double(owner.posZ), 
-					30F, 40F);
-			owner.setSitting(true);
-			break;
-		case 8:
-			// リロード
-//			isMaidChaseWait = true;
-			if (owner.attackTime <= 0) {
-				if (owner.maidInventory.addItemStackToInventory(new ItemStack(Items.snowball))) {
-					owner.setSwing(5, LMM_EnumSound.collect_snow);
-					owner.playSound("random.pop");
-					fcounter = 0;
-				} else {
-					owner.setPlayingRole(mpr_NULL);
-					fcounter = 0;
-				}
-			}
-//			isMaidChaseWait = true;
-			owner.setSneaking(true);
-			owner.getLookHelper().setLookPosition(
-					MathHelper.floor_double(owner.posX), 
-					MathHelper.floor_double(owner.posY - 1D), 
-					MathHelper.floor_double(owner.posZ), 
-					30F, 40F);
-			break;
-		}
-		
-	}
-
-
-	@Override
-	public void updateAITick(int pMode) {
-		if (owner.isFreedom()) {
-			// 自由行動中の固体は虎視眈々と隙をうかがう。
-			if (owner.worldObj.isDaytime()) {
-				// 昼間のお遊び
-				
-				// 雪原判定
-				if (!owner.isPlaying()) {
-					// TODO:お遊び判定
-					int xx = MathHelper.floor_double(owner.posX);
-					int yy = MathHelper.floor_double(owner.posY);
-					int zz = MathHelper.floor_double(owner.posZ);
-					
-					// 3x3が雪の平原ならお遊び判定が発生
-					boolean f = true;
-					for (int z = -1; z < 2; z++) {
-						for (int x = -1; x < 2; x++) {
-							f &= Block.isEqualTo(owner.worldObj.getBlock(xx + x, yy, zz + z), Blocks.snow_layer);
-						}
-					}
-					int lpr = owner.getRNG().nextInt(100) - 97;
-					lpr = (f && lpr > 0) ? (lpr == 1 ? mpr_QuickShooter : mpr_StockShooter) : 0;
-					owner.setPlayingRole(lpr);
-					fcounter = 0;
-					if (f) {
-						// mod_littleMaidMob.Debug(String.format("playRole-%d:%d", entityId, playingRole));
-					}
-					
-				} else if (owner.getPlayingRole() >= 0x8000) {
-					// 夜の部終了
-					owner.setPlayingRole(mpr_NULL);
-					fcounter = 0;
-				} else {
-					// お遊びの実行をここに書く？
-					if (owner.getPlayingRole() == mpr_QuickShooter || 
-							owner.getPlayingRole() == mpr_StockShooter) {
-						playingSnowWar();
-					}
-					
-				}
-				
-			} else {
-				// 夜のお遊び
-				if (!owner.isPlaying()) {
-					// 条件判定
-					
-				} else if (owner.getPlayingRole() < 0x8000) {
-					// 昼の部終了
-					owner.setPlayingRole(mpr_NULL);
-					fcounter = 0;
-					
-				} else {
-					// お遊びの実行をここに書く？
-					
-				}
-			}
-			
-			// チェスト判定
-			if (owner.getAttackTarget() == null
-					&& owner.maidInventory.getFirstEmptyStack() == -1) {
-				
-			}
-		}
-	}
-
-	@Override
-	public float attackEntityFrom(DamageSource par1DamageSource, float par2) {
-		if (par1DamageSource.getSourceOfDamage() instanceof EntitySnowball) {
-			// お遊び判定用、雪玉かどうか判定
-			owner.maidDamegeSound = LMM_EnumSound.hurt_snow;
-			if (!owner.isContract() || owner.isFreedom()) {
-				owner.setPlayingRole(mpr_QuickShooter);
-				owner.setMaidWait(false);
-				owner.setMaidWaitCount(0);
-				LMM_LittleMaidMobX.Debug("playingMode Enable.");
-			}
-		}
-		return 0F;
-	}
-
-	@Override
-	public boolean setMode(int pMode) {
-		switch (pMode) {
-		case mmode_Playing :
-			owner.aiAttack.setEnable(false);
-			owner.aiShooting.setEnable(true);
-			owner.setBloodsuck(false);
-			return true;
-		}
-		
-		return false;
-	}
-
-	@Override
-	public int getNextEquipItem(int pMode) {
-		ItemStack litemstack = null;
-		if (owner.getPlayingRole() != 0) {
-			for (int li = 0; li < owner.maidInventory.maxInventorySize; li++) {
-				litemstack = owner.maidInventory.getStackInSlot(li);
-				if (litemstack == null) continue;
-				
-				// 雪球
-				if (litemstack.getItem() instanceof ItemSnowball) {
-					return li;
-				}
-			}
-		}
-		return -1;
-	}
-
-}
+/* Location:              /home/kongou/Downloads/littleMaidMobX-1.7.x_0.0.8 (1)-deobf.jar!/littleMaidMobX/LMM_EntityMode_Playing.class
+ * Java compiler version: 6 (50.0)
+ * JD-Core Version:       0.7.1-SNAPSHOT-20140817
+ */
