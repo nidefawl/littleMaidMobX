@@ -16,16 +16,6 @@ buildscript {
 }
 
 
-// define the properties file
-ext.configFile = file "build.prop"
-
-configFile.withReader {
-	// read config.  it shall from now on be referenced as simply config or as project.config
-	def prop = new Properties()
-	prop.load(it)
-	project.ext.config = new ConfigSlurper().parse prop
-}
-
 allprojects {
 	apply plugin: 'java'
 	apply plugin: 'forge'
@@ -73,22 +63,28 @@ sourceSets {
 	}
 }
 
-//Creates a compiled de-obfuscated jar
-task deobfJar(type: Jar) {
+
+def commonManifest = {
+	'FMLCorePlugin': mmmlibx.lib.multiModel.MMMLoader.MMMCoremod(littleMaidMobX.LMM_LittleMaidMobX, mmmlibx.lib.MMMLib)
+}
+
+
+jar {
+	classifier = project.hasProperty('extra_classifier') ? project.extra_classifier : 'universal'
+	manifest commonManifest
+}
+
+task devJar(dependsOn: 'classes', type: Jar) {
 	from sourceSets.main.output
-	appendix = 'deobf'
-
-	manifest.attributes(
-		'FMLCorePlugin': 'mmmlibx.lib.multiModel.MMMLoader.MMMCoremod',
-		'FMLCorePluginContainsFMLMod': 'littleMaidMobX.LMM_LittleMaidMobX', 'mmmlibx.lib.MMMLib')
+	classifier = 'dev'
+	manifest commonManifest
 }
-//creates a jar containing only the src
-task sourceJar(type: Jar) {
+
+task sourceJar(dependsOn: 'classes', type: Jar) {
 	from sourceSets.main.allSource
-	appendix = 'src'
+	classifier = 'sources'
+	manifest commonManifest
 }
-
-tasks.build.dependsOn('sourceJar', 'deobfJar')
 
 processResources {
 	//First we just copy in the mcmod.info file
@@ -106,10 +102,4 @@ processResources {
 		exclude '**/*.info'
 		exclude '**/*.prop'
 	}
-}
-
-jar {
-	manifest.attributes(
-		'FMLCorePlugin': 'mmmlibx.lib.multiModel.MMMLoader.MMMCoremod',
-		'FMLCorePluginContainsFMLMod': 'littleMaidMobX.LMM_LittleMaidMobX', 'mmmlibx.lib.MMMLib')
 }
