@@ -20,12 +20,12 @@ allprojects {
 	apply plugin: 'java'
 	apply plugin: 'forge'
 	apply plugin: 'maven'
-	group = config.group_name
-	version = config.mod_version
-	archivesBaseName = "[${config.minecraft_version}]${config.mod_id}"
+	group = project.group_name
+	version = project.mod_version
+	archivesBaseName = "[${project.minecraft_version}]${project.mod_id}"
 
 	minecraft {
-		version = config.minecraft_version + "-" + config.forge_version
+		version = project.minecraft_version + "-" + project.forge_version
 		if (file('../run').exists()) {
 			runDir = "../run"
 		} else {
