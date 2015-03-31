@@ -65,7 +65,7 @@ sourceSets {
 
 def commonManifest = {
     attributes 'FMLCorePlugin': 'mmmlibx.lib.multiModel.MMMLoader.MMMCoremod'
-    attributes 'FMLCorePluginContainsFMLMod': 'littleMaidMobX.LMM_LittleMaidMobX mmmlibx.lib.MMMLib'
+    attributes 'FMLCorePluginContainsFMLMod': 'littleMaidMobX.LMM_LittleMaidMobX, mmmlibx.lib.MMMLib'
 }
 
 
