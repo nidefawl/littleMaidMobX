@@ -71,8 +71,7 @@ def commonManifest = [
 
 
 jar {
-	classifier = project.hasProperty('extra_classifier') ? project.extra_classifier : 'universal'
-	manifest commonManifest
+    manifest.mainAttributes(commonManifest)
 }
 
 task devJar(dependsOn: 'classes', type: Jar) {
