@@ -63,11 +63,11 @@ sourceSets {
 	}
 }
 
-def commonManifest = [
+def commonManifest = {
     attributes 'FMLCorePlugin': 'mmmlibx.lib.multiModel.MMMLoader.MMMCoremod'
     attributes 'FMLCorePluginContainsFMLMod': 'littleMaidMobX.LMM_LittleMaidMobX' 
     attributes 'FMLCorePluginContainsFMLMod': 'mmmlibx.lib.MMMLib'
-]
+}
 
 
 jar {
