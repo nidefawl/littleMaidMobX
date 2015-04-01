@@ -215,13 +215,14 @@ public class LMM_EntityLittleMaid extends EntityTameable implements ITextureEnti
 		
 		// モデルレンダリング用のフラグ獲得用ヘルパー関数
 		maidCaps = new LMM_EntityCaps(this);
-		
-		// 形態形成場
-		textureData = new MMM_TextureData(this, maidCaps);
-		textureData.setColor(12);
-		MMM_TextureBox ltb[] = new MMM_TextureBox[2];
-		ltb[0] = ltb[1] = MMM_TextureManager.instance.getDefaultTexture(this);
-		setTexturePackName(ltb);
+		if (!par1World.isRemote) {
+			// 形態形成場
+			textureData = new MMM_TextureData(this, maidCaps);
+			textureData.setColor(12);
+			MMM_TextureBox ltb[] = new MMM_TextureBox[2];
+			ltb[0] = ltb[1] = MMM_TextureManager.instance.getDefaultTexture(this);
+			setTexturePackName(ltb);
+		}
 		
 		entityIdFactor = (float)(getEntityId() * 70);
 		// 腕振り
