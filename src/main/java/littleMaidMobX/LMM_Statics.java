@@ -4,57 +4,57 @@ public class LMM_Statics
 {
 
 	/** Absoption効果をクライアント側へ転送するのに使う */
-	protected static final int dataWatch_Absoption		= 18;
+	public static final int dataWatch_Absoption		= 18;
 	
 	/** メイドカラー(byte) */
-	protected static final int dataWatch_Color			= 19;
+	public static final int dataWatch_Color			= 19;
 	/**
 	 * MSB|0x0000 0000|LSB<br>
 	 *       |    |本体のテクスチャインデックス<br>
 	 *       |アーマーのテクスチャインデックス<br>
 	 */
-	protected static final int dataWatch_Texture		= 20;
+	public static final int dataWatch_Texture		= 20;
 	/** モデルパーツの表示フラグ(Integer) */
-	protected static final int dataWatch_Parts			= 21;
+	public static final int dataWatch_Parts			= 21;
 	/**
 	 * 各種フラグを一纏めにしたもの。
 	 */
-	protected static final int dataWatch_Flags			= 22;
-	protected static final int dataWatch_Flags_looksWithInterest		= 0x00000001;
-	protected static final int dataWatch_Flags_looksWithInterestAXIS	= 0x00000002;
-	protected static final int dataWatch_Flags_Aimebow					= 0x00000004;
-	protected static final int dataWatch_Flags_Freedom					= 0x00000008;
-	protected static final int dataWatch_Flags_Tracer					= 0x00000010;
-	protected static final int dataWatch_Flags_remainsContract			= 0x00000020;
-	protected static final int dataWatch_Flags_PlayingMode				= 0x00000040;
-	protected static final int dataWatch_Flags_Working					= 0x00000080;
-	protected static final int dataWatch_Flags_Wait						= 0x00000100;
-	protected static final int dataWatch_Flags_WaitEx					= 0x00000200;
-	protected static final int dataWatch_Flags_LooksSugar				= 0x00000400;
-	protected static final int dataWatch_Flags_Bloodsuck				= 0x00000800;
-	protected static final int dataWatch_Flags_OverDrive				= 0x00001000;
+	public static final int dataWatch_Flags			= 22;
+	public static final int dataWatch_Flags_looksWithInterest		= 0x00000001;
+	public static final int dataWatch_Flags_looksWithInterestAXIS	= 0x00000002;
+	public static final int dataWatch_Flags_Aimebow					= 0x00000004;
+	public static final int dataWatch_Flags_Freedom					= 0x00000008;
+	public static final int dataWatch_Flags_Tracer					= 0x00000010;
+	public static final int dataWatch_Flags_remainsContract			= 0x00000020;
+	public static final int dataWatch_Flags_PlayingMode				= 0x00000040;
+	public static final int dataWatch_Flags_Working					= 0x00000080;
+	public static final int dataWatch_Flags_Wait						= 0x00000100;
+	public static final int dataWatch_Flags_WaitEx					= 0x00000200;
+	public static final int dataWatch_Flags_LooksSugar				= 0x00000400;
+	public static final int dataWatch_Flags_Bloodsuck				= 0x00000800;
+	public static final int dataWatch_Flags_OverDrive				= 0x00001000;
 	/** 紐の持ち主のEntityID。 */
-	protected static final int dataWatch_Gotcha			= 23;
+	public static final int dataWatch_Gotcha			= 23;
 	
 	/** メイドモード(Short) */
-	protected static final int dataWatch_Mode			= 24;
+	public static final int dataWatch_Mode			= 24;
 	/** 利き腕(Byte) */
-	protected static final int dataWatch_DominamtArm	= 25;
+	public static final int dataWatch_DominamtArm	= 25;
 	/** アイテムの使用判定、腕毎(Integer) */
-	protected static final int dataWatch_ItemUse		= 26;
+	public static final int dataWatch_ItemUse		= 26;
 	/** 保持経験値、実のところクライアント側では必要ないので要らない(Integer) */
-	protected static final int dataWatch_ExpValue		= 27;
+	public static final int dataWatch_ExpValue		= 27;
 	
 	/** EntityPlayer と EntityTameable で17番がかぶっているため、EntityPlayer側を28へ移動。 */
-	protected static final int dataWatch_AbsorptionAmount	= 28;
+	public static final int dataWatch_AbsorptionAmount	= 28;
 	
 	
 	/**
 	 * 自由設定値。
 	 */
-	protected static final int dataWatch_Free			= 31;
+	public static final int dataWatch_Free			= 31;
 	
-	protected static final int dataFlags_ForceUpdateInventory	= 0x80000000;
+	public static final int dataFlags_ForceUpdateInventory	= 0x80000000;
 
 // NetWork
 

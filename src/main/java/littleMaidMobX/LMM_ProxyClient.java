@@ -3,6 +3,7 @@ package littleMaidMobX;
 import static littleMaidMobX.LMM_Statics.LMN_Client_PlaySound;
 import static littleMaidMobX.LMM_Statics.LMN_Client_SetIFFValue;
 import static littleMaidMobX.LMM_Statics.LMN_Client_SwingArm;
+import littleMaidMobX.modes.LMM_IFF;
 import mmmlibx.lib.MMM_EntityDummy;
 import mmmlibx.lib.MMM_EntitySelect;
 import mmmlibx.lib.MMM_Helper;

@@ -2,6 +2,7 @@ package littleMaidMobX;
 
 import java.io.File;
 
+import littleMaidMobX.modes.LMM_IFF;
 import mmmlibx.lib.MMM_Config;
 import mmmlibx.lib.MMM_Helper;
 import mmmlibx.lib.MMM_Statics;

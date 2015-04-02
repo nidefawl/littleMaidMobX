@@ -1,5 +1,8 @@
 package littleMaidMobX;
 
+import littleMaidMobX.gui.LMM_GuiIFF;
+import littleMaidMobX.gui.LMM_GuiInventory;
+import littleMaidMobX.inventory.ContainerInventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
@@ -28,7 +31,7 @@ public class LMM_GuiCommonHandler implements IGuiHandler
 			case GUI_ID_INVVENTORY:
 				if(maidServer!=null)
 				{
-					o = new LMM_ContainerInventory(player.inventory, maidServer);
+					o = new ContainerInventory(player.inventory, maidServer);
 					maidServer = null;
 				}
 				break;
