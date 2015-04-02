@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import littleMaidMobX.LMM_LittleMaidMobX;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.entity.Entity;
@@ -69,7 +70,7 @@ public class MMM_ItemRenderManager {
 			forgeRender = new MMM_ItemRendererForge();
 		}
 		MinecraftForgeClient.registerItemRenderer(pItem, forgeRender);
-		MMMLib.Debug("registerForge:%s", pItem.getClass().getSimpleName());
+		LMM_LittleMaidMobX.Debug("registerForge:%s", pItem.getClass().getSimpleName());
 	}
 
 	public static boolean setEXRender(Item pItem, MMM_IItemRenderManager pEXRender) {

@@ -3,6 +3,7 @@ package mmmlibx.lib;
 import java.util.ArrayList;
 import java.util.List;
 
+import littleMaidMobX.LMM_LittleMaidMobX;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -97,7 +98,7 @@ public class MMM_EntityDummy extends Entity {
 		
 		// サーバー側でしか呼ばれないっぽい
 		if (owner.worldObj.isRemote) {
-			MMMLib.Debug("L");
+			LMM_LittleMaidMobX.Debug("L");
 		}
 		
 		MMM_EntityDummy ed = new MMM_EntityDummy(Client.getMCtheWorld(), color, owner);

@@ -1,8 +1,8 @@
 package mmmlibx.lib.multiModel.model.mc162;
 
+import littleMaidMobX.LMM_LittleMaidMobX;
 import mmmlibx.lib.Client;
 import mmmlibx.lib.ITextureEntity;
-import mmmlibx.lib.MMMLib;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -23,10 +23,10 @@ public class RenderModelMulti extends RenderLiving {
 	public RenderModelMulti(float pShadowSize) {
 		super(null, pShadowSize);
 		modelFATT = new ModelBaseDuo(this);
-		modelFATT.isModelAlphablend = MMMLib.cfg_isModelAlphaBlend;
+		modelFATT.isModelAlphablend = LMM_LittleMaidMobX.cfg_isModelAlphaBlend;
 		modelFATT.isRendering = true;
 		modelMain = new ModelBaseSolo(this);
-		modelMain.isModelAlphablend = MMMLib.cfg_isModelAlphaBlend;
+		modelMain.isModelAlphablend = LMM_LittleMaidMobX.cfg_isModelAlphaBlend;
 		modelMain.capsLink = modelFATT;
 		mainModel = modelMain;
 		setRenderPassModel(modelFATT);

@@ -119,8 +119,6 @@ public interface IModelCaps {
 	public static final int caps_HeadMount			= 0x0132;
 	/** モデルに設定されているハードポイントを配列で返します **/
 	public static final int caps_HardPoint			= 0x0133;
-	/** 装備しているスタビライザーを返します **/
-	public static final int caps_stabiliser			= 0x0134;
 	/** 現在保持しているアイテムの配列を返します **/
 	public static final int caps_Items				= 0x0135;
 	/** 現在保持しているアイテムの挙動の配列を返します **/

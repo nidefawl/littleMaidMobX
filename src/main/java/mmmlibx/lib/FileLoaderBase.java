@@ -20,21 +20,21 @@ public abstract class FileLoaderBase {
 	 */
 	public void execute() {
 //		List<File> llist = FileManager.getAllmodsFiles();
-		List<File> llist = FileManager.getAllmodsFiles(getClass().getClassLoader(), true);
-		for (File lf : llist) {
-			String ls = lf.getName();
-			if (isZipLoad() && ls.matches("(.+).(zip|jar)$")) {
-				decodeZip(lf);
-			} if (lf.isDirectory()) {
-				decodeDir(lf, lf);
-			} else {
-				try {
-					preLoad(lf, ls, new FileInputStream(lf));
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		}
+//		List<File> llist = FileManager.getAllmodsFiles(getClass().getClassLoader(), true);
+//		for (File lf : llist) {
+//			String ls = lf.getName();
+//			if (isZipLoad() && ls.matches("(.+).(zip|jar)$")) {
+//				decodeZip(lf);
+//			} if (lf.isDirectory()) {
+//				decodeDir(lf, lf);
+//			} else {
+//				try {
+//					preLoad(lf, ls, new FileInputStream(lf));
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
 	}
 
 	/**

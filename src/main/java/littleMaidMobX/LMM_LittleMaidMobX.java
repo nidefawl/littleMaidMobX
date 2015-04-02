@@ -1,17 +1,25 @@
 package littleMaidMobX;
 
-import mmmlibx.lib.FileManager;
+import java.io.File;
+
 import mmmlibx.lib.MMM_Config;
 import mmmlibx.lib.MMM_Helper;
+import mmmlibx.lib.MMM_Statics;
 import mmmlibx.lib.MMM_TextureManager;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.AchievementPage;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.event.CommandReceivedEvent;
+import network.W_Message;
 import network.W_Network;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -19,6 +27,7 @@ import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -72,8 +81,6 @@ public class LMM_LittleMaidMobX {
 	
 //	@MLProp(info="Default selected Texture Packege. Null is Random")
 	public static String cfg_defaultTexture = "";
-//	@MLProp(info="Print Debug Massages.")
-	public static boolean cfg_PrintDebugMessage = false;
 //	@MLProp(info="Print Death Massages.")
 	public static boolean cfg_DeathMessage = true;
 //	@MLProp(info="Spawn Anywhere.")
@@ -85,6 +92,21 @@ public class LMM_LittleMaidMobX {
 	public static String cfg_IgnoreItemList = "arsmagica2";
 
 	public static Achievement ac_Contract;
+	public static boolean cfg_isModelAlphaBlend = true;
+/**	public static final int cfg_startVehicleEntityID = 0;	Forgeã�«ã�¯ä¸�è¦�	*/
+	public static boolean isDebugMessage = true;
+	public static boolean isModelAlphaBlend = true;
+	
+	public static void Debug(String pText, Object... pData) {
+		if (isDebugMessage) {
+			System.out.println(String.format("MMMLib-" + pText, pData));
+		}
+	}
+	public static void Debug(boolean isRemote, String pText, Object... pData) {
+		if (isDebugMessage) {
+			System.out.println(String.format("["+(isRemote? "Client":"Server")+"]MMMLib-" + pText, pData));
+		}
+	}
 	
 	@SidedProxy(
 			clientSide = "littleMaidMobX.LMM_ProxyClient",
@@ -95,13 +117,6 @@ public class LMM_LittleMaidMobX {
 	public static LMM_LittleMaidMobX instance;
 	
 	public static LMM_ItemSpawnEgg spawnEgg;
-
-	public static void Debug(String pText, Object... pVals) {
-		// デバッグメッセージ
-		if (cfg_PrintDebugMessage) {
-			System.out.println(String.format("littleMaidMob-" + pText, pVals));
-		}
-	}
 
 	public String getName() {
 		return "littleMaidMobX";
@@ -116,10 +131,31 @@ public class LMM_LittleMaidMobX {
 		return "1.7.2-x";
 	}
 
+	
 	@EventHandler
 	public void PreInit(FMLPreInitializationEvent evt)
 	{
-		FileManager.setSrcPath(evt.getSourceFile());
+		{
+
+			File configFile = evt.getSuggestedConfigurationFile();
+			Configuration lconf = new Configuration(configFile);
+			lconf.load();
+			isDebugMessage		= true;//lconf.get("MMMLib", "isDebugMessage", false).getBoolean(false);
+			isModelAlphaBlend	= lconf.get("MMMLib", "isModelAlphaBlend", true).getBoolean(true);
+			cfg_isModelAlphaBlend = isModelAlphaBlend;
+			
+			lconf.save();
+			
+
+			MMM_TextureManager.instance.loadTextures();
+			if (MMM_Helper.isClient) {
+//				MMM_TextureManager.loadTextures();
+				Debug("Localmode: InitTextureList.");
+				MMM_TextureManager.instance.initTextureList(true);
+			} else {
+				MMM_TextureManager.instance.loadTextureServer();
+			}
+		}
 		MMM_Config.init();
 		
 		// MMMLibのRevisionチェック
@@ -130,7 +166,6 @@ public class LMM_LittleMaidMobX {
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new LMM_GuiCommonHandler());
 		
-		MMM_TextureManager.instance.init();
 
 		EntityRegistry.registerModEntity(LMM_EntityLittleMaid.class, "LittleMaidX", 0, instance, 80, 3, true);
 
@@ -175,8 +210,6 @@ public class LMM_LittleMaidMobX {
 			proxy.init();
 		}
 		
-		// AIリストの追加
-		LMM_EntityModeManager.init();
 		
 		// アイテムスロット更新用のパケット
 		W_Network.init(DOMAIN);
@@ -185,6 +218,18 @@ public class LMM_LittleMaidMobX {
 		proxy.loadSounds();
 		
 //		Debug("GUID-sneak: %s", LMM_EntityLittleMaid.maidUUIDSneak.toString());
+
+		   MinecraftForge.EVENT_BUS.register(this);
+	}
+	   @SubscribeEvent
+	public void cmd(CommandReceivedEvent evt)
+	{
+		   if (Thread.currentThread().getName().contains("Server thread")) {
+			   
+		   } else {
+			   
+		   }
+		
 	}
 
 	@EventHandler
@@ -230,9 +275,6 @@ public class LMM_LittleMaidMobX {
 			}
 		}
 		
-		// モードリストを構築
-		LMM_EntityModeManager.loadEntityMode();
-		LMM_EntityModeManager.showLoadedModes();
 		
 		// サウンドのロード
 // TODO ★		proxy.loadSounds();
@@ -264,5 +306,35 @@ public class LMM_LittleMaidMobX {
 		}
 		return false;
 	}
-	// 特定のMODのアイテムを持つとクラッシュする不具合対策====================================
+	// TODO: Merge this with LMM_Net, no need for 2 channels
+	public static void serverCustomPayload(EntityPlayer playerEntity, W_Message var2)
+	{
+		byte lmode = var2.data[0];
+		int leid = 0;
+		Entity lentity = null;
+		if ((lmode & 0x80) != 0) {
+			leid = MMM_Helper.getInt(var2.data, 1);
+			lentity = MMM_Helper.getEntity(var2.data, 1, playerEntity.worldObj);
+			if (lentity == null) return;
+		}
+		Debug("MMM|Upd Srv Call[%2x:%d].", lmode, leid);
+//		byte[] ldata;
+		
+		switch (lmode) {
+		case MMM_Statics.Server_SetTexturePackIndex:
+			MMM_TextureManager.instance.reciveFromClientSetTexturePackIndex(lentity, var2.data);
+			break;
+		case MMM_Statics.Server_GetTextureIndex:
+			MMM_TextureManager.instance.reciveFromClientGetTexturePackIndex(playerEntity, var2.data);
+			break;
+		case MMM_Statics.Server_GetTexturePackName:
+			MMM_TextureManager.instance.reciveFromClientGetTexturePackName(playerEntity, var2.data);
+			break;
+		}
+	}
+
+	public static void sendToClient(EntityPlayer player, byte[] ldata)
+	{
+		W_Network.sendPacketToPlayer(1, player, ldata);
+	}
 }

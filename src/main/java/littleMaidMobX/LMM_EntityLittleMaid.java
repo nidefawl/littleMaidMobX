@@ -1,6 +1,27 @@
 package littleMaidMobX;
 
-import static littleMaidMobX.LMM_Statics.*;
+import static littleMaidMobX.LMM_Statics.dataWatch_Absoption;
+import static littleMaidMobX.LMM_Statics.dataWatch_Color;
+import static littleMaidMobX.LMM_Statics.dataWatch_DominamtArm;
+import static littleMaidMobX.LMM_Statics.dataWatch_ExpValue;
+import static littleMaidMobX.LMM_Statics.dataWatch_Flags;
+import static littleMaidMobX.LMM_Statics.dataWatch_Flags_Aimebow;
+import static littleMaidMobX.LMM_Statics.dataWatch_Flags_Bloodsuck;
+import static littleMaidMobX.LMM_Statics.dataWatch_Flags_Freedom;
+import static littleMaidMobX.LMM_Statics.dataWatch_Flags_LooksSugar;
+import static littleMaidMobX.LMM_Statics.dataWatch_Flags_OverDrive;
+import static littleMaidMobX.LMM_Statics.dataWatch_Flags_Tracer;
+import static littleMaidMobX.LMM_Statics.dataWatch_Flags_Wait;
+import static littleMaidMobX.LMM_Statics.dataWatch_Flags_Working;
+import static littleMaidMobX.LMM_Statics.dataWatch_Flags_looksWithInterest;
+import static littleMaidMobX.LMM_Statics.dataWatch_Flags_looksWithInterestAXIS;
+import static littleMaidMobX.LMM_Statics.dataWatch_Flags_remainsContract;
+import static littleMaidMobX.LMM_Statics.dataWatch_Free;
+import static littleMaidMobX.LMM_Statics.dataWatch_Gotcha;
+import static littleMaidMobX.LMM_Statics.dataWatch_ItemUse;
+import static littleMaidMobX.LMM_Statics.dataWatch_Mode;
+import static littleMaidMobX.LMM_Statics.dataWatch_Parts;
+import static littleMaidMobX.LMM_Statics.dataWatch_Texture;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -12,7 +33,6 @@ import java.util.Map.Entry;
 import java.util.UUID;
 
 import mmmlibx.lib.ITextureEntity;
-import mmmlibx.lib.MMMLib;
 import mmmlibx.lib.MMM_Counter;
 import mmmlibx.lib.MMM_Helper;
 import mmmlibx.lib.MMM_TextureBox;
@@ -20,7 +40,6 @@ import mmmlibx.lib.MMM_TextureBoxBase;
 import mmmlibx.lib.MMM_TextureBoxServer;
 import mmmlibx.lib.MMM_TextureData;
 import mmmlibx.lib.MMM_TextureManager;
-import mmmlibx.lib.multiModel.model.mc162.EquippedStabilizer;
 import mmmlibx.lib.multiModel.model.mc162.IModelCaps;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoublePlant;
@@ -105,7 +124,6 @@ public class LMM_EntityLittleMaid extends EntityTameable implements ITextureEnti
 	protected int maidDominantArm;			// 利き腕、1Byte
 	/** テクスチャ関連のデータを管理 **/
 	public MMM_TextureData textureData;
-	public Map<String, EquippedStabilizer> maidStabilizer = new HashMap<String, EquippedStabilizer>();
 	
 	
 	public LMM_InventoryLittleMaid maidInventory;
@@ -169,7 +187,11 @@ public class LMM_EntityLittleMaid extends EntityTameable implements ITextureEnti
 //	protected LMM_EnumSound maidAttackSound;
 	protected LMM_EnumSound maidDamegeSound;
 	protected int maidSoundInterval;
-	protected float maidSoundRate;
+	
+	//TODO: figure out if its required to set this value
+	// minecraft has volume faders for different categories already
+	// the categories are defined in our sounds.json
+	protected float maidSoundRate = 0.8F;
 	
 	// 実験用
 	private int firstload = 1;
@@ -247,7 +269,7 @@ public class LMM_EntityLittleMaid extends EntityTameable implements ITextureEnti
 		
 		
 		// EntityModeの追加
-		maidEntityModeList = LMM_EntityModeManager.getModeList(this);
+		maidEntityModeList = LMM_EntityModeManager.instance.createMaidModes(this);
 		// モードリスト
 		maidActiveModeClass = null;
 		maidModeList = new HashMap<Integer, EntityAITasks[]>();
@@ -670,7 +692,8 @@ public class LMM_EntityLittleMaid extends EntityTameable implements ITextureEnti
 		maidSoundInterval = 20;
 		if (worldObj.isRemote) {
 			// Client
-			String s = LMM_SoundManager.getSoundValue(enumsound, textureData.getTextureName(0), textureData.getColor());
+			// TODO: TEST
+			String s = enumsound.toString();//LMM_SoundManager.getSoundValue(enumsound, textureData.getTextureName(0), textureData.getColor());
 			if(!s.isEmpty() && !s.startsWith("minecraft:"))
 			{
 				s = LMM_LittleMaidMobX.DOMAIN + ":" + s;
@@ -2415,7 +2438,7 @@ public class LMM_EntityLittleMaid extends EntityTameable implements ITextureEnti
 	@Override
 	public boolean interact(EntityPlayer par1EntityPlayer)
 	{
-		MMMLib.Debug(this.worldObj.isRemote, "LMM_EntityLittleMaid.interact:"+par1EntityPlayer.getGameProfile().getName());
+		LMM_LittleMaidMobX.Debug(this.worldObj.isRemote, "LMM_EntityLittleMaid.interact:"+par1EntityPlayer.getGameProfile().getName());
 		float lhealth = getHealth();
 		ItemStack itemstack1 = par1EntityPlayer.getCurrentEquippedItem();
 		
@@ -3203,7 +3226,7 @@ public class LMM_EntityLittleMaid extends EntityTameable implements ITextureEnti
 //				le.getValue().updateEquippedPoint(pEntity.textureModel0);
 //			}
 //		}
-		maidSoundRate = LMM_SoundManager.getSoundRate(textureData.getTextureName(0), getColor());
+//		maidSoundRate = LMM_SoundManager.getSoundRate(textureData.getTextureName(0), getColor());
 
 	}
 

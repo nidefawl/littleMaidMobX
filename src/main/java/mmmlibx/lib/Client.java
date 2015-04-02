@@ -2,6 +2,7 @@ package mmmlibx.lib;
 
 import java.util.Random;
 
+import littleMaidMobX.LMM_LittleMaidMobX;
 import mmmlibx.lib.multiModel.model.mc162.ModelBase;
 import mmmlibx.lib.multiModel.model.mc162.ModelBoxBase;
 import mmmlibx.lib.multiModel.model.mc162.ModelRenderer;
@@ -44,11 +45,11 @@ public class Client {
 			itemRenderer = new ItemRenderer(Helper.mc);
 		}
 		if (!(Helper.mc.entityRenderer.itemRenderer instanceof ItemRenderer)) {
-			mod_MMMLib.Debug("replace entityRenderer.itemRenderer.");
+			mod_LMM_LittleMaidMobX.Debug("replace entityRenderer.itemRenderer.");
 			Helper.mc.entityRenderer.itemRenderer = itemRenderer;
 		}
 		if (!(RenderManager.instance.itemRenderer instanceof ItemRenderer)) {
-			mod_MMMLib.Debug("replace RenderManager.itemRenderer.");
+			mod_LMM_LittleMaidMobX.Debug("replace RenderManager.itemRenderer.");
 			RenderManager.instance.itemRenderer = itemRenderer;
 		}
 		// GUIの表示を変えるには常時監視が必要？
@@ -64,7 +65,7 @@ public class Client {
 			lentity = MMM_Helper.getEntity(var2.data, 1, MMM_Helper.mc.theWorld);
 			if (lentity == null) return;
 		}
-		MMMLib.Debug("MMM|Upd Clt Call[%2x:%d].", lmode, leid);
+		LMM_LittleMaidMobX.Debug("MMM|Upd Clt Call[%2x:%d].", lmode, leid);
 		
 		switch (lmode) {
 		case MMM_Statics.Client_SetTextureIndex:
