@@ -3,8 +3,8 @@ package littleMaidMobX.inventory;
 import java.util.Iterator;
 import java.util.List;
 
-import littleMaidMobX.LMM_EntityLittleMaid;
-import mmmlibx.lib.MMM_Helper;
+import littleMaidMobX.Helper;
+import littleMaidMobX.entity.EntityLittleMaid;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockTNT;
 import net.minecraft.block.material.Material;
@@ -34,13 +34,13 @@ public class InventoryLittleMaid extends InventoryPlayer {
 	/**
 	 * オーナー
 	 */
-	public LMM_EntityLittleMaid entityLittleMaid;
+	public EntityLittleMaid entityLittleMaid;
 	/**
 	 * スロット変更チェック用
 	 */
 	public ItemStack prevItems[];
 
-	public InventoryLittleMaid(LMM_EntityLittleMaid par1EntityLittleMaid) {
+	public InventoryLittleMaid(EntityLittleMaid par1EntityLittleMaid) {
 		super(par1EntityLittleMaid.maidAvatar);
 
 		entityLittleMaid = par1EntityLittleMaid;
@@ -378,7 +378,7 @@ public class InventoryLittleMaid extends InventoryPlayer {
 	}
 
 	public static boolean isItemSmelting(ItemStack pItemstack) {
-		return (pItemstack != null && MMM_Helper.getSmeltingResult(pItemstack) != null);
+		return (pItemstack != null && Helper.getSmeltingResult(pItemstack) != null);
 	}
 
 	public boolean isItemExplord(int index) {
