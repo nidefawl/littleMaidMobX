@@ -1,5 +1,7 @@
 package mmmlibx.lib;
 
+import littleMaidMobX.models.IModelCaps;
+import littleMaidMobX.models.ModelCapsHelper;
 import mmmlibx.lib.multiModel.model.mc162.*;
 
 public class MMM_TextureBoxServer extends MMM_TextureBoxBase {

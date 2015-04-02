@@ -1,5 +1,7 @@
 package mmmlibx.lib;
 
+import littleMaidMobX.models.IModelCaps;
+import littleMaidMobX.models.ModelRenderer;
 import mmmlibx.lib.multiModel.model.mc162.*;
 
 public class MMM_ModelMulti_Stef extends MMM_ModelMulti_Steve {

@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import littleMaidMobX.FileManager;
+
 /**
  * コンフィグファイルの保存用。<br>
  * 渡されたClass名称と同名のConfigファイルを操作する。<br>

@@ -1,5 +1,7 @@
 package littleMaidMobX;
 
+import littleMaidMobX.models.IModelCaps;
+import littleMaidMobX.models.RenderModelMulti;
 import mmmlibx.lib.multiModel.model.mc162.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;

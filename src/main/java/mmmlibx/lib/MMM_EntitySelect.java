@@ -2,7 +2,7 @@ package mmmlibx.lib;
 
 import java.util.Map;
 
-import mmmlibx.lib.multiModel.model.mc162.IModelCaps;
+import littleMaidMobX.models.IModelCaps;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;

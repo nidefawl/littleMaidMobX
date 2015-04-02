@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
+import littleMaidMobX.models.IModelCaps;
+import littleMaidMobX.models.ModelCapsHelper;
+import littleMaidMobX.models.ModelMultiBase;
 import mmmlibx.lib.multiModel.model.mc162.*;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
