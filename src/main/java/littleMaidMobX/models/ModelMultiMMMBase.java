@@ -3,7 +3,7 @@ package littleMaidMobX.models;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import mmmlibx.lib.Client;
+import littleMaidMobX.ClientHelper;
 
 import org.lwjgl.opengl.GL11;
 

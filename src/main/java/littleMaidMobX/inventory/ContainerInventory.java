@@ -1,7 +1,7 @@
 package littleMaidMobX.inventory;
 
-import littleMaidMobX.LMM_EntityLittleMaid;
-import littleMaidMobX.LMM_LittleMaidMobX;
+import littleMaidMobX.LittleMaidMobX;
+import littleMaidMobX.entity.EntityLittleMaid;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ContainerPlayer;
 import net.minecraft.inventory.IInventory;
@@ -16,10 +16,10 @@ public class ContainerInventory extends ContainerPlayer {
 	
 	protected final InventoryLittleMaid littlemaidInventory;
 	protected final int numRows;
-	protected final LMM_EntityLittleMaid owner;
+	protected final EntityLittleMaid owner;
 
 
-	public ContainerInventory(IInventory iinventory, LMM_EntityLittleMaid pEntity) {
+	public ContainerInventory(IInventory iinventory, EntityLittleMaid pEntity) {
 		// >
 		// Forge対策、ContainerPlayer継承でなければ要らない、SlotArmor用
 		super(pEntity.maidInventory, !pEntity.worldObj.isRemote, pEntity.maidAvatar);
@@ -89,7 +89,7 @@ public class ContainerInventory extends ContainerPlayer {
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer) {
 		// 開けるかどうかの判定
-		LMM_EntityLittleMaid entitylittlemaid = littlemaidInventory.entityLittleMaid; 
+		EntityLittleMaid entitylittlemaid = littlemaidInventory.entityLittleMaid; 
 		if(entitylittlemaid.isDead) {
 //		if(entitylittlemaid.isDead || entitylittlemaid.isOpenInventory()) {
 			return false;
@@ -104,7 +104,7 @@ public class ContainerInventory extends ContainerPlayer {
 		if (slot != null && slot.getHasStack()) {
 			ItemStack itemstack1 = slot.getStack();
 			
-			if(LMM_LittleMaidMobX.isMaidIgnoreItem(itemstack1))
+			if(LittleMaidMobX.isMaidIgnoreItem(itemstack1))
 			{
 				// コンフィグで無視に指定されたアイテムは移動しない
 			}
