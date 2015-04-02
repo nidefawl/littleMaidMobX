@@ -50,7 +50,7 @@ public class MMM_TextureBox extends MMM_TextureBoxBase {
 		wildColor = -1;
 	}
 
-	public MMM_TextureBox(String pTextureName, String[] pSearch) {
+	public MMM_TextureBox(String pTextureName) {
 		this();
 		textureName = pTextureName;
 		fileName = pTextureName;
@@ -62,7 +62,6 @@ public class MMM_TextureBox extends MMM_TextureBoxBase {
 			packegeName = pTextureName;
 			modelName = "";
 		}
-		textureDir = pSearch;
 	}
 
 	public void setModels(String pModelName, ModelMultiBase[] pModels, ModelMultiBase[] pDefModels) {
@@ -201,7 +200,6 @@ public class MMM_TextureBox extends MMM_TextureBoxBase {
 		lbox.packegeName = packegeName;
 		lbox.fileName = fileName;
 		lbox.modelName = modelName;
-		lbox.textureDir = textureDir;
 		lbox.textures = textures;
 		lbox.armors = armors;
 		lbox.models = models;
@@ -216,7 +214,8 @@ public class MMM_TextureBox extends MMM_TextureBoxBase {
 		if (pLocation.startsWith(ls)) {
 			pLocation = pLocation.substring(ls.length());
 		} else {
-//			pLocation = "../.." + pLocation;
+			pLocation = pLocation.replaceFirst("/assets/", "");
+			pLocation = pLocation.replaceFirst("/", ":");
 		}
 		boolean lflag = false;
 		switch ((pIndex & 0xfff0)) {

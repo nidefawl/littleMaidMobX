@@ -16,7 +16,7 @@ public class MMM_ItemRendererForge implements IItemRenderer {
 		if (item == null || !MMM_ItemRenderManager.isEXRender(item.getItem())) return false;
 		
 		MMM_ItemRenderManager lirm = MMM_ItemRenderManager.getEXRender(item.getItem());
-//		mod_MMM_MMMLib.Debug("MMM_ItemRendererForge:%s", item.getItem().getClass().getSimpleName());
+//		mod_MMM_LMM_LittleMaidMobX.Debug("MMM_ItemRendererForge:%s", item.getItem().getClass().getSimpleName());
 
 		switch (type) {
 		case ENTITY:

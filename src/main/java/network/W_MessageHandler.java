@@ -3,7 +3,6 @@ package network;
 import littleMaidMobX.LMM_LittleMaidMobX;
 import littleMaidMobX.LMM_ProxyClient;
 import littleMaidMobX.LMM_Net;
-import mmmlibx.lib.MMMLib;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
@@ -23,7 +22,7 @@ public class W_MessageHandler implements IMessageHandler<W_Message, IMessage>
 			{
 				if(message.ch == 1)
 				{
-					MMMLib.serverCustomPayload(ctx.getServerHandler().playerEntity, message);
+					LMM_LittleMaidMobX.serverCustomPayload(ctx.getServerHandler().playerEntity, message);
 				}
 				if(message.ch == 2)
 				{

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import littleMaidMobX.LMM_LittleMaidMobX;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiSlot;
 import net.minecraft.client.renderer.Tessellator;
@@ -47,7 +48,7 @@ public abstract class MMM_GuiMobSelect extends GuiScreen {
 				entityMapClass.putAll(lmap);
 			}
 			catch (Exception e) {
-				MMMLib.Debug("EntityClassMap copy failed.");
+				LMM_LittleMaidMobX.Debug("EntityClassMap copy failed.");
 			}
 		}
 		
@@ -65,7 +66,7 @@ public abstract class MMM_GuiMobSelect extends GuiScreen {
 //					lentity = (EntityLivingBase)EntityList.createEntityByName(le.getValue(), world);
 				} while (lentity != null && checkEntity(le.getValue(), lentity, li++));
 			} catch (Exception e) {
-				MMMLib.Debug("Entity [" + le.getValue() + "] can't created.");
+				LMM_LittleMaidMobX.Debug("Entity [" + le.getValue() + "] can't created.");
 			}
 		}
 	}

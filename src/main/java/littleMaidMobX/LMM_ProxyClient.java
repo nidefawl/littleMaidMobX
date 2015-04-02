@@ -3,6 +3,7 @@ package littleMaidMobX;
 import static littleMaidMobX.LMM_Statics.LMN_Client_PlaySound;
 import static littleMaidMobX.LMM_Statics.LMN_Client_SetIFFValue;
 import static littleMaidMobX.LMM_Statics.LMN_Client_SwingArm;
+import littleMaidMobX.modes.LMM_IFF;
 import mmmlibx.lib.MMM_EntityDummy;
 import mmmlibx.lib.MMM_EntitySelect;
 import mmmlibx.lib.MMM_Helper;
@@ -111,21 +112,6 @@ public class LMM_ProxyClient extends LMM_ProxyCommon
 		return Minecraft.getMinecraft().thePlayer;
 	}
 
-	/* 呼び出し箇所なし
-	public static void setAchievement() {
-// MinecraftクラスからstatFileWriterが消えてる
-//		MMM_Helper.mc.statFileWriter.readStat(mod_LMM_littleMaidMob.ac_Contract, 1);
-	}
-	*/
-
-	public void loadSounds()
-	{
-		// 音声の解析
-		LMM_SoundManager.init();
-		// サウンドパック
-		LMM_SoundManager.loadDefaultSoundPack();
-		LMM_SoundManager.loadSoundPack();
-	}
 
 	public boolean isSinglePlayer()
 	{

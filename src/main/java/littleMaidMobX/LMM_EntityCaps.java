@@ -50,7 +50,6 @@ public class LMM_EntityCaps extends MMM_EntityCaps {
 //		caps.put("Arms", caps_Arms);
 		caps.put("HeadMount", caps_HeadMount);
 //		caps.put("HardPoint", caps_HardPoint);
-		caps.put("stabiliser", caps_stabiliser);
 		caps.put("Items", caps_Items);
 		caps.put("Actions", caps_Actions);
 		caps.put("Grounds", caps_Grounds);
@@ -143,8 +142,6 @@ public class LMM_EntityCaps extends MMM_EntityCaps {
 		case caps_HeadMount:
 			return owner.maidInventory.getStackInSlot(17);
 //		case caps_HardPoint:
-		case caps_stabiliser:
-			return owner.maidStabilizer;
 		case caps_Items:
 			ItemStack[] lstacks = new ItemStack[owner.mstatSwingStatus.length];
 			for (LMM_SwingStatus ls : owner.mstatSwingStatus) {

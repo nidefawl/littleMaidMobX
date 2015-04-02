@@ -9,6 +9,7 @@ import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import littleMaidMobX.LMM_LittleMaidMobX;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -141,7 +142,7 @@ public class MMM_Helper {
 		try {
 			lclass = Class.forName(pName);
 		} catch (Exception e) {
-			MMMLib.Debug("Class:%s is not found.", pName);
+			LMM_LittleMaidMobX.Debug("Class:%s is not found.", pName);
 		}
 		
 		return lclass;
@@ -320,7 +321,7 @@ public class MMM_Helper {
 			}
 			ModLoader.addEntityTracker(mod, entityclass, defaultId, trackingRange, updateFrequency, sendVelocityUpdate);
 		}
-		MMMLib.Debug("RegisterEntity ID:%d / %s-%d : %s", defaultId, mod.getName(), lid, entityName);
+		LMM_LittleMaidMobX.Debug("RegisterEntity ID:%d / %s-%d : %s", defaultId, mod.getName(), lid, entityName);
 		return defaultId;
 	}
 	public static int registerEntity(
@@ -492,7 +493,7 @@ public class MMM_Helper {
 				lmap.put(pDestClass, lint);
 			}
 			replaceEntitys.put(pSrcClass, pDestClass);
-			MMMLib.Debug("Replace %s -> %s(EntityListID: %d, EntityListString: %s)", pSrcClass.getSimpleName(), pDestClass.getSimpleName(), lint, ls);
+			LMM_LittleMaidMobX.Debug("Replace %s -> %s(EntityListID: %d, EntityListString: %s)", pSrcClass.getSimpleName(), pDestClass.getSimpleName(), lint, ls);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -504,7 +505,7 @@ public class MMM_Helper {
 			for (int j = 0; j < pMobs.size(); j++) {
 				if (pMobs.get(j).entityClass == le.getKey()) {
 					pMobs.get(j).entityClass = le.getValue();
-					MMMLib.Debug("ReplaceCreatureList: %s -> %s", le.getKey().getSimpleName(), le.getValue().getSimpleName());
+					LMM_LittleMaidMobX.Debug("ReplaceCreatureList: %s -> %s", le.getKey().getSimpleName(), le.getValue().getSimpleName());
 				}
 			}
 		}
@@ -521,14 +522,14 @@ public class MMM_Helper {
 		for (int i = 0; i < biomeList.length; i++) {
 			if (biomeList[i] == null) continue;
 			List<SpawnListEntry> mobs;
-			MMMLib.Debug("ReplaceBaiomeSpawn:%s", biomeList[i].biomeName);
-			MMMLib.Debug("[Creature]");
+			LMM_LittleMaidMobX.Debug("ReplaceBaiomeSpawn:%s", biomeList[i].biomeName);
+			LMM_LittleMaidMobX.Debug("[Creature]");
 			replaceCreatureList(biomeList[i].getSpawnableList(EnumCreatureType.creature));//.spawnableCreatureList);
-			MMMLib.Debug("[WaterCreature]");
+			LMM_LittleMaidMobX.Debug("[WaterCreature]");
 			replaceCreatureList(biomeList[i].getSpawnableList(EnumCreatureType.waterCreature));//.spawnableWaterCreatureList);
-			MMMLib.Debug("[CaveCreature]");
+			LMM_LittleMaidMobX.Debug("[CaveCreature]");
 			replaceCreatureList(biomeList[i].getSpawnableList(EnumCreatureType.ambient));//.spawnableCaveCreatureList);
-			MMMLib.Debug("[Monster]");
+			LMM_LittleMaidMobX.Debug("[Monster]");
 			replaceCreatureList(biomeList[i].getSpawnableList(EnumCreatureType.monster));//.spawnableMonsterList);
 		}
 	}

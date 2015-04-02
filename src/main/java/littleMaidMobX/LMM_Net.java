@@ -6,6 +6,7 @@ import static littleMaidMobX.LMM_Statics.LMN_Server_GetIFFValue;
 import static littleMaidMobX.LMM_Statics.LMN_Server_SaveIFF;
 import static littleMaidMobX.LMM_Statics.LMN_Server_SetIFFValue;
 import static littleMaidMobX.LMM_Statics.LMN_Server_UpdateSlots;
+import littleMaidMobX.modes.LMM_IFF;
 import mmmlibx.lib.MMM_Helper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityTracker;

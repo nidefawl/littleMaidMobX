@@ -1,6 +1,7 @@
 package mmmlibx.lib;
 
 import littleMaidMobX.LMM_EntityLittleMaid;
+import littleMaidMobX.LMM_LittleMaidMobX;
 import mmmlibx.lib.multiModel.model.mc162.IModelCaps;
 import mmmlibx.lib.multiModel.model.mc162.ModelMultiBase;
 import net.minecraft.entity.DataWatcher;
@@ -354,7 +355,7 @@ public class MMM_TextureData {
 	 * @param pName
 	 */
 	public void setTextureInitServer(String pName) {
-		MMMLib.Debug("request Init Texture: %s", pName);
+		LMM_LittleMaidMobX.Debug("request Init Texture: %s", pName);
 		textureIndex[0] = textureIndex[1] = MMM_TextureManager.instance.getIndexTextureBoxServer((ITextureEntity) owner, pName);
 		textureBox[0] = textureBox[1] = MMM_TextureManager.instance.getTextureBoxServer(textureIndex[0]);
 		color = textureBox[0].getRandomWildColor(owner.getRNG());

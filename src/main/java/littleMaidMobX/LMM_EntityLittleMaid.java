@@ -1,6 +1,27 @@
 package littleMaidMobX;
 
-import static littleMaidMobX.LMM_Statics.*;
+import static littleMaidMobX.LMM_Statics.dataWatch_Absoption;
+import static littleMaidMobX.LMM_Statics.dataWatch_Color;
+import static littleMaidMobX.LMM_Statics.dataWatch_DominamtArm;
+import static littleMaidMobX.LMM_Statics.dataWatch_ExpValue;
+import static littleMaidMobX.LMM_Statics.dataWatch_Flags;
+import static littleMaidMobX.LMM_Statics.dataWatch_Flags_Aimebow;
+import static littleMaidMobX.LMM_Statics.dataWatch_Flags_Bloodsuck;
+import static littleMaidMobX.LMM_Statics.dataWatch_Flags_Freedom;
+import static littleMaidMobX.LMM_Statics.dataWatch_Flags_LooksSugar;
+import static littleMaidMobX.LMM_Statics.dataWatch_Flags_OverDrive;
+import static littleMaidMobX.LMM_Statics.dataWatch_Flags_Tracer;
+import static littleMaidMobX.LMM_Statics.dataWatch_Flags_Wait;
+import static littleMaidMobX.LMM_Statics.dataWatch_Flags_Working;
+import static littleMaidMobX.LMM_Statics.dataWatch_Flags_looksWithInterest;
+import static littleMaidMobX.LMM_Statics.dataWatch_Flags_looksWithInterestAXIS;
+import static littleMaidMobX.LMM_Statics.dataWatch_Flags_remainsContract;
+import static littleMaidMobX.LMM_Statics.dataWatch_Free;
+import static littleMaidMobX.LMM_Statics.dataWatch_Gotcha;
+import static littleMaidMobX.LMM_Statics.dataWatch_ItemUse;
+import static littleMaidMobX.LMM_Statics.dataWatch_Mode;
+import static littleMaidMobX.LMM_Statics.dataWatch_Parts;
+import static littleMaidMobX.LMM_Statics.dataWatch_Texture;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -11,8 +32,28 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
 
+import littleMaidMobX.ai.LMM_EntityAIAttackArrow;
+import littleMaidMobX.ai.LMM_EntityAIAttackOnCollide;
+import littleMaidMobX.ai.LMM_EntityAIAvoidPlayer;
+import littleMaidMobX.ai.LMM_EntityAIBeg;
+import littleMaidMobX.ai.LMM_EntityAIBegMove;
+import littleMaidMobX.ai.LMM_EntityAICollectItem;
+import littleMaidMobX.ai.LMM_EntityAIFindBlock;
+import littleMaidMobX.ai.LMM_EntityAIFleeRain;
+import littleMaidMobX.ai.LMM_EntityAIFollowOwner;
+import littleMaidMobX.ai.LMM_EntityAIJumpToMaster;
+import littleMaidMobX.ai.LMM_EntityAIRestrictRain;
+import littleMaidMobX.ai.LMM_EntityAISwimming;
+import littleMaidMobX.ai.LMM_EntityAITracerMove;
+import littleMaidMobX.ai.LMM_EntityAIWait;
+import littleMaidMobX.ai.LMM_EntityAIWander;
+import littleMaidMobX.ai.LMM_IEntityAI;
+import littleMaidMobX.inventory.InventoryLittleMaid;
+import littleMaidMobX.modes.LMM_EntityModeBase;
+import littleMaidMobX.modes.LMM_EntityModeManager;
+import littleMaidMobX.modes.LMM_EntityMode_Playing;
+import littleMaidMobX.modes.LMM_IFF;
 import mmmlibx.lib.ITextureEntity;
-import mmmlibx.lib.MMMLib;
 import mmmlibx.lib.MMM_Counter;
 import mmmlibx.lib.MMM_Helper;
 import mmmlibx.lib.MMM_TextureBox;
@@ -20,7 +61,6 @@ import mmmlibx.lib.MMM_TextureBoxBase;
 import mmmlibx.lib.MMM_TextureBoxServer;
 import mmmlibx.lib.MMM_TextureData;
 import mmmlibx.lib.MMM_TextureManager;
-import mmmlibx.lib.multiModel.model.mc162.EquippedStabilizer;
 import mmmlibx.lib.multiModel.model.mc162.IModelCaps;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoublePlant;
@@ -100,15 +140,14 @@ public class LMM_EntityLittleMaid extends EntityTameable implements ITextureEnti
 
 	// 変数減らしたいなぁ
 //	protected long maidContractLimit;		// 契約失効日
-	protected int maidContractLimit;		// 契約期間
+	public int maidContractLimit;		// 契約期間
 	protected long maidAnniversary;			// 契約日UIDとして使用
-	protected int maidDominantArm;			// 利き腕、1Byte
+	public int maidDominantArm;			// 利き腕、1Byte
 	/** テクスチャ関連のデータを管理 **/
 	public MMM_TextureData textureData;
-	public Map<String, EquippedStabilizer> maidStabilizer = new HashMap<String, EquippedStabilizer>();
 	
 	
-	public LMM_InventoryLittleMaid maidInventory;
+	public InventoryLittleMaid maidInventory;
 	public LMM_EntityLittleMaidAvatar maidAvatar;
 	public LMM_EntityCaps maidCaps;	// Client側のみ
 	
@@ -120,13 +159,13 @@ public class LMM_EntityLittleMaid extends EntityTameable implements ITextureEnti
 	public boolean maidFreedom;
 	public boolean maidWait;
 	public int homeWorld;
-	protected int maidTiles[][] = new int[9][3];
+	public int maidTiles[][] = new int[9][3];
 	public int maidTile[] = new int[3];
 	public TileEntity maidTileEntity;
 	
 	// 動的な状態
-	protected EntityPlayer mstatMasterEntity;	// 主
-	protected double mstatMasterDistanceSq;		// 主との距離、計算軽量化用
+	public EntityPlayer mstatMasterEntity;	// 主
+	public double mstatMasterDistanceSq;		// 主との距離、計算軽量化用
 	protected Entity mstatgotcha;				// ワイヤード用
 	protected boolean mstatBloodsuck;
 	protected boolean mstatClockMaid;
@@ -138,7 +177,7 @@ public class LMM_EntityLittleMaid extends EntityTameable implements ITextureEnti
 //	protected boolean isMaidChaseWait;
 	protected int mstatWaitCount;
 	protected int mstatTime;
-	protected MMM_Counter maidOverDriveTime;
+	public MMM_Counter maidOverDriveTime;
 	protected boolean mstatFirstLook;
 	protected boolean mstatLookSuger;
 	protected MMM_Counter mstatWorkingCount;
@@ -167,9 +206,13 @@ public class LMM_EntityLittleMaid extends EntityTameable implements ITextureEnti
 	
 	// 音声
 //	protected LMM_EnumSound maidAttackSound;
-	protected LMM_EnumSound maidDamegeSound;
+	public LMM_EnumSound maidDamegeSound;
 	protected int maidSoundInterval;
-	protected float maidSoundRate;
+	
+	//TODO: figure out if its required to set this value
+	// minecraft has volume faders for different categories already
+	// the categories are defined in our sounds.json
+	protected float maidSoundRate = 0.8F;
 	
 	// 実験用
 	private int firstload = 1;
@@ -196,14 +239,14 @@ public class LMM_EntityLittleMaid extends EntityTameable implements ITextureEnti
 	public EntityAISwimming aiSwiming;
 	public EntityAIPanic aiPanic;
 	// ActiveModeClass
-	protected LMM_EntityModeBase maidActiveModeClass;
+	public LMM_EntityModeBase maidActiveModeClass;
 	public Profiler aiProfiler;
 
 
 	public LMM_EntityLittleMaid(World par1World) {
 		super(par1World);
 		// 初期設定
-		maidInventory = new LMM_InventoryLittleMaid(this);
+		maidInventory = new InventoryLittleMaid(this);
 		if (par1World != null ) {
 			maidAvatar = new LMM_EntityLittleMaidAvatar(par1World, this);
 		}
@@ -248,7 +291,7 @@ public class LMM_EntityLittleMaid extends EntityTameable implements ITextureEnti
 		
 		
 		// EntityModeの追加
-		maidEntityModeList = LMM_EntityModeManager.getModeList(this);
+		maidEntityModeList = LMM_EntityModeManager.instance.createMaidModes(this);
 		// モードリスト
 		maidActiveModeClass = null;
 		maidModeList = new HashMap<Integer, EntityAITasks[]>();
@@ -671,7 +714,8 @@ public class LMM_EntityLittleMaid extends EntityTameable implements ITextureEnti
 		maidSoundInterval = 20;
 		if (worldObj.isRemote) {
 			// Client
-			String s = LMM_SoundManager.getSoundValue(enumsound, textureData.getTextureName(0), textureData.getColor());
+			// TODO: TEST
+			String s = enumsound.toString();//LMM_SoundManager.getSoundValue(enumsound, textureData.getTextureName(0), textureData.getColor());
 			if(!s.isEmpty() && !s.startsWith("minecraft:"))
 			{
 				s = LMM_LittleMaidMobX.DOMAIN + ":" + s;
@@ -1549,7 +1593,7 @@ public class LMM_EntityLittleMaid extends EntityTameable implements ITextureEnti
 	}
 
 	@Override
-	protected int getExperiencePoints(EntityPlayer par1EntityPlayer) {
+	public int getExperiencePoints(EntityPlayer par1EntityPlayer) {
 		return experienceValue;
 	}
 
@@ -2416,7 +2460,7 @@ public class LMM_EntityLittleMaid extends EntityTameable implements ITextureEnti
 	@Override
 	public boolean interact(EntityPlayer par1EntityPlayer)
 	{
-		MMMLib.Debug(this.worldObj.isRemote, "LMM_EntityLittleMaid.interact:"+par1EntityPlayer.getGameProfile().getName());
+		LMM_LittleMaidMobX.Debug(this.worldObj.isRemote, "LMM_EntityLittleMaid.interact:"+par1EntityPlayer.getGameProfile().getName());
 		float lhealth = getHealth();
 		ItemStack itemstack1 = par1EntityPlayer.getCurrentEquippedItem();
 		
@@ -3032,7 +3076,7 @@ public class LMM_EntityLittleMaid extends EntityTameable implements ITextureEnti
 	 * サーバーへテクスチャパックのインデックスを送る。
 	 * クライアント側の処理
 	 */
-	protected boolean sendTextureToServer() {
+	public boolean sendTextureToServer() {
 		// 16bitあればテクスチャパックの数にたりんべ
 		MMM_TextureManager.instance.postSetTexturePack(this, textureData.getColor(), textureData.getTextureBox());
 		return true;
@@ -3204,7 +3248,7 @@ public class LMM_EntityLittleMaid extends EntityTameable implements ITextureEnti
 //				le.getValue().updateEquippedPoint(pEntity.textureModel0);
 //			}
 //		}
-		maidSoundRate = LMM_SoundManager.getSoundRate(textureData.getTextureName(0), getColor());
+//		maidSoundRate = LMM_SoundManager.getSoundRate(textureData.getTextureName(0), getColor());
 
 	}
 
@@ -3460,7 +3504,7 @@ public class LMM_EntityLittleMaid extends EntityTameable implements ITextureEnti
 	{
 		super.updateWanderPath();
 	}
-	protected boolean isMovementCeased()
+	public boolean isMovementCeased()
 	{
 		return super.isMovementCeased();
 	}
