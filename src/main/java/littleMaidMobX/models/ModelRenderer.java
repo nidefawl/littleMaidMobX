@@ -10,6 +10,7 @@ import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
+import littleMaidMobX.wrapper.MinecraftClientWrapper;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.TextureOffset;
@@ -32,8 +33,6 @@ import net.minecraft.item.ItemStack;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
-
-import wrapper.W_Client;
 
 public class ModelRenderer {
 
@@ -470,7 +469,7 @@ public class ModelRenderer {
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 //			TileEntitySkullRenderer.skullRenderer.func_82393_a(-0.5F, -0.25F, -0.5F, 1, 180.0F,
 //					itemstack.getItemDamage(), lsowner);
-			W_Client.renderSkeletonHead(TileEntitySkullRenderer.field_147536_b, -0.5F, 0.0F, -0.5F, 1, 180.0F, itemstack.getItemDamage(), lsowner);
+			MinecraftClientWrapper.renderSkeletonHead(TileEntitySkullRenderer.field_147536_b, -0.5F, 0.0F, -0.5F, 1, 180.0F, itemstack.getItemDamage(), lsowner);
 		} else if (pRealBlock && litem instanceof ItemBlock) {
 //			Client.setTexture(TextureMap.field_110575_b);
 //			pRender.loadTexture("/terrain.png");

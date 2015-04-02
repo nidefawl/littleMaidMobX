@@ -5,10 +5,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import littleMaidMobX.gui.LMM_GuiTriggerSelect;
-import littleMaidMobX.modes.LMM_TriggerSelect;
-import mmmlibx.lib.ContainerCreative;
-import mmmlibx.lib.MMM_Helper;
+import littleMaidMobX.Helper;
+import littleMaidMobX.aimodes.TriggerSelect;
+import littleMaidMobX.gui.GuiTriggerSelect;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
@@ -28,20 +27,20 @@ public class ContainerTriggerSelect extends ContainerCreative {
 		inventorySlots.clear();
 		for (int l2 = 0; l2 < 5; l2++) {
 			for (int j3 = 0; j3 < 8; j3++) {
-				addSlotToContainer(new Slot(LMM_GuiTriggerSelect.getInventory1(),
+				addSlotToContainer(new Slot(GuiTriggerSelect.getInventory1(),
 						j3 + l2 * 8, 8 + j3 * 18, 18 + l2 * 18));
 			}
 		}
 		
 		for (int l2 = 0; l2 < 4; l2++) {
 			for (int j3 = 0; j3 < 8; j3++) {
-				addSlotToContainer(new Slot(LMM_GuiTriggerSelect.getInventory2(),
+				addSlotToContainer(new Slot(GuiTriggerSelect.getInventory2(),
 						j3 + l2 * 8, 8 + j3 * 18, 121 + l2 * 18));
 			}
 			
 		}
 		
-		setWeaponSelect(MMM_Helper.getPlayerName(entityplayer), LMM_TriggerSelect.selector.get(0));
+		setWeaponSelect(Helper.getPlayerName(entityplayer), TriggerSelect.selector.get(0));
 		
 		initAllSelections();
 		scrollTo(0.0F);
@@ -106,9 +105,9 @@ public class ContainerTriggerSelect extends ContainerCreative {
 			for (int l = 0; l < 8; l++) {
 				int i1 = l + (k + j) * 8;
 				if (i1 >= 0 && i1 < itemList.size()) {
-					LMM_GuiTriggerSelect.getInventory1().setInventorySlotContents(l + k * 8, (ItemStack) itemList.get(i1));
+					GuiTriggerSelect.getInventory1().setInventorySlotContents(l + k * 8, (ItemStack) itemList.get(i1));
 				} else {
-					LMM_GuiTriggerSelect.getInventory1().setInventorySlotContents(l + k * 8, null);
+					GuiTriggerSelect.getInventory1().setInventorySlotContents(l + k * 8, null);
 				}
 			}
 
@@ -202,9 +201,9 @@ public class ContainerTriggerSelect extends ContainerCreative {
 			for (int l = 0; l < 8; l++) {
 				int i1 = l + (k + weaponOffset) * 8;
 				if (i1 >= 0 && i1 < weaponSelect.size()) {
-					LMM_GuiTriggerSelect.getInventory2().setInventorySlotContents(k * 8 + l, weaponSelect.get(i1));
+					GuiTriggerSelect.getInventory2().setInventorySlotContents(k * 8 + l, weaponSelect.get(i1));
 				} else {
-					LMM_GuiTriggerSelect.getInventory2().setInventorySlotContents(k * 8 + l, null);
+					GuiTriggerSelect.getInventory2().setInventorySlotContents(k * 8 + l, null);
 				}
 			}
 		}
@@ -213,7 +212,7 @@ public class ContainerTriggerSelect extends ContainerCreative {
 	public void setWeaponSelect(String pUsername, String pName) {
 		weaponSelect.clear();
 		weaponSelectName = pName;
-		weaponSelectList = LMM_TriggerSelect.getuserTriggerList(pUsername, pName);
+		weaponSelectList = TriggerSelect.getuserTriggerList(pUsername, pName);
 
 		for (Item li : weaponSelectList) {
 			if (li != null)
