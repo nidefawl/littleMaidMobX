@@ -3,9 +3,9 @@ package mmmlibx.lib;
 import java.util.Random;
 
 import littleMaidMobX.LMM_LittleMaidMobX;
-import mmmlibx.lib.multiModel.model.mc162.ModelBase;
-import mmmlibx.lib.multiModel.model.mc162.ModelBoxBase;
-import mmmlibx.lib.multiModel.model.mc162.ModelRenderer;
+import littleMaidMobX.models.ModelBase;
+import littleMaidMobX.models.ModelBoxBase;
+import littleMaidMobX.models.ModelRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;

@@ -1,5 +1,9 @@
 package mmmlibx.lib;
 
+import littleMaidMobX.models.IModelCaps;
+import littleMaidMobX.models.ModelCapsHelper;
+import littleMaidMobX.models.ModelMultiBase;
+import littleMaidMobX.models.ModelRenderer;
 import mmmlibx.lib.multiModel.model.mc162.*;
 
 import org.lwjgl.opengl.GL11;

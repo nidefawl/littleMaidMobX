@@ -16,10 +16,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.AchievementPage;
-import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.event.CommandReceivedEvent;
 import network.W_Message;
 import network.W_Network;
 import cpw.mods.fml.common.Mod;
@@ -28,7 +26,6 @@ import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -220,17 +217,6 @@ public class LMM_LittleMaidMobX {
 		
 //		Debug("GUID-sneak: %s", LMM_EntityLittleMaid.maidUUIDSneak.toString());
 
-		   MinecraftForge.EVENT_BUS.register(this);
-	}
-	   @SubscribeEvent
-	public void cmd(CommandReceivedEvent evt)
-	{
-		   if (Thread.currentThread().getName().contains("Server thread")) {
-			   
-		   } else {
-			   
-		   }
-		
 	}
 
 	@EventHandler

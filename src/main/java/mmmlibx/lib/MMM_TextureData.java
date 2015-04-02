@@ -2,8 +2,8 @@ package mmmlibx.lib;
 
 import littleMaidMobX.LMM_EntityLittleMaid;
 import littleMaidMobX.LMM_LittleMaidMobX;
-import mmmlibx.lib.multiModel.model.mc162.IModelCaps;
-import mmmlibx.lib.multiModel.model.mc162.ModelMultiBase;
+import littleMaidMobX.models.IModelCaps;
+import littleMaidMobX.models.ModelMultiBase;
 import net.minecraft.entity.DataWatcher;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;

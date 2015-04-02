@@ -5,7 +5,6 @@ import java.util.Collection;
 import wrapper.W_Common;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.BaseAttributeMap;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,7 +21,7 @@ import net.minecraft.world.World;
 
 
 
-public class LMM_EntityLittleMaidAvatar extends EntityLiving {
+public class LMM_EntityLittleMaidAvatar extends EntityPlayer {
 
 	public LMM_EntityLittleMaid avatar;
 	/** いらん？ **/

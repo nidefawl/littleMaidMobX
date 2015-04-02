@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import littleMaidMobX.models.IModelCaps;
 import mmmlibx.lib.multiModel.model.mc162.*;
 
 public abstract class MMM_TextureBoxBase {

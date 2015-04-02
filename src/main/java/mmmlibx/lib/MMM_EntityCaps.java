@@ -3,7 +3,7 @@ package mmmlibx.lib;
 import java.util.HashMap;
 import java.util.Map;
 
-import mmmlibx.lib.multiModel.model.mc162.IModelCaps;
+import littleMaidMobX.models.IModelCaps;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
