@@ -86,17 +86,6 @@ import modchu.model.ModchuModel_IEntityCaps;public class MultiModel_tareusa ex
 		UsaEL.rotationPointZ = UsaER.rotationPointZ = UsaEL1.rotationPointZ = UsaER1.rotationPointZ = -0.5F;		UsaEL1.rotateAngleX = UsaEL.rotateAngleX + 1.5708F;
 		UsaER1.rotateAngleX = UsaER.rotateAngleX + 1.5708F;		UsaER.rotateAngleY = UsaER1.rotateAngleY = mh_sin(f2 * 0.1F) * 0.06F - 1.920F;
 		UsaEL.rotateAngleY = UsaEL1.rotateAngleY = mh_sin(f2 * 0.1F) * -0.06F + 1.920F;	}	@Override
-	public void defaultPartsSettingBefore(ModchuModel_IEntityCaps entityCaps) {
-		super.defaultPartsSettingBefore(entityCaps);
-		String[] s = {
-				"bipedHeadwear", "d"
-		};
-		setCapsValue(entityCaps, caps_showPartsHideList, (Object) s);
-	}	@Override
-	public void showModelSettingReflects(ModchuModel_IEntityCaps entityCaps) {
-		super.showModelSettingReflects(entityCaps);
-		setCapsValue(entityCaps, caps_visible, bipedHeadwear, false);
-	}	@Override
 	public String getUsingTexture() {
 		return null;
 	}

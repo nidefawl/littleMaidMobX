@@ -233,26 +233,6 @@ import modchu.model.multimodel.base.MultiModel;public class MultiModel_Mabel e
 		innerSkirtFront.scaleX = innerSkirtBack.scaleX =
 				innerSkirtRight.scaleZ = innerSkirtLeft.scaleZ = 1.0F - (motionY * 1.0F);
 	}	@Override
-	public void defaultPartsSettingBefore(ModchuModel_IEntityCaps entityCaps) {
-		super.defaultPartsSettingBefore(entityCaps);
-		String[] s = {
-				"innerSkirtTop", "innerSkirtFront", "innerSkirtRight", "innerSkirtLeft", "innerSkirtLeft"
-		};
-		setCapsValue(entityCaps, caps_showPartsHideList, (Object) s);
-		String[] s1 = {
-				"aboveHeadwear", "innerRightLeg", "innerLeftLeg", "bipedHeadwearB"
-		};
-		String[] s2 = {
-				"a_Headwear", "innerRLeg", "innerLLeg", "HeadwearB"
-		};
-		setCapsValue(entityCaps, caps_showPartsRenemeMap, s1, s2);
-	}	@Override
-	public void showModelSettingReflects(ModchuModel_IEntityCaps entityCaps) {
-		super.showModelSettingReflects(entityCaps);
-		if (Modchu_EntityCapsHelper.getCapsValueInt(this, entityCaps, caps_skirtFloats) == 2) {
-			setCapsValue(entityCaps, caps_visible, innerSkirt, false);
-		}
-	}	@Override
 	public float getHeight(ModchuModel_IEntityCaps entityCaps) {
 		return 1.35F;
 	}	@Override

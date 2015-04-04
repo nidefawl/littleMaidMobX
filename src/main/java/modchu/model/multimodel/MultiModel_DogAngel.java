@@ -351,14 +351,5 @@ package modchu.model.multimodel;import modchu.lib.Modchu_Debug;import modchu.
 		Skirt11.rotateAngleZ += motionY;
 		Skirt12.rotateAngleX += motionY;
 		Skirt12.rotateAngleZ += motionY;
-	}	@Override
-	public void defaultPartsSettingBefore(ModchuModel_IEntityCaps entityCaps) {
-		super.defaultPartsSettingBefore(entityCaps);
-		String[] s = {
-				"Skirt1", "Skirt2", "Skirt3", "Skirt4", "Skirt5",
-				"Skirt6", "Skirt7", "Skirt8", "Skirt9", "Skirt10",
-				"Skirt11", "Skirt12"
-		};
-		setCapsValue(entityCaps, caps_showPartsHideList, (Object) s);
 	}
 	@Override	public void setArmorBipedHeadShowModel(ModchuModel_IEntityCaps entityCaps, boolean b) {		bipedHead.isHidden = !b;		super.setArmorBipedHeadShowModel(entityCaps, b);	}	@Override	public void setArmorSkirtShowModel(ModchuModel_IEntityCaps entityCaps, boolean b) {		super.setArmorSkirtShowModel(entityCaps, b);		Skirt.isHidden = !b;	}	@Override	public String[] getBreastName() {		return new String[]{ "bust" };	}}

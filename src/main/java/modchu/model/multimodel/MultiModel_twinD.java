@@ -41,19 +41,5 @@ import modchu.model.multimodel.base.MultiModel_SR2;public class MultiModel_twi
 		bipedHead.addChild(longhearL);
 		bipedHead.addChild(kamidomeR);
 		bipedHead.addChild(kamidomeL);
-	}	@Override
-	public void defaultPartsSettingBefore(ModchuModel_IEntityCaps entityCaps) {
-		super.defaultPartsSettingBefore(entityCaps);
-		String[] s = {
-				"Tail", "SideTailL", "SideTailR", "ChignonB"
-		};
-		setCapsValue(entityCaps, caps_showPartsHideList, (Object) s);
-	}	@Override
-	public void showModelSettingReflects(ModchuModel_IEntityCaps entityCaps) {
-		super.showModelSettingReflects(entityCaps);
-		setCapsValue(entityCaps, caps_visible, Tail, false);
-		setCapsValue(entityCaps, caps_visible, SideTailL, false);
-		setCapsValue(entityCaps, caps_visible, SideTailR, false);
-		setCapsValue(entityCaps, caps_visible, ChignonB, false);
 	}
 }

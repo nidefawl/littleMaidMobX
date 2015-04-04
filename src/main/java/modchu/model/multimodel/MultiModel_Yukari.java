@@ -587,45 +587,7 @@ import modchu.model.multimodel.base.MultiModel_Aug;public class MultiModel_Yuk
 		}
 	}	@Override
 	public void skirtFloats(float f, float f1, float f2, float f3, float f4, float f5, ModchuModel_IEntityCaps entityCaps) {
-	}	@Override
-	public void defaultPartsSettingBefore(ModchuModel_IEntityCaps entityCaps) {
-		super.defaultPartsSettingBefore(entityCaps);
-		String[] s = {
-				"Cheek_R", "Cheek_L"
-		};
-		setCapsValue(entityCaps, caps_showPartsHideList, (Object) s);
-		String[] s1 = {
-				"RabbitEar_RB1", "RabbitEar_RB2", "RabbitEar_R1",
-				"RabbitEar_R2", "RabbitEar_R3", "RabbitEar_R4",
-				"RabbitEar_LB1", "RabbitEar_LB2", "RabbitEar_L1",
-				"RabbitEar_L2", "RabbitEar_L3", "RabbitEar_L4",
-				"HairOrnament_R", "HairOrnament_L", "Accessory_S1",
-				"Accessory_S2", "Accessory_B1", "Accessory_B2",
-				"Accessory_H", "Accessory_HRF1", "Accessory_HRF2",
-				"Accessory_HRF3", "Accessory_HR1", "Accessory_HR2",
-				"Accessory_HLF1", "Accessory_HLF2", "Accessory_HLF3",
-				"Accessory_HL1", "Accessory_HL2", "Accessory_HB1",
-				"Accessory_HB2", "ArmAccessory_RF", "ArmAccessory_RB",
-				"ArmAccessory_RR", "ArmAccessory_RL", "ArmAccessory_R",
-				"BeltAccessory_L"
-		};
-		String[] s2 = {
-				"RabbitE_RB1", "RabbitE_RB2", "RabbitE_R1",
-				"RabbitE_R2", "RabbitE_R3", "RabbitE_R4",
-				"RabbitE_LB1", "RabbitE_LB2", "RabbitE_L1",
-				"RabbitE_L2", "RabbitE_L3", "RabbitE_L4",
-				"HairO_R", "HairO_L", "Ac_S1",
-				"Ac_S2", "Ac_B1", "Ac_B2",
-				"Ac_H", "Ac_HRF1", "Ac_HRF2",
-				"Ac_HRF3", "Ac_HR1", "Ac_HR2",
-				"Ac_HLF1", "Ac_HLF2", "Ac_HLF3",
-				"Ac_HL1", "Ac_HL2", "Ac_HB1",
-				"Ac_HB2", "ArmAc_RF", "ArmAc_RB",
-				"ArmAc_RR", "ArmAc_RL", "ArmAc_R",
-				"BeltAc_L"
-		};
-		setCapsValue(entityCaps, caps_showPartsRenemeMap, s1, s2);
-	}	@Override
+	}	@Override
 	public void actionPartsAddChild() {
 		Modchu_Debug.mDebug("actionPartsAddChild");
 		super.actionPartsAddChild();

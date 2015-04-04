@@ -154,37 +154,6 @@ import modchu.model.multimodel.base.MultiModel_SR2;public class MultiModel_MS1
 		}
 		Skirt.rotationPointY -= 3.0F;
 	}	@Override
-	public void defaultPartsSettingBefore(ModchuModel_IEntityCaps entityCaps) {
-		super.defaultPartsSettingBefore(entityCaps);
-		String[] s = {
-				"Cheek_R", "Cheek_L"
-		};
-		setCapsValue(entityCaps, caps_showPartsHideList, (Object) s);
-	}	@Override
-	public void defaultPartsSettingAfter(ModchuModel_IEntityCaps entityCaps) {
-		int i = Modchu_EntityCapsHelper.getCapsValueInt(this, entityCaps, caps_armorType);
-		//GogglesA Default off
-		setCapsValue(entityCaps, caps_defaultShowPartsMap, "GogglesA", i, false);
-	}	@Override
-	public void showModelSettingReflects(ModchuModel_IEntityCaps entityCaps) {
-		super.showModelSettingReflects(entityCaps);
-		setCapsValue(entityCaps, caps_visible, Tail, false);
-		setCapsValue(entityCaps, caps_visible, SideTailR, false);
-		setCapsValue(entityCaps, caps_visible, SideTailL, false);
-		setCapsValue(entityCaps, caps_visible, ChignonR, false);
-		setCapsValue(entityCaps, caps_visible, ChignonL, false);
-		setCapsValue(entityCaps, caps_visible, ChignonB, false);
-		setCapsValue(entityCaps, caps_visible, Goggles1, true);
-		setCapsValue(entityCaps, caps_visible, Goggles2, true);
-		setCapsValue(entityCaps, caps_visible, Goggles3, true);
-		setCapsValue(entityCaps, caps_visible, GogglesR, true);
-		setCapsValue(entityCaps, caps_visible, GogglesL, true);
-		setCapsValue(entityCaps, caps_visible, Goggles1A, false);
-		setCapsValue(entityCaps, caps_visible, Goggles2A, false);
-		setCapsValue(entityCaps, caps_visible, Goggles3A, false);
-		setCapsValue(entityCaps, caps_visible, GogglesRA, false);
-		setCapsValue(entityCaps, caps_visible, GogglesLA, false);
-	}	@Override
 	public void motionModelCorrectionAfter(float f, float f1, float f2, float f3, float f4, float f5, ModchuModel_IEntityCaps entityCaps) {
 		super.motionModelCorrectionAfter(f, f1, f2, f3, f4, f5, entityCaps);
 		Skirt.rotationPointY -= 2.0F;

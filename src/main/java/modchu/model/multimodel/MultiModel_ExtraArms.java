@@ -172,22 +172,6 @@ import modchu.model.multimodel.base.MultiModel;public class MultiModel_ExtraAr
 		Bullet1.rotateAngleX = Bullet2.rotateAngleX = Bullet3.rotateAngleX = 0.7854F;
 		Bullet1.rotateAngleY = Bullet2.rotateAngleY = Bullet3.rotateAngleY = 0.0F;
 		Bullet1.rotateAngleZ = Bullet2.rotateAngleZ = Bullet3.rotateAngleZ = 0.5236F;
-	}	@Override
-	public void defaultPartsSettingBefore(ModchuModel_IEntityCaps entityCaps) {
-		super.defaultPartsSettingBefore(entityCaps);
-		String[] s = {
-				"bipedHeadwear", "d"
-		};
-		setCapsValue(entityCaps, caps_showPartsHideList, (Object) s);
-		String[] s1 = {
-				"FirstAidSet", "Binoculars", "BinocularsL1", "BinocularsL2", "BinocularsR1",
-				"BinocularsR2", "BinocularsR1", "BinocularsR2"
-		};
-		String[] s2 = {
-				"FA_Set", "Bino", "BinoL1", "Bino_L2", "Bino_R1",
-				"Bino_R2", "Bino_R1", "Bino_R2"
-		};
-		setCapsValue(entityCaps, caps_showPartsRenemeMap, s1, s2);
 	}/*
 	@Override
 	public float getWidth(ModchuModel_IEntityCaps entityCaps)

@@ -817,19 +817,6 @@ import modchu.model.multimodel.base.MultiModel_SR2;public class MultiModel_Ten
 		Skirt215.rotateAngleZ += motionY;
 		Skirt216.rotateAngleZ += motionY;
 	}	@Override
-	public void defaultPartsSettingBefore(ModchuModel_IEntityCaps entityCaps) {
-		super.defaultPartsSettingBefore(entityCaps);
-		String[] s = {
-				"Skirt1", "Skirt2", "Skirt3", "Skirt4", "Skirt5",
-				"Skirt6", "Skirt7", "Skirt8", "Skirt9", "Skirt10",
-				"Skirt11", "Skirt12", "Skirt13", "Skirt14", "Skirt15",
-				"Skirt16", "Skirt21", "Skirt22", "Skirt23", "Skirt24",
-				"Skirt25", "Skirt26", "Skirt27", "Skirt27", "Skirt28",
-				"Skirt29", "Skirt210", "Skirt211", "Skirt212", "Skirt213",
-				"Skirt214", "Skirt215", "Skirt216"
-		};
-		setCapsValue(entityCaps, caps_showPartsHideList, (Object) s);
-	}	@Override
 	public void actionInit1(ModchuModel_IEntityCaps entityCaps) {
 		super.actionInit1(entityCaps);
 		bipedRightArm.removeChild(Patch1);

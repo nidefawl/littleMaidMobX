@@ -109,12 +109,6 @@ import modchu.model.multimodel.base.MultiModel_SR2;public class MultiModel_Dre
 			Skirt.rotationPointZ = 0.0F;
 		}
 	}	@Override
-	public void showModelSettingReflects(ModchuModel_IEntityCaps entityCaps) {
-		super.showModelSettingReflects(entityCaps);
-		int i = Modchu_EntityCapsHelper.getCapsValueInt(this, entityCaps, caps_showPartsMapBoolean, "Skirt", Modchu_EntityCapsHelper.getCapsValueInt(this, entityCaps, caps_armorType));
-		boolean b = i != 0;
-		setCapsValue(entityCaps, caps_visible, specialModel[0], b);
-	}	@Override
 	public float getHeight(ModchuModel_IEntityCaps entityCaps) {
 		return 1.35F;
 	}	@Override

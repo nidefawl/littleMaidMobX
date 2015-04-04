@@ -546,38 +546,6 @@ package modchu.model.multimodel.base;import modchu.lib.Modchu_Debug;import mo
 			break;
 		}
 		return -1;
-	}	@Override
-	public void defaultPartsSettingBefore(ModchuModel_IEntityCaps entityCaps) {
-		String[] s = {
-				"bipedCloak", "bipedEars", "SkirtTop", "SkirtFront", "SkirtLeft",
-				"SkirtRight", "SkirtBack", "rightArm", "rightArm2", "rightArmPlus",
-				"rightArmPlus2", "rightHand", "rightLeg", "rightLeg2", "rightLegPlus",
-				"rightLegPlus2", "leftArm", "leftArm2", "leftArmPlus", "leftArmPlus2",
-				"leftHand", "leftLeg", "leftLeg2", "leftLegPlus", "leftLegPlus2",
-				"HeadMount", "mainFrame", "j", "k", "field_78121_j", "field_78122_k"
-		};
-		setCapsValue(entityCaps, caps_showPartsHideList, (Object) s);
-		String[] s1 = {
-				"bipedHead", "bipedHeadwear", "bipedBody", "bipedRightArm", "bipedLeftArm",
-				"bipedRightLeg", "bipedLeftLeg", "c", "d", "e",
-				"f", "g", "h", "i", "field_78116_c",
-				"field_78114_d", "field_78115_e", "field_78112_f", "field_78113_g", "field_78123_h",
-				"field_78124_i"
-		};
-		String[] s2 = {
-				"Head", "Headwear", "Body", "RightArm", "LeftArm",
-				"RightLeg", "LeftLeg", "Head", "Headwear", "Body",
-				"RightArm", "LeftArm", "RightLeg", "LeftLeg", "bipedHead",
-				"Headwear", "Body", "RightArm", "LeftArm", "RightLeg",
-				"LeftLeg"
-		};
-		setCapsValue(entityCaps, caps_showPartsRenemeMap, s1, s2);
-	}	@Override
-	public void showModelSettingReflects(ModchuModel_IEntityCaps entityCaps) {
-		super.showModelSettingReflects(entityCaps);
-		//if (Modchu_EntityCapsHelper.getCapsValueInt(this, entityCaps, caps_skirtFloats) < 2) {
-		setCapsValue(entityCaps, caps_indexOfAllVisible, "Skirt", Modchu_EntityCapsHelper.getCapsValueInt(this, entityCaps, caps_armorType));
-		//}
 	}	/**
 	 * 身長
 	 */

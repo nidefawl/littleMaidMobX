@@ -342,23 +342,5 @@ import modchu.model.multimodel.base.MultiModel_Aug;public class MultiModel_SA 
 			Tail_U.setRotateAngleX(0.0F);
 			Tail_B.setRotateAngleX(-bipedHead.getRotateAngleX() + Skirt.getRotateAngleX());
 		}
-	}	@Override
-	public void defaultPartsSettingBefore(ModchuModel_IEntityCaps entityCaps) {
-		super.defaultPartsSettingBefore(entityCaps);
-		String[] s = {
-				"Cheek_R", "Cheek_L"
-		};
-		setCapsValue(entityCaps, caps_showPartsHideList, (Object) s);
-		String[] s1 = {
-				"ChignonAug_R", "ChignonAug_L", "SideTailAug_RU", "SideTailAug_RB", "SideTailAug_LU",
-				"SideTailAug_LB", "SideTail_RBU", "SideTail_RBB", "SideTail_LBU", "SideTail_LBB",
-				"SideTailUpper_LB", "SideTailUpper_RB"
-		};
-		String[] s2 = {
-				"ChignonA_R", "ChignonA_L", "SideTA_RU", "SideTA_RB", "SideTA_LU",
-				"SideTA_LB", "SideT_RBU", "SideT_RBB", "SideT_LBU", "SideT_LBB",
-				"SideTU_LB", "SideTU_RB"
-		};
-		setCapsValue(entityCaps, caps_showPartsRenemeMap, s1, s2);
 	}
 }

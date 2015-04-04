@@ -406,13 +406,6 @@ import modchu.model.multimodel.base.MultiModel_SR2;public class MultiModel_st 
 				leftLeg2.isHidden = true;		LegAR.rotationPointY = -7.0F;
 		LegAL.rotationPointY = -7.0F;
 	}	@Override
-	public void defaultPartsSettingBefore(ModchuModel_IEntityCaps entityCaps) {
-		super.defaultPartsSettingBefore(entityCaps);
-		String[] s = {
-				"Cheek_R", "Cheek_L"
-		};
-		setCapsValue(entityCaps, caps_showPartsHideList, (Object) s);
-	}	@Override
 	public void action1(float f, float f1, float f2, float f3, float f4, float f5, ModchuModel_IEntityCaps entityCaps) {
 		super.action1(f, f1, f2, f3, f4, f5, entityCaps);
 		LegAR.rotationPointY = -11.0F;

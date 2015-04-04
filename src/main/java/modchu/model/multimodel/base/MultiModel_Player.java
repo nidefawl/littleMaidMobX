@@ -68,31 +68,5 @@ package modchu.model.multimodel.base;import modchu.lib.Modchu_EntityCapsHelper
 		if (modelSize != 0.0F) return;		boolean b = false;		setCapsValue(null, caps_visible, bipedRightSleeve, b);		setCapsValue(null, caps_visible, bipedLeftSleeve, b);		setCapsValue(null, caps_visible, bipedRightPants, b);		setCapsValue(null, caps_visible, bipedLeftPants, b);		b = true;		if (rightArm != null) setCapsValue(null, caps_visible, rightArmSleeve, b);		if (rightArm2 != null) setCapsValue(null, caps_visible, rightArmSleeve2, b);		if (leftArm != null) setCapsValue(null, caps_visible, leftArmSleeve, b);		if (leftArm2 != null) setCapsValue(null, caps_visible, leftArmSleeve2, b);		if (rightLeg != null) setCapsValue(null, caps_visible, rightLegPants, b);		if (rightLeg2 != null) setCapsValue(null, caps_visible, rightLegPants2, b);		if (leftLeg != null) setCapsValue(null, caps_visible, leftLegPants, b);		if (leftLeg2 != null) setCapsValue(null, caps_visible, leftLegPants2, b);		if (rightArm != null) {			if (rightArmSleeve != null) rightArm.addChild(rightArmSleeve);			if (rightArm2 != null) rightArm2.addChild(rightArmSleeve2);		}		if (leftArm != null) {			if (leftArmSleeve != null) leftArm.addChild(leftArmSleeve);			if (leftArm2 != null					&& leftArmSleeve2 != null) leftArm2.addChild(leftArmSleeve2);		}		if (rightLeg != null) {			if (rightLegPants != null) rightLeg.addChild(rightLegPants);			if (rightLeg2 != null					&& rightLegPants2 != null) rightLeg2.addChild(rightLegPants2);		}		if (leftLeg != null) {			if (leftLegPants != null) leftLeg.addChild(leftLegPants);			if (leftLeg2 != null					&& leftLegPants2 != null) leftLeg2.addChild(leftLegPants2);		}	}	@Override
 	public void actionRelease(ModchuModel_IEntityCaps entityCaps, int i) {
 		super.actionRelease(entityCaps, i);
-		if (modelSize != 0.0F) return;		boolean b = true;		setCapsValue(null, caps_visible, bipedRightSleeve, b);		setCapsValue(null, caps_visible, bipedLeftSleeve, b);		setCapsValue(null, caps_visible, bipedRightPants, b);		setCapsValue(null, caps_visible, bipedLeftPants, b);		b = false;		setCapsValue(null, caps_visible, rightArmSleeve, b);		setCapsValue(null, caps_visible, rightArmSleeve2, b);		setCapsValue(null, caps_visible, leftArmSleeve, b);		setCapsValue(null, caps_visible, leftArmSleeve2, b);		setCapsValue(null, caps_visible, rightLegPants, b);		setCapsValue(null, caps_visible, rightLegPants2, b);		setCapsValue(null, caps_visible, leftLegPants, b);		setCapsValue(null, caps_visible, leftLegPants2, b);	}	@Override
-	public void defaultPartsSettingBefore(ModchuModel_IEntityCaps entityCaps) {
-		String[] s = {
-				"rightArm", "rightArm2", "rightArmPlus", "rightArmPlus2", "rightHand",
-				"rightLeg", "rightLeg2", "rightLegPlus", "rightLegPlus2", "leftArm",
-				"leftArm2", "leftArmPlus", "leftArmPlus2", "leftHand", "leftLeg",
-				"leftLeg2", "leftLegPlus", "leftLegPlus2", "HeadMount", "mainFrame"
-		};
-		setCapsValue(entityCaps, caps_showPartsHideList, (Object) s);
-		String[] s1 = {
-				"bipedHead", "bipedHeadwear", "bipedBody", "bipedRightArm", "bipedLeftArm",
-				"bipedRightLeg", "bipedLeftLeg", "bipedJacket", "bipedRightSleeve", "bipedLeftSleeve",
-				"bipedRightPants", "bipedLeftPants", "c", "d", "e",
-				"f", "g", "h", "i", "j",
-				"k", "field_78116_c", "field_78114_d", "field_78115_e", "field_78112_f",
-				"field_78113_g", "field_78123_h", "field_78124_i", "field_78121_j", "field_78122_k"
-		};
-		String[] s2 = {
-				"Head", "Headwear", "Body", "RightArm", "LeftArm",
-				"RightLeg", "LeftLeg", "Jacket", "RightSleeve", "LeftSleeve",
-				"RightPants", "LeftPants", "Head", "Headwear", "Body",
-				"RightArm", "LeftArm", "RightLeg", "LeftLeg", "bipedCloak",
-				"bipedEars", "bipedHead", "Headwear", "Body", "RightArm",
-				"LeftArm", "RightLeg", "LeftLeg", "bipedEars", "bipedCloak"
-		};
-		setCapsValue(entityCaps, caps_showPartsRenemeMap, s1, s2);
-	}
+		if (modelSize != 0.0F) return;		boolean b = true;		setCapsValue(null, caps_visible, bipedRightSleeve, b);		setCapsValue(null, caps_visible, bipedLeftSleeve, b);		setCapsValue(null, caps_visible, bipedRightPants, b);		setCapsValue(null, caps_visible, bipedLeftPants, b);		b = false;		setCapsValue(null, caps_visible, rightArmSleeve, b);		setCapsValue(null, caps_visible, rightArmSleeve2, b);		setCapsValue(null, caps_visible, leftArmSleeve, b);		setCapsValue(null, caps_visible, leftArmSleeve2, b);		setCapsValue(null, caps_visible, rightLegPants, b);		setCapsValue(null, caps_visible, rightLegPants2, b);		setCapsValue(null, caps_visible, leftLegPants, b);		setCapsValue(null, caps_visible, leftLegPants2, b);	}
 	public void setArmorBipedBodyShowModel(ModchuModel_IEntityCaps entityCaps, boolean b) {		super.setArmorBipedBodyShowModel(entityCaps, b);		setCapsValue(entityCaps, caps_visible, bipedJacket, modelSize == 0.0F);	}	public void setArmorBipedRightArmShowModel(ModchuModel_IEntityCaps entityCaps, boolean b) {		super.setArmorBipedRightArmShowModel(entityCaps, b);		setCapsValue(entityCaps, caps_visible, bipedRightSleeve, modelSize == 0.0F);	}	public void setArmorBipedLeftArmShowModel(ModchuModel_IEntityCaps entityCaps, boolean b) {		super.setArmorBipedLeftArmShowModel(entityCaps, b);		setCapsValue(entityCaps, caps_visible, bipedLeftSleeve, modelSize == 0.0F);	}	public void setArmorBipedRightLegShowModel(ModchuModel_IEntityCaps entityCaps, boolean b) {		super.setArmorBipedRightLegShowModel(entityCaps, b);		setCapsValue(entityCaps, caps_visible, bipedRightPants, modelSize == 0.0F);	}	public void setArmorBipedLeftLegShowModel(ModchuModel_IEntityCaps entityCaps, boolean b) {		super.setArmorBipedLeftLegShowModel(entityCaps, b);		setCapsValue(entityCaps, caps_visible, bipedLeftPants, modelSize == 0.0F);	}}

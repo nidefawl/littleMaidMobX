@@ -646,38 +646,5 @@ public class MultiModel_VUD1 extends MultiModel_Aug {
 		SideTailM_RU.rotateAngleZ = SideTailF_RU.rotateAngleZ = SideTailN_LU.rotateAngleZ = SideTailR_R.rotateAngleZ = f6;
 		SideTailM_LU.rotateAngleZ = SideTailF_LU.rotateAngleZ = SideTailN_LB.rotateAngleZ = SideTailR_L.rotateAngleZ = -f6;
 		SideTailM_LU.rotateAngleX = SideTailM_RU.rotateAngleX = SideTailN_LU.rotateAngleX = SideTailN_LB.rotateAngleX = SideTailF_RU.rotateAngleX = SideTailF_LU.rotateAngleX = SideTailR_R.rotateAngleX = SideTailR_L.rotateAngleX = -bipedHead.rotateAngleX / 2.0F;
-	}	@Override
-	public void defaultPartsSettingBefore(ModchuModel_IEntityCaps entityCaps) {
-		super.defaultPartsSettingBefore(entityCaps);
-		String[] s = {
-				"Cheek_R", "Cheek_L"
-		};
-		setCapsValue(entityCaps, caps_showPartsHideList, (Object) s);
-		String[] s1 = {
-				"SideTailRoot_R", "SideTailRoot_L", "SideTailM_RU",
-				"SideTailM_RB", "SideTailM_LU", "SideTailM_LB",
-				"SideTailF_RU", "SideTailF_RB", "SideTailF_LU",
-				"SideTailF_LB", "SideTailN_LU", "SideTailN_LB",
-				"SideTailR_R", "SideTailR_L", "DumplingHari_L",
-				"HairOrnamentM_R", "HairOrnamentM_L", "HairOrnamentF_R",
-				"HairOrnamentF_L", "HairOrnamentN_L"
-		};
-		String[] s2 = {
-				"SideT_R", "SideT_L", "SideTM_RU",
-				"SideTM_RB", "SideTM_LU", "SideTM_LB",
-				"SideTF_RU", "SideTF_RB", "SideTF_LU",
-				"SideTF_LB", "SideTN_LU", "SideTN_LB",
-				"SideTR_R", "SideTR_L", "D_Hari_L",
-				"HOM_R", "HOM_L", "HOF_R",
-				"HOF_L", "HON_L"
-		};
-		setCapsValue(entityCaps, caps_showPartsRenemeMap, s1, s2);
-	}	@Override
-	public void defaultPartsSettingAfter(ModchuModel_IEntityCaps entityCaps) {
-		int i = Modchu_EntityCapsHelper.getCapsValueInt(this, entityCaps, caps_armorType);
-		//Negi Default off
-		setCapsValue(entityCaps, caps_defaultShowPartsMap, "Negi1", i, false);
-		setCapsValue(entityCaps, caps_defaultShowPartsMap, "Negi2", i, false);
-		setCapsValue(entityCaps, caps_defaultShowPartsMap, "Negi3", i, false);
 	}
 }

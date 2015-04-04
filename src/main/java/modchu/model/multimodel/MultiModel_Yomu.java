@@ -707,16 +707,6 @@ import modchu.model.multimodel.base.MultiModel_SR2;public class MultiModel_Yom
 		Skirt16.rotateAngleX += motionY;
 		Skirt16.rotateAngleZ += motionY;
 	}	@Override
-	public void defaultPartsSettingBefore(ModchuModel_IEntityCaps entityCaps) {
-		super.defaultPartsSettingBefore(entityCaps);
-		String[] s = {
-				"Skirt1", "Skirt2", "Skirt3", "Skirt4", "Skirt5",
-				"Skirt6", "Skirt7", "Skirt8", "Skirt9", "Skirt10",
-				"Skirt11", "Skirt12", "Skirt13", "Skirt14", "Skirt15",
-				"Skirt16"
-		};
-		setCapsValue(entityCaps, caps_showPartsHideList, (Object) s);
-	}	@Override
 	public void setArmorBipedHeadShowModel(ModchuModel_IEntityCaps entityCaps, boolean b) {
 		bipedHead.isHidden = !b;
 		super.setArmorBipedHeadShowModel(entityCaps, b);

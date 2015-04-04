@@ -412,25 +412,6 @@ package modchu.model.multimodel;import modchu.lib.Modchu_Debug;import modchu.
 		leftArm.rotateAngleZ = -1.57F;
 		bipedHead.rotateAngleX = bipedHead.rotateAngleY = bipedHead.rotateAngleZ = bipedBody.rotateAngleX = bipedBody.rotateAngleY = bipedBody.rotateAngleZ = 0.0F;
 	}	@Override
-	public void defaultPartsSettingBefore(ModchuModel_IEntityCaps entityCaps) {
-		super.defaultPartsSettingBefore(entityCaps);
-		String[] s = {
-				"bipedHeadwear", "SkirtR", "SkirtL", "SkirtTopL", "SkirtFrontL",
-				"SkirtLeftL", "SkirtBackL", "d"
-		};
-		setCapsValue(entityCaps, caps_showPartsHideList, (Object) s);
-	}	@Override
-	public void showModelSettingReflects(ModchuModel_IEntityCaps entityCaps) {
-		super.showModelSettingReflects(entityCaps);
-		setCapsValue(entityCaps, caps_indexOfAllVisible, "ightArm", Modchu_EntityCapsHelper.getCapsValueInt(this, entityCaps, caps_armorType), bipedRightArm.showModel);
-		setCapsValue(entityCaps, caps_indexOfAllVisible, "eftArm", Modchu_EntityCapsHelper.getCapsValueInt(this, entityCaps, caps_armorType), bipedLeftArm.showModel);
-		setCapsValue(entityCaps, caps_indexOfAllVisible, "ightLeg", Modchu_EntityCapsHelper.getCapsValueInt(this, entityCaps, caps_armorType), bipedRightLeg.showModel);
-		setCapsValue(entityCaps, caps_indexOfAllVisible, "eftLeg", Modchu_EntityCapsHelper.getCapsValueInt(this, entityCaps, caps_armorType), bipedLeftLeg.showModel);
-		if (Modchu_EntityCapsHelper.getCapsValueInt(this, null, caps_skirtFloats) == 2) {
-			setCapsValue(entityCaps, caps_visible, SkirtR, false);
-			setCapsValue(entityCaps, caps_visible, SkirtL, false);
-		}
-	}	@Override
 	public void actionInit1(ModchuModel_IEntityCaps entityCaps) {
 		boolean b = true;
 		setCapsValue(entityCaps, caps_visible, rightArm, b);

@@ -516,33 +516,6 @@ import modchu.model.multimodel.base.MultiModel_SR2;public class MultiModel_NM1
 		}
 		breastFloats(f, f1, f2, f3, f4, f5, entityCaps);		setRotationAnglesGulliverAfter(f, f1, f2, f3, f4, f5, entityCaps);
 	}	@Override
-	public void defaultPartsSettingAfter(ModchuModel_IEntityCaps entityCaps) {
-		int i = Modchu_EntityCapsHelper.getCapsValueInt(this, entityCaps, caps_armorType);
-		//bipedRightLeg Default off
-		setCapsValue(entityCaps, caps_defaultShowPartsMap, "bipedRightLeg", i, false);
-		//bipedLeftLeg Default off
-		setCapsValue(entityCaps, caps_defaultShowPartsMap, "bipedLeftLeg", i, false);
-		//HornR Default off
-		setCapsValue(entityCaps, caps_defaultShowPartsMap, "HornR", i, false);
-		//HornL Default off
-		setCapsValue(entityCaps, caps_defaultShowPartsMap, "HornL", i, false);
-		//ArmR Default off
-		setCapsValue(entityCaps, caps_defaultShowPartsMap, "ArmR", i, false);
-		//ArmL Default off
-		setCapsValue(entityCaps, caps_defaultShowPartsMap, "ArmL", i, false);
-		//LegR Default off
-		setCapsValue(entityCaps, caps_defaultShowPartsMap, "LegR", i, false);
-		//LegL Default off
-		setCapsValue(entityCaps, caps_defaultShowPartsMap, "LegL", i, false);
-		//HandR Default off
-		setCapsValue(entityCaps, caps_defaultShowPartsMap, "HandR", i, false);
-		//HandL Default off
-		setCapsValue(entityCaps, caps_defaultShowPartsMap, "HandL", i, false);
-		//bootR Default off
-		setCapsValue(entityCaps, caps_defaultShowPartsMap, "bootR", i, false);
-		//bootL Default off
-		setCapsValue(entityCaps, caps_defaultShowPartsMap, "bootL", i, false);
-	}	@Override
 	public void actionInit1(ModchuModel_IEntityCaps entityCaps) {
 		boolean b = bipedRightLeg.showModel;
 		boolean b1 = bipedLeftLeg.showModel;

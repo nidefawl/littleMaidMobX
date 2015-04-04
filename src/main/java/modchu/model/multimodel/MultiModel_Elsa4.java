@@ -311,12 +311,5 @@ public class MultiModel_Elsa4 extends MultiModel_SR2 {	public Modchu_ModelRend
 		setCapsValue(entityCaps, caps_visible, hemSkirt, b);
 		Skirt.isHidden = !b;
 		hemSkirt.isHidden = !b;
-	}	@Override
-	public void defaultPartsSettingBefore(ModchuModel_IEntityCaps entityCaps) {
-		super.defaultPartsSettingBefore(entityCaps);
-		String[] s = {
-			"hemSkirt"
-		};
-		setCapsValue(entityCaps, caps_showPartsHideList, (Object) s);
 	}
 }

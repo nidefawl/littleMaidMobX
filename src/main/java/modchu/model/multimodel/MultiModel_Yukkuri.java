@@ -628,26 +628,6 @@ public class MultiModel_Yukkuri extends MultiModelOkotaSR2 {	public Modchu_Mod
 	}	@Override
 	public void skirtFloats(float f, float f1, float f2, float f3, float f4, float f5, ModchuModel_IEntityCaps entityCaps) {
 	}	@Override
-	public void defaultPartsSettingBefore(ModchuModel_IEntityCaps entityCaps) {
-		super.defaultPartsSettingBefore(entityCaps);
-		String[] s1 = {
-				"MariribonL", "MariribonR", "MariribonC",
-				"RSidehair1", "RSidehair2", "RSidehair3",
-				"RSidehair4", "LSidehair1", "LSidehair2",
-				"LSidehair3", "LSidehair4", "Backhair1",
-				"Backhair2", "Backhair3", "Backhair4",
-				"Backhair5"
-		};
-		String[] s2 = {
-				"M_ribonL", "M_ribonR", "M_ribonC",
-				"R_hair1", "R_hair2", "R_hair3",
-				"R_hair4", "L_hair1", "L_hair2",
-				"L_hair3", "L_hair4", "B_hair1",
-				"B_hair2", "B_hair3", "B_hair4",
-				"B_hair5"
-		};
-		setCapsValue(entityCaps, caps_showPartsRenemeMap, s1, s2);
-	}	@Override
 	public void actionInit1(ModchuModel_IEntityCaps entityCaps) {
 		entityCaps.setCapsValue(caps_freeVariable, "sneakBan", true);
 		entityCaps.setCapsValue(caps_freeVariable, "waitBan", true);

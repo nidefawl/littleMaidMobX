@@ -113,15 +113,5 @@ import modchu.model.ModchuModel_IEntityCaps;public class MultiModel_Aug extend
 		sensor1.rotationPointY = sensor2.rotationPointY = sensor3.rotationPointY = sensor4.rotationPointY = y;
 		y = -1.0F;
 		shaggyB.rotationPointY = shaggyR.rotationPointY = shaggyL.rotationPointY = y;
-	}	@Override
-	public void defaultPartsSettingBefore(ModchuModel_IEntityCaps entityCaps) {
-		super.defaultPartsSettingBefore(entityCaps);
-		String[] s1 = {
-				"sidetailUpperR", "sidetailUpperL"
-		};
-		String[] s2 = {
-				"s_tailUR", "s_tailUL"
-		};
-		setCapsValue(entityCaps, caps_showPartsRenemeMap, s1, s2);
 	}
 }

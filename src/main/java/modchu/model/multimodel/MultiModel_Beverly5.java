@@ -586,12 +586,5 @@ public class MultiModel_Beverly5 extends MultiModelBeverlyBase {	//added field
 	public void setArmorSkirtShowModel(ModchuModel_IEntityCaps entityCaps, boolean b) {
 		super.setArmorSkirtShowModel(entityCaps, b);
 		setCapsValue(entityCaps, caps_visible, hemSkirtR1, b);		setCapsValue(entityCaps, caps_visible, hemSkirtL1, b);		setCapsValue(entityCaps, caps_visible, hemSkirtR2, b);		setCapsValue(entityCaps, caps_visible, hemSkirtL2, b);
-	}	@Override
-	public void defaultPartsSettingBefore(ModchuModel_IEntityCaps entityCaps) {
-		super.defaultPartsSettingBefore(entityCaps);
-		String[] s = {
-		"hemSkirtR1", "hemSkirtL1", "hemSkirtR2", "hemSkirtL2"
-		};
-		setCapsValue(entityCaps, caps_showPartsHideList, (Object) s);
 	}
 }

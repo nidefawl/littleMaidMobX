@@ -275,26 +275,6 @@ import modchu.model.ModchuModel_IEntityCaps;public class MultiModel_Kelo exten
 	}	@Override
 	public void defaultSkirtFloatsAddChild() {
 	}	@Override
-	public void defaultPartsSettingBefore(ModchuModel_IEntityCaps entityCaps) {
-		super.defaultPartsSettingBefore(entityCaps);
-		String[] s = {
-				"bipedHeadwear", "ChignonB", "Tail", "d"
-		};
-		setCapsValue(entityCaps, caps_showPartsHideList, (Object) s);
-		String[] s1 = {
-				"BreastPocket", "LsidePocket", "RsidePocket", "BackpackPocket"
-		};
-		String[] s2 = {
-				"B_Pocket", "L_Pocket", "R_Pocket", "B_packPocket"
-		};
-		setCapsValue(entityCaps, caps_showPartsRenemeMap, s1, s2);
-	}	@Override
-	public void showModelSettingReflects(ModchuModel_IEntityCaps entityCaps) {
-		super.showModelSettingReflects(entityCaps);
-		setCapsValue(entityCaps, caps_visible, bipedHeadwear, false);
-		setCapsValue(entityCaps, caps_visible, ChignonB, false);
-		setCapsValue(entityCaps, caps_visible, Tail, false);
-	}	@Override
 	public void actionPartsAddChild() {
 		super.actionPartsAddChild();
 		setCapsValue(null, caps_visible, rightHandPlus, true);

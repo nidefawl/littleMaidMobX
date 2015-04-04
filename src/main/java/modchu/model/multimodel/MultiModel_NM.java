@@ -324,14 +324,5 @@ import modchu.model.multimodel.base.MultiModel_SR2;public class MultiModel_NM 
 		}		//float f8 = mh_sin(f3 * 0.067F) * 0.05F - f7;
 		//float f9 = ((float)Math.PI * 2F / 9F);
 		sensor.setRotateAngle(mh_sin(f3 * 0.067F) * 0.05F + f7, mh_cos(f3 * 0.09F) * 0.5F, mh_sin(f3 * 0.09F) * 0.2F);
-	}	@Override
-	public void defaultPartsSettingAfter(ModchuModel_IEntityCaps entityCaps) {
-		int i = Modchu_EntityCapsHelper.getCapsValueInt(this, entityCaps, caps_armorType);
-		//RightArm2 Default off
-		setCapsValue(entityCaps, caps_defaultShowPartsMap, "RightArm2", i, false);
-		//LeftArm2 Default off
-		setCapsValue(entityCaps, caps_defaultShowPartsMap, "LeftArm2", i, false);
-		//Zukin Default off
-		setCapsValue(entityCaps, caps_defaultShowPartsMap, "Zukin", i, false);
 	}
 }

@@ -448,13 +448,6 @@ import modchu.model.multimodel.base.MultiModel_SR2;public class MultiModel_ch 
 	}	@Override
 	public void defaultSkirtFloatsAddChild() {
 	}	@Override
-	public void defaultPartsSettingBefore(ModchuModel_IEntityCaps entityCaps) {
-		super.defaultPartsSettingBefore(entityCaps);
-		String[] s = {
-				"Cheek_R", "Cheek_L"
-		};
-		setCapsValue(entityCaps, caps_showPartsHideList, (Object) s);
-	}	@Override
 	public void setLivingAnimationsLM(ModchuModel_IEntityCaps entityCaps, float f, float f1, float f2) {
 		super.setLivingAnimationsLM(entityCaps, f, f1, f2);
 		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isLookSuger)) {

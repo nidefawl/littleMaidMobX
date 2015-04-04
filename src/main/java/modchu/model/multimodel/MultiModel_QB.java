@@ -380,16 +380,6 @@ import modchu.model.multimodel.base.MultiModel;public class MultiModel_QB exte
 			}
 		}
 	}	@Override
-	public void defaultPartsSettingBefore(ModchuModel_IEntityCaps entityCaps) {
-		super.defaultPartsSettingBefore(entityCaps);
-		String[] s1 = {
-				"rightLegbottom", "leftLegbottom", "rightearhair", "leftearhair"
-		};
-		String[] s2 = {
-				"rightLeg_b", "leftLeg_b", "r_earhair", "l_earhair"
-		};
-		setCapsValue(entityCaps, caps_showPartsRenemeMap, s1, s2);
-	}	@Override
 	public void actionInit1(ModchuModel_IEntityCaps entityCaps) {
 		entityCaps.setCapsValue(caps_freeVariable, "sneakBan", true);
 		entityCaps.setCapsValue(caps_freeVariable, "waitBan", true);

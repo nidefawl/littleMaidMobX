@@ -164,13 +164,6 @@ import modchu.model.multimodel.base.MultiModel;public class MultiModel_Elsie e
 		//bipedHeadwear.rotateAngleX = -(mh_sin(f2 * 0.09F) * 0.03F + 0.03F);
 		setRotationAnglesGulliverAfter(f, f1, f2, f3, f4, f5, entityCaps);
 	}	@Override
-	public void defaultPartsSettingBefore(ModchuModel_IEntityCaps entityCaps) {
-		super.defaultPartsSettingBefore(entityCaps);
-		String[] s = {
-				"bipedHeadwear", "ChignonB", "Tail", "d"
-		};
-		setCapsValue(entityCaps, caps_showPartsHideList, (Object) s);
-	}	@Override
 	public void defaultAddChildSetting() {
 		super.defaultAddChildSetting();
 		bipedHead.removeChild(bipedHeadwear);

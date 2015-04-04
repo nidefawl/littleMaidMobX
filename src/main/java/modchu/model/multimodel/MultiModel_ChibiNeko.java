@@ -539,16 +539,6 @@ import modchu.model.multimodel.base.MultiModel_SR2;public class MultiModel_Chi
 		Skirt215.rotateAngleZ += motionY;
 		Skirt216.rotateAngleZ += motionY;
 	}	@Override
-	public void defaultPartsSettingBefore(ModchuModel_IEntityCaps entityCaps) {
-		super.defaultPartsSettingBefore(entityCaps);
-		String[] s = {
-				"Skirt21", "Skirt22", "Skirt23", "Skirt24", "Skirt25",
-				"Skirt26", "Skirt27", "Skirt27", "Skirt28", "Skirt29",
-				"Skirt210", "Skirt211", "Skirt212", "Skirt213", "Skirt214",
-				"Skirt215", "Skirt216"
-		};
-		setCapsValue(entityCaps, caps_showPartsHideList, (Object) s);
-	}	@Override
 	public void action1(float f, float f1, float f2, float f3, float f4, float f5, ModchuModel_IEntityCaps entityCaps) {
 		super.action1(f, f1, f2, f3, f4, f5, entityCaps);
 		rightArm2.rotationPointX = 1.0F - (1.0F * Scale);

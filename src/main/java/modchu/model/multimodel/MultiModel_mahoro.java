@@ -109,13 +109,6 @@ import modchu.model.multimodel.base.MultiModel;public class MultiModel_mahoro 
 			}
 		}
 	}	@Override
-	public void defaultPartsSettingBefore(ModchuModel_IEntityCaps entityCaps) {
-		super.defaultPartsSettingBefore(entityCaps);
-		String[] s = {
-				"SideTailR", "SideTailL", "Tail"
-		};
-		setCapsValue(entityCaps, caps_showPartsHideList, (Object) s);
-	}	@Override
 	public String getUsingTexture() {
 		return null;
 	}

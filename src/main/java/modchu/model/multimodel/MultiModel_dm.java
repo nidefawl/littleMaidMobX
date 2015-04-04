@@ -285,14 +285,7 @@ import modchu.model.multimodel.base.MultiModel_SR2;public class MultiModel_dm 
 			Cheek_R.setVisible(false);
 			Cheek_L.setVisible(false);
 		}
-	}	@Override	public void setDefaultPause(float f, float f1, float f2, float f3, float f4, float f5, ModchuModel_IEntityCaps entityCaps) {		super.setDefaultPause(f, f1, f2, f3, f4, f5, entityCaps);		Breast1.setRotationPoint(0.0F, -2.5F, -2F);	}	@Override
-	public void defaultPartsSettingBefore(ModchuModel_IEntityCaps entityCaps) {
-		super.defaultPartsSettingBefore(entityCaps);
-		String[] s = {
-		"Cheek_R", "Cheek_L"
-		};
-		setCapsValue(entityCaps, caps_showPartsHideList, (Object) s);
-	}/*	@Override
+	}	@Override	public void setDefaultPause(float f, float f1, float f2, float f3, float f4, float f5, ModchuModel_IEntityCaps entityCaps) {		super.setDefaultPause(f, f1, f2, f3, f4, f5, entityCaps);		Breast1.setRotationPoint(0.0F, -2.5F, -2F);	}/*	@Override
 	public void motionModelCorrectionAfter(float f, float f1, float f2, float f3, float f4, float f5, ModchuModel_IEntityCaps entityCaps) {
 		super.motionModelCorrectionAfter(f, f1, f2, f3, f4, f5, entityCaps);
 		//rightHand.rotationPointY = 0.0F;
