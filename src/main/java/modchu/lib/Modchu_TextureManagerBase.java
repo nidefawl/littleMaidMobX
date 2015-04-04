@@ -1,10 +1,8 @@
 package modchu.lib;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;
@@ -14,7 +12,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Random;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,7 +20,6 @@ import java.util.zip.ZipInputStream;
 
 import littleMaidMobX.LittleMaidMobX;
 import modchu.lib.characteristic.Modchu_AS;
-import modchu.lib.characteristic.Modchu_HelperBase;
 import modchu.lib.characteristic.Modchu_TextureBoxBase;
 import modchu.lib.characteristic.Modchu_TextureBoxServer;
 import modchu.model.multimodel.MultiModel_Angel;
@@ -1790,7 +1786,6 @@ public class Modchu_TextureManagerBase {
 				Constructor<MultiModelBaseBiped> cm = lclass.getConstructor(float.class);
 				mlm[0] = cm.newInstance(0.0F);
 				float[] lsize = mlm[0].getArmorModelsSize();
-				//Modchu_Debug.mDebug("getModelClass lclass="+lclass+" lsize[0]="+lsize[0]+" lsize[1]="+lsize[1]);
 				mlm[1] = cm.newInstance(lsize[0]);
 				mlm[2] = cm.newInstance(lsize[1]);
 				modelMap.put(name, mlm);
