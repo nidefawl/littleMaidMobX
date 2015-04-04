@@ -80,11 +80,11 @@ public class TextureManager {
 	/**
 	 * ローカルで保持しているモデルのリスト
 	 */
-	protected Map < String, ModelMultiBase[] > modelMap = new TreeMap < String, ModelMultiBase[] > ();
+	public Map < String, ModelMultiBase[] > modelMap = new TreeMap < String, ModelMultiBase[] > ();
 	/**
 	 * ローカルで保持しているテクスチャパック
 	 */
-	private List < TextureBox > textures = new ArrayList < TextureBox > ();
+	public List < TextureBox > textures = new ArrayList < TextureBox > ();
 	/**
 	 * サーバー側での管理番号を識別するのに使う、クライアント用。
 	 */
@@ -97,7 +97,7 @@ public class TextureManager {
 	 * Entity毎にデフォルトテクスチャを参照。
 	 * 構築方法はEntityListを参照のこと。
 	 */
-	protected Map < Class, TextureBox > defaultTextures = new HashMap < Class, TextureBox > ();
+	public Map < Class, TextureBox > defaultTextures = new HashMap < Class, TextureBox > ();
 
 	/**
 	 * クライアント側で使う

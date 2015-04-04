@@ -11,6 +11,10 @@ import littleMaidMobX.network.NetConstants;
 import littleMaidMobX.network.Message;
 import littleMaidMobX.network.Network;
 import littleMaidMobX.textures.TextureManager;
+import modchu.lib.Modchu_ASBase;
+import modchu.lib.Modchu_Reflect;
+import modchu.lib.characteristic.Modchu_AS;
+import modchu.model.ModchuModel_Main;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.player.EntityPlayer;
@@ -99,12 +103,12 @@ public class LittleMaidMobX {
 	
 	public static void Debug(String pText, Object... pData) {
 		if (isDebugMessage) {
-			System.out.println(String.format("MMMLib-" + pText, pData));
+//			System.out.println(String.format("MMMLib-" + pText, pData));
 		}
 	}
 	public static void Debug(boolean isRemote, String pText, Object... pData) {
 		if (isDebugMessage) {
-			System.out.println(String.format("["+(isRemote? "Client":"Server")+"]MMMLib-" + pText, pData));
+//			System.out.println(String.format("["+(isRemote? "Client":"Server")+"]MMMLib-" + pText, pData));
 		}
 	}
 	
@@ -117,6 +121,10 @@ public class LittleMaidMobX {
 	public static LittleMaidMobX instance;
 	
 	public static ItemSpawnEgg spawnEgg;
+
+	public static boolean isServer = false;
+
+	public static boolean isForge = true;
 
 	public String getName() {
 		return "littleMaidMobX";
@@ -135,6 +143,8 @@ public class LittleMaidMobX {
 	@EventHandler
 	public void PreInit(FMLPreInitializationEvent evt)
 	{
+		Modchu_AS.instanceCheck();
+		Modchu_Reflect.initNameMap();
 		{
 
 			File configFile = evt.getSuggestedConfigurationFile();
@@ -270,6 +280,7 @@ public class LittleMaidMobX {
 		
 		// IFFのロード
 		IFF.loadIFFs();
+		ModchuModel_Main.load();
 	}
 	
 
@@ -325,5 +336,13 @@ public class LittleMaidMobX {
 	public static void sendToClient(EntityPlayer player, byte[] ldata)
 	{
 		Network.sendPacketToPlayer(1, player, ldata);
+	}
+
+	public static String getModelName(String t, String t1) {
+		int i = t != null && !t.isEmpty() ? t.lastIndexOf(t1) : -1;
+		int i1 = i > -1 ? i + t1.length() : -1;
+		if (i1 > -1)
+			return t.length() > i1 ? t.substring(i1) : null;
+		return t;
 	}
 }

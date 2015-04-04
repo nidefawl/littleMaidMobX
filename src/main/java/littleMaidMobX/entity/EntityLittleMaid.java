@@ -264,17 +264,6 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 		mstatWorkingCount = new Counter(11, 10, -10);
 		
 		// モデルレンダリング用のフラグ獲得用ヘルパー関数
-<<<<<<< HEAD:src/main/java/littleMaidMobX/LMM_EntityLittleMaid.java
-		maidCaps = new LMM_EntityCaps(this);
-		if (!par1World.isRemote) {
-			// 形態形成場
-			textureData = new MMM_TextureData(this, maidCaps);
-			textureData.setColor(12);
-			MMM_TextureBox ltb[] = new MMM_TextureBox[2];
-			ltb[0] = ltb[1] = MMM_TextureManager.instance.getDefaultTexture(this);
-			setTexturePackName(ltb);
-		}
-=======
 		maidCaps = new EntityCapsMaid(this);
 		
 		// 形態形成場
@@ -283,7 +272,6 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 		TextureBox ltb[] = new TextureBox[2];
 		ltb[0] = ltb[1] = TextureManager.instance.getDefaultTexture(this);
 		setTexturePackName(ltb);
->>>>>>> 8f46d59abdedd0eec4940c78850f94392c207af2:src/main/java/littleMaidMobX/entity/EntityLittleMaid.java
 		
 		entityIdFactor = (float)(getEntityId() * 70);
 		// 腕振り
