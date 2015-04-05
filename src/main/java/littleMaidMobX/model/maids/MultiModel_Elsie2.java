@@ -1,4 +1,4 @@
-package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.modchu.ModelModchuBaseMulti;import littleMaidMobX.render.model.ModelRenderer;import modchu.lib.Modchu_EntityCapsHelper;import modchu.lib.characteristic.Modchu_AS;public class MultiModel_Elsie2 extends ModelModchuBaseMulti {	public ModelRenderer RightSkirt;
+package littleMaidMobX.model.maids;import littleMaidMobX.Helper;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.model.modchu.ModelModchuBaseMulti;import littleMaidMobX.render.model.ModelRenderer;public class MultiModel_Elsie2 extends ModelModchuBaseMulti {	public ModelRenderer RightSkirt;
 	public ModelRenderer LeftSkirt;
 	public ModelRenderer bipedHeadwearB;
 	public ModelRenderer SkirtTopL;
@@ -123,13 +123,13 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 		bipedLeftLeg.rotationPointY = 8.0F;		bipedRightArm.rotationPointY += 3.0F;
 		bipedLeftArm.rotationPointY += 3.0F;
 		bipedBody.rotationPointZ = 0.0F;
-		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isRiding)) {
+		if (ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isRiding)) {
 			RightSkirt.rotationPointY =
 					LeftSkirt.rotationPointY = -2.4F;
 		} else {
 //			setRotationAnglesGulliverBefore(f, f1, f2, f3, f4, f5, entityCaps);
 		}
-		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isSneak)) {
+		if (ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isSneak)) {
 			bipedHead.rotationPointY += 1.0F;
 			bipedBody.rotationPointY += 1.0F;
 			bipedBody.rotationPointZ -= 0.1F;
@@ -139,11 +139,11 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 			//bipedLeftLeg.rotationPointY -= 1.0F;
 			//Skirt.rotationPointZ = 4.0F;
 		}
-		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isWait) && !Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_aimedBow)) {
-			bipedRightArm.rotateAngleX = Modchu_AS.getFloat(Modchu_AS.mathHelperSin, f2 * 0.067F) * 0.05F - 0.7F;
+		if (ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isWait) && !ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_aimedBow)) {
+			bipedRightArm.rotateAngleX = Helper.sin(f2 * 0.067F) * 0.05F - 0.7F;
 			bipedRightArm.rotateAngleY = 0.0F;
 			bipedRightArm.rotateAngleZ = -0.4F;
-			bipedLeftArm.rotateAngleX = Modchu_AS.getFloat(Modchu_AS.mathHelperSin, f2 * 0.067F) * 0.05F - 0.7F;
+			bipedLeftArm.rotateAngleX = Helper.sin(f2 * 0.067F) * 0.05F - 0.7F;
 			bipedLeftArm.rotateAngleY = 0.0F;
 			bipedLeftArm.rotateAngleZ = 0.4F;
 		}

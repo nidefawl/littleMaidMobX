@@ -848,6 +848,8 @@ public class ModelRenderer {
 			this.childModels.clear();
 	}
 
+
+
 //
 //	public int getBoxSizeX() {
 //		return getboxSizeX(0);

@@ -1,6 +1,5 @@
-package modchu.lib;
+package littleMaidMobX;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.InputStream;
 import java.lang.reflect.Array;
@@ -13,9 +12,7 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.google.common.collect.Multimap;
-
-public class Modchu_CastHelperBase {
+public class CastHelper {
 
 	public static String String(Object o) {
 		return o != null 
@@ -37,7 +34,7 @@ public class Modchu_CastHelperBase {
 			return b ? i1 : i2;
 		}
 		if (o instanceof Integer) return (Integer) o;
-		if (Modchu_Main.integerCheck(""+o)) return Integer.valueOf(""+o);
+		if (integerCheck(""+o)) return Integer.valueOf(""+o);
 		return i;
 	}
 
@@ -52,7 +49,7 @@ public class Modchu_CastHelperBase {
 			return (short) (b ? 2 : 1);
 		}
 		if (o instanceof Short) return (Short) o;
-		if (Modchu_Main.shortCheck(""+o)) return Short.valueOf(""+o);
+		if (shortCheck(""+o)) return Short.valueOf(""+o);
 		return sh;
 	}
 
@@ -149,10 +146,10 @@ public class Modchu_CastHelperBase {
 				&& o instanceof Map[] ? (Map[]) o : null;
 	}
 
-	public static Multimap[] MultimapArray(Object o) {
-		return o != null 
-				&& o instanceof Multimap[] ? (Multimap[]) o : null;
-	}
+//	public static Multimap[] MultimapArray(Object o) {
+//		return o != null 
+//				&& o instanceof Multimap[] ? (Multimap[]) o : null;
+//	}
 
 	public static IntBuffer[] IntBufferArray(Object o) {
 		return o != null 
@@ -167,11 +164,6 @@ public class Modchu_CastHelperBase {
 	public static UUID[] UUIDArray(Object o) {
 		return o != null 
 				&& o instanceof UUID[] ? (UUID[]) o : null;
-	}
-
-	public static BufferedImage[] BufferedImageArray(Object o) {
-		return o != null 
-				&& o instanceof BufferedImage[] ? (BufferedImage[]) o : null;
 	}
 
 	public static Object[] ObjectArray(Object o) {
@@ -221,7 +213,6 @@ public class Modchu_CastHelperBase {
 		if (c1 == byte.class) return Byte(o);
 		if (c1 == boolean.class) return Boolean(o);
 		if (c1 == long.class) return Long(o);
-		if (c1 == Class.class) return Class(o);
 		if (c1 == Short.class) return Short(o);
 		if (c1 == String.class) return String(o);
 		if (c1 == Enum.class) return Enum(o);
@@ -232,11 +223,10 @@ public class Modchu_CastHelperBase {
 		if (c1 == ConcurrentHashMap.class) return ConcurrentHashMap(o);
 		if (c1 == HashMap.class) return HashMap(o);
 		if (c1 == Map.class) return Map(o);
-		if (c1 == Multimap.class) return Multimap(o);
+//		if (c1 == Multimap.class) return Multimap(o);
 		if (c1 == IntBuffer.class) return IntBuffer(o);
 		if (c1 == InputStream.class) return InputStream(o);
 		if (c1 == UUID.class) return UUID(o);
-		if (c1 == BufferedImage.class) return BufferedImage(o);
 		if (c1 == Object[].class) return ObjectArray(o);
 		if (c1 == int[].class) return IntArray(o);
 		if (c1 == float[].class) return FloatArray(o);
@@ -244,7 +234,6 @@ public class Modchu_CastHelperBase {
 		if (c1 == byte[].class) return ByteArray(o);
 		if (c1 == boolean[].class) return BooleanArray(o);
 		if (c1 == long[].class) return LongArray(o);
-		if (c1 == Class[].class) return ClassArray(o);
 		if (c1 == Short[].class) return ShortArray(o);
 		if (c1 == String[].class) return StringArray(o);
 		if (c1 == Enum[].class) return EnumArray(o);
@@ -255,11 +244,10 @@ public class Modchu_CastHelperBase {
 		if (c1 == ConcurrentHashMap[].class) return ConcurrentHashMapArray(o);
 		if (c1 == HashMap[].class) return HashMapArray(o);
 		if (c1 == Map[].class) return MapArray(o);
-		if (c1 == Multimap[].class) return MultimapArray(o);
+//		if (c1 == Multimap[].class) return MultimapArray(o);
 		if (c1 == IntBuffer[].class) return IntBufferArray(o);
 		if (c1 == InputStream[].class) return InputStreamArray(o);
 		if (c1 == UUID[].class) return UUIDArray(o);
-		if (c1 == BufferedImage[].class) return BufferedImageArray(o);
 		return null;
 	}
 
@@ -278,7 +266,7 @@ public class Modchu_CastHelperBase {
 			return (byte) (b ? by1 : by2);
 		}
 		if (o instanceof Byte) return (Byte) o;
-		if (Modchu_Main.byteCheck(""+o)) return Byte.valueOf(""+o);
+		if (byteCheck(""+o)) return Byte.valueOf(""+o);
 		return by;
 	}
 
@@ -293,7 +281,7 @@ public class Modchu_CastHelperBase {
 			return b ? 2 : 1;
 		}
 		if (o instanceof Float) return (Float) o;
-		if (Modchu_Main.floatCheck(""+o)) return Float.valueOf(""+o);
+		if (floatCheck(""+o)) return Float.valueOf(""+o);
 		return f;
 	}
 
@@ -361,10 +349,10 @@ public class Modchu_CastHelperBase {
 				&& o instanceof Map ? (Map) o : null;
 	}
 
-	public static Multimap Multimap(Object o) {
-		return o != null 
-				&& o instanceof Multimap ? (Multimap) o : null;
-	}
+//	public static Multimap Multimap(Object o) {
+//		return o != null 
+//				&& o instanceof Multimap ? (Multimap) o : null;
+//	}
 
 	public static IntBuffer IntBuffer(Object o) {
 		return o != null 
@@ -381,33 +369,48 @@ public class Modchu_CastHelperBase {
 				&& o instanceof UUID ? (UUID) o : null;
 	}
 
-	public static BufferedImage BufferedImage(Object o) {
-		return o != null 
-				&& o instanceof BufferedImage ? (BufferedImage) o : null;
+	public static boolean integerCheck(String s) {
+		try {
+			Integer.valueOf(s);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
-	public static Class Class(Object o) {
-		if (o != null) {
-			if (o instanceof Class) return (Class) o;
-			if (o instanceof String) return Modchu_Reflect.loadClass((String) o);
+	public static boolean floatCheck(String s) {
+		try {
+			Float.valueOf(s);
+			return true;
+		} catch (Exception e) {
+			return false;
 		}
-		return null;
 	}
 
-	public static Class[] ClassArray(Object o) {
-		if (o != null) {
-			if (o instanceof Class[]) return (Class[]) o;
-			if (o instanceof String[]) {
-				String[] s = (String[]) o;
-				Class[] c = new Class[s.length];
-				for (int i = 0; i < s.length; i++) {
-					c[i] = Modchu_Reflect.loadClass(s[i]);
-				}
-				return c;
-			}
-			if (o instanceof Class) return new Class[]{ (Class) o };
-			if (o instanceof String) return new Class[]{ Modchu_Reflect.loadClass((String) o) };
+	public static boolean doubleCheck(String s) {
+		try {
+			Double.valueOf(s);
+			return true;
+		} catch (Exception e) {
+			return false;
 		}
-		return null;
+	}
+
+	public static boolean byteCheck(String s) {
+		try {
+			Byte.valueOf(s);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	public static boolean shortCheck(String s) {
+		try {
+			Short.valueOf(s);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 }

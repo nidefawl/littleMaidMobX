@@ -1,4 +1,4 @@
-package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.modchu.ModelModchuBaseSR2;import littleMaidMobX.render.model.ModelRenderer;import modchu.lib.Modchu_EntityCapsHelper;import modchu.lib.Modchu_Reflect;import modchu.lib.characteristic.Modchu_AS;import modchu.model.multimodel.base.MultiModel_SR2;public class MultiModel_NM extends ModelModchuBaseSR2 {
+package littleMaidMobX.model.maids;import littleMaidMobX.Helper;import littleMaidMobX.entity.EntityLittleMaid;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.model.modchu.ModelModchuBaseSR2;import littleMaidMobX.render.model.ModelRenderer;public class MultiModel_NM extends ModelModchuBaseSR2 {
 	public ModelRenderer hairR;
 	public ModelRenderer hairL;
 	public ModelRenderer Cachusya;
@@ -192,7 +192,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 		if (isAfterInit) afterInit(f, f1);
 	}	@Override
 	public void skirtFloatsInit(float f, float f1) {
-		if (Modchu_EntityCapsHelper.getCapsValueInt(this, null, caps_skirtFloats) < 2) return;
+		if (ModelCapsHelper.getCapsValueInt(this, null, caps_skirtFloats) < 2) return;
 		textureWidth = 64;
 		textureHeight = 64;
 		super.skirtFloatsInit(f, f1);
@@ -235,13 +235,13 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 		super.setLivingAnimationsLM(entityCaps, f, f1, f2);
 		Object entityliving = entityCaps.getCapsValue(entityCaps.caps_Entity);
 		if (entityliving != null); else return;
-		int ticksExisted = Modchu_AS.getInt(Modchu_AS.entityTicksExisted, entityliving);
-		float f3 = (float)ticksExisted + f2 + Modchu_EntityCapsHelper.getCapsValueFloat(this, entityCaps, caps_entityIdFactor);
-		if (!Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_aimedBow)) {
-			boolean isWorkingDelay = Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isWorkingDelay);
+		int ticksExisted = Helper.getEntityTicksExisted(entityliving);
+		float f3 = (float)ticksExisted + f2 + ModelCapsHelper.getCapsValueFloat(this, entityCaps, caps_entityIdFactor);
+		if (!ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_aimedBow)) {
+			boolean isWorkingDelay = ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isWorkingDelay);
 			if (isWorkingDelay) {
 //-@-125
-				int maidMode = (Integer) Modchu_Reflect.getFieldObject("LMM_EntityLittleMaid", "getMaidModeInt", entityliving);
+				int maidMode = 0;				if (entityliving instanceof EntityLittleMaid) {					maidMode = ((EntityLittleMaid)entityliving).getMaidModeInt();				}
 				int i = 0x0080;
 				int i1 = 0x0021;
 				int i2 = 0x0083;
@@ -306,13 +306,13 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 			}
 		}
 		float f7 = 0.0F;
-		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isLookSuger)) {
+		if (ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isLookSuger)) {
 			f3 *= 8F;
 			f7 = -0.2F;
 			Cheek_R.setVisible(true);
 			Cheek_L.setVisible(true);
 		} else {
-			f7 = (1.0F - Modchu_EntityCapsHelper.getCapsValueInt(this, entityCaps, caps_health) / 20F) * 0.5F;
+			f7 = (1.0F - ModelCapsHelper.getCapsValueInt(this, entityCaps, caps_health) / 20F) * 0.5F;
 			Cheek_R.setVisible(false);
 			Cheek_L.setVisible(false);
 		}		//float f8 = mh_sin(f3 * 0.067F) * 0.05F - f7;

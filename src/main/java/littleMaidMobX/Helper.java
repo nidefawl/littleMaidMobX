@@ -9,6 +9,14 @@ import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockDoublePlant;
+import net.minecraft.block.BlockFlower;
+import net.minecraft.block.BlockLeavesBase;
+import net.minecraft.block.BlockMushroom;
+import net.minecraft.block.BlockPumpkin;
+import net.minecraft.block.BlockSapling;
+import net.minecraft.block.BlockTallGrass;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -52,7 +60,7 @@ public class Helper {
 	protected static Map<String, Integer> entityIDList = new HashMap<String, Integer>();
 	
 	static {
-		// TODO 必要ない？
+		// TODO å¿…è¦�ã�ªã�„ï¼Ÿ
 //		fpackage = ModLoader.class.getPackage();
 //		packegeBase = "";//fpackage == null ? "" : fpackage.getName().concat(".");
 
@@ -85,21 +93,21 @@ public class Helper {
 	}
 
 	/**
-	 * 現在の実行環境がローカルかどうかを判定する。
+	 * ç�¾åœ¨ã�®å®Ÿè¡Œç’°å¢ƒã�Œãƒ­ãƒ¼ã‚«ãƒ«ã�‹ã�©ã�†ã�‹ã‚’åˆ¤å®šã�™ã‚‹ã€‚
 	 */
 	public static boolean isLocalPlay() {
 		return isClient && mc.isIntegratedServerRunning();
 	}
 
 	/**
-	 * マルチ対応用。
-	 * ItemStackに情報更新を行うと、サーバー側との差異からSlotのアップデートが行われる。
-	 * その際、UsingItemの更新処理が行われないため違うアイテムに持替えられたと判定される。
-	 * ここでは比較用に使われるスタックリストを強制的に書換える事により対応した。
+	 * ãƒžãƒ«ãƒ�å¯¾å¿œç”¨ã€‚
+	 * ItemStackã�«æƒ…å ±æ›´æ–°ã‚’è¡Œã�†ã�¨ã€�ã‚µãƒ¼ãƒ�ãƒ¼å�´ã�¨ã�®å·®ç•°ã�‹ã‚‰Slotã�®ã‚¢ãƒƒãƒ—ãƒ‡ãƒ¼ãƒˆã�Œè¡Œã‚�ã‚Œã‚‹ã€‚
+	 * ã��ã�®éš›ã€�UsingItemã�®æ›´æ–°å‡¦ç�†ã�Œè¡Œã‚�ã‚Œã�ªã�„ã�Ÿã‚�é�•ã�†ã‚¢ã‚¤ãƒ†ãƒ ã�«æŒ�æ›¿ã�ˆã‚‰ã‚Œã�Ÿã�¨åˆ¤å®šã�•ã‚Œã‚‹ã€‚
+	 * ã�“ã�“ã�§ã�¯æ¯”è¼ƒç”¨ã�«ä½¿ã‚�ã‚Œã‚‹ã‚¹ã‚¿ãƒƒã‚¯ãƒªã‚¹ãƒˆã‚’å¼·åˆ¶çš„ã�«æ›¸æ�›ã�ˆã‚‹äº‹ã�«ã‚ˆã‚Šå¯¾å¿œã�—ã�Ÿã€‚
 	 */
 	public static void updateCheckinghSlot(Entity pEntity, ItemStack pItemstack) {
 		if (pEntity instanceof EntityPlayerMP) {
-			// サーバー側でのみ処理
+			// ã‚µãƒ¼ãƒ�ãƒ¼å�´ã�§ã�®ã�¿å‡¦ç�†
 			EntityPlayerMP lep = (EntityPlayerMP)pEntity;
 			Container lctr = lep.openContainer;
 			for (int li = 0; li < lctr.inventorySlots.size(); li++) {
@@ -118,10 +126,10 @@ public class Helper {
 	}
 	
 	/**
-	 * Forge用クラス獲得。
+	 * Forgeç”¨ã‚¯ãƒ©ã‚¹ç�²å¾—ã€‚
 	 */
 	/*
-	使用箇所無し 削除
+	ä½¿ç”¨ç®‡æ‰€ç„¡ã�— å‰Šé™¤
 	public static Class getForgeClass(BaseMod pMod, String pName) {
 		if (isForge) {
 			pName = pName.concat("_Forge");
@@ -131,7 +139,7 @@ public class Helper {
 	*/
 
 	/**
-	 * 名前からクラスを獲得する
+	 * å��å‰�ã�‹ã‚‰ã‚¯ãƒ©ã‚¹ã‚’ç�²å¾—ã�™ã‚‹
 	 */
 	public static Class getNameOfClass(String pName) {
 		if (fpackage != null) {
@@ -148,7 +156,7 @@ public class Helper {
 	}
 
 	/**
-	 * 送信用データのセット
+	 * é€�ä¿¡ç”¨ãƒ‡ãƒ¼ã‚¿ã�®ã‚»ãƒƒãƒˆ
 	 */
 	public static void setValue(byte[] pData, int pIndex, int pVal, int pSize) {
 		for (int li = 0; li < pSize; li++) {
@@ -200,9 +208,9 @@ public class Helper {
 		}
 	}
 
-	// 状況判断要関数群
+	// çŠ¶æ³�åˆ¤æ–­è¦�é–¢æ•°ç¾¤
 	public static boolean canBlockBeSeen(Entity pEntity, int x, int y, int z, boolean toTop, boolean do1, boolean do2) {
-		// ブロックの可視判定
+		// ãƒ–ãƒ­ãƒƒã‚¯ã�®å�¯è¦–åˆ¤å®š
 		Vec3 vec3d = Vec3.createVectorHelper(pEntity.posX, pEntity.posY + pEntity.getEyeHeight(), pEntity.posZ);
 		Vec3 vec3d1 = Vec3.createVectorHelper((double)x + 0.5D, (double)y + (toTop ? 0.9D : 0.5D), (double)z + 0.5D);
 		
@@ -221,10 +229,10 @@ public class Helper {
 	}
 
 	public static boolean setPathToTile(EntityLiving pEntity, TileEntity pTarget, boolean flag) {
-		// Tileまでのパスを作る
+		// Tileã�¾ã�§ã�®ãƒ‘ã‚¹ã‚’ä½œã‚‹
 		PathNavigate lpn = pEntity.getNavigator();
 		float lspeed = 1.0F;
-		// 向きに合わせて距離を調整
+		// å�‘ã��ã�«å�ˆã‚�ã�›ã�¦è·�é›¢ã‚’èª¿æ•´
 		int i = (pTarget.yCoord == MathHelper.floor_double(pEntity.posY) && flag) ? 2 : 1;
 		switch (pEntity.worldObj.getBlockMetadata(pTarget.xCoord, pTarget.yCoord, pTarget.zCoord)) {
 		case 3:
@@ -241,20 +249,20 @@ public class Helper {
 	}
 
 	/**
-	 * Modloader環境下で空いているEntityIDを返す。
-	 * 有効な値を獲得できなければ-1を返す。
+	 * Modloaderç’°å¢ƒä¸‹ã�§ç©ºã�„ã�¦ã�„ã‚‹EntityIDã‚’è¿”ã�™ã€‚
+	 * æœ‰åŠ¹ã�ªå€¤ã‚’ç�²å¾—ã�§ã��ã�ªã�‘ã‚Œã�°-1ã‚’è¿”ã�™ã€‚
 	 */
 	/*
 	private static int getNextEntityID(boolean isLiving) {
 		if (isLiving) {
-			// 生物用
+			// ç”Ÿç‰©ç”¨
 			for (int li = 1; li < 256; li++) {
 				if (EntityList.getClassFromID(li) == null) {
 					return li;
 				}
 			}
 		} else {
-			// 物用
+			// ç‰©ç”¨
 			for (int li = MMMLib.cfg_startVehicleEntityID; li < MMMLib.cfg_startVehicleEntityID + 2048; li++) {
 				if (EntityList.getClassFromID(li) == null) {
 					return li;
@@ -266,12 +274,12 @@ public class Helper {
 	*/
 
 	/**
-	 * Entityを登録する。
-	 * RML、Forge両対応。
+	 * Entityã‚’ç™»éŒ²ã�™ã‚‹ã€‚
+	 * RMLã€�Forgeä¸¡å¯¾å¿œã€‚
 	 * @param entityclass
 	 * @param entityName
 	 * @param defaultId
-	 * 0 : オートアサイン
+	 * 0 : ã‚ªãƒ¼ãƒˆã‚¢ã‚µã‚¤ãƒ³
 	 * @param mod
 	 * @param uniqueModeName
 	 * @param trackingRange
@@ -288,7 +296,7 @@ public class Helper {
 		if (isForge) {
 			try {
 				Method lmethod;
-				// EntityIDの獲得
+				// EntityIDã�®ç�²å¾—
 				lmethod = entityRegistry.getMethod("findGlobalUniqueEntityId");
 				defaultId = (Integer)lmethod.invoke(null);
 				
@@ -301,7 +309,7 @@ public class Helper {
 							Class.class, String.class, int.class, int.class, int.class);
 					lmethod.invoke(null, entityclass, entityName, defaultId, pEggColor1, pEggColor2);
 				}
-				// EntityListへの登録は適当な数字でよい。
+				// EntityListã�¸ã�®ç™»éŒ²ã�¯é�©å½“ã�ªæ•°å­—ã�§ã‚ˆã�„ã€‚
 				registerModEntity.invoke(
 						null, entityclass, entityName, lid,
 						mod, trackingRange, updateFrequency, sendVelocityUpdate);
@@ -309,7 +317,7 @@ public class Helper {
 				e.printStackTrace();
 			}
 		} else {
-			// EntityListへの登録は
+			// EntityListã�¸ã�®ç™»éŒ²ã�¯
 			if (defaultId == 0) {
 				defaultId = getNextEntityID(entityclass.isAssignableFrom(EntityLivingBase.class));
 			}
@@ -340,22 +348,22 @@ public class Helper {
 	}
 
 	/**
-	 * Entityを返す。
+	 * Entityã‚’è¿”ã�™ã€‚
 	 */
 	public static Entity getEntity(byte[] pData, int pIndex, World pWorld) {
 		return pWorld.getEntityByID(Helper.getInt(pData, pIndex));
 	}
 
 	/**
-	 * 変数「avatar」から値を取り出し戻り値として返す。
-	 * avatarが存在しない場合は元の値を返す。
-	 * avatarはEntityLiving互換。
+	 * å¤‰æ•°ã€Œavatarã€�ã�‹ã‚‰å€¤ã‚’å�–ã‚Šå‡ºã�—æˆ»ã‚Šå€¤ã�¨ã�—ã�¦è¿”ã�™ã€‚
+	 * avatarã�Œå­˜åœ¨ã�—ã�ªã�„å ´å�ˆã�¯å…ƒã�®å€¤ã‚’è¿”ã�™ã€‚
+	 * avatarã�¯EntityLivingäº’æ�›ã€‚
 	 */
 	public static Entity getAvatarEntity(Entity pEntity){
-		// littleMaid用コードここから
+		// littleMaidç”¨ã‚³ãƒ¼ãƒ‰ã�“ã�“ã�‹ã‚‰
 		if (pEntity == null) return null;
 		try {
-			// 射手の情報をEntityLittleMaidAvatarからEntityLittleMaidへ置き換える
+			// å°„æ‰‹ã�®æƒ…å ±ã‚’EntityLittleMaidAvatarã�‹ã‚‰EntityLittleMaidã�¸ç½®ã��æ�›ã�ˆã‚‹
 			Field field = pEntity.getClass().getField("avatar");
 			pEntity = (EntityLivingBase)field.get(pEntity);
 		} catch (NoSuchFieldException e) {
@@ -364,17 +372,17 @@ public class Helper {
 		} catch (Error e) {
 			e.printStackTrace();
 		}
-		// ここまで
+		// ã�“ã�“ã�¾ã�§
 		return pEntity;
 	}
 
 	/**
-	 * 変数「maidAvatar」から値を取り出し戻り値として返す。
-	 * maidAvatarが存在しない場合は元の値を返す。
-	 * maidAvatarはEntityPlayer互換。
+	 * å¤‰æ•°ã€ŒmaidAvatarã€�ã�‹ã‚‰å€¤ã‚’å�–ã‚Šå‡ºã�—æˆ»ã‚Šå€¤ã�¨ã�—ã�¦è¿”ã�™ã€‚
+	 * maidAvatarã�Œå­˜åœ¨ã�—ã�ªã�„å ´å�ˆã�¯å…ƒã�®å€¤ã‚’è¿”ã�™ã€‚
+	 * maidAvatarã�¯EntityPlayeräº’æ�›ã€‚
 	 */
 	public static Entity getAvatarPlayer(Entity entity) {
-		// メイドさんチェック
+		// ãƒ¡ã‚¤ãƒ‰ã�•ã‚“ãƒ�ã‚§ãƒƒã‚¯
 		try {
 			Field field = entity.getClass().getField("maidAvatar");
 			entity = (Entity)field.get(entity);
@@ -387,7 +395,7 @@ public class Helper {
 	}
 
 	/**
-	 * プレーヤのインベントリからアイテムを減らす
+	 * ãƒ—ãƒ¬ãƒ¼ãƒ¤ã�®ã‚¤ãƒ³ãƒ™ãƒ³ãƒˆãƒªã�‹ã‚‰ã‚¢ã‚¤ãƒ†ãƒ ã‚’æ¸›ã‚‰ã�™
 	 */
 	public static ItemStack decPlayerInventory(EntityPlayer par1EntityPlayer, int par2Index, int par3DecCount) {
 		if (par1EntityPlayer == null) {
@@ -403,7 +411,7 @@ public class Helper {
 		}
 		
 		if (!par1EntityPlayer.capabilities.isCreativeMode) {
-			// クリエイティブだと減らない
+			// ã‚¯ãƒªã‚¨ã‚¤ãƒ†ã‚£ãƒ–ã� ã�¨æ¸›ã‚‰ã�ªã�„
 			itemstack1.stackSize -= par3DecCount;
 		}
 		
@@ -437,28 +445,28 @@ public class Helper {
 		return lf;
 	}
 	protected static float convRevision() {
-		// TODO ★後回し
+		// TODO â˜…å¾Œå›žã�—
 		return 0;// convRevision(MMMLib.Revision);
 	}
 
 	/**
-	 * 指定されたリビジョンよりも古ければ例外を投げてストップ
+	 * æŒ‡å®šã�•ã‚Œã�Ÿãƒªãƒ“ã‚¸ãƒ§ãƒ³ã‚ˆã‚Šã‚‚å�¤ã�‘ã‚Œã�°ä¾‹å¤–ã‚’æŠ•ã�’ã�¦ã‚¹ãƒˆãƒƒãƒ—
 	 */
 	public static void checkRevision(String pRev) {
 		if (convRevision() < convRevision(pRev)) {
-			// 適合バージョンではないのでストップ
-		// TODO ★後回し
+			// é�©å�ˆãƒ�ãƒ¼ã‚¸ãƒ§ãƒ³ã�§ã�¯ã�ªã�„ã�®ã�§ã‚¹ãƒˆãƒƒãƒ—
+		// TODO â˜…å¾Œå›žã�—
 		//	ModLoader.getLogger().warning("you must check MMMLib revision.");
 		//	throw new RuntimeException("The revision of MMMLib is old.");
 		}
 	}
 
 	/**
-	 * EntityListに登録されていいるEntityを置き換える。
+	 * EntityListã�«ç™»éŒ²ã�•ã‚Œã�¦ã�„ã�„ã‚‹Entityã‚’ç½®ã��æ�›ã�ˆã‚‹ã€‚
 	 */
 	public static void replaceEntityList(Class pSrcClass, Class pDestClass) {
-		// EntityList登録情報を置き換え
-		// 古いEntityでもスポーンできるように一部の物は二重登録
+		// EntityListç™»éŒ²æƒ…å ±ã‚’ç½®ã��æ�›ã�ˆ
+		// å�¤ã�„Entityã�§ã‚‚ã‚¹ãƒ�ãƒ¼ãƒ³ã�§ã��ã‚‹ã‚ˆã�†ã�«ä¸€éƒ¨ã�®ç‰©ã�¯äºŒé‡�ç™»éŒ²
 		try {
 			// stringToClassMapping
 			Map lmap;
@@ -484,7 +492,7 @@ public class Helper {
 					le.setValue(pDestClass);
 				}
 			}
-			// classToIDMapping なんぜコイツだけprivateのまま？
+			// classToIDMapping ã�ªã‚“ã�œã‚³ã‚¤ãƒ„ã� ã�‘privateã�®ã�¾ã�¾ï¼Ÿ
 			lmap = (Map)ObfuscationReflectionHelper.getPrivateValue(EntityList.class, null, "field_75624_e", "classToIDMapping");
 			if (lmap.containsKey(pSrcClass)) {
 				lint = (Integer)lmap.get(pSrcClass);
@@ -511,11 +519,11 @@ public class Helper {
 	}
 
 	/**
-	 * バイオームの設定Entityを置き換えられたEntityへ置き換える。
-	 * 基本的にMMMLib以外からは呼ばれない。
+	 * ãƒ�ã‚¤ã‚ªãƒ¼ãƒ ã�®è¨­å®šEntityã‚’ç½®ã��æ�›ã�ˆã‚‰ã‚Œã�ŸEntityã�¸ç½®ã��æ�›ã�ˆã‚‹ã€‚
+	 * åŸºæœ¬çš„ã�«MMMLibä»¥å¤–ã�‹ã‚‰ã�¯å‘¼ã�°ã‚Œã�ªã�„ã€‚
 	 */
 	protected static void replaceBaiomeSpawn() {
-		// バイオームの発生処理をのっとる
+		// ãƒ�ã‚¤ã‚ªãƒ¼ãƒ ã�®ç™ºç”Ÿå‡¦ç�†ã‚’ã�®ã�£ã�¨ã‚‹
 		if (replaceEntitys.isEmpty()) return;
 		BiomeGenBase[] biomeList = BiomeGenBase.getBiomeGenArray();
 		for (int i = 0; i < biomeList.length; i++) {
@@ -534,15 +542,15 @@ public class Helper {
 	}
 
 	/**
-	 * 視線の先にいる最初のEntityを返す
+	 * è¦–ç·šã�®å…ˆã�«ã�„ã‚‹æœ€åˆ�ã�®Entityã‚’è¿”ã�™
 	 * @param pEntity
-	 * 視点
+	 * è¦–ç‚¹
 	 * @param pRange
-	 * 視線の有効距離
+	 * è¦–ç·šã�®æœ‰åŠ¹è·�é›¢
 	 * @param pDelta
-	 * 時刻補正
+	 * æ™‚åˆ»è£œæ­£
 	 * @param pExpand
-	 * 検知領域の拡大範囲
+	 * æ¤œçŸ¥é ˜åŸŸã�®æ‹¡å¤§ç¯„å›²
 	 * @return
 	 */
 	public static Entity getRayTraceEntity(EntityLivingBase pEntity, double pRange, float pDelta, float pExpand) {
@@ -582,10 +590,10 @@ public class Helper {
 	}
 
 
-	// Forge対策
+	// Forgeå¯¾ç­–
 
 	/**
-	 * Forge対策用のメソッド
+	 * Forgeå¯¾ç­–ç”¨ã�®ãƒ¡ã‚½ãƒƒãƒ‰
 	 */
 	public static ItemStack getSmeltingResult(ItemStack pItemstack) {
 /*
@@ -600,13 +608,13 @@ public class Helper {
 	}
 
 	/**
-	 * アイテムに追加効果が在るかを判定する。
-	 * Forge対策。
+	 * ã‚¢ã‚¤ãƒ†ãƒ ã�«è¿½åŠ åŠ¹æžœã�Œåœ¨ã‚‹ã�‹ã‚’åˆ¤å®šã�™ã‚‹ã€‚
+	 * Forgeå¯¾ç­–ã€‚
 	 * @param pItemStack
 	 * @return
 	 */
 	public static boolean hasEffect(ItemStack pItemStack) {
-		// マジClientSIDEとか辞めてほしい。
+		// ãƒžã‚¸ClientSIDEã�¨ã�‹è¾žã‚�ã�¦ã�»ã�—ã�„ã€‚
 		if (pItemStack != null) {
 			Item litem = pItemStack.getItem();
 			if (litem instanceof ItemPotion) {
@@ -618,8 +626,8 @@ public class Helper {
 	}
 
 	/**
-	 * Blockのインスタンスを置き換える。
-	 * static finalの変数に対して行うのでForgeでは無効。
+	 * Blockã�®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç½®ã��æ�›ã�ˆã‚‹ã€‚
+	 * static finalã�®å¤‰æ•°ã�«å¯¾ã�—ã�¦è¡Œã�†ã�®ã�§Forgeã�§ã�¯ç„¡åŠ¹ã€‚
 	 * @param pOriginal
 	 * @param pReplace
 	 * @return
@@ -630,11 +638,11 @@ public class Helper {
 			return false;
 		}
 		try {
-			// Blockのstatic final分の置換え
+			// Blockã�®static finalåˆ†ã�®ç½®æ�›ã�ˆ
 			Field[] lfield = Block.class.getDeclaredFields();
 			for (int li = 0; li < lfield.length; li++) {
 				if (!Modifier.isStatic(lfield[li].getModifiers())) {
-					// static以外は対象外
+					// staticä»¥å¤–ã�¯å¯¾è±¡å¤–
 					continue;
 				}
 				
@@ -652,8 +660,8 @@ public class Helper {
 	*/
 
 	/**
-	 * 16進数の文字列をIntへ変換する。
-	 * 0xffffffff対策。
+	 * 16é€²æ•°ã�®æ–‡å­—åˆ—ã‚’Intã�¸å¤‰æ�›ã�™ã‚‹ã€‚
+	 * 0xffffffffå¯¾ç­–ã€‚
 	 * @param pValue
 	 * @return
 	 */
@@ -666,7 +674,7 @@ public class Helper {
 	}
 
 	/**
-	 *  アイテムに設定された攻撃力を見る
+	 *  ã‚¢ã‚¤ãƒ†ãƒ ã�«è¨­å®šã�•ã‚Œã�Ÿæ”»æ’ƒåŠ›ã‚’è¦‹ã‚‹
 	 * @param pItemStack
 	 * @return
 	 */
@@ -675,4 +683,82 @@ public class Helper {
 		return lam == null ? 0 : lam.getAmount();
 	}
 
+
+	public static float sin(float f) {
+		return MathHelper.sin(f);
+	}
+
+
+	public static float cos(float f) {
+		return MathHelper.cos(f);
+	}
+
+
+	public static float sqrt(float f) {
+		return MathHelper.sqrt_float(f);
+	}
+
+
+	public static int getEntityTicksExisted(Object entity) {
+		if (entity instanceof Entity) {
+			return ((Entity)entity).ticksExisted;
+		}
+		return 0;
+	}
+
+
+	public static Object getRidingEntity(Object entity) {
+		if (entity instanceof Entity) {
+			return ((Entity)entity).ridingEntity;
+		}
+		return null;
+	}
+
+
+	public static boolean isRidingMaster(Object entityliving) {
+		// TODO Auto-generated method stub
+//		Modchu_Reflect.loadClass("EntityPlayer").isInstance(Modchu_Reflect.getFieldObject("Entity", "field_70154_o", "ridingEntity", entityliving));
+		return false;
+	}
+
+
+	public static int normalize(int i, int min, int max, int minOver, int maxOver) {
+		return i < min ? minOver : i > max ? maxOver : i;
+	}
+
+	public static long normalize(long l, long min, long max, long minOver, long maxOver) {
+		return l < min ? minOver : l > max ? maxOver : l;
+	}
+
+	public static float normalize(float f, float min, float max, float minOver, float maxOver) {
+		return f < min ? minOver : f > max ? maxOver : f;
+	}
+
+	public static double normalize(double d, double min, double max, double minOver, double maxOver) {
+		return d < min ? minOver : d > max ? maxOver : d;
+	}
+	public static Block getBlock(Object itemstack) {
+		if (itemstack instanceof ItemStack) {
+			Item item = ((ItemStack)itemstack).getItem();
+			return item != null ? Block.getBlockFromItem(item) : null;
+		}
+		return null;
+	}
+
+	public static boolean isCamouflage(Object itemstack) {
+		Block block = getBlock(itemstack);
+		if (block instanceof BlockLeavesBase || block instanceof BlockPumpkin) {
+			return true;
+		}
+		return false;
+	}
+
+	public static boolean isPlanter(Object stack) {
+		Block itemStackOrBlockOrItem = getBlock(stack);
+		return itemStackOrBlockOrItem instanceof BlockFlower
+				|| itemStackOrBlockOrItem instanceof BlockDoublePlant
+				|| itemStackOrBlockOrItem instanceof BlockMushroom
+				|| itemStackOrBlockOrItem instanceof BlockSapling
+				|| itemStackOrBlockOrItem instanceof BlockTallGrass;
+	}
 }

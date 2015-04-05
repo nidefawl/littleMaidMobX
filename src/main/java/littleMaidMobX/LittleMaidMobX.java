@@ -11,9 +11,6 @@ import littleMaidMobX.network.Message;
 import littleMaidMobX.network.NetConstants;
 import littleMaidMobX.network.Network;
 import littleMaidMobX.registry.ModelManager;
-import modchu.lib.Modchu_Reflect;
-import modchu.lib.characteristic.Modchu_AS;
-import modchu.model.ModchuModel_Main;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.player.EntityPlayer;
@@ -98,11 +95,17 @@ public class LittleMaidMobX {
 	public static boolean cfg_isModelAlphaBlend = true;
 /**	public static final int cfg_startVehicleEntityID = 0;	Forgeã�«ã�¯ä¸�è¦�	*/
 	public static boolean isDebugMessage = true;
+	public static boolean isDebugModels = true;
 	public static boolean isModelAlphaBlend = true;
 	
 	public static void Debug(String pText, Object... pData) {
 		if (isDebugMessage) {
 //			System.out.println(String.format("MMMLib-" + pText, pData));
+		}
+	}
+	public static void DebugModel(String string) {
+		if (isDebugModels) {
+			System.out.println("LMM Models: " + string);
 		}
 	}
 	public static void Debug(boolean isRemote, String pText, Object... pData) {
@@ -142,8 +145,8 @@ public class LittleMaidMobX {
 	@EventHandler
 	public void PreInit(FMLPreInitializationEvent evt)
 	{
-		Modchu_AS.instanceCheck();
-		Modchu_Reflect.initNameMap();
+//		Modchu_AS.instanceCheck();
+//		Modchu_Reflect.initNameMap();
 		{
 
 			File configFile = evt.getSuggestedConfigurationFile();
@@ -279,7 +282,7 @@ public class LittleMaidMobX {
 		
 		// IFFのロード
 		IFF.loadIFFs();
-		ModchuModel_Main.load();
+//		ModchuModel_Main.load();
 	}
 	
 
