@@ -54,10 +54,10 @@ public class TextureRegistry {
 		list.add("/assets/minecraft/textures/entity/littleMaid/ALTERNATIVE/mob_littlemaid_c.png");
 		list.add("/assets/minecraft/textures/entity/littleMaid/ALTERNATIVE/mob_littlemaid_d.png");
 		list.add("/assets/minecraft/textures/entity/littleMaid/ALTERNATIVE/Stabilizer_MagicHat.png");
-		list.add("/assets/minecraft/textures/entity/littleMaid/ALTERNATIVE/testx64.png");
+		list.add("/assets/minecraft/textures/entity/littleMaid/ALTERNATIVE/testx64.png");*/
 		list.add("/assets/minecraft/textures/entity/littleMaid/Ar_NM/littlemaid_Ar_11.png");
 		list.add("/assets/minecraft/textures/entity/littleMaid/Ar_NM/littlemaid_Ar_12.png");
-		list.add("/assets/minecraft/textures/entity/littleMaid/b14color_Beverly5/contract_0.png");
+		/*list.add("/assets/minecraft/textures/entity/littleMaid/b14color_Beverly5/contract_0.png");
 		list.add("/assets/minecraft/textures/entity/littleMaid/b14color_Beverly5/contract_1.png");
 		list.add("/assets/minecraft/textures/entity/littleMaid/b14color_Beverly5/contract_2.png");
 		list.add("/assets/minecraft/textures/entity/littleMaid/b14color_Beverly5/contract_3.png");
@@ -932,7 +932,7 @@ public class TextureRegistry {
 		list.add("/assets/minecraft/textures/entity/littleMaid/littleMaidMob_MS/sisters_c.png");
 		list.add("/assets/minecraft/textures/entity/littleMaid/littleMAidMob_MS1/default_11.png");
 		list.add("/assets/minecraft/textures/entity/littleMaid/littleMAidMob_MS1/default_12.png");
-		list.add("/assets/minecraft/textures/entity/littleMaid/littleMAidMob_MS1/sisters_c.png");
+		list.add("/assets/minecraft/textures/entity/littleMaid/littleMAidMob_MS1/sisters_c.png");*/
 		list.add("/assets/minecraft/textures/entity/littleMaid/LittleMaidMob_NM/default_11.png");
 		list.add("/assets/minecraft/textures/entity/littleMaid/LittleMaidMob_NM/default_12.png");
 		list.add("/assets/minecraft/textures/entity/littleMaid/LittleMaidMob_NM/littlemaid_ai_a.png");
@@ -942,7 +942,7 @@ public class TextureRegistry {
 		list.add("/assets/minecraft/textures/entity/littleMaid/LittleMaidMob_NM/littlemaid_sword_f.png");
 		list.add("/assets/minecraft/textures/entity/littleMaid/LittleMaidMob_NM/littlemaid_S_e.png");
 		list.add("/assets/minecraft/textures/entity/littleMaid/LittleMaidMob_NM/littlemaid_Yu_8.png");
-		list.add("/assets/minecraft/textures/entity/littleMaid/LittleMaidMob_NM1/Axe_11.png");
+		/*list.add("/assets/minecraft/textures/entity/littleMaid/LittleMaidMob_NM1/Axe_11.png");
 		list.add("/assets/minecraft/textures/entity/littleMaid/LittleMaidMob_NM1/Axe_12.png");
 		list.add("/assets/minecraft/textures/entity/littleMaid/LittleMaidMob_NM1/NM1_0.png");
 		list.add("/assets/minecraft/textures/entity/littleMaid/littleMaidMob_st/default_11.png");
@@ -1235,10 +1235,10 @@ public class TextureRegistry {
 		list.add("/assets/minecraft/textures/entity/littleMaid/suika_suika/suika_0e.png");
 		list.add("/assets/minecraft/textures/entity/littleMaid/suika_suika/suika_0f.png");
 		list.add("/assets/minecraft/textures/entity/littleMaid/suika_suika/suika_20.png");
-		list.add("/assets/minecraft/textures/entity/littleMaid/suika_suika/suika_30.png");
+		list.add("/assets/minecraft/textures/entity/littleMaid/suika_suika/suika_30.png");*/
 		list.add("/assets/minecraft/textures/entity/littleMaid/Sword_NM/littlemaid_sword_11.png");
 		list.add("/assets/minecraft/textures/entity/littleMaid/Sword_NM/littlemaid_sword_12.png");
-		list.add("/assets/minecraft/textures/entity/littleMaid/Tei_tareusa/Tei_00.png");
+		/*list.add("/assets/minecraft/textures/entity/littleMaid/Tei_tareusa/Tei_00.png");
 		list.add("/assets/minecraft/textures/entity/littleMaid/Tei_tareusa/Tei_01.png");
 		list.add("/assets/minecraft/textures/entity/littleMaid/Tei_tareusa/Tei_02.png");
 		list.add("/assets/minecraft/textures/entity/littleMaid/Tei_tareusa/Tei_03.png");

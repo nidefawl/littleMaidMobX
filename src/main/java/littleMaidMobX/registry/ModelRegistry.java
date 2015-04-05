@@ -2,8 +2,7 @@ package littleMaidMobX.registry;
 
 import java.util.HashSet;
 
-import littleMaidMobX.model.maids.ModelLittleMaid_Orign;
-import littleMaidMobX.model.maids.MultiModel_Elsie2;
+import littleMaidMobX.model.maids.*;
 
 public class ModelRegistry {
 	public static final HashSet<Class> list = new HashSet<Class>();
@@ -18,6 +17,7 @@ public class ModelRegistry {
 //		list.add(ModelMulti_Steve.class);
 //		list.add(MultiModel_Evelyn4.class);
 		list.add(MultiModel_Elsie2.class);
+		list.add(MultiModel_NM.class);
 	}
 
 }
