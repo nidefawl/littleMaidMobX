@@ -53,6 +53,7 @@ public abstract class ModelMultiBase extends ModelBase implements IModelCaps {
 	}
 
 	public ModelMultiBase(float pSizeAdjust, float pYOffset, int pTextureWidth, int pTextureHeight) {
+		this.modelSize = pSizeAdjust;
 		isSneak = false;
 		aimedBow = false;
 		textureWidth = pTextureWidth;

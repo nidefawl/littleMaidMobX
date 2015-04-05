@@ -15,6 +15,7 @@ import littleMaidMobX.model.ModelMultiBase;
 import littleMaidMobX.model.caps.IModelCaps;
 import littleMaidMobX.model.caps.ModelCapsHelper;
 import littleMaidMobX.model.maids.MultiModel_Elsie2;
+import littleMaidMobX.model.maids.MultiModel_NM2;
 import littleMaidMobX.wrapper.MinecraftClientWrapper;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -111,7 +112,7 @@ public class ModelRenderer {
 		isRendering = true;
 		cubeList = new ArrayList<ModelBoxBase>();
 		baseModel = pModelBase;
-		if (pModelBase instanceof MultiModel_Elsie2) {
+		if (pModelBase instanceof MultiModel_NM2 && pModelBase.modelSize==0) {
 			System.out.println("our: "+pModelBase.boxList.size()+" = "+pName);
 		}
 		
@@ -204,11 +205,34 @@ public class ModelRenderer {
 
 	
 	public void render(float par1, boolean pIsRender) {
-		if (isHidden || !showModel) {
+//		boolean hide = isHidden || !showModel;
+//		if (Minecraft.FRAME_NUM%100==0) {
+//			if (this.baseModel instanceof MultiModel_NM2) {
+//				MultiModel_NM2 mm = (MultiModel_NM2)this.baseModel;	
+//				if (this.boxName!=null&&this.boxName.toLowerCase().contains("skirt")&&!this.boxName.equals("Skirt")) {
+//					System.out.println("render skirt "+boxName+" "+this.baseModel+ " - "+hide);
+//					System.out.println("render skirt rotationPointX "+rotationPointX);
+//					System.out.println("render skirt rotationPointY "+rotationPointY);
+//					System.out.println("render skirt rotationPointZ "+rotationPointZ);
+//					System.out.println("render skirt offsetX "+offsetX);
+//					System.out.println("render skirt offsetY "+offsetY);
+//					System.out.println("render skirt offsetZ "+offsetZ);
+//				}
+//	//			int a = 0;
+//	//			for (ModelRenderer mb : this.baseModel.boxList) {
+//	//				if (mb == mm.SkirtTop) {
+//	//					a++;
+//	//				}
+//	//			}
+//	//			if (a > 0) {
+//	//				System.out.println("found "+a+" skirttops");
+//	//			}
+//			}
+//		}
+		if (isHidden) {
 			return;
 		}
-		
-		if (!compiled) {
+		if (!compiled && showModel) {
 			compileDisplayList(par1);
 		}
 		
@@ -624,8 +648,13 @@ public class ModelRenderer {
 	
 	protected void renderObject(float par1, boolean pRendering) {
 		
-		GL11.glGetFloat(GL11.GL_MODELVIEW_MATRIX, matrix);
-		if (pRendering && isRendering) {
+		/** Download the matrix from GPU
+		 * 
+		 * This is very bad practice
+		 */
+		GL11.glGetFloat(GL11.GL_MODELVIEW_MATRIX, matrix); 
+		
+		if (pRendering && isRendering && showModel) {
 			GL11.glPushMatrix();
 			GL11.glScalef(scaleX, scaleY, scaleZ);
 			GL11.glCallList(displayList);

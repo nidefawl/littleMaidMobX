@@ -1,4 +1,4 @@
-package littleMaidMobX.model.modchu;import littleMaidMobX.Helper;import littleMaidMobX.LittleMaidMobX;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.render.model.ModelBoxPlate;import littleMaidMobX.render.model.ModelRenderer;public class ModelModchuBaseMulti extends ModelModchuBaseSkirt {	public ModelRenderer ChignonR;
+package littleMaidMobX.model.modchu;import littleMaidMobX.Helper;import littleMaidMobX.LittleMaidMobX;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.render.model.ModelBoxPlate;import littleMaidMobX.render.model.ModelRenderer;import modchu.lib.Modchu_EntityCapsHelper;import modchu.model.ModchuModel_IEntityCaps;public class ModelModchuBaseMulti extends ModelModchuBaseSkirt {	public ModelRenderer ChignonR;
 	public ModelRenderer ChignonL;
 	public ModelRenderer ChignonB;
 	public ModelRenderer Tail;
@@ -36,7 +36,7 @@ package littleMaidMobX.model.modchu;import littleMaidMobX.Helper;import littl
 		bipedLeftLeg = new ModelRenderer(this, 32, 19);
 		bipedLeftLeg.mirror = true;
 		bipedLeftLeg.addBox(-1.5F, 0.0F, -2.0F, 3, 9, 4, f);
-		Skirt = new ModelRenderer(this, 0, 16);
+		Skirt = new ModelRenderer(this, 0, 16, "Skirt");
 		Skirt.addBox(-4F, -4F, -4F, 8, 8, 8, f);
 		ChignonR = new ModelRenderer(this, 24, 18);
 		ChignonR.addBox(-5F, -7F, 0.2F, 1, 3, 3, f);
@@ -127,19 +127,19 @@ package littleMaidMobX.model.modchu;import littleMaidMobX.Helper;import littl
 	public void skirtFloatsInit(float f, float f1) {
 		if (ModelCapsHelper.getCapsValueInt(this, null, caps_skirtFloats) < 2) return;
 		
-		SkirtTop = new ModelRenderer(this, 8, 16);
+		SkirtTop = new ModelRenderer(this, 8, 16, "SkirtTop");
 		SkirtTop.addPlate(0.0F, 0.0F, 0.0F, 8, 8, ModelBoxPlate.planeXZTop);
 		SkirtTop.setRotationPoint(-4.0F, -4.0F, -4.0F);		
-		SkirtFront = new ModelRenderer(this, 8, 24);
+		SkirtFront = new ModelRenderer(this, 8, 24, "SkirtFront");
 		SkirtFront.addPlate(0.0F, 0.0F, 0.0F, 8, 8, ModelBoxPlate.planeXYFront);
 		SkirtFront.setRotationPoint(0.0F, 0.0F, 0.0F);		
-		SkirtRight = new ModelRenderer(this, 0, 24);
+		SkirtRight = new ModelRenderer(this, 0, 24, "SkirtRight");
 		SkirtRight.addPlate(0.0F, 0.0F, 0.0F, 8, 8, ModelBoxPlate.planeZYRight);
 		SkirtRight.setRotationPoint(8.0F, 0.0F, 0.0F);		
-		SkirtLeft = new ModelRenderer(this, 16, 24);
+		SkirtLeft = new ModelRenderer(this, 16, 24, "SkirtLeft");
 		SkirtLeft.addPlate(0.0F, 0.0F, 0.0F, 8, 8, ModelBoxPlate.planeZYLeft);
 		SkirtLeft.setRotationPoint(0.0F, 0.0F, 0.0F);		
-		SkirtBack = new ModelRenderer(this, 24, 24);
+		SkirtBack = new ModelRenderer(this, 24, 24, "SkirtBack");
 		SkirtBack.addPlate(0.0F, 0.0F, 0.0F, 8, 8, ModelBoxPlate.planeXYBack);
 		SkirtBack.setRotationPoint(0.0F, 0.0F, 8.0F);
 	}	@Override
@@ -255,11 +255,11 @@ package littleMaidMobX.model.modchu;import littleMaidMobX.Helper;import littl
 			if (SkirtFront != null) SkirtTop.addChild(SkirtFront);
 			if (SkirtRight != null) SkirtTop.addChild(SkirtRight);
 			if (SkirtLeft != null) SkirtTop.addChild(SkirtLeft);
-			if (SkirtBack != null) SkirtTop.addChild(SkirtBack);
+			if (SkirtBack != null) SkirtTop.addChild(SkirtBack);			System.err.println("add 4 skirt parts to skirt top!");
 		}
-		if (Skirt != null) {
-			if (SkirtTop != null) Skirt.addChild(SkirtTop);			Skirt.setVisible(false);
-//			setCapsValue(null, caps_visible, Skirt, false);
+		if (Skirt != null) {			if (SkirtTop != null)			System.err.println("add SkirtTop to Skirt!");
+			if (SkirtTop != null) Skirt.addChild(SkirtTop);
+			setCapsValue(null, caps_visible, Skirt, false);
 		}
 	}	public void setDefaultPause(float f, float f1, float f2, float f3, float f4, float f5, IModelCaps entityCaps) {		if (bipedHead != null) bipedHead.setRotationPoint(0.0F, 0.0F, 0.0F);		if (bipedHeadwear != null) bipedHeadwear.setRotationPoint(0.0F, 0.0F, 0.0F);		if (bipedBody != null) bipedBody.setRotationPoint(0.0F, -3.0F, 0.0F);		if (bipedRightArm != null) bipedRightArm.setRotationPoint(-3.0F, -3.0F, 0.0F);		if (bipedLeftArm != null) bipedLeftArm.setRotationPoint(3.0F, -3.0F, 0.0F);		if (bipedRightLeg != null) bipedRightLeg.setRotationPoint(-1.5F, 3.5F, 0.0F);		if (bipedLeftLeg != null) bipedLeftLeg.setRotationPoint(1.5F, 3.5F, 0.0F);		if (Skirt != null) Skirt.setRotationPoint(0.0F, 4.0F, 0.0F);//		if (ModelCapsHelper.getCapsValueByte(this, entityCaps, ((IModelCaps) entityCaps).caps_EntityType) == ((IModelCaps) entityCaps).entityType_PFLM) {//			bipedHead.rotateAngleZ = 0.0F;//		}		upperBody.setRotationPoint(0.0F, 0.0F, 0.0F);		upperBody.setRotateAngle(0.0F, 0.0F, 0.0F);		lowerBody.setRotationPoint(0.0F, 0.0F, 0.0F);		lowerBody.setRotateAngle(0.0F, 0.0F, 0.0F);		hip.setRotationPoint(0.0F, 0.0F, 0.0F);		hip.setRotateAngle(0.0F, 0.0F, 0.0F);		rightShoulder.setRotationPoint(0.0F, 0.0F, 0.0F);		rightShoulder.setRotateAngle(0.0F, 0.0F, 0.0F);		leftShoulder.setRotationPoint(0.0F, 0.0F, 0.0F);		leftShoulder.setRotateAngle(0.0F, 0.0F, 0.0F);		center.setRotationPoint(0.0F, 0.0F, 0.0F);		center.setRotateAngle(0.0F, 0.0F, 0.0F);		leftLegIK.setRotationPoint(0.0F, 0.0F, 0.0F);		leftLegIK.setRotateAngle(0.0F, 0.0F, 0.0F);		rightLegIK.setRotationPoint(0.0F, 0.0F, 0.0F);		rightLegIK.setRotateAngle(0.0F, 0.0F, 0.0F);		mainFrame.setRotationPoint(0.0F, 8.0F, 0.0F);	}	@Override
 	public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, IModelCaps entityCaps) {
@@ -415,10 +415,8 @@ package littleMaidMobX.model.modchu;import littleMaidMobX.Helper;import littl
 			arm.setRotateAngle(0.0F, 0.0F, 0.0F);
 			armSwing(f, f1, f2, f3, f4, f5, entityCaps);
 		}
-		Object entity = entityCaps.getCapsValue(entityCaps.caps_Entity);
-		if (entity != null
-				&& entityCaps.getCapsValue(entityCaps.caps_currentEquippedItem) != null) {
-			
+		Object entity = entityCaps.getCapsValue(caps_Entity);
+		if (entity != null && entityCaps.getCapsValue(caps_currentEquippedItem) != null) {
 			if (dominantArm == 0) {
 				arm.rotationPointX = -3.0F;
 				arm.rotationPointY = 1.5F;
@@ -493,5 +491,5 @@ package littleMaidMobX.model.modchu;import littleMaidMobX.Helper;import littl
 	}	@Override
 	public boolean isItemHolder(IModelCaps entityCaps) {
 		return true;
-	}	/*	 * 	@Override	public void showAllParts(IModelCaps entityCaps) {		int armorType = ModelCapsHelper.getCapsValueInt(this, entityCaps, caps_armorType);		boolean b = armorType == 0;/*		if (entityCaps instanceof IModelCaps				&& ModelCapsHelper.getCapsValueByte(this, entityCaps, entityCaps.caps_EntityType) == entityCaps.entityType_LMM) {			Modchu_Debug.mDebug1("MultiModel showAllParts LMM armorType="+armorType+" b="+b);		} else {			Modchu_Debug.mDebug1("MultiModel showAllParts entityCaps="+entityCaps);			float[] f = getArmorModelsSize();			//Modchu_Debug.mlDebug("modelSize="+modelSize+" "+this);			//Modchu_Debug.mlDebug("modelSize="+modelSize+" f[0]="+f[0]+" f[1]="+f[1]);			armorType = modelSize == f[0] ? 1 : modelSize == f[1] ? 2 : 0;			//Modchu_Debug.mDebug("MultiModel showAllParts LMM armorType="+armorType+" b="+b);		}*/		@Override	public int showArmorParts(IModelCaps entityCaps, int parts, int index) {		switch(parts) {		case 0:			setArmorBipedRightLegShowModel(entityCaps, true);			setArmorBipedLeftLegShowModel(entityCaps, true);			break;		case 1:			setArmorSkirtShowModel(entityCaps, true);			break;		case 2:			setArmorBipedBodyShowModel(entityCaps, true);			setArmorBipedRightArmShowModel(entityCaps, true);			setArmorBipedLeftArmShowModel(entityCaps, true);			break;		case 3:			setArmorBipedHeadShowModel(entityCaps, true);			break;		}		return -1;	}	@Override	public void showAllParts(IModelCaps entityCaps) {		int armorType = ModelCapsHelper.getCapsValueInt(this, entityCaps, caps_armorType); // CORRECT?!?!?!?		boolean b = armorType == 0;/*		if (entityCaps instanceof IModelCaps				&& ModelCapsHelper.getCapsValueByte(this, entityCaps, entityCaps.caps_EntityType) == entityCaps.entityType_LMM) {			Modchu_Debug.mDebug1("MultiModel showAllParts LMM armorType="+armorType+" b="+b);		} else {			Modchu_Debug.mDebug1("MultiModel showAllParts entityCaps="+entityCaps);			float[] f = getArmorModelsSize();			//Modchu_Debug.mlDebug("modelSize="+modelSize+" "+this);			//Modchu_Debug.mlDebug("modelSize="+modelSize+" f[0]="+f[0]+" f[1]="+f[1]);			armorType = modelSize == f[0] ? 1 : modelSize == f[1] ? 2 : 0;			//Modchu_Debug.mDebug("MultiModel showAllParts LMM armorType="+armorType+" b="+b);		}*/		setArmorBipedHeadShowModel(entityCaps, b);		setArmorBipedBodyShowModel(entityCaps, b);		setArmorBipedRightArmShowModel(entityCaps, b);		setArmorBipedLeftArmShowModel(entityCaps, b);		setArmorSkirtShowModel(entityCaps, b);		setArmorBipedRightLegShowModel(entityCaps, b);		setArmorBipedLeftLegShowModel(entityCaps, b);		setArmorBipedOtherShowModel(entityCaps, b);	}
+	}	/*	 * 	@Override	public void showAllParts(IModelCaps entityCaps) {		int armorType = ModelCapsHelper.getCapsValueInt(this, entityCaps, caps_armorType);		boolean b = armorType == 0;/*		if (entityCaps instanceof IModelCaps				&& ModelCapsHelper.getCapsValueByte(this, entityCaps, entityCaps.caps_EntityType) == entityCaps.entityType_LMM) {			Modchu_Debug.mDebug1("MultiModel showAllParts LMM armorType="+armorType+" b="+b);		} else {			Modchu_Debug.mDebug1("MultiModel showAllParts entityCaps="+entityCaps);			float[] f = getArmorModelsSize();			//Modchu_Debug.mlDebug("modelSize="+modelSize+" "+this);			//Modchu_Debug.mlDebug("modelSize="+modelSize+" f[0]="+f[0]+" f[1]="+f[1]);			armorType = modelSize == f[0] ? 1 : modelSize == f[1] ? 2 : 0;			//Modchu_Debug.mDebug("MultiModel showAllParts LMM armorType="+armorType+" b="+b);		}*/		@Override	public int showArmorParts(IModelCaps entityCaps, int parts, int index) {		switch(parts) {		case 0:			setArmorBipedRightLegShowModel(entityCaps, true);			setArmorBipedLeftLegShowModel(entityCaps, true);			break;		case 1:			setArmorSkirtShowModel(entityCaps, true);			break;		case 2:			setArmorBipedBodyShowModel(entityCaps, true);			setArmorBipedRightArmShowModel(entityCaps, true);			setArmorBipedLeftArmShowModel(entityCaps, true);			break;		case 3:			setArmorBipedHeadShowModel(entityCaps, true);			break;		}		return -1;	}	@Override	public void showAllParts(IModelCaps entityCaps) {		int armorType = ModelCapsHelper.getCapsValueInt(this, entityCaps, caps_armorType); // CORRECT?!?!?!?		boolean b = armorType == 0;/*		if (entityCaps instanceof IModelCaps				&& ModelCapsHelper.getCapsValueByte(this, entityCaps, entityCaps.caps_EntityType) == entityCaps.entityType_LMM) {			Modchu_Debug.mDebug1("MultiModel showAllParts LMM armorType="+armorType+" b="+b);		} else {			Modchu_Debug.mDebug1("MultiModel showAllParts entityCaps="+entityCaps);			float[] f = getArmorModelsSize();			//Modchu_Debug.mlDebug("modelSize="+modelSize+" "+this);			//Modchu_Debug.mlDebug("modelSize="+modelSize+" f[0]="+f[0]+" f[1]="+f[1]);			armorType = modelSize == f[0] ? 1 : modelSize == f[1] ? 2 : 0;			//Modchu_Debug.mDebug("MultiModel showAllParts LMM armorType="+armorType+" b="+b);		}*/		setArmorBipedHeadShowModel(entityCaps, b);		setArmorBipedBodyShowModel(entityCaps, b);		setArmorBipedRightArmShowModel(entityCaps, b);		setArmorBipedLeftArmShowModel(entityCaps, b);		setArmorSkirtShowModel(entityCaps, b);		setArmorBipedRightLegShowModel(entityCaps, b);		setArmorBipedLeftLegShowModel(entityCaps, b);		setArmorBipedOtherShowModel(entityCaps, b);	}	public void setArmorSkirtShowModel(IModelCaps entityCaps, boolean b) {		if (Skirt != null) {			if (ModelCapsHelper.getCapsValueInt(this, null, caps_skirtFloats) < 2) {				setCapsValue(entityCaps, caps_visible, Skirt, b);			} else {				setCapsValue(entityCaps, caps_visible, SkirtTop, b);				setCapsValue(entityCaps, caps_visible, SkirtFront, b);				setCapsValue(entityCaps, caps_visible, SkirtRight, b);				setCapsValue(entityCaps, caps_visible, SkirtLeft, b);				setCapsValue(entityCaps, caps_visible, SkirtBack, b);			}		}	}
 }

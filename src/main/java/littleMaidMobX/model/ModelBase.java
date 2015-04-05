@@ -28,6 +28,7 @@ public abstract class ModelBase {
 	public List<ModelRenderer> boxList = new ArrayList<ModelRenderer>();
 	private Map<String, TextureOffset> modelTextureMap = new HashMap<String, TextureOffset>();
 
+	public float modelSize = 0F;
 
 
 	

@@ -579,4 +579,9 @@ public class Helper {
 				|| itemStackOrBlockOrItem instanceof BlockSapling
 				|| itemStackOrBlockOrItem instanceof BlockTallGrass;
 	}
+
+
+	public static float degToRad(float deg) {
+		return deg / 180F * (float) Math.PI;
+	}
 }
