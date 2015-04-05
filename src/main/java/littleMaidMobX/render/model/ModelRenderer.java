@@ -41,7 +41,7 @@ import org.lwjgl.opengl.GL11;
 
 public class ModelRenderer {
 
-	// ModelRenderer互換変数群
+	
 	public float textureWidth;
 	public float textureHeight;
 	private int textureOffsetX;
@@ -57,10 +57,7 @@ public class ModelRenderer {
 	public boolean mirror;
 	public boolean showModel;
 	public boolean isHidden;
-	/**
-	 * パーツの親子関係に左右されずに描画するかを決める。
-	 * アーマーの表示などに使う。
-	 */
+	
 	public boolean isRendering;
 	public List<ModelBoxBase> cubeList;
 	public List<ModelRenderer> childModels;
@@ -80,7 +77,7 @@ public class ModelRenderer {
 //	public static final float degFactor = 0.01745329251994329576923690768489F;
 	public static final float degFactor = (float)Math.PI / 180F;
 	
-	// SmartMovingに合わせるために名称の変更があるかもしれません。
+	
 	public int rotatePriority;
 	public static final int RotXYZ = 0;
 	public static final int RotXZY = 1;
@@ -164,7 +161,7 @@ public class ModelRenderer {
 		this.scaleZ = pScaleZ;
 	}
 
-	// ModelRenderer互換関数群
+	
 
 	public void addChild(ModelRenderer pModelRenderer) {
 		if (childModels == null) {
@@ -205,7 +202,7 @@ public class ModelRenderer {
 		return this;
 	}
 
-	// TODO:アップデート時はここをチェックすること
+	
 	public void render(float par1, boolean pIsRender) {
 		if (isHidden || !showModel) {
 			return;
@@ -292,11 +289,9 @@ public class ModelRenderer {
 	}
 
 
-	// 独自追加分
+	
 
-	/**
-	 * ModelBox継承の独自オブジェクト追加用
-	 */
+	
 	public ModelRenderer addCubeList(ModelBoxBase pModelBoxBase) {
 		cubeList.add(pModelBoxBase);
 		return this;
@@ -336,20 +331,14 @@ public class ModelRenderer {
 		return this;
 	}
 
-	/**
-	 * 自分でテクスチャの座標を指定する時に使います。
-	 * コンストラクタへそのまま値を渡します。
-	 */
+	
 	public ModelRenderer addPartsTexture(Class<? extends ModelBoxBase> pModelBoxBase, String pName, Object ... pArg) {
 		pName = (new StringBuilder()).append(boxName).append(".").append(pName).toString();
 		addCubeList(getModelBoxBase(pModelBoxBase, pArg).setBoxName(pName));
 		return this;
 	}
 
-	/**
-	 * 自分でテクスチャの座標を指定する時に使います。
-	 * コンストラクタへそのまま値を渡します。
-	 */
+	
 	public ModelRenderer addPartsTexture(Class<? extends ModelBoxBase> pModelBoxBase, Object ... pArg) {
 		addCubeList(getModelBoxBase(pModelBoxBase, pArg));
 		return this;
@@ -374,9 +363,7 @@ public class ModelRenderer {
 		return this;
 	}
 
-	/**
-	 * 描画用のボックス、子供をクリアする
-	 */
+	
 	public void clearCubeList() {
 		cubeList.clear();
 		compiled = false;
@@ -385,7 +372,7 @@ public class ModelRenderer {
 		}
 	}
 
-	// TODO:このあたりは要修正
+	
 	public boolean renderItems(ModelMultiBase pModelMulti, IModelCaps pEntityCaps, boolean pRealBlock, int pIndex) {
 		ItemStack[] litemstacks = (ItemStack[])ModelCapsHelper.getCapsValue(pEntityCaps, caps_Items);
 		if (litemstacks == null) return false;
@@ -412,11 +399,11 @@ public class ModelRenderer {
 	protected void renderItems(EntityLivingBase pEntityLiving, Render pRender, boolean pRealBlock, EnumAction pAction) {
 		if (itemstack == null) return;
 		
-		// アイテムのレンダリング
+		
 		GL11.glPushMatrix();
 		Item litem = itemstack.getItem();
 		
-		// アイテムの種類による表示位置の補正
+		
 		if (adjust) {
 			// GL11.glTranslatef(-0.0625F, 0.4375F, 0.0625F);
 			
@@ -476,7 +463,7 @@ public class ModelRenderer {
 			}
 		}
 		
-		// 描画
+		
 		if (pRealBlock && litem instanceof ItemSkull) {
 			String lsowner = "";
 			if (itemstack.hasTagCompound() && itemstack.getTagCompound().hasKey("SkullOwner")) {
@@ -502,12 +489,12 @@ public class ModelRenderer {
 //					Block.blocksList[itemstack.itemID],
 //					itemstack.getItemDamage(), 1.0F);
 
-// 2Dのアイテムとして描画されてしまうため	RenderManager.instance.itemRenderer.renderItem(pEntityLiving, itemstack, 0);
+
 			renderBlock(itemstack);
 
 			GL11.glDisable(GL11.GL_CULL_FACE);
 		} else {
-			// アイテムに色付け
+			
 //			pRender.loadTexture("/gui/items.png");
 			for (int j = 0; j <= (litem.requiresMultipleRenderPasses() ? 1 : 0); j++) {
 				int k = itemstack.getItem().getColorFromItemStack(itemstack, j);
@@ -556,20 +543,14 @@ public class ModelRenderer {
 		GL11.glPopMatrix();
 	}
 
-	/**
-	 *  回転変換を行う順序を指定。
-	 * @param pValue
-	 * Rot???を指定する
-	 */
+	
 	public void setRotatePriority(int pValue) {
 		rotatePriority = pValue;
 	}
 
-	/**
-	 * 内部実行用、座標変換部
-	 */
+	
 	protected void setRotation() {
-		// 変換順位の設定
+		
 		switch (rotatePriority) {
 		case RotXYZ:
 			if (rotateAngleZ != 0.0F) {
@@ -640,11 +621,9 @@ public class ModelRenderer {
 		}
 	}
 
-	/**
-	 * 内部実行用、レンダリング部分。
-	 */
+	
 	protected void renderObject(float par1, boolean pRendering) {
-		// レンダリング、あと子供も
+		
 		GL11.glGetFloat(GL11.GL_MODELVIEW_MATRIX, matrix);
 		if (pRendering && isRendering) {
 			GL11.glPushMatrix();
@@ -660,9 +639,7 @@ public class ModelRenderer {
 		}
 	}
 
-	/**
-	 * パーツ描画時点のマトリクスを設定する。 これ以前に設定されたマトリクスは破棄される。
-	 */
+	
 	public ModelRenderer loadMatrix() {
 		GL11.glLoadMatrix(matrix);
 		if (isInvertX) {
@@ -672,7 +649,7 @@ public class ModelRenderer {
 	}
 
 
-	// ゲッター、セッター
+	
 
 	public boolean getMirror() {
 		return mirror;
@@ -696,7 +673,7 @@ public class ModelRenderer {
 	}
 
 
-	// Deg付きは角度指定が度数法
+	
 
 	public float getRotateAngleX() {
 		return rotateAngleX;

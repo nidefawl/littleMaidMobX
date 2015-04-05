@@ -8,17 +8,15 @@ import cpw.mods.fml.relauncher.Side;
 
 public class Network
 {
-	//このMOD用のSimpleNetworkWrapperを生成。チャンネルの文字列は固有であれば何でも良い。MODIDの利用を推奨。
+	
 	private static SimpleNetworkWrapper INSTANCE;
 
 	public static void init(String ch)
 	{
 		INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(ch);
 
-		/*IMesssageHandlerクラスとMessageクラスの登録。
-		*第三引数：MessageクラスのMOD内での登録ID。256個登録できる
-		*第四引数：送り先指定。クライアントかサーバーか、Side.CLIENT Side.SERVER*/
-		// どうせまた変わるだろうから最低限のみ登録。メッセージの振り分けはMOD側で行う。
+		
+		
 		INSTANCE.registerMessage(MessageHandler.class, Message.class, 0, Side.SERVER);
 		INSTANCE.registerMessage(MessageHandler.class, Message.class, 0, Side.CLIENT);
 	}

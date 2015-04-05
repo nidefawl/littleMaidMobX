@@ -39,11 +39,11 @@ public class EntitySelect extends EntityLiving implements IModelCaps, ITextureEn
 
 	@Override
 	protected void entityInit() {
-		// Select用だから、これ別にいらんけどな。
+		
 		super.entityInit();
 		// color
 		dataWatcher.addObject(19, Integer.valueOf(0));
-		// 20:選択テクスチャインデックス
+		
 		dataWatcher.addObject(20, Integer.valueOf(0));
 	}
 
@@ -87,7 +87,7 @@ public class EntitySelect extends EntityLiving implements IModelCaps, ITextureEn
 		dataWatcher.updateObject(20, (Integer.valueOf(pIndex[0]) & 0xffff) | ((Integer.valueOf(pIndex[1]) & 0xffff) << 16));
 //		textureBox[0] = MMM_TextureManager.instance.getTextureBoxServer(textureIndex[0]);
 //		textureBox[1] = MMM_TextureManager.instance.getTextureBoxServer(textureIndex[1]);
-		// サイズの変更
+		
 //		setSize(textureBox[0].getWidth(entityCaps), textureBox[0].getHeight(entityCaps));
 	}
 
@@ -98,16 +98,14 @@ public class EntitySelect extends EntityLiving implements IModelCaps, ITextureEn
 //		textureBox[0] = pTextureBox[0];
 //		textureBox[1] = pTextureBox[1];
 //		setTextureNames();
-//		// 身長変更用
+
 //		setSize(textureBox[0].getWidth(null), textureBox[0].getHeight(null));
 //		setPosition(posX, posY, posZ);
-		// モデルの初期化
+		
 //		((MMM_TextureBox)textureBox[0]).models[0].setCapsValue(MMM_IModelCaps.caps_changeModel, this);
 	}
 
-	/**
-	 * テクスチャのファイル名を獲得
-	 */
+	
 	public void setTextureNames() {
 		textureData.setTextureNames();
 //		textures[0][0] = ((MMM_TextureBox)textureBox[0]).getTextureName(color + (contract ? 0 : MMM_TextureManager.tx_wild));
@@ -245,7 +243,7 @@ public class EntitySelect extends EntityLiving implements IModelCaps, ITextureEn
 
 	@Override
 	public int getBrightnessForRender(float par1) {
-		// 一定の明るさを返す
+		
 		return 0x00f000f0;
 	}
 

@@ -429,21 +429,21 @@ public class ModelLittleMaid_RX0 extends ModelLittleMaidBase {
 	@Override
 	public int showArmorParts(IModelCaps iModelCaps, int parts, int index) {
 		
-		// 鎧の表示用
+		
 		boolean f;
-		// 允E
+		
 		f = parts == 3 ? true : false;
 		bipedHead.setVisible(f);
-		// 鎧
+		
 		f = parts == 2 ? true : false;
 		bipedBody.setVisible(f);
 		bipedWaist.setVisible(f);
 		bipedRightArm.setVisible(f);
 		bipedLeftArm.setVisible(f);
-		// 脚甲
+		
 		f = parts == 1 ? true : false;
 		Skirt.setVisible(f);
-		// 臑彁E
+		
 		f = parts == 0 ? true : false;
 		bipedRightLeg.setVisible(f);
 		bipedLeftLeg.setVisible(f);

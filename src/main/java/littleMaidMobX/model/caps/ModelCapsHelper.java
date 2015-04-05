@@ -2,9 +2,7 @@ package littleMaidMobX.model.caps;
 
 import littleMaidMobX.CastHelper;
 
-/**
- * ModelCapsã�®è£œåŠ©é–¢æ•°ç¾¤
- */
+
 public class ModelCapsHelper {
 
 	public static Object getCapsValue(IModelCaps pOwner, int pCapsIndex, Object ...pArg) {

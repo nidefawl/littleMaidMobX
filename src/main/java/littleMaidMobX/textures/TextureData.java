@@ -16,36 +16,25 @@ import net.minecraft.util.ResourceLocation;
 
 
 
-/**
- * テクスチャ管理用の変数群をまとめたもの。
- */
+
 public class TextureData {
 	//public class MMM_TextureData implements MMM_ITextureEntity {
 
 	public EntityLivingBase owner;
 	public IModelCaps entityCaps;
 
-	/**
-	 * 使用されるテクスチャリソースのコンテナ
-	 */
+	
 	public ResourceLocation textures[][];
-	/**
-	 * 選択色
-	 */
+	
 	public int color;
-	/**
-	 * 契約テクスチャを選択するかどうか
-	 */
+	
 	public boolean contract;
 
 	public TextureBoxBase textureBox[];
 	public int textureIndex[];
 	public ModelMultiBase textureModel[];
 
-	/**
-	 * 表示制御に使うフラグ群<br>
-	 * int型32bitで保存。
-	 */
+	
 	public int selectValue;
 
 
@@ -58,29 +47,19 @@ public class TextureData {
 		owner = pEntity;
 		entityCaps = pCaps;
 		textures = new ResourceLocation[][] {
-			/**
-			 * 基本、発光
-			 */ {
+			 {
 				null, null
 			},
-			/**
-			 * アーマー内：頭、胴、腰、足
-			 */ {
+			 {
 				null, null, null, null
 			},
-			/**
-			 * アーマー外：頭、胴、腰、足
-			 */ {
+			 {
 				null, null, null, null
 			},
-			/**
-			 * アーマー内発光：頭、胴、腰、足
-			 */ {
+			 {
 				null, null, null, null
 			},
-			/**
-			 * アーマー外発光：頭、胴、腰、足
-			 */ {
+			 {
 				null, null, null, null
 			}
 		};
@@ -94,9 +73,7 @@ public class TextureData {
 		textureModel = new ModelMultiBase[3];
 	}
 
-	/**
-	 * テクスチャリソースを現在値に合わせて設定する。
-	 */
+	
 	public boolean setTextureNames() {
 		textureModel[0] = null;
 		textureModel[1] = null;
@@ -109,9 +86,7 @@ public class TextureData {
 		}
 	}
 
-	/**
-	 * テクスチャリソースを現在値に合わせて設定する。
-	 */
+	
 	protected boolean setTextureNamesClient() {
 		// Client
 		boolean lf = false;
@@ -127,7 +102,7 @@ public class TextureData {
 				lf = true;
 				textureModel[0] = lbox.models[0];
 			}
-			// TODO ★ 暫定処置 クライアントに存在しないテクスチャが指定された場合、デフォルトを読み出す。
+			
 			else {
 				lbox = ModelManager.instance.getDefaultTexture((ITextureEntity) owner);
 				textureBox[0] = textureBox[1] = lbox;
@@ -139,7 +114,7 @@ public class TextureData {
 					lf = true;
 					textureModel[0] = lbox.models[0];
 				} else {
-					// もう諦める
+					
 				}
 			}
 		} else {
@@ -203,14 +178,14 @@ public class TextureData {
 	public void setNextTexturePackege(int pTargetTexture) {
 		if (pTargetTexture == 0) {
 			int lc = getColor() + (isContract() ? 0 : ModelManager.tx_wild);
-			// TODO ★ 暫定処置
+			
 			if (textureBox[0] instanceof TextureBox) {
 				textureBox[0] = ModelManager.instance.getNextPackege((TextureBox) textureBox[0], lc);
 			} else {
 				textureBox[0] = null;
 			}
 			if (textureBox[0] == null) {
-				// 指定色が無い場合は標準モデルに
+				
 				textureBox[0] = textureBox[1] = ModelManager.instance.getDefaultTexture((ITextureEntity) owner);
 				setColor(12);
 			} else {
@@ -239,15 +214,13 @@ public class TextureData {
 		}
 	}
 
-	/**
-	 * 毎時処理
-	 */
+	
 	public void onUpdate() {
 
-		// 不具合対応
+		
 		// http://forum.minecraftuser.jp/viewtopic.php?f=13&t=23347&start=160#p210319
 		if (textureBox != null && textureBox.length > 0 && textureBox[0] != null) {
-			// モデルサイズのリアルタイム変更有り？
+			
 			if (textureBox[0].isUpdateSize) {
 				setSize();
 			}
@@ -257,7 +230,7 @@ public class TextureData {
 	protected void setSize() {
 
 		if (textureBox != null && textureBox.length > 0 && textureBox[0] != null) {
-			// サイズの変更
+			
 			//		owner.setSize(textureBox[0].getWidth(entityCaps), textureBox[0].getHeight(entityCaps));
 			if (owner instanceof EntityLittleMaid) {
 				((EntityLittleMaid) owner).setSize2(textureBox[0].getWidth(entityCaps), textureBox[0].getHeight(entityCaps));
@@ -266,7 +239,7 @@ public class TextureData {
 			}
 
 			if (owner instanceof EntityAgeable) {
-				// EntityAgeableはこれをしないと大きさ変更しないようになってる、くそう。
+				
 				((EntityAgeable) owner).setScaleForAge(owner.isChild());
 			}
 		}
@@ -346,17 +319,12 @@ public class TextureData {
 	}
 
 
-	/**
-	 * 野生の色をランダムで獲得する。
-	 */
+	
 	public int getWildColor() {
 		return textureBox[0].getRandomWildColor(owner.getRNG());
 	}
 
-	/**
-	 * テクスチャ名称からランダムで設定する。
-	 * @param pName
-	 */
+	
 	public void setTextureInitServer(String pName) {
 		LittleMaidMobX.Debug("request Init Texture: %s", pName);
 		textureIndex[0] = textureIndex[1] = ModelManager.instance.getIndexTextureBoxServer((ITextureEntity) owner, pName);
@@ -398,11 +366,7 @@ public class TextureData {
 		selectValue |= ((pFlag ? 1 : 0) << pIndex);
 	}
 
-	/**
-	 * 保有パラメーターの保存。<br>
-	 * サーバー用。
-	 * @param par1nbtTagCompound
-	 */
+	
 	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
 		NBTTagCompound lnbt = new NBTTagCompound();
 		lnbt.setIntArray("Textures", textureIndex);
@@ -412,11 +376,7 @@ public class TextureData {
 		par1nbtTagCompound.setTag("TextureData", lnbt);
 	}
 
-	/**
-	 * 保有パラメーターの読出。<br>
-	 * サーバー用。
-	 * @param par1nbtTagCompound
-	 */
+	
 	public void readToNBT(NBTTagCompound par1nbtTagCompound) {
 		if (par1nbtTagCompound.hasKey("TextureData")) {
 			NBTTagCompound lnbt = par1nbtTagCompound.getCompoundTag("TextureData");
@@ -428,7 +388,7 @@ public class TextureData {
 			if (intList.length > 0) {
 				setTexturePackIndex(color, intList);
 			} else {
-				// ローカルに在るデフォルトのテクスチャを設定
+				
 				TextureBox lbox = ModelManager.instance.getDefaultTexture((ITextureEntity) owner);
 				int li = ModelManager.instance.getIndexTextureBoxServerIndex(lbox);
 				setTexturePackIndex(color, new int[] {
@@ -460,17 +420,14 @@ public class TextureData {
 		return lf;
 	}
 
-	// パッケージ化用
-	/**
-	 * 監視用のdataWatcherを設定する。
-	 * @param pDataWatcher
-	 */
+	
+	
 	public void entityInit(DataWatcher pDataWatcher) {
 		// Color
 		pDataWatcher.addObject(data_Color, Byte.valueOf((byte) 0));
-		// 選択テクスチャインデックス
+		
 		pDataWatcher.addObject(data_Texture, Integer.valueOf(0));
-		// モデルパーツの表示フラグ
+		
 		pDataWatcher.addObject(data_Value, Integer.valueOf(0));
 	}
 

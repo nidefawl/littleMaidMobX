@@ -34,15 +34,15 @@ public class AIJumpToMaster extends EntityAIBase implements IEntityAI {
 	@Override
 	public boolean shouldExecute() {
 		if (!isEnable || !theMaid.isContractEX() || theMaid.isMaidWaitEx()) {
-			// 契約個体のみが跳ぶ
+			
 			return false;
 		}
 		if (theMaid.getLeashed()) {
-			// 括られているなら跳ばない
+			
 			return false;
 		}
 		if (theMaid.isFreedom()) {
-			// 自由行動の子は基点へジャンプ
+			
 			if (theMaid.homeWorld != theMaid.dimension) {
 				LittleMaidMobX.Debug(String.format("ID:%d, %d -> %d, Change HomeWorld. reset HomePosition.",
 						theMaid.getEntityId(),theMaid.homeWorld, theMaid.worldObj.provider.dimensionId));
@@ -72,7 +72,7 @@ public class AIJumpToMaster extends EntityAIBase implements IEntityAI {
 					return false;
 				}
 			} else {
-				// ターゲティング中は距離が伸びる
+				
 				if (theMaid.mstatMasterDistanceSq < (theMaid.isBloodsuck() ? 1024D : 256D)) {
 					return false;
 				}
@@ -99,7 +99,7 @@ public class AIJumpToMaster extends EntityAIBase implements IEntityAI {
 								&& theWorld.getBlock(i + l, k - 1, j + i1).isNormalCube()
 								&& !theWorld.getBlock(i + l, k, j + i1).isNormalCube()
 								&& !theWorld.getBlock(i + l, k + 1, j + i1).isNormalCube()) {
-							// 主の前に跳ばない
+							
 							double dd = theOwner.getDistanceSq(
 									(double) (i + l) + 0.5D + MathHelper.sin(theOwner.rotationYaw * 0.01745329252F) * 2.0D,
 									(double) k,
@@ -121,12 +121,12 @@ public class AIJumpToMaster extends EntityAIBase implements IEntityAI {
 				System.out.println("Owner is null");
 			}
 		} else {
-			// ホームポジションエリア外で転移
+			
 			int lx = theMaid.getHomePosition().posX;
 			int ly = theMaid.getHomePosition().posY;
 			int lz = theMaid.getHomePosition().posZ;
 			if (!(isCanJump(lx, ly, lz))) {
-				// ホームポジション消失
+				
 				LittleMaidMobX.Debug(String.format(
 						"ID:%d(%s) home lost.",
 						theMaid.getEntityId(), theMaid.worldObj.isRemote ? "C" : "W"));
@@ -134,7 +134,7 @@ public class AIJumpToMaster extends EntityAIBase implements IEntityAI {
 				int b;
 				// int c;
 				boolean f = false;
-				// ｙ座標で地面を検出
+				
 				for (a = 1; a < 6 && !f; a++) {
 					if (isCanJump(lx, ly + a, lz)) {
 						f = true;
@@ -150,7 +150,7 @@ public class AIJumpToMaster extends EntityAIBase implements IEntityAI {
 					}
 				}
 
-				// CW方向に検索領域を広げる
+				
 				loop_search: for (a = 2; a < 18 && !f; a += 2) {
 					lx--;
 					lz--;
@@ -206,9 +206,7 @@ public class AIJumpToMaster extends EntityAIBase implements IEntityAI {
 				theMaid.getEntityId(), theMaid.worldObj.isRemote ? "C" : "W"));
 	}
 
-	/**
-	 * 転移先のチェック
-	 */
+	
 	protected boolean isCanJump(int px, int py, int pz) {
 		double lw = (double) theMaid.width / 2D;
 		double ly = (double) py - (double) (theMaid.yOffset + theMaid.ySize);

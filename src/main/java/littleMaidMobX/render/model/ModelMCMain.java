@@ -55,17 +55,17 @@ public class ModelMCMain extends ModelMCBase {
 			}
 		}
 		if (textures.length > 2 && textures[2] != null) {
-			// Actors用
+			
 			model.setRotationAngles(par2, par3, par4, par5, par6, par7, entityCaps);
 			// Face
-			// TODO:テクスチャのロードはなんか考える。
+			
 			ClientHelper.setTexture(textures[2]);
 			model.setCapsValue(caps_renderFace, entityCaps, par2, par3, par4, par5, par6, par7, isRendering);
 			// Body
 			ClientHelper.setTexture(textures[0]);
 			model.setCapsValue(caps_renderBody, entityCaps, par2, par3, par4, par5, par6, par7, isRendering);
 		} else {
-			// 通常
+			
 			if (textures.length > 0 && textures[0] != null) {
 				ClientHelper.setTexture(textures[0]);
 			}
@@ -73,7 +73,7 @@ public class ModelMCMain extends ModelMCBase {
 		}
 		isAlphablend = false;
 		if (textures.length > 1 && textures[1] != null && renderCount == 0) {
-			// 発光パーツ
+			
 			ClientHelper.setTexture(textures[1]);
 			float var4 = 1.0F;
 			GL11.glEnable(GL11.GL_BLEND);
@@ -110,7 +110,7 @@ public class ModelMCMain extends ModelMCBase {
 	}
 
 
-	// IModelMMM追加分
+	
 
 	@Override
 	public void renderItems(EntityLivingBase pEntity, Render pRender) {
@@ -126,10 +126,7 @@ public class ModelMCMain extends ModelMCBase {
 		}
 	}
 
-	/**
-	 * Renderer辺でこの変数を設定する。
-	 * 設定値はIModelCapsを継承したEntitiyとかを想定。
-	 */
+	
 	@Override
 	public void setEntityCaps(IModelCaps pEntityCaps) {
 		entityCaps = pEntityCaps;
@@ -151,7 +148,7 @@ public class ModelMCMain extends ModelMCBase {
 	}
 
 
-	// IModelCaps追加分
+	
 
 	@Override
 	public Map<String, Integer> getModelCaps() {

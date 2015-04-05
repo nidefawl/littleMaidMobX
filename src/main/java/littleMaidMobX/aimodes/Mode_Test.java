@@ -24,9 +24,7 @@ import net.minecraft.util.ChatComponentText;
 public class Mode_Test extends ModeBase implements ICommand {
 
 	public static boolean isEnable = false;
-	/**
-	 * 各種実験用。 
-	 */
+	
 	public Mode_Test(EntityLittleMaid pEntity) {
 		super(pEntity);
 	}
@@ -50,7 +48,7 @@ public class Mode_Test extends ModeBase implements ICommand {
 	public void showSpecial(RenderLittleMaid prenderlittlemaid, double px, double py, double pz) {
 		if (!isEnable) return;
 		
-		// 名前とかの表示用
+		
 		List<String> llist = new ArrayList<String>();
 		double ld;
 		
@@ -96,7 +94,7 @@ public class Mode_Test extends ModeBase implements ICommand {
 	}
 
 	
-	// デバッグ表示コマンド追加用
+	
 	
 	@Override
 	public int compareTo(Object arg0) {
@@ -125,12 +123,12 @@ public class Mode_Test extends ModeBase implements ICommand {
 			switch (Integer.valueOf(var2[0])) {
 			case 0:
 				isEnable = false;
-				// TODO ★ p_152374_1_ はコマンドの実行権限のチェック用なので似たようなコマンドならなんでも良いはず？
+				
 				MinecraftWrapper.notifyAdmins(var1, new CommandTime(), 0, "LMM TestMessage Disable", new Object[] {});
 				break;
 			case 1:
 				isEnable = true;
-				// TODO ★ p_152374_1_ はコマンドの実行権限のチェック用なので似たようなコマンドならなんでも良いはず？
+				
 				MinecraftWrapper.notifyAdmins(var1, new CommandTime(), 0, "LMM TestMessage Enable", new Object[] {});
 				break;
 			case 2:
@@ -172,7 +170,7 @@ public class Mode_Test extends ModeBase implements ICommand {
 
 	@Override
 	public List addTabCompletionOptions(ICommandSender var1, String[] var2) {
-		// 特に変換しない
+		
 		return null;
 	}
 

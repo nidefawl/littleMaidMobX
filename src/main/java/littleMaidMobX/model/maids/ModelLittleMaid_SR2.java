@@ -7,9 +7,7 @@ import littleMaidMobX.render.model.ModelRenderer;
 
 
 
-/**
- * 瞬き付き基本形
- */
+
 public class ModelLittleMaid_SR2 extends ModelLittleMaidBase {
 
 	public ModelRenderer eyeR;
@@ -31,7 +29,7 @@ public class ModelLittleMaid_SR2 extends ModelLittleMaidBase {
 	public void initModel(float psize, float pyoffset, boolean isAfterInit) {
 		super.initModel(psize, pyoffset, isAfterInit);
 		
-		// 追加パーツ
+		
 		eyeR = new ModelRenderer(this, 32, 19);
 		eyeR.addPlate(-4.0F, -5.0F, -4.001F, 4, 4, 0, psize);
 		eyeR.setRotationPoint(0.0F, 0.0F, 0.0F);
@@ -47,7 +45,7 @@ public class ModelLittleMaid_SR2 extends ModelLittleMaidBase {
 		super.setLivingAnimations(pEntityCaps, par2, par3, pRenderPartialTicks);
 		
 		float f3 = (float)entityTicksExisted + pRenderPartialTicks + entityIdFactor;
-		// 目パチ
+		
 		if( 0 > mh_sin(f3 * 0.05F) + mh_sin(f3 * 0.13F) + mh_sin(f3 * 0.7F) + 2.55F) { 
 			eyeR.setVisible(true);
 			eyeL.setVisible(true);

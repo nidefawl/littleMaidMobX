@@ -10,8 +10,8 @@ import com.mojang.authlib.GameProfile;
 import cpw.mods.fml.common.Loader;
 
 
-// バージョン差分吸収をおこなう。
-// JAVAで#ifdef って使えないの？
+
+
 
 public class MinecraftWrapper
 {
@@ -36,9 +36,9 @@ public class MinecraftWrapper
 	{
 		String ownerName = instance.getOwnerName(entity);
 
-		// メイドがターゲットを探す際に、狼などのテイム可能なモブのオーナー名を取得してチェックする
-		// この時オーナー名が NULL だと NULL.isEmpty() と呼び出してしまいクラッシュする。
-		// ここにNULLチェックを入れてクラッシュを防ぐ
+		
+		
+		
 		// http://forum.minecraftuser.jp/viewtopic.php?f=13&t=23347&p=212078#p212038
 		return ownerName!=null? ownerName : "";
 	}

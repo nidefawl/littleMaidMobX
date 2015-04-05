@@ -14,33 +14,21 @@ import net.minecraft.util.ResourceLocation;
 
 public class TextureBox extends TextureBoxBase {
 
-	/**
-	 * テクスチャパックの名称、モデル指定詞の前までの文字列。
-	 */
+	
 	public String packegeName;
-	/**
-	 * テクスチャファイルのファイル名リスト。
-	 */
+	
 	public Map<Integer, ResourceLocation> textures;
-	/**
-	 * アーマーファイルのファイル名リスト。
-	 */
+	
 	public Map<String, Map<Integer, ResourceLocation>> armors;
-	/**
-	 * モデル指定詞
-	 */
+	
 	public String modelName;
-	/**
-	 * マルチモデルクラス
-	 */
+	
 	public ModelMultiBase[] models;
 	/**
 	 * pName, pTextureDir, pClassPrefix
 	 */
 	public String[] textureDir;
-	/**
-	 * テクスチャの格納されているパックの名前（モデルに関係なし）
-	 */
+	
 	public String fileName;
 
 
@@ -74,10 +62,7 @@ public class TextureBox extends TextureBoxBase {
 		isUpdateSize = (models != null && models[0] != null) ? ModelCapsHelper.getCapsValueBoolean(models[0], IModelCaps.caps_isUpdateSize) : false;
 	}
 
-	/**
-	 * テクスチャのフルパスを返す。
-	 * 登録インデックスが無い場合はNULLを返す。
-	 */
+	
 	public ResourceLocation getTextureName(int pIndex) {
 		if (textures.containsKey(pIndex)) {
 			return textures.get(pIndex);
@@ -90,8 +75,8 @@ public class TextureBox extends TextureBoxBase {
 	}
 
 	public ResourceLocation getArmorTextureName(int pIndex, ItemStack itemstack) {
-		// indexは0x40,0x50番台
-		// lightも追加
+		
+		
 		if (armors.isEmpty() || itemstack == null) return null;
 		if (!(itemstack.getItem() instanceof ItemArmor)) return null;
 		
@@ -100,8 +85,8 @@ public class TextureBox extends TextureBoxBase {
 			l = (10 * itemstack.getItemDamage() / itemstack.getMaxDamage());
 		}
 		
-		// 不具合修正
-		// 他MODの影響と思われるが、インデックスがarmorFilenamePrefixのサイズをオーバーしクラッシュすることがあるので丸める
+		
+		
 		// http://forum.minecraftuser.jp/viewtopic.php?f=13&t=23347&start=160#p211172
 		int renderIndex = ((ItemArmor)itemstack.getItem()).renderIndex;
 		if(renderIndex >= ModelManager.armorFilenamePrefix.length && ModelManager.armorFilenamePrefix.length > 0)
@@ -112,7 +97,7 @@ public class TextureBox extends TextureBoxBase {
 		return getArmorTextureName(pIndex, ModelManager.armorFilenamePrefix[renderIndex], l);
 	}
 	public ResourceLocation getArmorTextureName(int pIndex, String pArmorPrefix, int pDamage) {
-		// indexは0x40,0x50番台
+		
 		if (armors.isEmpty() || pArmorPrefix == null) return null;
 		
 		Map<Integer, ResourceLocation> m = armors.get(pArmorPrefix);
@@ -132,9 +117,7 @@ public class TextureBox extends TextureBoxBase {
 		return ls;
 	}
 
-	/**
-	 * 契約色の有無をビット配列にして返す
-	 */
+	
 	@Override
 	public int getContractColorBits() {
 		if (contractColor == -1) {
@@ -148,9 +131,7 @@ public class TextureBox extends TextureBoxBase {
 		}
 		return contractColor;
 	}
-	/**
-	 * 野生色の有無をビット配列にして返す
-	 */
+	
 	@Override
 	public int getWildColorBits() {
 		if (wildColor == -1) {

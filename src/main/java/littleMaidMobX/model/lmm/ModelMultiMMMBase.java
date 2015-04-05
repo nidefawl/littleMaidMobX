@@ -5,26 +5,16 @@ import littleMaidMobX.model.caps.IModelCaps;
 
 import org.lwjgl.opengl.GL11;
 
-/**
- * MMMの実験コードを含む部分。
- * ModelMultiBaseに追加するに足りるかをここで実験。
- * このクラスにある機能は予告なく削除される恐れが有るためご留意下さい。
- */
+
 public abstract class ModelMultiMMMBase extends ModelMultiBase {
 
-	/**
-	 * 削除予定変数使わないで下さい。
-	 */
+	
 	@Deprecated
 	public float onGround;
-	/**
-	 * 削除予定変数使わないで下さい。
-	 */
+	
 	@Deprecated
 	public float heldItemLeft;
-	/**
-	 * 削除予定変数使わないで下さい。
-	 */
+	
 	@Deprecated
 	public float heldItemRight;
 
@@ -42,9 +32,7 @@ public abstract class ModelMultiMMMBase extends ModelMultiBase {
 		initModel(pSizeAdjust, pYOffset, true);
 	}
 
-	/**
-	 * mainFrameに全てぶら下がっているならば標準で描画する。
-	 */
+	
 	@Override
 	public void render(IModelCaps pEntityCaps, float par2, float par3, float ticksExisted,
 			float pheadYaw, float pheadPitch, float par7, boolean pIsRender) {
@@ -52,34 +40,23 @@ public abstract class ModelMultiMMMBase extends ModelMultiBase {
 		mainFrame.render(par7, pIsRender);
 	}
 
-	/**
-	 * 通常のレンダリング前に呼ばれる。
-	 * @return falseを返すと通常のレンダリングをスキップする。
-	 */
+	
 	public boolean preRender(float par2, float par3,
 			float par4, float par5, float par6, float par7) {
 		return true;
 	}
 
-	/**
-	 * 通常のレンダリング後に呼ぶ。 基本的に装飾品などの自律運動しないパーツの描画用。
-	 */
+	
 	public void renderExtention(float par2, float par3,
 			float par4, float par5, float par6, float par7) {
 	}
 
-	/**
-	 * モデル切替時に実行されるコード
-	 * @param pEntityCaps
-	 * Entityの値を操作するためのModelCaps。
-	 */
+	
 	public void changeModel(IModelCaps pEntityCaps) {
-		// カウンタ系の加算値、リミット値の設定など行う予定。
+		
 	}
 
-	/**
-	 * 初期ロード時に実行
-	 */
+	
 	public void buildTexture() {
 		
 	}
@@ -121,18 +98,15 @@ public abstract class ModelMultiMMMBase extends ModelMultiBase {
 		return super.getCapsValue(pIndex, pArg);
 	}
 
-	// Actors実験区画
-	// このへん未だ未整理
+	
+	
 	public void renderFace(IModelCaps pEntityCaps, float par2, float par3, float ticksExisted,
 			float pheadYaw, float pheadPitch, float par7, boolean pIsRender) {
 	}
 	public void renderBody(IModelCaps pEntityCaps, float par2, float par3, float ticksExisted,
 			float pheadYaw, float pheadPitch, float par7, boolean pIsRender) {
 	}
-	/**
-	 * 表情をテクスチャのUVマップを変えることで表現
-	 * @param pIndex
-	 */
+	
 	public int setFaceTexture(int pIndex) {
 		// u = (int)(pIndex % 2) * 32 / 64
 		// v = (int)(pIndex / 2) * 32 / 32

@@ -12,10 +12,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 
-/**
- * ���֐߃��f��
- * �g��2.0�u���b�N��
- */
+
 public class ModelLittleMaid_Chloe2 extends ModelLittleMaidBase {
 
 	//added fields
@@ -41,21 +38,15 @@ public class ModelLittleMaid_Chloe2 extends ModelLittleMaidBase {
 	protected byte legPosY;
 	protected Random rand = new Random();
 
-	/**
-	 * �R���X�g���N�^�͑S�Čp�������邱��
-	 */
+	
 	public ModelLittleMaid_Chloe2() {
 		this(0F);
 	}
-	/**
-	 * �R���X�g���N�^�͑S�Čp�������邱��
-	 */
+	
 	public ModelLittleMaid_Chloe2(float psize) {
 		this(psize, 0F, 128, 64);
 	}
-	/**
-	 * �R���X�g���N�^�͑S�Čp�������邱��
-	 */
+	
 	public ModelLittleMaid_Chloe2(float psize, float pyoffset, int pTextureWidth, int pTextureHeight) {
 		super(psize, pyoffset, pTextureWidth, pTextureHeight);
 	}
@@ -102,13 +93,13 @@ public class ModelLittleMaid_Chloe2 extends ModelLittleMaidBase {
 
 		/* ARMS */
 		Arms = new ModelRenderer[18]; //Hand
-		// �莝��
+		
 		Arms[0] = new ModelRenderer(this, 0, 0);
 		Arms[0].setRotationPoint(-0.5F, 7F, 0F);
 		Arms[1] = new ModelRenderer(this, 0, 0);
 		Arms[1].setRotationPoint(0.5F, 7F, 0F);
 		Arms[1].isInvertX = true;
-		// �o�C�v���_�N�g�G�t�F�N�^�[
+		
 		Arms[2] = new ModelRenderer(this, 0, 0);
 		Arms[2].setRotationPoint(-3.5F, 11F, 6F);
 		Arms[2].setRotateAngle(0.78539816339744830961566084581988F, 0F, 0F);
@@ -116,7 +107,7 @@ public class ModelLittleMaid_Chloe2 extends ModelLittleMaidBase {
 		Arms[3].setRotationPoint(3.5F, 11F, 6F);
 		Arms[3].setRotateAngle(0.78539816339744830961566084581988F, 0F, 0F);
 		Arms[3].isInvertX = true;
-		// �e�[���\�[�h
+		
 		Arms[4] = new ModelRenderer(this, 0, 0);
 		Arms[4].setRotationPoint(-2F, 0F, 0F);
 		Arms[4].setRotateAngle(3.1415926535897932384626433832795F, 0F, 0F);
@@ -227,9 +218,7 @@ public class ModelLittleMaid_Chloe2 extends ModelLittleMaidBase {
 		return 0.5F;
 	}
 
-	/**
-	 * �p������E������
-	 */
+	
 	@Override
 	public void setLivingAnimations(IModelCaps pEntityCaps, float f, float f1, float pRenderPartialTicks)
 	{
@@ -346,10 +335,10 @@ public class ModelLittleMaid_Chloe2 extends ModelLittleMaidBase {
 		mainFrame.rotateAngleY = 0F;
 		mainFrame.rotateAngleZ = 0F;
 
-		//���˂���
+		
 		bipedHead.rotateAngleZ = ModelCapsHelper.getCapsValueFloat(pEntityCaps, caps_interestedAngle, (Float)pRenderPartialTicks);
 		if(ModelCapsHelper.getCapsValueBoolean(pEntityCaps, caps_isLookSuger))
-		{ //���邤��
+		{ 
 			float fe1 = rand.nextFloat() - 0.5F;
 			float fe2 = rand.nextFloat() - 0.5F;
 			float fe3 = rand.nextFloat() - 0.5F;
@@ -359,21 +348,21 @@ public class ModelLittleMaid_Chloe2 extends ModelLittleMaidBase {
 			eyeL.rotationPointY += fe2 * 0.05F;
 		}
 
-		// �܂΂��� from SR2
-		float blinkFreq = 0.18F; //�܂΂����p�x, min: 0
-		blinkFreq += 1F - (float)ModelCapsHelper.getCapsValueInt(pEntityCaps, caps_health) / 20F; //�̗͏��Ȃ��Ƃ܂΂��������Ȃ�
+		
+		float blinkFreq = 0.18F; 
+		blinkFreq += 1F - (float)ModelCapsHelper.getCapsValueInt(pEntityCaps, caps_health) / 20F; 
 		float idTicks = entityTicksExisted + pRenderPartialTicks + entityIdFactor;
-		float f3 = idTicks * 0.01F; //�ʑ�
-		float f4 = (float)(Math.sin(f3 * 3F) + Math.sin(f3 * 17F) + Math.sin(f3 * 37F) + blinkFreq-2.23309F); //�p���X��
-		if (f4 < 0) {//�J
+		float f3 = idTicks * 0.01F; 
+		float f4 = (float)(Math.sin(f3 * 3F) + Math.sin(f3 * 17F) + Math.sin(f3 * 37F) + blinkFreq-2.23309F); 
+		if (f4 < 0) {
 			eyeR.setVisible(true);
 			eyeL.setVisible(true);
-		} else {//��
+		} else {
 			eyeR.setVisible(false);
 			eyeL.setVisible(false);
 		}
 
-		//�r �p���ω�
+		
 		float legSlideDelay = idTicks % 2011 - 2000;
 		legSlideDelay = legSlideDelay<0 ? 0F : legSlideDelay / 10;
 		if(idTicks % 4022 < 2011)
@@ -385,12 +374,12 @@ public class ModelLittleMaid_Chloe2 extends ModelLittleMaidBase {
 		upperLeftLeg.rotateAngleX -= 0.18F * (1 - legSlideDelay);
 		bipedLeftLeg.rotateAngleX += 0.36F * (1 - legSlideDelay);
 
-		//�W�����v�ӂ��
+		
 		//EntityLivingBase ent = (EntityLivingBase)ModelCapsHelper.getCapsValue(pEntityCaps, caps_Entity);
 		//String var6 = EnumChatFormatting.getTextWithoutFormattingCodes(p_77043_1_.getCommandSenderName());
 		float velY = (float)ModelCapsHelper.getCapsValueDouble(pEntityCaps, caps_motionY) + 0.1F;
 		//velY = (var6.equals("Dinnerbone") || var6.equals("Grumm")) ? -velY : velY;
-		//�X�J�[�g
+		
 		float fwBuf0 = velY * 1.1F;
 		fwBuf0 = fwBuf0>0.5F ? 0.5F : fwBuf0;
 		fwBuf0 = fwBuf0<-0.5F ? -0.5F : fwBuf0;
@@ -405,7 +394,7 @@ public class ModelLittleMaid_Chloe2 extends ModelLittleMaidBase {
 		fwBuf2 = fwBuf2<-3F ? -3F : fwBuf2;
 		hemSkirtR2.rotationPointY  += fwBuf2;
 		hemSkirtL2.rotationPointY  += fwBuf2;
-		//��
+		
 		if(!ModelCapsHelper.getCapsValueBoolean(pEntityCaps, caps_isWet))
 		{
 			float fwBuf5 = velY * 2.1F;
@@ -417,16 +406,14 @@ public class ModelLittleMaid_Chloe2 extends ModelLittleMaidBase {
 		}
 	}
 
-	/**
-	 * �p������E�X�V����
-	 */
+	
 	@Override
 	public void setRotationAngles(float f, float f1, float ticksExisted, float pheadYaw, float pheadPitch, float f5, IModelCaps pEntityCaps)
 	{
-		//�����
+		
 		bipedHead.rotateAngleY += pheadYaw / 57.29578F;
 		bipedHead.rotateAngleX += pheadPitch / 57.29578F;
-		//�|�j�e�c�C���e
+		
 		Ponytail.rotateAngleX += BunchR.rotateAngleX = BunchL.rotateAngleX = -bipedHead.rotateAngleX;
 		Ponytail.rotateAngleZ -= bipedHead.rotateAngleZ;
 		if (bipedHead.rotateAngleZ > 0)
@@ -440,7 +427,7 @@ public class ModelLittleMaid_Chloe2 extends ModelLittleMaidBase {
 
 		if (isRiding)
 		{
-			// �w�����Ă���
+			
 			EntityLivingBase ent = (EntityLivingBase)ModelCapsHelper.getCapsValue(pEntityCaps, caps_Entity);
 			if(ent.ridingEntity instanceof EntityPlayer || ent.ridingEntity instanceof EntityLittleMaid)
 			{
@@ -468,7 +455,7 @@ public class ModelLittleMaid_Chloe2 extends ModelLittleMaidBase {
 				mainFrame.rotationPointY += 4F;
 				mainFrame.rotationPointZ += 1F;
 			}
-			// ��蕨�ɏ���Ă���
+			
 			else
 			{
 				upperRightArm.rotateAngleX -= 0.1F;
@@ -503,10 +490,10 @@ public class ModelLittleMaid_Chloe2 extends ModelLittleMaidBase {
 		}
 		else
 		{
-			if (isSneak) //���Ⴊ��
+			if (isSneak) 
 			{
 				if (isWait)
-				{//�G����
+				{
 					upperRightLeg.rotateAngleX -= 0.1F;
 					upperLeftLeg.rotateAngleX -= 0.2F;
 					bipedRightLeg.rotateAngleX += 1.7F;
@@ -514,7 +501,7 @@ public class ModelLittleMaid_Chloe2 extends ModelLittleMaidBase {
 					mainFrame.rotationPointY += 6F;
 				}
 				else
-				{//����
+				{
 					bipedBody.rotateAngleX += 0.7F;
 					hipBody.rotateAngleX -= 0.1F + (float)Math.sin(ticksExisted * 0.060F) * 0.03F;
 					upperRightArm.rotateAngleX += 0.1F;
@@ -527,7 +514,7 @@ public class ModelLittleMaid_Chloe2 extends ModelLittleMaidBase {
 					bipedLeftLeg.rotateAngleX += 0.22F;
 					mainFrame.rotationPointY += 0.4F;
 				}
-				//���Ⴊ�ݕ��s
+				
 				float f15 = (float)Math.sin(f * 0.6767F); //wave1
 				float f16 = (float)Math.cos(f * 0.6767F); //wave2
 				float f22 = f15 > f16 ? f15 : f16; //upper wave
@@ -551,7 +538,7 @@ public class ModelLittleMaid_Chloe2 extends ModelLittleMaidBase {
 			}
 			else
 			{
-				//�ʏ���s
+				
 				float f15 = (float)Math.sin(f * 0.5050F); //wave1
 				float f16 = (float)Math.cos(f * 0.5050F); //wave2
 				float f22 = f15 > f16 ? f15 : f16; //upper wave
@@ -575,7 +562,7 @@ public class ModelLittleMaid_Chloe2 extends ModelLittleMaidBase {
 			}
 		}
 
-		// �A�C�e�������Ă�Ƃ��̘r�U���}����+�\���p�I�t�Z�b�g
+		
 		if (heldItemLeft != 0)
 		{
 			bipedLeftArm.rotateAngleX = bipedLeftArm.rotateAngleX * 0.5F - (float)Math.PI * 0.1F * heldItemLeft;
@@ -591,7 +578,7 @@ public class ModelLittleMaid_Chloe2 extends ModelLittleMaidBase {
 		onGroundL = onGrounds[1];
 		if ((onGroundR > -9990F || onGroundL > -9990F) && !aimedBow)
 		{
-			// �r�U��
+			
 			float f6, f7, f8;
 			f6 = (float)Math.sin((float)Math.sqrt(onGroundR) * (float)Math.PI * 2.0F);
 			f7 = (float)Math.sin((float)Math.sqrt(onGroundL) * (float)Math.PI * 2.0F);
@@ -629,7 +616,7 @@ public class ModelLittleMaid_Chloe2 extends ModelLittleMaidBase {
 		}
 
 		if (isWait)
-		{// �ҋ@��� �r
+		{
 			upperRightArm.rotateAngleX += (float)Math.sin(ticksExisted * 0.060F) * 0.05F - 0.5F;
 			upperRightArm.rotateAngleZ -= 0.3F;
 			Arms[0].rotateAngleZ -= 1.5F;
@@ -646,7 +633,7 @@ public class ModelLittleMaid_Chloe2 extends ModelLittleMaidBase {
 		else
 		{
 			if (aimedBow)
-			{// �|�\�� �r
+			{
 				float f6 = (float)Math.sin(onGround * 3.141593F);
 				float f7 = (float)Math.sin((1.0F - (1.0F - onGround) * (1.0F - onGround)) * 3.141593F);
 				upperRightArm.rotateAngleZ = 0.0F;
@@ -667,7 +654,7 @@ public class ModelLittleMaid_Chloe2 extends ModelLittleMaidBase {
 				upperLeftArm.rotateAngleY += bipedHead.rotateAngleY;
 			}
 			else
-			{// �ʏ�
+			{
 				upperRightArm.rotateAngleZ += 0.2F;
 				upperLeftArm.rotateAngleZ -= 0.2F;
 				bipedRightArm.rotateAngleZ += 0.05F;
@@ -683,7 +670,7 @@ public class ModelLittleMaid_Chloe2 extends ModelLittleMaidBase {
 		Arms[2].setRotateAngle(-0.78539816339744830961566084581988F - upperRightArm.getRotateAngleX(), 0F, 0F);
 		Arms[3].setRotateAngle(-0.78539816339744830961566084581988F - upperLeftArm.getRotateAngleX(), 0F, 0F);
 
-		//�r���Ǐ]
+		
 		float sinBody1X = (float)Math.sin(bipedBody.rotateAngleX);
 		float cosBody1X = 1F - (float)Math.cos(bipedBody.rotateAngleX);
 		float sinBody2X = (float)Math.sin(bipedBody.rotateAngleX + hipBody.rotateAngleX);
@@ -705,7 +692,7 @@ public class ModelLittleMaid_Chloe2 extends ModelLittleMaidBase {
 
 		mainFrame.rotationPointY += legPosY * cosBody2X;
 
-		//�X�J�[�g�Ǐ]
+		
 		Skirt.rotationPointZ += legPosY * sinBody2X;
 		Skirt.rotationPointY -= legPosY * cosBody2X;
 

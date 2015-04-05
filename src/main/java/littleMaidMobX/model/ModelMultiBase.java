@@ -8,11 +8,7 @@ import littleMaidMobX.render.model.ModelRenderer;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 
-/**
- * マルチモデル用の基本クラス、これを継承していればマルチモデルとして使用できる。
- * Mincraftネイティブなクラスや継承関数などを排除して、難読化対策を行う。
- * 継承クラスではなくなったため、直接的な互換性はない。
- */
+
 public abstract class ModelMultiBase extends ModelBase implements IModelCaps {
 
 	public float heldItem[] = new float[] {0.0F, 0.0F};
@@ -28,11 +24,9 @@ public abstract class ModelMultiBase extends ModelBase implements IModelCaps {
 	
 	public float entityIdFactor;
 	public int entityTicksExisted;
-	// 変数である意味ない？
+	
 	public float scaleFactor = 0.9375F;
-	/**
-	 * モデルが持っている機能群
-	 */
+	
 	@SuppressWarnings("serial")
 	private final Map<String, Integer> fcapsmap = new HashMap<String, Integer>() {{
 		put("onGround",			caps_onGround);
@@ -66,123 +60,76 @@ public abstract class ModelMultiBase extends ModelBase implements IModelCaps {
 		
 		if (FMLCommonHandler.instance().getSide() == Side.CLIENT) {
 //			LMM_LittleMaidMobX.Debug("ModelMulti.InitClient");
-			// ハードポイント
+			
 			Arms = new ModelRenderer[2];
 			HeadMount = new ModelRenderer(this, "HeadMount");
 			HeadTop = new ModelRenderer(this, "HeadTop");
 		}
 	}
 
-	// 独自定義関数群
+	
 
-	/**
-	 * モデルの初期化コード
-	 * @param isAfterInit TODO
-	 */
+	
 	public abstract void initModel(float psize, float pyoffset, boolean isAfterInit);
 
-	/**
-	 * モデル指定詞に依らずに使用するテクスチャパック名。
-	 * 一つのテクスチャに複数のモデルを割り当てる時に使う。
-	 * @return
-	 */
+	
 	public String getUsingTexture() {
 		return null;
 	}
 
-	/**
-	 *  身長
-	 */
+	
 	@Deprecated
 	public abstract float getHeight();
-	/**
-	 *  身長
-	 */
+	
 	public float getHeight(IModelCaps pEntityCaps) {
 		return getHeight();
 	}
-	/**
-	 * 横幅
-	 */
+	
 	@Deprecated
 	public abstract float getWidth();
-	/**
-	 * 横幅
-	 */
+	
 	public float getWidth(IModelCaps pEntityCaps) {
 		return getWidth();
 	}
-	/**
-	 * モデルのYオフセット
-	 */
+	
 	@Deprecated
 	public abstract float getyOffset();
-	/**
-	 * モデルのYオフセット
-	 */
+	
 	public float getyOffset(IModelCaps pEntityCaps) {
 		return getyOffset();
 	}
-	/**
-	 * 上に乗せる時のオフセット高
-	 */
+	
 	@Deprecated
 	public abstract float getMountedYOffset();
-	/**
-	 * 上に乗せる時のオフセット高
-	 */
+	
 	public float getMountedYOffset(IModelCaps pEntityCaps) {
 		return getMountedYOffset();
 	}
 
-	/**
-	 * ロープの取り付け位置調整用
-	 * @return
-	 */
+	
 	public float getLeashOffset(IModelCaps pEntityCaps) {
 		return 0.4F;
 	}
 
-	/**
-	 * アイテムを持っているときに手を前に出すかどうか。
-	 */
+	
 	@Deprecated
 	public boolean isItemHolder() {
 		return false;
 	}
-	/**
-	 * アイテムを持っているときに手を前に出すかどうか。
-	 */
+	
 	public boolean isItemHolder(IModelCaps pEntityCaps) {
 		return isItemHolder();
 	}
 
-	/**
-	 * 表示すべきすべての部品
-	 */
+	
 	public abstract void showAllParts(IModelCaps pEntityCaps);
 
-	/**
-	 * 部位ごとの装甲表示。
-	 * @param iModelCaps TODO
-	 * @param parts
-	 * 3:頭部。
-	 * 2:胴部。
-	 * 1:脚部
-	 * 0:足部
-	 * @param index
-	 * 0:inner
-	 * 1:outer
-	 * @return
-	 * 戻り値は基本 -1
-	 */
+	
 	public int showArmorParts(IModelCaps iModelCaps, int parts, int index) {
 		return -1;
 	}
 
-	/**
-	 * ハードポイントに接続されたアイテムを表示する
-	 */
+	
 	public abstract void renderItems(IModelCaps pEntityCaps);
 
 	public abstract void renderFirstPersonHand(IModelCaps pEntityCaps);

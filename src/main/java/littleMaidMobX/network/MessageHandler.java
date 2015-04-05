@@ -7,7 +7,7 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
 public class MessageHandler implements IMessageHandler<Message, IMessage>
 {
-	@Override//IMessageHandlerのメソッド
+	@Override
 	public IMessage onMessage(Message message, MessageContext ctx)
 	{
 		if(message.data != null)
@@ -28,6 +28,6 @@ public class MessageHandler implements IMessageHandler<Message, IMessage>
 				}
 			}
 		}
-		return null;//本来は返答用IMessageインスタンスを返すのだが、旧来のパケットの使い方をするなら必要ない。
+		return null;
 	}
 }

@@ -27,11 +27,11 @@ import net.minecraft.world.World;
 public class EntityLittleMaidAvatar extends EntityPlayer {
 
 	public EntityLittleMaid avatar;
-	/** いらん？ **/
+	
 	public boolean isItemTrigger;
-	/** いらん？ **/
+	
 	public boolean isItemReload;
-	/** いらん？ **/
+	
 	private boolean isItemPreReload;
 	private double appendX;
 	private double appendY;
@@ -46,7 +46,7 @@ public class EntityLittleMaidAvatar extends EntityPlayer {
 	public EntityLittleMaidAvatar(World par1World, EntityLittleMaid par2EntityLittleMaid) {
 		super(par1World, MinecraftWrapper.newGameProfile("1", "LMM_EntityLittleMaidAvatar"));
 		
-		// 初期設定
+		
 		avatar = par2EntityLittleMaid;
 		dataWatcher = avatar.getDataWatcher();
 		
@@ -84,8 +84,8 @@ public class EntityLittleMaidAvatar extends EntityPlayer {
 	
 	@Override
 	protected void applyEntityAttributes() {
-		// 初期設定殺し
-		// 初期設定値はダミーに設定される。
+		
+		
 		super.applyEntityAttributes();
 //		this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.13000000417232513D);
 	}
@@ -134,7 +134,7 @@ public class EntityLittleMaidAvatar extends EntityPlayer {
 
 	@Override
 	public void onItemPickup(Entity entity, int i) {
-		// アイテム回収のエフェクト
+		
 		if (worldObj.isRemote) {
 			// Client
 			LittleMaidMobX.proxy.onItemPickup(this, entity, i);
@@ -201,16 +201,11 @@ public class EntityLittleMaidAvatar extends EntityPlayer {
 	public ItemStack[] getLastActiveItems() {
 		return avatar.getLastActiveItems();
 	}
-/*
-	@Override
-	protected void alertWolves(EntityLivingBase par1EntityLiving, boolean par2) {
-		// ここを設定しちゃうと通常ではぬるぽ落ちする
-	}
-*/
+
 	@Override
 	public void destroyCurrentEquippedItem() {
-		// アイテムが壊れたので次の装備を選択
-		// TODO:但し、Forge等でプレーヤーイベントを設定しているものだとぬるぽ落ちするので、何らかの対策が必要。
+		
+		
 //		super.destroyCurrentEquippedItem();
 		inventory.setInventorySlotContents(inventory.currentItem, (ItemStack)null);
 		avatar.getNextEquipItem();
@@ -225,7 +220,7 @@ public class EntityLittleMaidAvatar extends EntityPlayer {
 		return worldObj.isRemote ? null : this;
 	}
 
-	// Item使用関連
+	
 
 	public int getItemInUseDuration(int pIndex) {
 		return avatar.getSwingStatus(pIndex).getItemInUseDuration();
@@ -359,15 +354,15 @@ public class EntityLittleMaidAvatar extends EntityPlayer {
 
 //	@Override
 //	public void sendChatToPlayer(ChatMessageComponent var1) {
-//		// チャットメッセージは使わない。
+
 //	}
 
 	@Override
 	public void addChatMessage(IChatComponent var1) {
-		// チャットメッセージは使わない。
+		
 	}
 
-	// 不要？
+	
 
 	@Override
 	protected void setHideCape(int par1, boolean par2) {}
@@ -393,9 +388,7 @@ public class EntityLittleMaidAvatar extends EntityPlayer {
 		return avatar.getAbsorptionAmount();
 	}
 
-	/**
-	 * 属性値リストを取得
-	 */
+	
 	public BaseAttributeMap getAttributeMap() {
 //		return super.func_110140_aT();
 		return avatar == null ? super.getAttributeMap() : avatar.getAttributeMap();
@@ -427,7 +420,7 @@ public class EntityLittleMaidAvatar extends EntityPlayer {
 	}
 
 	public void getValue() {
-		// EntityLittleMaidから値をコピー
+		
 		setPosition(avatar.posX, avatar.posY, avatar.posZ);
 		prevPosX = avatar.prevPosX;
 		prevPosY = avatar.prevPosY;
@@ -444,7 +437,7 @@ public class EntityLittleMaidAvatar extends EntityPlayer {
 	}
 
 	public void getValueVector(double atx, double aty, double atz, double atl) {
-		// EntityLittleMaidから値をコピー
+		
 		double l = MathHelper.sqrt_double(atl);
 		appendX = atx / l;
 		appendY = aty / l;
@@ -470,11 +463,9 @@ public class EntityLittleMaidAvatar extends EntityPlayer {
 		isSwingInProgress = avatar.getSwinging();
 	}
 
-	/**
-	 * 射撃管制用、rotationを頭に合わせる
-	 */
+	
 	public void getValueVectorFire(double atx, double aty, double atz, double atl) {
-		// EntityLittleMaidから値をコピー
+		
 		double l = MathHelper.sqrt_double(atl);
 		appendX = atx / l;
 		appendY = aty / l;
@@ -508,7 +499,7 @@ public class EntityLittleMaidAvatar extends EntityPlayer {
 
 
 	public void setValue() {
-		// EntityLittleMiadへ値をコピー
+		
 		avatar.setPosition(posX, posY, posZ);
 		avatar.prevPosX = prevPosX;
 		avatar.prevPosY = prevPosY;
@@ -524,7 +515,7 @@ public class EntityLittleMaidAvatar extends EntityPlayer {
 	}
 
 	public void setValueRotation() {
-		// EntityLittleMiadへ値をコピー
+		
 		avatar.rotationPitch = rotationPitch;
 		avatar.rotationYaw = rotationYaw;
 		avatar.prevRotationPitch = prevRotationPitch;
@@ -539,7 +530,7 @@ public class EntityLittleMaidAvatar extends EntityPlayer {
 	}
 
 	public void setValueVector() {
-		// EntityLittleMiadへ値をコピー
+		
 		avatar.posX = posX - appendX;
 		avatar.posY = posY - appendY;
 		avatar.posZ = posZ - appendZ;

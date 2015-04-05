@@ -18,7 +18,7 @@ public abstract class ModelBase {
 
 	public Render render;
 
-	// ModelBaseとある程度互換
+	
 	public int textureWidth = 64;
 	public int textureHeight = 32;
 	public float onGrounds[] = new float[] {0.0F, 0.0F};
@@ -30,7 +30,7 @@ public abstract class ModelBase {
 
 
 
-	// ModelBase互換関数群
+	
 
 	public void render(IModelCaps pEntityCaps, float par2, float par3,
 			float ticksExisted, float pheadYaw, float pheadPitch, float par7, boolean pIsRender) {
@@ -44,14 +44,14 @@ public abstract class ModelBase {
 	}
 
 	public ModelRenderer getRandomModelBox(Random par1Random) {
-		// 膝に矢を受けてしまってな・・・
+		
 		int li = par1Random.nextInt(this.boxList.size());
 		ModelRenderer lmr = (ModelRenderer)this.boxList.get(li);
 		for (int lj = 0; lj < boxList.size(); lj++) {
 			if (!lmr.cubeList.isEmpty()) {
 				break;
 			}
-			// 箱がない
+			
 			if (++li >= boxList.size()) {
 				li = 0;
 			}
@@ -64,16 +64,14 @@ public abstract class ModelBase {
 		modelTextureMap.put(par1Str, new TextureOffset(par2, par3));
 	}
 
-	/**
-	 * 推奨されません。
-	 */
+	
 	public TextureOffset getTextureOffset(String par1Str) {
-		// このままだと意味ないな。
+		
 		return modelTextureMap.get(par1Str);
 	}
 
 
-	// MathHelperトンネル関数群
+	
 
 	public static final float mh_sin(float f) {
 		f = f % 6.283185307179586F;

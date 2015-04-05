@@ -55,17 +55,7 @@ public class Mode_Basic extends ModeBlockBase {
 	
 	@Override
 	public void init() {
-		/* langファイルに移動
-		ModLoader.addLocalization("littleMaidMob.mode.Strike", "Strike");
-		ModLoader.addLocalization("littleMaidMob.mode.Wait", "Wait");
-		ModLoader.addLocalization("littleMaidMob.mode.Wild", "Wild");
-		ModLoader.addLocalization("littleMaidMob.mode.Wild", "ja_JP", "野生種");
-		ModLoader.addLocalization("littleMaidMob.mode.Escorter", "Escorter");
-		ModLoader.addLocalization("littleMaidMob.mode.Escorter", "ja_JP", "従者");
-		ModLoader.addLocalization("littleMaidMob.mode.F-Escorter", "Freedom");
-		ModLoader.addLocalization("littleMaidMob.mode.D-Escorter", "D-Escorter");
-		ModLoader.addLocalization("littleMaidMob.mode.T-Escorter", "Tracer");
-		*/
+		
 	}
 
 	@Override
@@ -107,7 +97,7 @@ public class Mode_Basic extends ModeBlockBase {
 
 	@Override
 	public boolean changeMode(EntityPlayer pentityplayer) {
-		// 強制的に割り当てる
+		
 		owner.setMaidMode("Escorter");
 		return true;
 	}
@@ -144,7 +134,7 @@ public class Mode_Basic extends ModeBlockBase {
 	public boolean isSearchBlock() {
 		if (owner.getMaidModeInt() == mmode_Escorter && owner.isFreedom() &&
 				owner.maidInventory.getFirstEmptyStack() == -1) {
-			// 対象をまだ見つけていないときは検索を行う。
+			
 			fDistance = 100F;
 			return myInventory == null;
 		}
@@ -165,15 +155,15 @@ public class Mode_Basic extends ModeBlockBase {
 			return false;
 		}
 		if (((IInventory)ltile).getSizeInventory() < 18) {
-			// インベントリのサイズが１８以下なら対象としない。
+			
 			return false;
 		}
 		
-		// 世界のメイドから
+		
 		if (checkWorldMaid(ltile)) return false;
-		// 使用済みチェック
+		
 		if (fusedTiles.contains(ltile)) {
-			// 既に通り過ぎた場所よッ！
+			
 			return false;
 		}
 		
@@ -187,17 +177,17 @@ public class Mode_Basic extends ModeBlockBase {
 
 	@Override
 	public boolean overlooksBlock(int pMode) {
-		// チェストカートの検索
+		
 		List<Entity> list = owner.worldObj.getEntitiesWithinAABB(IInventory.class, owner.boundingBox.expand(8D, 2D, 8D));
 		double cartl = 256D;
 		for (Entity lentity : list) {
 			if (!fusedTiles.contains(lentity)) {
 				if (((IInventory)lentity).getSizeInventory() < 18) {
-					// インベントリが一定サイズ以下はスキップ
+					
 					continue;
 				}
 				double lr = lentity.getDistanceSqToEntity(owner);
-				// 見える位置にある最も近い調べていないカートチェスト
+				
 				
 				if (fDistance > lr && owner.getEntitySenses().canSee(lentity)) {
 					myInventory = (IInventory)lentity;
@@ -242,34 +232,34 @@ public class Mode_Basic extends ModeBlockBase {
 	public boolean executeBlock(int pMode, int px, int py, int pz) {
 //		isMaidChaseWait = true;
 		if (myInventory instanceof TileEntityChest) {
-			// ブロック系のチェスト
+			
 			TileEntityChest lchest = (TileEntityChest)myInventory;
 			if (!lchest.isInvalid()) {
-				// 使用直前に可視判定
+				
 				if (Helper.canBlockBeSeen(owner, lchest.xCoord, lchest.yCoord, lchest.zCoord, false, true, false)) {
 					if (myChest == null) {
 						getChest();
 						if (myChest != null) {
 							myChest.openInventory();
 						} else {
-							// 開かないチェスト
+							
 							myInventory = null;
 						}
 					}
-					// チェストに収納
+					
 					owner.setWorking(true);
 					putChest();
 					return true;
 				} else {
-					// 見失った
+					
 					clearMy();
 				}
 			} else {
-				// Tileの消失
+				
 				clearMy();
 			}
 		} else {
-			// 想定外のインベントリ
+			
 			if (myInventory != null) {
 				fusedTiles.add(myInventory);
 			}
@@ -280,15 +270,15 @@ public class Mode_Basic extends ModeBlockBase {
 
 	@Override
 	public boolean outrangeBlock(int pMode, int pX, int pY, int pZ) {
-		// チェストまでのパスを作る
+		
 		boolean lf = false;
 		if (!owner.isMaidWaitEx()) {
 			double distance;
 			if (myInventory instanceof TileEntity) {
 				distance = owner.getDistanceTilePos();
 				if (distance == lastdistance) {
-					// TODO:現状無意味
-					// 移動が固まらないように乱数加速
+					
+					
 					LittleMaidMobX.Debug("Assert.");
 					owner.updateWanderPath();
 					lf = true;
@@ -299,7 +289,7 @@ public class Mode_Basic extends ModeBlockBase {
 				distance = 0;
 			}
 			lastdistance = distance;
-			// レンジ外のチェストは閉じる
+			
 			if (myChest != null) {
 				myChest.closeInventory();
 				myChest = null;
@@ -316,11 +306,11 @@ public class Mode_Basic extends ModeBlockBase {
 
 
 	protected boolean getChest() {
-		// チェストを獲得
+		
 		if (myInventory == null) {
 			return false;
 		}
-		// 検索済みにスタック
+		
 		fusedTiles.add(myInventory);
 		if (myInventory instanceof TileEntityChest) {
 			TileEntityChest lchest = (TileEntityChest)myInventory;
@@ -344,9 +334,9 @@ public class Mode_Basic extends ModeBlockBase {
 	}
 
 	protected void putChest() {
-		// チェストに近接
+		
 		if (owner.getSwingStatusDominant().canAttack() && myChest != null) {
-			// 砂糖、時計、被っているヘルム以外のアイテムを突っ込む
+			
 			ItemStack is;
 			LittleMaidMobX.Debug(String.format("getChest:%d", maidSearchCount));
 			while ((is = owner.maidInventory.getStackInSlot(maidSearchCount)) == null && maidSearchCount < owner.maidInventory.mainInventory.length) {
@@ -397,12 +387,12 @@ public class Mode_Basic extends ModeBlockBase {
 			}
 //			mod_littleMaidMob.Debug(String.format("getchest3:%d", maidSearchCount));
 			if (++maidSearchCount >= owner.maidInventory.mainInventory.length) {
-				// 検索済みの対象をスタック
+				
 //				serchedChest.add(myChest);
 				clearMy();
 				lastdistance = 0D;
 				LittleMaidMobX.Debug("endChest.");
-				// 空きができたら捜索終了
+				
 				if (owner.maidInventory.getFirstEmptyStack() > -1) {
 					LittleMaidMobX.Debug("Search clear.");
 					fusedTiles.clear();
@@ -414,7 +404,7 @@ public class Mode_Basic extends ModeBlockBase {
 	@Override
 	public boolean attackEntityAsMob(int pMode, Entity pEntity) {
 		if (pEntity == myInventory) {
-			// チェスト付カートとか
+			
 			Entity lentity = (Entity)myInventory;
 			if (!lentity.isDead) {
 				if (owner.getDistanceSqToEntity(lentity) < 5D)	{
@@ -427,14 +417,14 @@ public class Mode_Basic extends ModeBlockBase {
 					if (myChest != null) {
 						owner.getLookHelper().setLookPositionWithEntity(lentity, 30F, 40F);
 					}
-					// チェストに収納
+					
 					putChest();
 				} else {
-					// チェストまでのパスを作る
+					
 					if (!owner.isMaidWaitEx()) {
 						double distance = owner.getDistanceSqToEntity(lentity);
 						if (distance == lastdistance) {
-							// TODO: 現状無意味
+							
 							LittleMaidMobX.Debug("Assert.");
 							owner.updateWanderPath();
 						} else {
@@ -449,12 +439,12 @@ public class Mode_Basic extends ModeBlockBase {
 					}
 				}
 			} else {
-				// Entityの死亡
+				
 				clearMy();
 			}
 			return true;
 		} else {
-			// ターゲットが変わってる？
+			
 			clearMy();
 		}
 		return true;
@@ -470,27 +460,27 @@ public class Mode_Basic extends ModeBlockBase {
 
 	@Override
 	public boolean preInteract(EntityPlayer pentityplayer, ItemStack pitemstack) {
-		// しゃがみ時は処理無効
+		
 		if (pentityplayer.isSneaking()) {
 			return false;
 		}
 		if (owner.isContract()) {
-			// 契約状態
+			
 			if (owner.isEntityAlive() && owner.isMaidContractOwner(pentityplayer)) {
 				if (pitemstack != null) {
-					// 追加分の処理
+					
 					owner.setPathToEntity(null);
 					if (owner.isRemainsContract()) {
 						if (pitemstack.getItem() instanceof ItemAppleGold) {
-							// ゴールデンアッポー
+							
 							if(!owner.worldObj.isRemote) {
 								((ItemAppleGold)pitemstack.getItem()).onEaten(pitemstack, owner.worldObj, owner.maidAvatar);
 							}
-// TODO ★ onEatenに変えたのでいらない？		MMM_Helper.decPlayerInventory(pentityplayer, -1, 1);
+
 							return true;
 						}
 						else if (pitemstack.getItem() instanceof ItemBucketMilk && !owner.getActivePotionEffects().isEmpty()) {
-							// 牛乳に相談だ
+							
 							if(!owner.worldObj.isRemote) {
 								owner.clearActivePotions();
 							}

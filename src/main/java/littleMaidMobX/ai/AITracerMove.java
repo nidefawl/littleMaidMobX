@@ -47,8 +47,8 @@ public class AITracerMove extends EntityAIBase implements IEntityAI {
 
 	@Override
 	public void startExecuting() {
-		// ルート策定
-		// ターゲットをサーチ
+		
+		
 		int ox = MathHelper.floor_double(theMaid.posX);
 		int oy = MathHelper.floor_double(theMaid.posY);
 		int oz = MathHelper.floor_double(theMaid.posZ);
@@ -62,7 +62,7 @@ public class AITracerMove extends EntityAIBase implements IEntityAI {
 		EntityDummy.clearDummyEntity(theMaid);
 		boolean flagdammy = false;
 		
-		// CW方向に検索領域を広げる 
+		
 		for (int d = 0; d < 4; d++) {
 			for (int a = 2; a < 14; a += 2) {
 				int del = a / 2;
@@ -92,7 +92,7 @@ public class AITracerMove extends EntityAIBase implements IEntityAI {
 					for (int c = 0; c < 3; c++) {
 						yy = oy + (c == 2 ? -1 : c);
 						if (checkBlock(xx, yy, zz)) {
-							// 最も近いポイントの判定
+							
 							double lr = theMaid.getDistanceSq(xx, yy, zz);
 							if (lr < lrange) {
 								if (doFindBlock(xx, yy, zz)) {
@@ -140,17 +140,12 @@ public class AITracerMove extends EntityAIBase implements IEntityAI {
 		}
 	}
 
-	/**
-	 * 指定座標のブロックは探しているものか？
-	 */
+	
 	protected boolean checkBlock(int px, int py, int pz) {
 		return world.getBlockPowerInput(px, py, pz) > 0 && (world.getBlock(px, py + 1, pz).getMaterial() == Material.air);
 	}
 
-	/**
-	 * 見つけたブロックに対する動作。
-	 * trueを返すとループ終了。
-	 */
+	
 	protected boolean doFindBlock(int px, int py, int pz) {
 		return theMaid.getNavigator().tryMoveToXYZ(px, py, pz, 1.0F);
 //		return theMaid.getNavigator().tryMoveToXYZ(px, py, pz, theMaid.getAIMoveSpeed());

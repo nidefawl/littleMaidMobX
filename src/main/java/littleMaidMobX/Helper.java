@@ -60,7 +60,7 @@ public class Helper {
 	protected static Map<String, Integer> entityIDList = new HashMap<String, Integer>();
 	
 	static {
-		// TODO å¿…è¦�ã�ªã�„ï¼Ÿ
+		
 //		fpackage = ModLoader.class.getPackage();
 //		packegeBase = "";//fpackage == null ? "" : fpackage.getName().concat(".");
 
@@ -92,22 +92,15 @@ public class Helper {
 		*/
 	}
 
-	/**
-	 * ç�¾åœ¨ã�®å®Ÿè¡Œç’°å¢ƒã�Œãƒ­ãƒ¼ã‚«ãƒ«ã�‹ã�©ã�†ã�‹ã‚’åˆ¤å®šã�™ã‚‹ã€‚
-	 */
+	
 	public static boolean isLocalPlay() {
 		return isClient && mc.isIntegratedServerRunning();
 	}
 
-	/**
-	 * ãƒžãƒ«ãƒ�å¯¾å¿œç”¨ã€‚
-	 * ItemStackã�«æƒ…å ±æ›´æ–°ã‚’è¡Œã�†ã�¨ã€�ã‚µãƒ¼ãƒ�ãƒ¼å�´ã�¨ã�®å·®ç•°ã�‹ã‚‰Slotã�®ã‚¢ãƒƒãƒ—ãƒ‡ãƒ¼ãƒˆã�Œè¡Œã‚�ã‚Œã‚‹ã€‚
-	 * ã��ã�®éš›ã€�UsingItemã�®æ›´æ–°å‡¦ç�†ã�Œè¡Œã‚�ã‚Œã�ªã�„ã�Ÿã‚�é�•ã�†ã‚¢ã‚¤ãƒ†ãƒ ã�«æŒ�æ›¿ã�ˆã‚‰ã‚Œã�Ÿã�¨åˆ¤å®šã�•ã‚Œã‚‹ã€‚
-	 * ã�“ã�“ã�§ã�¯æ¯”è¼ƒç”¨ã�«ä½¿ã‚�ã‚Œã‚‹ã‚¹ã‚¿ãƒƒã‚¯ãƒªã‚¹ãƒˆã‚’å¼·åˆ¶çš„ã�«æ›¸æ�›ã�ˆã‚‹äº‹ã�«ã‚ˆã‚Šå¯¾å¿œã�—ã�Ÿã€‚
-	 */
+	
 	public static void updateCheckinghSlot(Entity pEntity, ItemStack pItemstack) {
 		if (pEntity instanceof EntityPlayerMP) {
-			// ã‚µãƒ¼ãƒ�ãƒ¼å�´ã�§ã�®ã�¿å‡¦ç�†
+			
 			EntityPlayerMP lep = (EntityPlayerMP)pEntity;
 			Container lctr = lep.openContainer;
 			for (int li = 0; li < lctr.inventorySlots.size(); li++) {
@@ -125,22 +118,10 @@ public class Helper {
 		return player.getGameProfile().getName();
 	}
 	
-	/**
-	 * Forgeç”¨ã‚¯ãƒ©ã‚¹ç�²å¾—ã€‚
-	 */
-	/*
-	ä½¿ç”¨ç®‡æ‰€ç„¡ã�— å‰Šé™¤
-	public static Class getForgeClass(BaseMod pMod, String pName) {
-		if (isForge) {
-			pName = pName.concat("_Forge");
-		}
-		return getNameOfClass(pName);
-	}
-	*/
+	
+	
 
-	/**
-	 * å��å‰�ã�‹ã‚‰ã‚¯ãƒ©ã‚¹ã‚’ç�²å¾—ã�™ã‚‹
-	 */
+	
 	public static Class getNameOfClass(String pName) {
 		if (fpackage != null) {
 			pName = fpackage.getName() + "." + pName;
@@ -155,9 +136,7 @@ public class Helper {
 		return lclass;
 	}
 
-	/**
-	 * é€�ä¿¡ç”¨ãƒ‡ãƒ¼ã‚¿ã�®ã‚»ãƒƒãƒˆ
-	 */
+	
 	public static void setValue(byte[] pData, int pIndex, int pVal, int pSize) {
 		for (int li = 0; li < pSize; li++) {
 			pData[pIndex++] = (byte)(pVal & 0xff);
@@ -208,9 +187,9 @@ public class Helper {
 		}
 	}
 
-	// çŠ¶æ³�åˆ¤æ–­è¦�é–¢æ•°ç¾¤
+	
 	public static boolean canBlockBeSeen(Entity pEntity, int x, int y, int z, boolean toTop, boolean do1, boolean do2) {
-		// ãƒ–ãƒ­ãƒƒã‚¯ã�®å�¯è¦–åˆ¤å®š
+		
 		Vec3 vec3d = Vec3.createVectorHelper(pEntity.posX, pEntity.posY + pEntity.getEyeHeight(), pEntity.posZ);
 		Vec3 vec3d1 = Vec3.createVectorHelper((double)x + 0.5D, (double)y + (toTop ? 0.9D : 0.5D), (double)z + 0.5D);
 		
@@ -229,10 +208,10 @@ public class Helper {
 	}
 
 	public static boolean setPathToTile(EntityLiving pEntity, TileEntity pTarget, boolean flag) {
-		// Tileã�¾ã�§ã�®ãƒ‘ã‚¹ã‚’ä½œã‚‹
+		
 		PathNavigate lpn = pEntity.getNavigator();
 		float lspeed = 1.0F;
-		// å�‘ã��ã�«å�ˆã‚�ã�›ã�¦è·�é›¢ã‚’èª¿æ•´
+		
 		int i = (pTarget.yCoord == MathHelper.floor_double(pEntity.posY) && flag) ? 2 : 1;
 		switch (pEntity.worldObj.getBlockMetadata(pTarget.xCoord, pTarget.yCoord, pTarget.zCoord)) {
 		case 3:
@@ -248,95 +227,11 @@ public class Helper {
 		}
 	}
 
-	/**
-	 * Modloaderç’°å¢ƒä¸‹ã�§ç©ºã�„ã�¦ã�„ã‚‹EntityIDã‚’è¿”ã�™ã€‚
-	 * æœ‰åŠ¹ã�ªå€¤ã‚’ç�²å¾—ã�§ã��ã�ªã�‘ã‚Œã�°-1ã‚’è¿”ã�™ã€‚
-	 */
-	/*
-	private static int getNextEntityID(boolean isLiving) {
-		if (isLiving) {
-			// ç”Ÿç‰©ç”¨
-			for (int li = 1; li < 256; li++) {
-				if (EntityList.getClassFromID(li) == null) {
-					return li;
-				}
-			}
-		} else {
-			// ç‰©ç”¨
-			for (int li = MMMLib.cfg_startVehicleEntityID; li < MMMLib.cfg_startVehicleEntityID + 2048; li++) {
-				if (EntityList.getClassFromID(li) == null) {
-					return li;
-				}
-			}
-		}
-		return -1;
-	}
-	*/
+	
+	
 
-	/**
-	 * Entityã‚’ç™»éŒ²ã�™ã‚‹ã€‚
-	 * RMLã€�Forgeä¸¡å¯¾å¿œã€‚
-	 * @param entityclass
-	 * @param entityName
-	 * @param defaultId
-	 * 0 : ã‚ªãƒ¼ãƒˆã‚¢ã‚µã‚¤ãƒ³
-	 * @param mod
-	 * @param uniqueModeName
-	 * @param trackingRange
-	 * @param updateFrequency
-	 * @param sendVelocityUpdate
-	 */
-	/*
-	public static int registerEntity(
-			Class<? extends Entity> entityclass, String entityName, int defaultId,
-			BaseMod mod, int trackingRange, int updateFrequency, boolean sendVelocityUpdate,
-			int pEggColor1, int pEggColor2) {
-		int lid = 0;
-		lid = getModEntityID(mod.getName());
-		if (isForge) {
-			try {
-				Method lmethod;
-				// EntityIDã�®ç�²å¾—
-				lmethod = entityRegistry.getMethod("findGlobalUniqueEntityId");
-				defaultId = (Integer)lmethod.invoke(null);
-				
-				if (pEggColor1 == 0 && pEggColor2 == 0) {
-					lmethod = entityRegistry.getMethod("registerGlobalEntityID",
-							Class.class, String.class, int.class);
-					lmethod.invoke(null, entityclass, entityName, defaultId);
-				} else {
-					lmethod = entityRegistry.getMethod("registerGlobalEntityID",
-							Class.class, String.class, int.class, int.class, int.class);
-					lmethod.invoke(null, entityclass, entityName, defaultId, pEggColor1, pEggColor2);
-				}
-				// EntityListã�¸ã�®ç™»éŒ²ã�¯é�©å½“ã�ªæ•°å­—ã�§ã‚ˆã�„ã€‚
-				registerModEntity.invoke(
-						null, entityclass, entityName, lid,
-						mod, trackingRange, updateFrequency, sendVelocityUpdate);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else {
-			// EntityListã�¸ã�®ç™»éŒ²ã�¯
-			if (defaultId == 0) {
-				defaultId = getNextEntityID(entityclass.isAssignableFrom(EntityLivingBase.class));
-			}
-			if (pEggColor1 == 0 && pEggColor2 == 0) {
-				ModLoader.registerEntityID(entityclass, entityName, defaultId);
-			} else {
-				ModLoader.registerEntityID(entityclass, entityName, defaultId, pEggColor1, pEggColor2);
-			}
-			ModLoader.addEntityTracker(mod, entityclass, defaultId, trackingRange, updateFrequency, sendVelocityUpdate);
-		}
-		LMM_LittleMaidMobX.Debug("RegisterEntity ID:%d / %s-%d : %s", defaultId, mod.getName(), lid, entityName);
-		return defaultId;
-	}
-	public static int registerEntity(
-			Class<? extends Entity> entityclass, String entityName, int defaultId,
-			BaseMod mod, int trackingRange, int updateFrequency, boolean sendVelocityUpdate) {
-		return registerEntity(entityclass, entityName, defaultId, mod, trackingRange, updateFrequency, sendVelocityUpdate, 0, 0);
-	}
-	*/
+	
+	
 
 	private static int getModEntityID(String uniqueModeName) {
 		int li = 0;
@@ -347,23 +242,17 @@ public class Helper {
 		return li;
 	}
 
-	/**
-	 * Entityã‚’è¿”ã�™ã€‚
-	 */
+	
 	public static Entity getEntity(byte[] pData, int pIndex, World pWorld) {
 		return pWorld.getEntityByID(Helper.getInt(pData, pIndex));
 	}
 
-	/**
-	 * å¤‰æ•°ã€Œavatarã€�ã�‹ã‚‰å€¤ã‚’å�–ã‚Šå‡ºã�—æˆ»ã‚Šå€¤ã�¨ã�—ã�¦è¿”ã�™ã€‚
-	 * avatarã�Œå­˜åœ¨ã�—ã�ªã�„å ´å�ˆã�¯å…ƒã�®å€¤ã‚’è¿”ã�™ã€‚
-	 * avatarã�¯EntityLivingäº’æ�›ã€‚
-	 */
+	
 	public static Entity getAvatarEntity(Entity pEntity){
-		// littleMaidç”¨ã‚³ãƒ¼ãƒ‰ã�“ã�“ã�‹ã‚‰
+		
 		if (pEntity == null) return null;
 		try {
-			// å°„æ‰‹ã�®æƒ…å ±ã‚’EntityLittleMaidAvatarã�‹ã‚‰EntityLittleMaidã�¸ç½®ã��æ�›ã�ˆã‚‹
+			
 			Field field = pEntity.getClass().getField("avatar");
 			pEntity = (EntityLivingBase)field.get(pEntity);
 		} catch (NoSuchFieldException e) {
@@ -372,17 +261,13 @@ public class Helper {
 		} catch (Error e) {
 			e.printStackTrace();
 		}
-		// ã�“ã�“ã�¾ã�§
+		
 		return pEntity;
 	}
 
-	/**
-	 * å¤‰æ•°ã€ŒmaidAvatarã€�ã�‹ã‚‰å€¤ã‚’å�–ã‚Šå‡ºã�—æˆ»ã‚Šå€¤ã�¨ã�—ã�¦è¿”ã�™ã€‚
-	 * maidAvatarã�Œå­˜åœ¨ã�—ã�ªã�„å ´å�ˆã�¯å…ƒã�®å€¤ã‚’è¿”ã�™ã€‚
-	 * maidAvatarã�¯EntityPlayeräº’æ�›ã€‚
-	 */
+	
 	public static Entity getAvatarPlayer(Entity entity) {
-		// ãƒ¡ã‚¤ãƒ‰ã�•ã‚“ãƒ�ã‚§ãƒƒã‚¯
+		
 		try {
 			Field field = entity.getClass().getField("maidAvatar");
 			entity = (Entity)field.get(entity);
@@ -394,9 +279,7 @@ public class Helper {
 		return entity;
 	}
 
-	/**
-	 * ãƒ—ãƒ¬ãƒ¼ãƒ¤ã�®ã‚¤ãƒ³ãƒ™ãƒ³ãƒˆãƒªã�‹ã‚‰ã‚¢ã‚¤ãƒ†ãƒ ã‚’æ¸›ã‚‰ã�™
-	 */
+	
 	public static ItemStack decPlayerInventory(EntityPlayer par1EntityPlayer, int par2Index, int par3DecCount) {
 		if (par1EntityPlayer == null) {
 			return null;
@@ -411,7 +294,7 @@ public class Helper {
 		}
 		
 		if (!par1EntityPlayer.capabilities.isCreativeMode) {
-			// ã‚¯ãƒªã‚¨ã‚¤ãƒ†ã‚£ãƒ–ã� ã�¨æ¸›ã‚‰ã�ªã�„
+			
 			itemstack1.stackSize -= par3DecCount;
 		}
 		
@@ -445,28 +328,24 @@ public class Helper {
 		return lf;
 	}
 	protected static float convRevision() {
-		// TODO â˜…å¾Œå›žã�—
+		
 		return 0;// convRevision(MMMLib.Revision);
 	}
 
-	/**
-	 * æŒ‡å®šã�•ã‚Œã�Ÿãƒªãƒ“ã‚¸ãƒ§ãƒ³ã‚ˆã‚Šã‚‚å�¤ã�‘ã‚Œã�°ä¾‹å¤–ã‚’æŠ•ã�’ã�¦ã‚¹ãƒˆãƒƒãƒ—
-	 */
+	
 	public static void checkRevision(String pRev) {
 		if (convRevision() < convRevision(pRev)) {
-			// é�©å�ˆãƒ�ãƒ¼ã‚¸ãƒ§ãƒ³ã�§ã�¯ã�ªã�„ã�®ã�§ã‚¹ãƒˆãƒƒãƒ—
-		// TODO â˜…å¾Œå›žã�—
+			
+		
 		//	ModLoader.getLogger().warning("you must check MMMLib revision.");
 		//	throw new RuntimeException("The revision of MMMLib is old.");
 		}
 	}
 
-	/**
-	 * EntityListã�«ç™»éŒ²ã�•ã‚Œã�¦ã�„ã�„ã‚‹Entityã‚’ç½®ã��æ�›ã�ˆã‚‹ã€‚
-	 */
+	
 	public static void replaceEntityList(Class pSrcClass, Class pDestClass) {
-		// EntityListç™»éŒ²æƒ…å ±ã‚’ç½®ã��æ�›ã�ˆ
-		// å�¤ã�„Entityã�§ã‚‚ã‚¹ãƒ�ãƒ¼ãƒ³ã�§ã��ã‚‹ã‚ˆã�†ã�«ä¸€éƒ¨ã�®ç‰©ã�¯äºŒé‡�ç™»éŒ²
+		
+		
 		try {
 			// stringToClassMapping
 			Map lmap;
@@ -492,7 +371,7 @@ public class Helper {
 					le.setValue(pDestClass);
 				}
 			}
-			// classToIDMapping ã�ªã‚“ã�œã‚³ã‚¤ãƒ„ã� ã�‘privateã�®ã�¾ã�¾ï¼Ÿ
+			
 			lmap = (Map)ObfuscationReflectionHelper.getPrivateValue(EntityList.class, null, "field_75624_e", "classToIDMapping");
 			if (lmap.containsKey(pSrcClass)) {
 				lint = (Integer)lmap.get(pSrcClass);
@@ -518,12 +397,9 @@ public class Helper {
 		}
 	}
 
-	/**
-	 * ãƒ�ã‚¤ã‚ªãƒ¼ãƒ ã�®è¨­å®šEntityã‚’ç½®ã��æ�›ã�ˆã‚‰ã‚Œã�ŸEntityã�¸ç½®ã��æ�›ã�ˆã‚‹ã€‚
-	 * åŸºæœ¬çš„ã�«MMMLibä»¥å¤–ã�‹ã‚‰ã�¯å‘¼ã�°ã‚Œã�ªã�„ã€‚
-	 */
+	
 	protected static void replaceBaiomeSpawn() {
-		// ãƒ�ã‚¤ã‚ªãƒ¼ãƒ ã�®ç™ºç”Ÿå‡¦ç�†ã‚’ã�®ã�£ã�¨ã‚‹
+		
 		if (replaceEntitys.isEmpty()) return;
 		BiomeGenBase[] biomeList = BiomeGenBase.getBiomeGenArray();
 		for (int i = 0; i < biomeList.length; i++) {
@@ -541,18 +417,7 @@ public class Helper {
 		}
 	}
 
-	/**
-	 * è¦–ç·šã�®å…ˆã�«ã�„ã‚‹æœ€åˆ�ã�®Entityã‚’è¿”ã�™
-	 * @param pEntity
-	 * è¦–ç‚¹
-	 * @param pRange
-	 * è¦–ç·šã�®æœ‰åŠ¹è·�é›¢
-	 * @param pDelta
-	 * æ™‚åˆ»è£œæ­£
-	 * @param pExpand
-	 * æ¤œçŸ¥é ˜åŸŸã�®æ‹¡å¤§ç¯„å›²
-	 * @return
-	 */
+	
 	public static Entity getRayTraceEntity(EntityLivingBase pEntity, double pRange, float pDelta, float pExpand) {
 		Vec3 lvpos = Vec3.createVectorHelper(
 				pEntity.posX, pEntity.posY + pEntity.getEyeHeight(), pEntity.posZ);
@@ -590,11 +455,9 @@ public class Helper {
 	}
 
 
-	// Forgeå¯¾ç­–
+	
 
-	/**
-	 * Forgeå¯¾ç­–ç”¨ã�®ãƒ¡ã‚½ãƒƒãƒ‰
-	 */
+	
 	public static ItemStack getSmeltingResult(ItemStack pItemstack) {
 /*
 		if (methGetSmeltingResultForge != null) {
@@ -607,14 +470,9 @@ public class Helper {
 		return FurnaceRecipes.smelting().getSmeltingResult(pItemstack);
 	}
 
-	/**
-	 * ã‚¢ã‚¤ãƒ†ãƒ ã�«è¿½åŠ åŠ¹æžœã�Œåœ¨ã‚‹ã�‹ã‚’åˆ¤å®šã�™ã‚‹ã€‚
-	 * Forgeå¯¾ç­–ã€‚
-	 * @param pItemStack
-	 * @return
-	 */
+	
 	public static boolean hasEffect(ItemStack pItemStack) {
-		// ãƒžã‚¸ClientSIDEã�¨ã�‹è¾žã‚�ã�¦ã�»ã�—ã�„ã€‚
+		
 		if (pItemStack != null) {
 			Item litem = pItemStack.getItem();
 			if (litem instanceof ItemPotion) {
@@ -625,46 +483,10 @@ public class Helper {
 		return false;
 	}
 
-	/**
-	 * Blockã�®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç½®ã��æ�›ã�ˆã‚‹ã€‚
-	 * static finalã�®å¤‰æ•°ã�«å¯¾ã�—ã�¦è¡Œã�†ã�®ã�§Forgeã�§ã�¯ç„¡åŠ¹ã€‚
-	 * @param pOriginal
-	 * @param pReplace
-	 * @return
-	 */
-	/*
-	public static boolean replaceBlock(Block pOriginal, Block pReplace) {
-		if (isForge) {
-			return false;
-		}
-		try {
-			// Blockã�®static finalåˆ†ã�®ç½®æ�›ã�ˆ
-			Field[] lfield = Block.class.getDeclaredFields();
-			for (int li = 0; li < lfield.length; li++) {
-				if (!Modifier.isStatic(lfield[li].getModifiers())) {
-					// staticä»¥å¤–ã�¯å¯¾è±¡å¤–
-					continue;
-				}
-				
-				Object lobject = lfield[li].get(null);
-				if (lobject == pOriginal) {
-					ModLoader.setPrivateValue(Block.class, null, li, pReplace);
-					return true;
-				}
-			}
-		}
-		catch(Exception exception) {
-		}
-		return false;
-	}
-	*/
+	
+	
 
-	/**
-	 * 16é€²æ•°ã�®æ–‡å­—åˆ—ã‚’Intã�¸å¤‰æ�›ã�™ã‚‹ã€‚
-	 * 0xffffffffå¯¾ç­–ã€‚
-	 * @param pValue
-	 * @return
-	 */
+	
 	public static int getHexToInt(String pValue) {
 		String ls = "00000000".concat(pValue);
 		int llen = ls.length();
@@ -673,11 +495,7 @@ public class Helper {
 		return (lj << 16) | li;
 	}
 
-	/**
-	 *  ã‚¢ã‚¤ãƒ†ãƒ ã�«è¨­å®šã�•ã‚Œã�Ÿæ”»æ’ƒåŠ›ã‚’è¦‹ã‚‹
-	 * @param pItemStack
-	 * @return
-	 */
+	
 	public static double getAttackVSEntity(ItemStack pItemStack) {
 		AttributeModifier lam = (AttributeModifier)pItemStack.getAttributeModifiers().get(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName());
 		return lam == null ? 0 : lam.getAmount();

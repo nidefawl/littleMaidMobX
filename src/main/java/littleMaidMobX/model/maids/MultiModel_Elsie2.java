@@ -147,7 +147,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.Helper;import little
 			bipedLeftArm.rotateAngleY = 0.0F;
 			bipedLeftArm.rotateAngleZ = 0.4F;
 		}
-		//スカートと髪ゆらゆら
+		
 		RightSkirt.rotateAngleZ += mh_cos(f2 * 0.06F) * 0.03F + 0.03F;
 		LeftSkirt.rotateAngleZ -= mh_cos(f2 * 0.06F) * 0.03F + 0.03F;
 		RightSkirt.rotateAngleX += mh_sin(f2 * 0.04F) * 0.03F;

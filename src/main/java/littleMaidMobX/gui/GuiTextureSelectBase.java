@@ -7,9 +7,7 @@ import littleMaidMobX.textures.ITextureEntity;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 
-/**
- * 選択時にサーバーへ染料の使用を通知するための処理。
- */
+
 public class GuiTextureSelectBase extends GuiTextureSelect {
 
 	public GuiTextureSelectBase(GuiScreen pOwner, ITextureEntity pTarget,
@@ -25,9 +23,9 @@ public class GuiTextureSelectBase extends GuiTextureSelect {
 			if (toServer) {
 				ModelManager.instance.postSetTexturePack(target, selectColor, target.getTextureBox());
 				if (selectColor != selectPanel.color) {
-					// 色情報の設定
+					
 //					theMaid.maidColor = selectPanel.color | 0x010000 | (selectColor << 8);
-					// サーバーへ染料の使用を通知
+					
 					byte ldata[] = new byte[2];
 					ldata[0] = Statics.LMN_Server_DecDyePowder;
 					ldata[1] = (byte)selectColor;

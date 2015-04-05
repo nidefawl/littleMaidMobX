@@ -21,7 +21,7 @@ public class ContainerInventory extends ContainerPlayer {
 
 	public ContainerInventory(IInventory iinventory, EntityLittleMaid pEntity) {
 		// >
-		// Forge対策、ContainerPlayer継承でなければ要らない、SlotArmor用
+		
 		super(pEntity.maidInventory, !pEntity.worldObj.isRemote, pEntity.maidAvatar);
 		inventorySlots.clear();
 		inventoryItemStacks.clear();
@@ -54,7 +54,7 @@ public class ContainerInventory extends ContainerPlayer {
 //			int j1 = j + 1;
 //			addSlotToContainer(new SlotArmor(this, linventory, linventory.getSizeInventory() - 2 - j, 8, 8 + j * 18, j1));
 
-			final int armorIndex = 1 + j; // ヘルメットはない
+			final int armorIndex = 1 + j; 
 			this.addSlotToContainer(new Slot(linventory, linventory.getSizeInventory() - 2 - j, 8, 8 + j * 18)
 			{
 				private static final String __OBFID = "CL_00001755";
@@ -88,7 +88,7 @@ public class ContainerInventory extends ContainerPlayer {
 
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer) {
-		// 開けるかどうかの判定
+		
 		EntityLittleMaid entitylittlemaid = littlemaidInventory.entityLittleMaid; 
 		if(entitylittlemaid.isDead) {
 //		if(entitylittlemaid.isDead || entitylittlemaid.isOpenInventory()) {
@@ -106,7 +106,7 @@ public class ContainerInventory extends ContainerPlayer {
 			
 			if(LittleMaidMobX.isMaidIgnoreItem(itemstack1))
 			{
-				// コンフィグで無視に指定されたアイテムは移動しない
+				
 			}
 			else
 			{

@@ -18,9 +18,9 @@ import net.minecraft.world.World;
 public class GuiIFF extends GuiMobSelect {
 
 	public static final String IFFString[] = {
-		"ENEMY", // 反撃、狩
-		"UNKNOWN", // 反撃
-		"FRIENDLY" // 攻撃しない
+		"ENEMY", 
+		"UNKNOWN", 
+		"FRIENDLY" 
 	};
 
 	protected EntityLittleMaid target;
@@ -31,7 +31,7 @@ public class GuiIFF extends GuiMobSelect {
 		screenTitle = "LittleMaid IFF";
 		target = pEntity;
 		
-		// IFFをサーバーから取得
+		
 		if (!ClientHelper.isIntegratedServerRunning()) {
 			int li = 0;
 			for (String ls : IFF.DefaultIFF.keySet()) {
@@ -49,22 +49,22 @@ public class GuiIFF extends GuiMobSelect {
 	@Override
 	protected boolean checkEntity(String pName, Entity pEntity, int pIndex) {
 		boolean lf = false;
-		// Entityの値を設定
+		
 		int liff = IFF.checkEntityStatic(pName, pEntity, pIndex, entityMap);
 		if (pEntity instanceof EntityLivingBase) {
 			if (pEntity instanceof EntityLittleMaid) {
 				if (pIndex == 0 || pIndex == 1) {
-					// 野生種、自分契約者
+					
 					lf = true;
 				} else {
-					// 他人の契約者
+					
 				}
 			} else if (pEntity instanceof IEntityOwnable) {
 				if (pIndex == 0 || pIndex == 1) {
-					// 野生種、自分の
+					
 					lf = true;
 				} else {
-					// 他人の家畜
+					
 				}
 			}
 		}
@@ -118,7 +118,7 @@ public class GuiIFF extends GuiMobSelect {
 			}
 			
 			if (!mc.isIntegratedServerRunning()) {
-				// サーバーへ変更値を送る。
+				
 				int li = 0;
 				for (String ls : IFF.DefaultIFF.keySet()) {
 					if (ls.contains(pName)) {
@@ -144,7 +144,7 @@ public class GuiIFF extends GuiMobSelect {
 	@Override
 	public void drawSlot(int pSlotindex, int pX, int pY, int pDrawheight,
 			Tessellator pTessellator, String pName, Entity pEntity) {
-		// 名前と敵味方識別の描画
+		
 		int tt = IFF.getIFF(null, pName, pEntity.worldObj);
 		int c = 0xffffff;
 		switch (tt) {

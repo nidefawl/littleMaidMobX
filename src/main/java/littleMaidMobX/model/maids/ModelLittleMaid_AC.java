@@ -5,9 +5,7 @@ import littleMaidMobX.model.lmm.ModelMultiMMMBase;
 import littleMaidMobX.render.model.ModelRenderer;
 
 
-/**
- * スタビライザー搭載機
- */
+
 public class ModelLittleMaid_AC extends ModelMultiMMMBase {
 
 	public ModelRenderer bipedHead;
@@ -40,24 +38,7 @@ public class ModelLittleMaid_AC extends ModelMultiMMMBase {
 	@Override
 	public void initModel(float psize, float pyoffset, boolean isAfterInit) {
 		// TODO Auto-generated method stub
-		/*
-		Arms = new ModelRenderer[18];
-		// バイプロダクトエフェクター
-		Arms[2] = new ModelRenderer(this, 0, 0);
-		Arms[2].setRotationPoint(-3F, 9F, 6F);
-		Arms[2].setRotateAngleDeg(45F, 0F, 0F);
-		Arms[3] = new ModelRenderer(this, 0, 0);
-		Arms[3].setRotationPoint(3F, 9F, 6F);
-		Arms[3].setRotateAngleDeg(45F, 0F, 0F);
-		Arms[3].isInvertX = true;
-		// テールソード
-		Arms[4] = new ModelRenderer(this, 0, 0);
-		Arms[4].setRotationPoint(-2F, 0F, 0F);
-		Arms[4].setRotateAngleDeg(180F, 0F, 0F);
-		Arms[5] = new ModelRenderer(this, 0, 0);
-		Arms[5].setRotationPoint(2F, 0F, 0F);
-		Arms[5].setRotateAngleDeg(180F, 0F, 0F);
-		*/
+		
 		//
 //		Arms[2].setRotateAngle(-0.78539816339744830961566084581988F - bipedRightArm.getRotateAngleX(), 0F, 0F);
 //		Arms[3].setRotateAngle(-0.78539816339744830961566084581988F - bipedLeftArm.getRotateAngleX(), 0F, 0F);

@@ -69,7 +69,7 @@ public class GuiTriggerSelect extends GuiContainer {
 
 	@Override
 	public void onGuiClosed() {
-		// 設定値のデコード
+		
 		setItemList();
 
 		super.onGuiClosed();
@@ -113,7 +113,7 @@ public class GuiTriggerSelect extends GuiContainer {
 				ItemStack itemstack4 = slot.getStack();
 				if (itemstack1 != null && itemstack4 != null
 						&& itemstack1.getItem() == itemstack4.getItem()) {
-					// 選択アイテムが空ではない時
+					
 					if (j != 0) {
 						inventoryplayer.setItemStack(null);
 					}
@@ -131,7 +131,7 @@ public class GuiTriggerSelect extends GuiContainer {
 //								(slot.slotNumber - inventorySlots.inventorySlots.size()) + 9 + 36);
 			}
 		} else {
-			// Slot以外のところは捨てる
+			
 			InventoryPlayer inventoryplayer1 = mc.thePlayer.inventory;
 			inventoryplayer1.setItemStack(null);
 		}

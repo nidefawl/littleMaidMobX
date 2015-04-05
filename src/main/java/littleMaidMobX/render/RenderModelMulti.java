@@ -36,7 +36,7 @@ public class RenderModelMulti extends RenderLiving {
 	}
 
 	protected int showArmorParts(EntityLivingBase par1EntityLiving, int par2, float par3) {
-		// アーマーの表示設定
+		
 		modelFATT.renderParts = par2;
 		modelFATT.renderCount = 0;
 		ItemStack is = par1EntityLiving.getEquipmentInSlot(par2 + 1);
@@ -105,7 +105,7 @@ public class RenderModelMulti extends RenderLiving {
 	public void renderModelMulti(EntityLiving par1EntityLiving, double par2,
 			double par4, double par6, float par8, float par9, IModelCaps pEntityCaps) {
 		setModelValues(par1EntityLiving, par2, par4, par6, par8, par9, pEntityCaps);
-		// TODO:1.6.2-MCP805 なぜか変なとこに飛んでループする
+		
 //		super.func_130000_a(par1EntityLiving, par2, par4, par6, par8, par9);
 		super.doRender(par1EntityLiving, par2, par4, par6, par8, par9);
 	}
@@ -120,8 +120,8 @@ public class RenderModelMulti extends RenderLiving {
 	@Override
 	protected void func_110827_b(EntityLiving par1EntityLiving, double par2,
 			double par4, double par6, float par8, float par9) {
-		// 縄の位置のオフセット
-		// TODO：MCP-804対策
+		
+		
 		float lf = 0F;
 		if (modelMain.model != null && fcaps != null) {
 			lf = modelMain.model.getLeashOffset(fcaps);
@@ -137,13 +137,13 @@ public class RenderModelMulti extends RenderLiving {
 		} else {
 			modelMain.setArmorRendering(false);
 		}
-		// アイテムのレンダリング位置を獲得するためrenderを呼ぶ必要がある
+		
 		mainModel.render(par1EntityLiving, par2, par3, par4, par5, par6, par7);
 	}
 
 	@Override
 	protected void renderEquippedItems(EntityLivingBase par1EntityLiving, float par2) {
-		// ハードポイントの描画
+		
 		modelMain.renderItems(par1EntityLiving, this);
 		renderArrowsStuckInEntity(par1EntityLiving, par2);
 	}
@@ -155,7 +155,7 @@ public class RenderModelMulti extends RenderLiving {
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity var1) {
-		// テクスチャリソースを返すところだけれど、基本的に使用しない。
+		
 		return null;
 	}
 

@@ -157,7 +157,7 @@ public class GuiTextureSlot extends GuiSlot {
 		entity.rotationYawHead = 15F;
 		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240.0F, 240.0F);
 		if (mode) {
-			// アーマー
+			
 			ResourceLocation ltxname[];
 			GL11.glTranslatef(1F, 0, 0);
 			Map<Integer, ResourceLocation> lmap = lbox.armors.get("default");
@@ -186,7 +186,7 @@ public class GuiTextureSlot extends GuiSlot {
 				}
 			}
 		} else {
-			// テクスチャ表示
+			
 			for (int li = 0; li < 16; li++) {
 				GL11.glTranslatef(1F, 0, 0);
 				if (lbox.hasColor(li, isContract)) {

@@ -114,18 +114,18 @@ public class AIAttackOnCollide extends EntityAIBase implements IEntityAI {
 		theMaid.getLookHelper().setLookPositionWithEntity(entityTarget, 30F, 30F);
 		
 //		if ((isReroute || theMaid.getEntitySenses().canSee(entityTarget)) && --rerouteTimer <= 0) {
-//			// リルート
+
 //			rerouteTimer = 4 + theMaid.getRNG().nextInt(7);
 //			theMaid.getNavigator().tryMoveToXYZ(entityTarget.posX, entityTarget.posY, entityTarget.posZ, moveSpeed);
 //		}
 		if (--rerouteTimer <= 0) {
 			if (isReroute) {
-				// リルート
+				
 				rerouteTimer = 4 + theMaid.getRNG().nextInt(7);
 				theMaid.getNavigator().tryMoveToXYZ(entityTarget.posX, entityTarget.posY, entityTarget.posZ, moveSpeed);
 			}
 			if (theMaid.getEntitySenses().canSee(entityTarget)) {
-				// リルート
+				
 				rerouteTimer = 4 + theMaid.getRNG().nextInt(7);
 				theMaid.getNavigator().tryMoveToXYZ(entityTarget.posX, entityTarget.posY, entityTarget.posZ, moveSpeed);
 			} else {
@@ -161,7 +161,7 @@ public class AIAttackOnCollide extends EntityAIBase implements IEntityAI {
 		if (!theMaid.getSwingStatusDominant().canAttack()) {
 			return;
 		} else {
-			// 正面から110度方向が攻撃範囲
+			
 			double tdx = entityTarget.posX - theMaid.posX;
 			double tdz = entityTarget.posZ - theMaid.posZ;
 			double vdx = -Math.sin(theMaid.renderYawOffset * 3.1415926535897932384626433832795F / 180F);
@@ -172,10 +172,10 @@ public class AIAttackOnCollide extends EntityAIBase implements IEntityAI {
 				return;
 			}
 			
-			// 攻撃
+			
 			theMaid.attackEntityAsMob(entityTarget);
 			if (theMaid.getActiveModeClass().isChangeTartget(entityTarget)) {
-				// 対象を再設定させる
+				
 				theMaid.setAttackTarget(null);
 				theMaid.setTarget(null);
 				theMaid.getNavigator().clearPathEntity();

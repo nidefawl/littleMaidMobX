@@ -6,7 +6,7 @@ import littleMaidMobX.model.caps.ModelCapsHelper;
 
 public class TextureBoxServer extends TextureBoxBase {
 
-	// ローカルでモデルを保持している時にリンク
+	
 	protected TextureBox localBox;
 
 

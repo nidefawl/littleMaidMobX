@@ -41,12 +41,7 @@ public class Mode_Playing extends ModeBase {
 
 	@Override
 	public void init() {
-		/* langファイルに移動
-		ModLoader.addLocalization("littleMaidMob.mode.Playing", "Playing");
-		// ModLoader.addLocalization("littleMaidMob.mode.T-Playing", "Playing");
-		// ModLoader.addLocalization("littleMaidMob.mode.F-Playing", "Playing");
-		// ModLoader.addLocalization("littleMaidMob.mode.D-Playing", "Playing");
-		*/
+		
 	}
 
 	@Override
@@ -65,7 +60,7 @@ public class Mode_Playing extends ModeBase {
 	}
 
 	protected boolean checkSnows(int x, int y, int z) {
-		// 周りが雪か？
+		
 		int snowCnt = 0;
 		snowCnt += Block.isEqualTo(owner.worldObj.getBlock(x,   y, z  ), Blocks.snow_layer) ? 3: 0;
 		snowCnt += Block.isEqualTo(owner.worldObj.getBlock(x+1, y, z  ), Blocks.snow_layer) ? 1: 0;
@@ -83,7 +78,7 @@ public class Mode_Playing extends ModeBase {
 		int z = MathHelper.floor_double(owner.posZ);
 		PathEntity pe = null;
 		
-		// CW方向に検索領域を広げる 
+		
 		loop_search:
 			for (int a = 2; a < 18 && pe == null; a += 2) {
 				x--;
@@ -117,7 +112,7 @@ public class Mode_Playing extends ModeBase {
 	protected void playingSnowWar() {
 		switch (fcounter) {
 		case 0:
-			// 有り玉全部投げる
+			
 			owner.setSitting(false);
 			owner.setSneaking(false);
 			if (!owner.getNextEquipItem()) {
@@ -126,7 +121,7 @@ public class Mode_Playing extends ModeBase {
 				owner.getNavigator().clearPathEntity();
 				fcounter = 1;
 			} else if (owner.getAttackTarget() == null) {
-				// メイドとプレーヤー（無差別）をターゲットに
+				
 				List<Entity> list = owner.worldObj.getEntitiesWithinAABBExcludingEntity(owner, owner.boundingBox.expand(16D, 4D, 16D));
 				for (Entity e : list) {
 					if (e != null && (e instanceof EntityPlayer || e instanceof EntityLittleMaid)) {
@@ -139,7 +134,7 @@ public class Mode_Playing extends ModeBase {
 			}
 			break;
 		case 1:
-			// 乱数加速
+			
 			owner.setAttackTarget(null);
 			if (owner.getNavigator().noPath()) {
 				fcounter = 2;
@@ -147,7 +142,7 @@ public class Mode_Playing extends ModeBase {
 			break;
 		
 		case 2:
-			// 雪原を探す
+			
 			if (owner.getAttackTarget() == null && owner.getNavigator().noPath()) {
 				if (movePlaying()) {
 					fcounter = 3;
@@ -161,7 +156,7 @@ public class Mode_Playing extends ModeBase {
 //			isMaidChaseWait = true;
 			break;
 		case 3:
-			// 雪原へ到着
+			
 			if (owner.getNavigator().noPath()) {
 				if (checkSnows(
 						MathHelper.floor_double(owner.posX),
@@ -175,7 +170,7 @@ public class Mode_Playing extends ModeBase {
 						fcounter = 4;
 					}
 				} else {
-					// 再検索
+					
 					fcounter = 2;
 				}
 			}
@@ -184,7 +179,7 @@ public class Mode_Playing extends ModeBase {
 		case 5:
 		case 6:
 		case 7:
-			// リロード
+			
 			if (owner.attackTime <= 0) {
 				if (owner.maidInventory.addItemStackToInventory(new ItemStack(Items.snowball))) {
 					owner.playSound("random.pop");
@@ -211,7 +206,7 @@ public class Mode_Playing extends ModeBase {
 			owner.setSitting(true);
 			break;
 		case 8:
-			// リロード
+			
 //			isMaidChaseWait = true;
 			if (owner.attackTime <= 0) {
 				if (owner.maidInventory.addItemStackToInventory(new ItemStack(Items.snowball))) {
@@ -239,18 +234,18 @@ public class Mode_Playing extends ModeBase {
 	@Override
 	public void updateAITick(int pMode) {
 		if (owner.isFreedom()) {
-			// 自由行動中の固体は虎視眈々と隙をうかがう。
+			
 			if (owner.worldObj.isDaytime()) {
-				// 昼間のお遊び
 				
-				// 雪原判定
+				
+				
 				if (!owner.isPlaying()) {
-					// TODO:お遊び判定
+					
 					int xx = MathHelper.floor_double(owner.posX);
 					int yy = MathHelper.floor_double(owner.posY);
 					int zz = MathHelper.floor_double(owner.posZ);
 					
-					// 3x3が雪の平原ならお遊び判定が発生
+					
 					boolean f = true;
 					for (int z = -1; z < 2; z++) {
 						for (int x = -1; x < 2; x++) {
@@ -266,11 +261,11 @@ public class Mode_Playing extends ModeBase {
 					}
 					
 				} else if (owner.getPlayingRole() >= 0x8000) {
-					// 夜の部終了
+					
 					owner.setPlayingRole(mpr_NULL);
 					fcounter = 0;
 				} else {
-					// お遊びの実行をここに書く？
+					
 					if (owner.getPlayingRole() == mpr_QuickShooter || 
 							owner.getPlayingRole() == mpr_StockShooter) {
 						playingSnowWar();
@@ -279,22 +274,22 @@ public class Mode_Playing extends ModeBase {
 				}
 				
 			} else {
-				// 夜のお遊び
+				
 				if (!owner.isPlaying()) {
-					// 条件判定
+					
 					
 				} else if (owner.getPlayingRole() < 0x8000) {
-					// 昼の部終了
+					
 					owner.setPlayingRole(mpr_NULL);
 					fcounter = 0;
 					
 				} else {
-					// お遊びの実行をここに書く？
+					
 					
 				}
 			}
 			
-			// チェスト判定
+			
 			if (owner.getAttackTarget() == null
 					&& owner.maidInventory.getFirstEmptyStack() == -1) {
 				
@@ -305,7 +300,7 @@ public class Mode_Playing extends ModeBase {
 	@Override
 	public float attackEntityFrom(DamageSource par1DamageSource, float par2) {
 		if (par1DamageSource.getSourceOfDamage() instanceof EntitySnowball) {
-			// お遊び判定用、雪玉かどうか判定
+			
 			owner.maidDamegeSound = EnumSound.hurt_snow;
 			if (!owner.isContract() || owner.isFreedom()) {
 				owner.setPlayingRole(mpr_QuickShooter);
@@ -338,7 +333,7 @@ public class Mode_Playing extends ModeBase {
 				litemstack = owner.maidInventory.getStackInSlot(li);
 				if (litemstack == null) continue;
 				
-				// 雪球
+				
 				if (litemstack.getItem() instanceof ItemSnowball) {
 					return li;
 				}

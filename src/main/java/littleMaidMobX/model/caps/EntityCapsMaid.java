@@ -9,10 +9,7 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 
 
-/**
- * Entityのデータ読み取り用のクラス
- * 別にEntityにインターフェース付けてもOK
- */
+
 public class EntityCapsMaid extends EntityCapsBase {
 
 	private EntityLittleMaid owner;

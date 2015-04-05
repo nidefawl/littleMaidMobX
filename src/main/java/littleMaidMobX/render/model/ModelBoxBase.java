@@ -17,11 +17,7 @@ public abstract class ModelBoxBase {
 	public String boxName;
 
 
-	/**
-	 * こちらを必ず実装すること。
-	 * @param pMRenderer
-	 * @param pArg
-	 */
+	
 	public ModelBoxBase(ModelRenderer pMRenderer, Object ... pArg) {
 	}
 

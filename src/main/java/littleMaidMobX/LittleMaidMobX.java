@@ -93,7 +93,7 @@ public class LittleMaidMobX {
 
 	public static Achievement ac_Contract;
 	public static boolean cfg_isModelAlphaBlend = true;
-/**	public static final int cfg_startVehicleEntityID = 0;	Forgeã�«ã�¯ä¸�è¦�	*/
+
 	public static boolean isDebugMessage = true;
 	public static boolean isDebugModels = true;
 	public static boolean isModelAlphaBlend = true;
@@ -133,7 +133,7 @@ public class LittleMaidMobX {
 	}
 
 	public String getPriorities() {
-		// MMMLibを要求
+		
 		return "required-after:mod_MMM_MMMLib";
 	}
 
@@ -170,7 +170,7 @@ public class LittleMaidMobX {
 		}
 		Config.init();
 		
-		// MMMLibのRevisionチェック
+		
 //		MMM_Helper.checkRevision("6");
 		Config.checkConfig(this.getClass());
 		
@@ -181,17 +181,14 @@ public class LittleMaidMobX {
 
 		EntityRegistry.registerModEntity(EntityLittleMaid.class, "LittleMaidX", 0, instance, 80, 3, true);
 
-		/* langファイルに移動
-		ModLoader.addLocalization("entity.LittleMaidX.name", "LittleMaidX");
-		ModLoader.addLocalization("entity.LittleMaidX.name", "ja_JP", "リトルメイド");
-		*/
-		// アイテム自体は登録しておき、レシピを隠して無効化
+		
+		
 		spawnEgg = new ItemSpawnEgg();
 		spawnEgg.setUnlocalizedName(DOMAIN + ":spawn_lmmx_egg");
 		spawnEgg.setTextureName(DOMAIN + ":spawn_lmmx_egg");
 		GameRegistry.registerItem(spawnEgg, "spawn_lmmx_egg");
 		if (cfg_enableSpawnEgg) {
-			// 招喚用レシピを追加
+			
 			GameRegistry.addRecipe(new ItemStack(spawnEgg, 1), new Object[] {
 				"scs",
 				"sbs",
@@ -208,25 +205,18 @@ public class LittleMaidMobX {
 		AchievementPage.registerAchievementPage(new AchievementPage("LittleMaidX", achievements));
 
 		if (Helper.isClient) {
-			// 名称変換テーブル
-			/* langファイルに移動
-			ModLoader.addLocalization("littleMaidMob.text.Health", "Health");
-			ModLoader.addLocalization("littleMaidMob.text.Health", "ja_JP", "メイド強度");
-			ModLoader.addLocalization("littleMaidMob.text.AP", "AP");
-			ModLoader.addLocalization("littleMaidMob.text.AP", "ja_JP", "メイド装甲");
-			ModLoader.addLocalization("littleMaidMob.text.STATUS", "Status");
-			ModLoader.addLocalization("littleMaidMob.text.STATUS", "ja_JP", "メイド状態");
-			*/
 			
-			// デフォルトモデルの設定
+			
+			
+			
 			proxy.init();
 		}
 		
 		
-		// アイテムスロット更新用のパケット
+		
 		Network.init(DOMAIN);
 
-		// TODO ★ サウンドのロードを早くするテスト
+		
 		proxy.loadSounds();
 		
 //		Debug("GUID-sneak: %s", LMM_EntityLittleMaid.maidUUIDSneak.toString());
@@ -236,13 +226,13 @@ public class LittleMaidMobX {
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent evt)
 	{
-		// カンマ区切りのアイテム名のリストを配列にして設定
+		
 		// "aaa, bbb,ccc  " -> "aaa" "bbb" "ccc"
 		ignoreItemList = cfg_IgnoreItemList.trim().split("\\s*,\\s*");
 		
 		MinecraftForge.EVENT_BUS.register(new EventHook());
 		
-		// デフォルトモデルの設定
+		
 		ModelManager.instance.setDefaultTexture(EntityLittleMaid.class, ModelManager.instance.getTextureBox("default_Orign"));
 		
 		// Dominant
@@ -254,7 +244,7 @@ public class LittleMaidMobX {
 			}
 			else
 			{
-				// 通常スポーン設定バイオームは適当
+				
 				biomeList = new BiomeGenBase[]{
 						BiomeGenBase.desert,
 						BiomeGenBase.plains,
@@ -277,16 +267,16 @@ public class LittleMaidMobX {
 		}
 		
 		
-		// サウンドのロード
-// TODO ★		proxy.loadSounds();
 		
-		// IFFのロード
+
+		
+		
 		IFF.loadIFFs();
 //		ModchuModel_Main.load();
 	}
 	
 
-	// 特定のMODのアイテムを持つとクラッシュする不具合対策====================================
+	
 	private static String ignoreItemList[] = new String[]{};
 
 	public static boolean isMaidIgnoreItem(ItemStack item)

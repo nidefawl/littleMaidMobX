@@ -11,16 +11,16 @@ import net.minecraft.util.Vec3;
 
 public class SwingStatus {
 
-	/** 使用中のアイテムスロット */
+	
 	public int index;
 	public int lastIndex;
-	/* 腕振り関連変数 */
+	
 	public boolean isSwingInProgress;
 	public float swingProgress;
 	public float prevSwingProgress;
 	public int swingProgressInt;
 	public float onGround;
-	/** クールタイム */
+	
 	public int attackTime;
 //	public int usingCount;
 	public int itemInUseCount;
@@ -38,23 +38,19 @@ public class SwingStatus {
 		itemInUse = null;
 	}
 
-	/**
-	 * TODO:数値の更新用、onEntityUpdate内で呼ぶ事:いらんか？
-	 */
+	
 	public void onEntityUpdate(EntityLittleMaid pEntity) {
 		prevSwingProgress = swingProgress;
 	}
 
-	/**
-	 * 数値の更新用、onUpdate内で呼ぶ事
-	 */
+	
 	public void onUpdate(EntityLittleMaid pEntity) {
 		prevSwingProgress = swingProgress;
 		if (attackTime > 0) {
 			attackTime--;
 		}
 		
-		// 腕振り
+		
 		int li = pEntity.getSwingSpeedModifier();
 		if (isSwingInProgress) {
 			swingProgressInt++;
@@ -75,7 +71,7 @@ public class SwingStatus {
 				clearItemInUse(lrentity);
 			} else {
 				if (itemInUseCount <= 25 && itemInUseCount % 4 == 0) {
-					// 食べかすとか
+					
 					updateItemUse(pEntity, 5);
 				}
 				if (--itemInUseCount <= 0 && lrentity != null) {
@@ -85,17 +81,13 @@ public class SwingStatus {
 		}
 	}
 
-	/**
-	 * 選択中のスロット番号を設定
-	 */
+	
 	public void setSlotIndex(int pIndex) {
 		index = pIndex;
 		lastIndex = -2;
 	}
 
-	/**
-	 * 選択中のインベントリ内アイテムスタックを返す
-	 */
+	
 	public ItemStack getItemStack(EntityLittleMaid pEntity) {
 		if (index > -1) {
 			return pEntity.maidInventory.getStackInSlot(index);
@@ -110,7 +102,7 @@ public class SwingStatus {
 
 
 
-// 腕振り関係
+
 
 
 	public float getSwingProgress(float ltime) {
@@ -133,16 +125,14 @@ public class SwingStatus {
 	}
 
 
-	/**
-	 * 変更があるかどうかを返し、フラグをクリアする。
-	 */
+	
 	public boolean checkChanged() {
 		boolean lflag = index != lastIndex;
 		lastIndex = index;
 		return lflag;
 	}
 
-// アイテムの使用に関わる関数群
+
 
 	public ItemStack getItemInUse() {
 		return itemInUse;
@@ -160,11 +150,7 @@ public class SwingStatus {
 		return isUsingItem() ? itemInUse.getMaxItemUseDuration() - itemInUseCount : 0;
 	}
 
-	/**
-	 * 
-	 * @param pEntity
-	 * サーバーの時はEntityを設定する。
-	 */
+	
 	public void stopUsingItem(Entity pEntity) {
 		if (itemInUse != null && pEntity instanceof EntityPlayer) {
 			itemInUse.onPlayerStoppedUsing(pEntity.worldObj, (EntityPlayer)pEntity, itemInUseCount);
@@ -173,11 +159,7 @@ public class SwingStatus {
 		clearItemInUse(pEntity);
 	}
 
-	/**
-	 * 
-	 * @param pEntity
-	 * サーバーの時はEntityを設定する。
-	 */
+	
 	public void clearItemInUse(Entity pEntity) {
 		itemInUse = null;
 		itemInUseCount = 0;
@@ -191,13 +173,7 @@ public class SwingStatus {
 		return isUsingItem() && this.itemInUse.getItemUseAction() == EnumAction.block;
 	}
 
-	/**
-	 * 
-	 * @param par1ItemStack
-	 * @param par2
-	 * @param pEntity
-	 * サーバーの時はEntityを設定する。
-	 */
+	
 	public void setItemInUse(ItemStack par1ItemStack, int par2, Entity pEntity) {
 		if (par1ItemStack != itemInUse) {
 			itemInUse = par1ItemStack;

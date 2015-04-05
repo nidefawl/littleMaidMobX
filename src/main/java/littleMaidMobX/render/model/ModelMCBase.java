@@ -17,10 +17,7 @@ public abstract class ModelMCBase extends ModelBase implements IModelCaps {
 	public int lighting;
 	public IModelCaps entityCaps;
 	public boolean isRendering;
-	/**
-	 * レンダリングが実行された回数。
-	 * ダメージ時などの対策。
-	 */
+	
 	public int renderCount;
 
 

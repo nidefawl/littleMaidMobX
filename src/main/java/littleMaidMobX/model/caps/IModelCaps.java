@@ -2,23 +2,15 @@ package littleMaidMobX.model.caps;
 
 import java.util.Map;
 
-/**
- * モデル共通化用インターフェース。
- * 形式指定の値読み出しはModelCapsHelperを使うこと。
- * TODO:次バージョンで色々消すこと。
- */
+
 public interface IModelCaps {
 
-	/*
-	 * 機能名称群、取り敢えず書いてあるけど別に被らなければ何でも良し。
-	 * 一応予約値ってことで。
-	 * 独自追加の場合は0x00010000以上を使って下さい。
-	 */
+	
 	// ModelBase
 	public static final int caps_onGround			= 0x0001;
 	public static final int caps_isRiding			= 0x0002;
 	public static final int caps_isChild			= 0x0003;
-	/** リアルタイムでEntityのサイズを更新する **/
+	
 	public static final int caps_isUpdateSize		= 0x0004;
 	// ModelBiped
 	public static final int caps_heldItemLeft		= 0x0010;
@@ -45,9 +37,9 @@ public interface IModelCaps {
 	public static final int caps_isInWater				= 0x0037;
 	public static final int caps_isInvisible			= 0x0038;
 	public static final int caps_isSprinting			= 0x0039;
-	/** 縄に繋がれてます; return boolean; **/
+	
 	public static final int caps_isLeeding				= 0x003a;
-	/** 乗っかているEntityの名前を返す; return String; **/
+	
 	public static final int caps_getRidingName			= 0x003b;
 	
 	public static final int caps_posX					= 0x0060;
@@ -65,19 +57,19 @@ public interface IModelCaps {
 	public static final int caps_prevRotationPitch		= 0x006c;
 	public static final int caps_renderYawOffset		= 0x006d;
 	
-	/** Entityの位置にオフセットした座標のBlockを取得する [0]:offsetX, [1]:offsetY, [2]:offsetZ **/
+	
 //	public static final int caps_PosBlock				= 0x0080;
-	/** Entityの位置にオフセットした座標のBlockIDを取得する [0]:offsetX, [1]:offsetY, [2]:offsetZ **/
+	
 	public static final int caps_PosBlockID				= 0x0081;
-	/** Entityの位置にオフセットした座標のBlockMetaDataを取得する [0]:offsetX, [1]:offsetY, [2]:offsetZ **/
+	
 	public static final int caps_PosBlockMeta			= 0x0082;
-	/** Entityの位置にオフセットした座標のBlockが空気ブロックかを取得する [0]:offsetX, [1]:offsetY, [2]:offsetZ **/
+	
 	public static final int caps_PosBlockAir			= 0x0083;
-	/** Entityの位置にオフセットした座標のBlockが空気ブロックかを取得する [0]:offsetX, [1]:offsetY, [2]:offsetZ **/
+	
 	public static final int caps_PosBlockLight			= 0x0084;
-	/** Entityの位置にオフセットした座標のBlockが空気ブロックかを取得する [0]:offsetX, [1]:offsetY, [2]:offsetZ **/
+	
 	public static final int caps_PosBlockPower			= 0x0085;
-	/** playerに乗っているかを判定**/
+	
 	public static final int caps_isRidingPlayer			= 0x0086;
 
 	// WorldData
@@ -95,7 +87,7 @@ public interface IModelCaps {
 	public static final int caps_isBlocking			= 0x0106;
 	public static final int caps_isWait				= 0x0107;
 	public static final int caps_isWaitEX			= 0x0108;
-	/** インベントリを開いているかを返します(boolean) **/
+	
 	public static final int caps_isOpenInv			= 0x0109;
 	public static final int caps_isWorking			= 0x010a;
 	public static final int caps_isWorkingDelay		= 0x010b;
@@ -117,15 +109,15 @@ public interface IModelCaps {
 	public static final int caps_render				= 0x0130;
 	public static final int caps_Arms				= 0x0131;
 	public static final int caps_HeadMount			= 0x0132;
-	/** モデルに設定されているハードポイントを配列で返します **/
+	
 	public static final int caps_HardPoint			= 0x0133;
-	/** 現在保持しているアイテムの配列を返します **/
+	
 	public static final int caps_Items				= 0x0135;
-	/** 現在保持しているアイテムの挙動の配列を返します **/
+	
 	public static final int caps_Actions			= 0x0136;
-	/** 現在保持しているアイテムの振り回し状態を配列で返します **/
+	
 	public static final int caps_Grounds			= 0x0137;
-	/** Inventoryを返します **/
+	
 	public static final int caps_Inventory			= 0x0138;
 	public static final int caps_Ground				= 0x0139;
 	public static final int caps_interestedAngle	= 0x0150;
@@ -138,14 +130,14 @@ public interface IModelCaps {
 	public static final int caps_PartsStrings	= 0x0204;
 
 	// test
-	/** モデルが変更された時に実行される関数へリンクします **/
+	
 	public static final int caps_changeModel		= 0x0300;
 	public static final int caps_renderFace			= 0x0310;
 	public static final int caps_renderBody			= 0x0311;
 	public static final int caps_setFaceTexture		= 0x0312;
-	/** TextureDataのインスタンスを返します。 **/
+	
 	public static final int caps_textureData		= 0x0313;
-	/** 発光テクスチャの色補正 */
+	
 	public static final int caps_textureLightColor	= 0x0314;
 	public static final int caps_oldwalking	= 0x0315;
 	public static final int caps_breastFloats	= 0x0316;
@@ -155,25 +147,13 @@ public interface IModelCaps {
 	public static final int caps_visible	= 0x0319;
 
 	public static final int caps_armorType					 					= 0x031a;
-	/**
-	 * モデルが実装している機能をリストに入れて返す。
-	 * @return
-	 */
+	
 	public Map<String, Integer> getModelCaps();
 
-	/**
-	 * 現在の設定値を読み取る。
-	 * @param pIndex
-	 * @return
-	 */
+	
 	public Object getCapsValue(int pIndex, Object ... pArg);
 
-	/**
-	 * 機能番号に値を設定する。
-	 * @param pIndex
-	 * @param pArg
-	 * @return
-	 */
+	
 	public boolean setCapsValue(int pIndex, Object ... pArg);
 
 }

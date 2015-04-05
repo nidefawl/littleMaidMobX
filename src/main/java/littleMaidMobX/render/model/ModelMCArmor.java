@@ -14,39 +14,20 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-/**
- * アーマーの二重描画用クラス。
- * 必ずInner側にはモデルを設定すること。
- * 通常のRendererで描画するためのクラスなので、Renderをちゃんと記述するならいらないクラスです。
- */
+
 public class ModelMCArmor extends ModelMCBase {
 
 	public ModelMultiBase modelOuter;
 	public ModelMultiBase modelInner;
-	/**
-	 * 部位毎のアーマーテクスチャの指定。
-	 * 外側。
-	 */
+	
 	public ResourceLocation[] textureOuter;
-	/**
-	 * 部位毎のアーマーテクスチャの指定。
-	 * 内側。
-	 */
+	
 	public ResourceLocation[] textureInner;
-	/**
-	 * 部位毎のアーマーテクスチャの指定。
-	 * 外側・発光。
-	 */
+	
 	public ResourceLocation[] textureOuterLight;
-	/**
-	 * 部位毎のアーマーテクスチャの指定。
-	 * 内側・発光。
-	 */
+	
 	public ResourceLocation[] textureInnerLight;
-	/**
-	 * 描画されるアーマーの部位。
-	 * shouldRenderPassとかで指定する。
-	 */
+	
 	public int renderParts;
 
 	public float[] textureLightColor;
@@ -73,16 +54,16 @@ public class ModelMCArmor extends ModelMCBase {
 		if (modelInner != null) {
 			if (textureInner != null && lri) {
 				if (textureInner[renderParts] != null) {
-					// 通常パーツ
+					
 					ClientHelper.setTexture(textureInner[renderParts]);
 					modelInner.render(entityCaps, par2, par3, par4, par5, par6, par7, isRendering);
 				}
 			} else {
-				// ほぼエンチャントエフェクト用
+				
 				modelInner.render(entityCaps, par2, par3, par4, par5, par6, par7, isRendering);
 			}
 			if (textureInnerLight != null && renderCount == 0) {
-				// 発光テクスチャ表示処理
+				
 				if (textureInnerLight[renderParts] != null) {
 					ClientHelper.setTexture(textureInnerLight[renderParts]);
 					GL11.glEnable(GL11.GL_BLEND);
@@ -94,7 +75,7 @@ public class ModelMCArmor extends ModelMCBase {
 					if (textureLightColor == null) {
 						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 					} else {
-						//発光色を調整
+						
 						GL11.glColor4f(
 								textureLightColor[0],
 								textureLightColor[1],
@@ -111,17 +92,17 @@ public class ModelMCArmor extends ModelMCBase {
 		}
 		if (modelOuter != null) {
 			if (textureOuter != null && lri) {
-				// 通常パーツ
+				
 				if (textureOuter[renderParts] != null) {
 					ClientHelper.setTexture(textureOuter[renderParts]);
 					modelOuter.render(entityCaps, par2, par3, par4, par5, par6, par7, isRendering);
 				}
 			} else {
-				// ほぼエンチャントエフェクト用
+				
 				modelOuter.render(entityCaps, par2, par3, par4, par5, par6, par7, isRendering);
 			}
 			if (textureOuterLight != null && renderCount == 0) {
-				// 発光テクスチャ表示処理
+				
 				if (textureOuterLight[renderParts] != null) {
 					ClientHelper.setTexture(textureOuterLight[renderParts]);
 					float var4 = 1.0F;
@@ -134,7 +115,7 @@ public class ModelMCArmor extends ModelMCBase {
 					if (textureLightColor == null) {
 						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 					} else {
-						//発光色を調整
+						
 						GL11.glColor4f(
 								textureLightColor[0],
 								textureLightColor[1],
@@ -170,7 +151,7 @@ public class ModelMCArmor extends ModelMCBase {
 	}
 
 
-	// IModelMMM追加分
+	
 
 	@Override
 	public void renderItems(EntityLivingBase pEntity, Render pRender) {
@@ -189,10 +170,7 @@ public class ModelMCArmor extends ModelMCBase {
 		}
 	}
 
-	/**
-	 * Renderer辺でこの変数を設定する。
-	 * 設定値はIModelCapsを継承したEntitiyとかを想定。
-	 */
+	
 	@Override
 	public void setEntityCaps(IModelCaps pEntityCaps) {
 		entityCaps = pEntityCaps;
@@ -217,7 +195,7 @@ public class ModelMCArmor extends ModelMCBase {
 	}
 
 
-	// IModelCaps追加分
+	
 
 	@Override
 	public Map<String, Integer> getModelCaps() {

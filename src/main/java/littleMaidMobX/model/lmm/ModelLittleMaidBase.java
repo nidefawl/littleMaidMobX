@@ -6,9 +6,7 @@ import littleMaidMobX.render.model.ModelRenderer;
 
 import org.lwjgl.opengl.GL11;
 
-/**
- * LMM用に最適化
- */
+
 public abstract class ModelLittleMaidBase extends ModelMultiMMMBase {
 
 	//fields
@@ -24,21 +22,15 @@ public abstract class ModelLittleMaidBase extends ModelMultiMMMBase {
 	public ModelRenderer Skirt;
 
 
-	/**
-	 * コンストラクタは全て継承させること
-	 */
+	
 	public ModelLittleMaidBase() {
 		super();
 	}
-	/**
-	 * コンストラクタは全て継承させること
-	 */
+	
 	public ModelLittleMaidBase(float psize) {
 		super(psize);
 	}
-	/**
-	 * コンストラクタは全て継承させること
-	 */
+	
 	public ModelLittleMaidBase(float psize, float pyoffset, int pTextureWidth, int pTextureHeight) {
 		super(psize, pyoffset, pTextureWidth, pTextureHeight);
 	}
@@ -46,8 +38,8 @@ public abstract class ModelLittleMaidBase extends ModelMultiMMMBase {
 
 	@Override
 	public void initModel(float psize, float pyoffset, boolean isAfterInit) {
-		// 標準型
-		// 手持ち
+		
+		
 		Arms[0] = new ModelRenderer(this);
 		Arms[0].setRotationPoint(-1F, 5F, -1F);
 		Arms[1] = new ModelRenderer(this);
@@ -148,17 +140,14 @@ public abstract class ModelLittleMaidBase extends ModelMultiMMMBase {
 		bipedHead.setRotateAngleZ(angle);
 	}
 
-	/**
-	 * 姿勢制御用
-	 * 独自追加分
-	 */
+	
 	@Override
 	public void setRotationAngles(float par1, float par2, float pTicksExisted,
 			float pHeadYaw, float pHeadPitch, float par6, IModelCaps pEntityCaps) {
 		setDefaultPause(par1, par2, pTicksExisted, pHeadYaw, pHeadPitch, par6, pEntityCaps);
 		
 		if (isRiding) {
-			// 乗り物に乗っている
+			
 			bipedRightArm.addRotateAngleX(-0.6283185F);
 			bipedLeftArm.addRotateAngleX(-0.6283185F);
 			bipedRightLeg.setRotateAngleX(-1.256637F);
@@ -169,7 +158,7 @@ public abstract class ModelLittleMaidBase extends ModelMultiMMMBase {
 		}
 		
 		
-		// アイテム持ってるときの腕振りを抑える+表示角オフセット
+		
 		if (heldItem[1] != 0) {
 			bipedLeftArm.setRotateAngleX(bipedLeftArm.getRotateAngleX() * 0.5F);
 			bipedLeftArm.addRotateAngleDegX(-18F * (float)heldItem[1]);
@@ -183,7 +172,7 @@ public abstract class ModelLittleMaidBase extends ModelMultiMMMBase {
 //		bipedLeftArm.setRotateAngleY(0.0F);
 		
 		if ((onGrounds[0] > -9990F || onGrounds[1] > -9990F) && !aimedBow) {
-			// 腕振り
+			
 			float f6, f7, f8;
 			f6 = mh_sin(mh_sqrt_float(onGrounds[0]) * (float)Math.PI * 2.0F);
 			f7 = mh_sin(mh_sqrt_float(onGrounds[1]) * (float)Math.PI * 2.0F);
@@ -223,7 +212,7 @@ public abstract class ModelLittleMaidBase extends ModelMultiMMMBase {
 			}
 		}
 		if(isSneak) {
-			// しゃがみ
+			
 			bipedTorso.rotateAngleX += 0.5F;
 			bipedNeck.rotateAngleX -= 0.5F;
 			bipedRightArm.rotateAngleX += 0.2F;
@@ -239,17 +228,17 @@ public abstract class ModelLittleMaidBase extends ModelMultiMMMBase {
 			Skirt.addRotateAngleX(0.2F);
 			bipedTorso.rotationPointY += 1.00F;
 		} else {
-			// 通常立ち
+			
 		}
 		if (isWait) {
-			//待機状態の特別表示
+			
 			float lx = mh_sin(pTicksExisted * 0.067F) * 0.05F -0.7F;
 			bipedRightArm.setRotateAngle(lx, 0.0F, -0.4F);
 			bipedLeftArm.setRotateAngle(lx, 0.0F, 0.4F);
 		} else {
 			float la, lb, lc;
 			if (aimedBow) {
-				// 弓構え
+				
 				float lonGround = onGrounds[dominantArm];
 				float f6 = mh_sin(lonGround * 3.141593F);
 				float f7 = mh_sin((1.0F - (1.0F - lonGround) * (1.0F - lonGround)) * 3.141593F);
@@ -268,7 +257,7 @@ public abstract class ModelLittleMaidBase extends ModelMultiMMMBase {
 				bipedRightArm.addRotateAngleZ(la);
 				bipedLeftArm.addRotateAngleZ(-la);
 			} else {
-				// 通常
+				
 				la = mh_sin(pTicksExisted * 0.067F) * 0.05F;
 				lc = 0.5F + mh_cos(pTicksExisted * 0.09F) * 0.05F + 0.05F;
 				bipedRightArm.addRotateAngleX(la);
@@ -310,7 +299,7 @@ public abstract class ModelLittleMaidBase extends ModelMultiMMMBase {
 
 	@Override
 	public void showAllParts(IModelCaps pEntityCaps) {
-		// 表示制限を解除してすべての部品を表示
+		
 		bipedHead.setVisible(true);
 		bipedBody.setVisible(true);
 		bipedRightArm.setVisible(true);
@@ -322,20 +311,20 @@ public abstract class ModelLittleMaidBase extends ModelMultiMMMBase {
 
 	@Override
 	public int showArmorParts(IModelCaps iModelCaps, int parts, int index) {
-		// 鎧の表示用
+		
 		boolean f;
-		// 兜
+		
 		f = parts == 3 ? true : false;
 		bipedHead.setVisible(f);
-		// 鎧
+		
 		f = parts == 2 ? true : false;
 		bipedBody.setVisible(f);
 		bipedRightArm.setVisible(f);
 		bipedLeftArm.setVisible(f);
-		// 脚甲
+		
 		f = parts == 1 ? true : false;
 		Skirt.setVisible(f);
-		// 臑当
+		
 		f = parts == 0 ? true : false;
 		bipedRightLeg.setVisible(f);
 		bipedLeftLeg.setVisible(f);
@@ -345,7 +334,7 @@ public abstract class ModelLittleMaidBase extends ModelMultiMMMBase {
 
 	@Override
 	public void renderItems(IModelCaps pEntityCaps) {
-		// 手持ちの表示
+		
 		GL11.glPushMatrix();
 		// R
 		Arms[0].loadMatrix();
@@ -355,7 +344,7 @@ public abstract class ModelLittleMaidBase extends ModelMultiMMMBase {
 		Arms[1].loadMatrix();
 		GL11.glTranslatef(0F, 0.05F, -0.05F);
 		Arms[1].renderItems(this, pEntityCaps, false, 1);
-		// 頭部装飾品
+		
 		boolean lplanter = ModelCapsHelper.getCapsValueBoolean(pEntityCaps, caps_isPlanter);
 		if (ModelCapsHelper.getCapsValueBoolean(pEntityCaps, caps_isCamouflage) || lplanter) {
 			HeadMount.loadMatrix();

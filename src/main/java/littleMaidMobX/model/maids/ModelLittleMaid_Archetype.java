@@ -7,10 +7,7 @@ import littleMaidMobX.render.model.ModelRenderer;
 
 import org.lwjgl.opengl.GL11;
 
-/**
- * 旧型モデル互換のベースモデル。
- * 関節リンクしていない
- */
+
 public class ModelLittleMaid_Archetype extends ModelLittleMaidBase {
 
 	// fields
@@ -38,7 +35,7 @@ public class ModelLittleMaid_Archetype extends ModelLittleMaidBase {
 	public void initModel(float psize, float pyoffset, boolean isAfterInit) {
 		pyoffset += 8F;
 
-		// 装備位置
+		
 		Arms = new ModelRenderer[1];
 		Arms[0] = new ModelRenderer(this, 0, 0);
 		Arms[0].setRotationPoint(-1F, 5F, -1F);
@@ -131,37 +128,37 @@ public class ModelLittleMaid_Archetype extends ModelLittleMaidBase {
 	}
 
 	public float getHeight() {
-		// 身長
+		
 		return 1.35F;
 	}
 
 	public float getWidth() {
-		// 横幅
+		
 		return 0.5F;
 	}
 
 	public void equippedBlockPosition() {
-		// 手持ちブロックの表示位置
+		
 		GL11.glTranslatef(0.0F, 0.1275F, -0.3125F);
 	}
 
 	public void equippedItemPosition3D() {
-		// 手持ち３Dアイテムの表示位置
+		
 		GL11.glTranslatef(0.02F, 0.1300F, 0.0F);
 	}
 
 	public void equippedItemPosition() {
-		// 手持ちアイテムの表示位置
+		
 		GL11.glTranslatef(0.20F, 0.0800F, -0.0875F);
 	}
 
 	public void equippedHeadItemPosition() {
-		// 頭部着装アイテムの表示位置
+		
 		GL11.glTranslatef(0.0F, 1.0F, 0.0F);
 	}
 
 	public void equippedItemBow() {
-		// 手持ち弓の表示位置
+		
 		// GL11.glTranslatef(-0.07F, 0.005F, 0.3F);
 		equippedItemPosition3D();
 		// GL11.glTranslatef(-0.09F, -0.125F, 0.3F);
@@ -169,7 +166,7 @@ public class ModelLittleMaid_Archetype extends ModelLittleMaidBase {
 	}
 
 	public boolean isItemHolder() {
-		// アイテムを持っているときに手を前に出すかどうか。
+		
 		return false;
 	}
 
@@ -200,7 +197,7 @@ public class ModelLittleMaid_Archetype extends ModelLittleMaidBase {
 		bipedLeftLeg.rotateAngleY = 0.0F;
 
 		if (isRiding) {
-			// 乗り物に乗っている
+			
 			bipedRightArm.rotateAngleX += -0.6283185F;
 			bipedLeftArm.rotateAngleX += -0.6283185F;
 			bipedRightLeg.rotateAngleX = -1.256637F;
@@ -208,7 +205,7 @@ public class ModelLittleMaid_Archetype extends ModelLittleMaidBase {
 			bipedRightLeg.rotateAngleY = 0.3141593F;
 			bipedLeftLeg.rotateAngleY = -0.3141593F;
 		}
-		// アイテム持ってるときの腕振りを抑える
+		
 		if (heldItem[1] != 0) {
 			bipedLeftArm.rotateAngleX = bipedLeftArm.rotateAngleX * 0.5F
 					- 0.3141593F * (float) heldItem[1];
@@ -222,7 +219,7 @@ public class ModelLittleMaid_Archetype extends ModelLittleMaidBase {
 		bipedLeftArm.rotateAngleY = 0.0F;
 		float lonGround = onGrounds[dominantArm];
 		if (lonGround > -9990F && !aimedBow) {
-			// 腕振り
+			
 			float f6 = lonGround;
 			bipedBody.rotateAngleY = mh_sin(mh_sqrt_float(f6) * 3.141593F * 2.0F) * 0.2F;
 			Skirt.rotateAngleY = bipedBody.rotateAngleY;
@@ -245,7 +242,7 @@ public class ModelLittleMaid_Archetype extends ModelLittleMaidBase {
 			bipedRightArm.rotateAngleZ = mh_sin(lonGround * 3.141593F) * -0.4F;
 		}
 		if (isSneak) {
-			// しゃがみ
+			
 			bipedBody.rotateAngleX = 0.5F;
 			bipedRightLeg.rotateAngleX -= 0.0F;
 			bipedLeftLeg.rotateAngleX -= 0.0F;
@@ -262,7 +259,7 @@ public class ModelLittleMaid_Archetype extends ModelLittleMaidBase {
 			Skirt.rotationPointZ = 2.7F;
 			Skirt.rotateAngleX = 0.2F;
 		} else {
-			// 通常立ち
+			
 			bipedBody.rotateAngleX = 0.0F;
 			bipedRightLeg.rotationPointZ = 0.0F;
 			bipedLeftLeg.rotationPointZ = 0.0F;
@@ -275,7 +272,7 @@ public class ModelLittleMaid_Archetype extends ModelLittleMaidBase {
 			Skirt.rotateAngleX = 0.0F;
 		}
 		if (isWait) {
-			// 待機状態の特別表示
+			
 			bipedRightArm.rotateAngleX = mh_sin(pTicksExisted * 0.067F) * 0.05F - 0.7F;
 			bipedRightArm.rotateAngleY = 0.0F;
 			bipedRightArm.rotateAngleZ = -0.4F;
@@ -284,7 +281,7 @@ public class ModelLittleMaid_Archetype extends ModelLittleMaidBase {
 			bipedLeftArm.rotateAngleZ = 0.4F;
 		} else {
 			if (aimedBow) {
-				// 弓構え
+				
 				float f6 = mh_sin(lonGround * 3.141593F);
 				float f7 = mh_sin((1.0F - (1.0F - lonGround)
 						* (1.0F - lonGround)) * 3.141593F);
@@ -307,7 +304,7 @@ public class ModelLittleMaid_Archetype extends ModelLittleMaidBase {
 				bipedRightArm.rotateAngleY += bipedHead.rotateAngleY;
 				bipedLeftArm.rotateAngleY += bipedHead.rotateAngleY;
 			} else {
-				// 通常
+				
 				bipedRightArm.rotateAngleZ += 0.5F;
 				bipedLeftArm.rotateAngleZ -= 0.5F;
 				bipedRightArm.rotateAngleZ += mh_cos(pTicksExisted * 0.09F) * 0.05F + 0.05F;
@@ -321,12 +318,12 @@ public class ModelLittleMaid_Archetype extends ModelLittleMaidBase {
 
 	@Override
 	public void renderItems(IModelCaps pEntityCaps) {
-		// 手持ちの表示
+		
 		GL11.glPushMatrix();
 		if (pEntityCaps != null) {
 			int ldominant = ModelCapsHelper.getCapsValueInt(pEntityCaps, caps_dominantArm);
 			Arms[0].loadMatrix().renderItems(this, pEntityCaps, false, ldominant);
-			// 頭部装飾品
+			
 			boolean lplanter = ModelCapsHelper.getCapsValueBoolean(pEntityCaps, caps_isPlanter);
 			if (ModelCapsHelper.getCapsValueBoolean(pEntityCaps, caps_isCamouflage) || lplanter) {
 				HeadMount.loadMatrix();

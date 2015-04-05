@@ -1,9 +1,7 @@
 package littleMaidMobX;
 
 
-/**
- * カウンタ用。
- */
+
 public class Counter {
 
 	protected int fSetValue;

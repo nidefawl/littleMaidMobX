@@ -34,9 +34,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class ModelManager {
 
-	/**
-	 * 継承クラスで置き換えることを考慮。
-	 */
+	
 	public static ModelManager instance = new ModelManager();
 
 	public static String nameTextureIndex = "config/mod_MMM_textureList.cfg";
@@ -56,9 +54,7 @@ public class ModelManager {
 	public static final int tx_armor1light = 0x80; //128;
 	public static final int tx_armor2light = 0x90; //144;
 	public static String[] armorFilenamePrefix;
-	/**
-	 * 旧タイプのファイル名
-	 */
+	
 	protected static String defNames[] = {
 		"mob_littlemaid0.png", "mob_littlemaid1.png",
 			"mob_littlemaid2.png", "mob_littlemaid3.png",
@@ -72,31 +68,18 @@ public class ModelManager {
 			"mob_littlemaid_a00.png", "mob_littlemaid_a01.png"
 	};
 
-	/**
-	 * ローカルで保持しているモデルのリスト
-	 */
+	
 	public Map < String, ModelMultiBase[] > modelMap = new TreeMap < String, ModelMultiBase[] > ();
-	/**
-	 * ローカルで保持しているテクスチャパック
-	 */
+	
 	public List < TextureBox > textures = new ArrayList < TextureBox > ();
-	/**
-	 * サーバー側での管理番号を識別するのに使う、クライアント用。
-	 */
+	
 	public Map < TextureBox, Integer > textureServerIndex = new HashMap < TextureBox, Integer > ();
-	/**
-	 * サーバー・クライアント間でテクスチャパックの名称リストの同期を取るのに使う、サーバー用。
-	 */
+	
 	public List < TextureBoxServer > textureServer = new ArrayList < TextureBoxServer > ();
-	/**
-	 * Entity毎にデフォルトテクスチャを参照。
-	 * 構築方法はEntityListを参照のこと。
-	 */
+	
 	public Map < Class, TextureBox > defaultTextures = new HashMap < Class, TextureBox > ();
 
-	/**
-	 * クライアント側で使う
-	 */
+	
 	protected String[] requestString = new String[] {
 		null, null, null, null, null, null, null, null,
 		null, null, null, null, null, null, null, null
@@ -129,11 +112,7 @@ public class ModelManager {
 		return instance.textures;
 	}
 
-	/**
-	 * 渡されたTextureBoxBaseを判定してTextureBoxを返す。
-	 * @param pBoxBase
-	 * @return
-	 */
+	
 	public TextureBox getTextureBox(TextureBoxBase pBoxBase) {
 		if (pBoxBase instanceof TextureBox) {
 			return (TextureBox) pBoxBase;
@@ -162,22 +141,12 @@ public class ModelManager {
 
 	protected void getArmorPrefix() {
 		armorFilenamePrefix = RenderBiped.bipedArmorFilenamePrefix;
-		/*
-		// アーマーファイルのプリフィックスを獲得
-		try {
-			armorFilenamePrefix = (String[])ModLoader.getPrivateValue(RenderBiped.class, null, 5);
-			return;
-		} catch (Exception e) {
-		} catch (Error e) {
-			e.printStackTrace();
-		}
-		armorFilenamePrefix = null;
-*/
+		
 	}
 
 	boolean init = false;
 	public boolean loadTextures() {
-		// アーマーのファイル名を識別するための文字列を獲得する
+		
 		if (Helper.isClient) {
 			getArmorPrefix();
 		}
@@ -201,10 +170,10 @@ public class ModelManager {
 		}
 		
 		
-		// TODO:実験コード
+		
 		buildCrafterTexture();
 
-		// テクスチャパッケージにモデルクラスを紐付け
+		
 		ModelMultiBase[] ldm = modelMap.get(defaultModelName);
 		if (ldm == null && !modelMap.isEmpty()) {
 			ldm = (ModelMultiBase[]) modelMap.values().toArray()[0];
@@ -258,7 +227,7 @@ public class ModelManager {
 	}
 
 	public void buildCrafterTexture() {
-		// TODO:実験コード標準モデルテクスチャで構築
+		
 		TextureBox lbox = new TextureBox("Crafter_Steve");
 		lbox.fileName = "";
 
@@ -279,13 +248,13 @@ public class ModelManager {
 
 
 	public boolean loadTextureServer() {
-		// サーバー用テクスチャ名称のインデクッスローダー
-		// 先ずは手持ちのテクスチャパックを追加する。
+		
+		
 		textureServer.clear();
 		for (TextureBox lbox: getTextureList()) {
 			textureServer.add(new TextureBoxServer(lbox));
 		}
-		// ファイルからロード
+		
 		File lfile = MinecraftServer.getServer().getFile(nameTextureIndex);
 		if (lfile.exists() && lfile.isFile()) {
 			try {
@@ -296,7 +265,7 @@ public class ModelManager {
 				while ((ls = br.readLine()) != null) {
 					String lt[] = ls.split(",");
 					if (lt.length >= 7) {
-						// ファイルのほうが優先
+						
 						TextureBoxServer lbox = getTextureBoxServer(lt[6]);
 						if (lbox == null) {
 							lbox = new TextureBoxServer();
@@ -331,7 +300,7 @@ public class ModelManager {
 	}
 
 	public void saveTextureServer() {
-		// サーバー用テクスチャ名称のインデクッスセーバー
+		
 		File lfile = MinecraftServer.getServer().getFile(nameTextureIndex);
 		try {
 			FileWriter fw = new FileWriter(lfile);
@@ -356,9 +325,7 @@ public class ModelManager {
 		}
 	}
 
-	/**
-	 * テクスチャインデックスを構築。
-	 */
+	
 	public void initTextureList(boolean pFlag) {
 		LittleMaidMobX.Debug("Clear TextureBoxServer.");
 		textureServerIndex.clear();
@@ -418,7 +385,7 @@ public class ModelManager {
 
 
 	protected int getIndex(String name) {
-		// 名前からインデックスを取り出す
+		
 		for (int i = 0; i < defNames.length; i++) {
 			if (name.endsWith(defNames[i])) {
 				return i;
@@ -435,7 +402,7 @@ public class ModelManager {
 	}
 
 	public TextureBox getNextPackege(TextureBox pNowBox, int pColor) {
-		// 次のテクスチャパッケージの名前を返す
+		
 		boolean f = false;
 		TextureBox lreturn = null;
 		for (TextureBox ltb: getTextureList()) {
@@ -455,7 +422,7 @@ public class ModelManager {
 	}
 
 	public TextureBox getPrevPackege(TextureBox pNowBox, int pColor) {
-		// 前のテクスチャパッケージの名前を返す
+		
 		TextureBox lreturn = null;
 		for (TextureBox ltb: getTextureList()) {
 			if (ltb == pNowBox) {
@@ -470,15 +437,13 @@ public class ModelManager {
 		return lreturn == null ? null : lreturn;
 	}
 
-	/**
-	 * ローカルで読み込まれているテクスチャパックの数。
-	 */
+	
 	public int getTextureCount() {
 		return getTextureList().size();
 	}
 
 	public TextureBox getNextArmorPackege(TextureBox pNowBox) {
-		// 次のテクスチャパッケージの名前を返す
+		
 		boolean f = false;
 		TextureBox lreturn = null;
 		for (TextureBox ltb: getTextureList()) {
@@ -498,7 +463,7 @@ public class ModelManager {
 	}
 
 	public TextureBox getPrevArmorPackege(TextureBox pNowBox) {
-		// 前のテクスチャパッケージの名前を返す
+		
 		TextureBox lreturn = null;
 		for (TextureBox ltb: getTextureList()) {
 			if (ltb == pNowBox) {
@@ -521,7 +486,7 @@ public class ModelManager {
 		if (textureServer.isEmpty()) {
 			return null;
 		} else {
-			// 野生色があるものをリストアップ
+			
 			List < TextureBoxServer > llist = new ArrayList < TextureBoxServer > ();
 			for (TextureBoxServer lbox: textureServer) {
 				if (lbox.getWildColorBits() > 0) {
@@ -532,20 +497,14 @@ public class ModelManager {
 		}
 	}
 
-	/**
-	 * テクスチャパック名に対応するインデックスを返す。
-	 * 基本サーバー用。
-	 * @param pEntity
-	 * @param pPackName
-	 * @return
-	 */
+	
 	public int getIndexTextureBoxServer(ITextureEntity pEntity, String pPackName) {
 		for (int li = 0; li < textureServer.size(); li++) {
 			if (textureServer.get(li).textureName.equals(pPackName)) {
 				return li;
 			}
 		}
-		// 見当たらなかったのでEntityに対応するデフォルトを返す
+		
 		//		int li = textureServerIndex.get(getDefaultTexture(pEntity));
 		TextureBox lbox = getDefaultTexture(pEntity);
 		if (lbox != null) {
@@ -559,18 +518,12 @@ public class ModelManager {
 		return 0;
 	}
 
-	/**
-	 * 指定されたテクスチャパックのサーバー側の管理番号を返す。
-	 * @param pBox
-	 * @return
-	 */
+	
 	public int getIndexTextureBoxServerIndex(TextureBox pBox) {
 		return textureServerIndex.get(pBox);
 	}
 
-	/**
-	 * Entityに対応するデフォルトのテクスチャを設定する。
-	 */
+	
 	public void setDefaultTexture(ITextureEntity pEntity, TextureBox pBox) {
 		setDefaultTexture(pEntity.getClass(), pBox);
 	}
@@ -580,9 +533,7 @@ public class ModelManager {
 		pEntityClass.getSimpleName(), pBox == null ? "NULL" : pBox.textureName);
 	}
 
-	/**
-	 * Entityに対応するデフォルトモデルを返す。
-	 */
+	
 	public TextureBox getDefaultTexture(ITextureEntity pEntity) {
 		return getDefaultTexture(pEntity.getClass());
 	}
@@ -604,11 +555,9 @@ public class ModelManager {
 
 
 
-	/*
-	 * サーバークライアント間でのテクスチャ管理関数群
-	 */
+	
 
-	// ネットワーク越しにテクスチャインデクスを得る際に使う
+	
 	protected int getRequestStringIndex(String pVal) {
 		int lblank = -1;
 		for (int li = 0; li < requestString.length; li++) {
@@ -616,7 +565,7 @@ public class ModelManager {
 				lblank = li;
 				requestStringCounter[li] = 0;
 			} else if (requestString[li].equals(pVal)) {
-				// 既に要求中
+				
 				return -2;
 			}
 		}
@@ -641,7 +590,7 @@ public class ModelManager {
 				lblank = li;
 				requestIndexCounter[li] = 0;
 			} else if (requestIndex[li] == pTextureServerBoxIndex) {
-				// 既に要求中
+				
 				return -2;
 			}
 		}
@@ -656,7 +605,7 @@ public class ModelManager {
 	protected boolean clearRequestIndex(int pTextureServerBoxIndex) {
 		for (int li = 0; li < requestIndex.length; li++) {
 			if (requestIndex[li] == pTextureServerBoxIndex) {
-				// 要求中だったので消す。
+				
 				requestIndex[li] = -1;
 				return true;
 			}
@@ -675,19 +624,15 @@ public class ModelManager {
 	}
 
 
-	/**
-	 * テクスチャパックを設定するため、サーバーへ情報を送る。
-	 * @param pEntity
-	 * @param pBox
-	 */
+	
 	public void postSetTexturePack(ITextureEntity pEntity, int pColor, TextureBoxBase[] pBox) {
 		// Client
 		if (!(pEntity instanceof Entity)) return;
-		// テクスチャパックを設定するため、サーバーへ情報を送る。
+		
 		int lindex[] = new int[pBox.length];
 		boolean lflag = true;
 
-		// PackeNameからサーバー側のテクスチャインデックスを獲得する。
+		
 		for (int li = 0; li < pBox.length; li++) {
 			lindex[li] = checkTextureBoxServer((TextureBox) pBox[li]);
 			if (lindex[li] < 0) {
@@ -696,10 +641,10 @@ public class ModelManager {
 		}
 
 		if (lflag) {
-			// すべての名称からインデックスを取り出せた場合、サーバーへポストする。
+			
 			sendToServerSetTexturePackIndex(pEntity, pColor, lindex);
 		} else {
-			// ローカルに設定値がない場合、バッファにジョブをスタックし終了。
+			
 			Object lo[] = new Object[1 + pBox.length];
 			lo[0] = pColor;
 			for (int li = 0; li < pBox.length; li++) {
@@ -709,11 +654,7 @@ public class ModelManager {
 		}
 	}
 
-	/**
-	 * TextureBoxにサーバー識別番号が付与されているかを確認し、なければ問い合わせを行う。
-	 * @param pBox
-	 * @return
-	 */
+	
 	public int checkTextureBoxServer(TextureBox pBox) {
 		// Client
 		if (textureServerIndex.containsKey(pBox)) {
@@ -731,7 +672,7 @@ public class ModelManager {
 
 	protected void sendToServerSetTexturePackIndex(ITextureEntity pEntity, int pColor, int[] pIndex) {
 		// Client
-		// サーバー側へテクスチャパックのインデックスが変更されたことを通知する。
+		
 		if (pEntity instanceof Entity) {
 			byte ldata[] = new byte[6 + pIndex.length * 2];
 			ldata[0] = NetConstants.Server_SetTexturePackIndex;
@@ -749,7 +690,7 @@ public class ModelManager {
 	public void reciveFromClientSetTexturePackIndex(Entity pEntity, byte[] pData) {
 		// Server
 		if (pEntity instanceof ITextureEntity) {
-			// クライアント側からテクスチャパックのインデックスが変更された通知を受け取ったので処理を行う。
+			
 			int lcount = (pData.length - 6) / 2;
 			if (lcount < 1) return;
 			int lindex[] = new int[lcount];
@@ -764,9 +705,9 @@ public class ModelManager {
 
 	protected void sendToServerGetTextureIndex(int pBufIndex, TextureBox pBox) {
 		// Client
-		// サーバー側へテクスチャパックの管理番号を問い合わせる。
-		// 呼び出し側のクライアントへのみ返す。
-		// 返すときはNameは不要、BufIndexのみで識別させる
+		
+		
+		
 		byte ldata[] = new byte[22 + pBox.textureName.length()];
 		ldata[0] = NetConstants.Server_GetTextureIndex;
 		ldata[1] = (byte) pBufIndex;
@@ -783,7 +724,7 @@ public class ModelManager {
 
 	public void reciveFromClientGetTexturePackIndex(EntityPlayer player, byte[] pData) {
 		// Server
-		// クライアント側へテクスチャパックの管理番号を返す。
+		
 		String lpackname = Helper.getStr(pData, 22);
 		TextureBoxServer lboxsrv = getTextureBoxServer(lpackname);
 		int li;
@@ -806,12 +747,12 @@ public class ModelManager {
 
 	public void reciveFormServerSetTexturePackIndex(byte[] pData) {
 		// Client
-		// サーバー側からテクスチャパックのインデックスを受け取ったので値を登録する。
+		
 		TextureBox lbox = getTextureBox(getRequestString(pData[1]));
 		textureServerIndex.put(lbox, (int) Helper.getShort(pData, 2));
 		LittleMaidMobX.Debug("reciveFormServerSetTexturePackIndex: %s, %04x", lbox.textureName, (int) Helper.getShort(pData, 2));
 
-		// スタックされたジョブから処理可能な物があれば実行する。
+		
 		Map < ITextureEntity, Object[] > lmap = new HashMap < ITextureEntity, Object[] > (stackSetTexturePack);
 		stackSetTexturePack.clear();
 		for (Entry < ITextureEntity, Object[] > le: lmap.entrySet()) {
@@ -827,18 +768,14 @@ public class ModelManager {
 
 
 
-	/**
-	 * サーバーから設定されたテクスチャインデックスからテクスチャパックを取得する。
-	 * @param pEntity
-	 * @param pIndex
-	 */
+	
 	public void postGetTexturePack(ITextureEntity pEntity, int[] pIndex) {
 		// Client
-		// クライアント側で指定されたインデックスに対してテクスチャパックの名称を返し設定させる
+		
 		TextureBox lbox[] = new TextureBox[pIndex.length];
 		boolean lflag = true;
 
-		// ローカルインデックスに名称が登録されていなければサーバーへ問い合わせる。
+		
 		for (int li = 0; li < pIndex.length; li++) {
 			lbox[li] = getTextureBoxServerIndex(pIndex[li]);
 			if (lbox[li] == null) {
@@ -850,17 +787,17 @@ public class ModelManager {
 		}
 
 		if (lflag) {
-			// 全ての値が取れる場合はEntityへ値を設定する。
+			
 			pEntity.setTexturePackName(lbox);
 		} else {
-			// 不明値がある場合は処理をスタックする。
+			
 			stackGetTexturePack.put(pEntity, pIndex);
 		}
 	}
 
 	protected void sendToServerGetTexturePackName(int pIndex) {
 		// Client
-		// サーバー側へテクスチャパックの名称を問い合わせる
+		
 		if (pIndex < 0) {
 			LittleMaidMobX.Debug("request range out.");
 			return;
@@ -873,11 +810,11 @@ public class ModelManager {
 
 	public void reciveFromClientGetTexturePackName(EntityPlayer player, byte[] pData) {
 		// Server
-		// クライアントからテクスチャパックの名称が問い合わせられた。
+		
 		int lindex = Helper.getShort(pData, 1);
 		TextureBoxServer lboxserver = getTextureBoxServer(lindex);
 
-		// Clientへ管理番号に登録されているテクスチャ名称をポストする
+		
 		byte ldata[] = new byte[23 + lboxserver.textureName.length()];
 		ldata[0] = NetConstants.Client_SetTexturePackName;
 		Helper.setShort(ldata, 1, lindex);
@@ -894,12 +831,12 @@ public class ModelManager {
 
 	public void reciveFromServerSetTexturePackName(byte[] pData) {
 		// Client
-		// サーバーからインデックスに対する名称の設定があった。
+		
 		String lpackname = Helper.getStr(pData, 23);
 		TextureBox lbox = getTextureBox(lpackname);
 		if (lbox == null) {
-			// ローカルには存在しないテクスチャパック
-			// TODO:この辺要修正
+			
+			
 			lbox = getTextureBox("default_Orign").duplicate();
 			lbox.textureName = lpackname;
 			//			lbox = new MMM_TextureBox(lpackname, null);
@@ -914,7 +851,7 @@ public class ModelManager {
 		textureServerIndex.put(lbox, lindex);
 		clearRequestIndex(lindex);
 
-		// 処理可能な物がスタックされている場合は処理を行う。
+		
 		Map < ITextureEntity, int[] > lmap = new HashMap < ITextureEntity, int[] > (stackGetTexturePack);
 		stackGetTexturePack.clear();
 		for (Entry < ITextureEntity, int[] > le: lmap.entrySet()) {
@@ -922,12 +859,10 @@ public class ModelManager {
 		}
 	}
 
-	/**
-	 * Request系の値を一定カウントで消去
-	 */
+	
 	protected void onUpdate() {
 		for (int li = 0; li < requestString.length; li++) {
-			// 約30秒で解放
+			
 			if (requestString[li] != null && requestStringCounter[li]++ > 600) {
 				requestString[li] = null;
 				requestStringCounter[li] = 0;

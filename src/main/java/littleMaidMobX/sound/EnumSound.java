@@ -63,9 +63,7 @@ public enum EnumSound {
 		DefaultValue = fdefault;
 	}
 
-	/**
-	 * 指定されたインデックスのEnumSoundを返す。
-	 */
+	
 	public static EnumSound getEnumSound(int pindex) {
 		for (EnumSound le : EnumSound.values()) {
 			if (le.index == pindex) {

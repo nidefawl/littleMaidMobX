@@ -5,7 +5,7 @@ import net.minecraft.client.model.TexturedQuad;
 
 public class ModelBoxPlate extends ModelBoxBase {
 
-	// 互換用パラメーター
+	
 	@Deprecated
 	public static final int planeXY		= 0;
 	@Deprecated
@@ -19,11 +19,7 @@ public class ModelBoxPlate extends ModelBoxBase {
 	@Deprecated
 	public static final int planeXZInv	= 6;
 
-	/*
-	 * こちらを使用して下さい。
-	 * ボックスを作った時と同じマッピングになるように調整してます。
-	 * マッピング的に左右の面は自力で移動しなければ反転されません、前後が逆になります。
-	 */
+	
 	public static final int planeXYFront	= 0x10;
 	public static final int planeXYBack		= 0x14;
 	public static final int planeZYRight	= 0x11;
@@ -54,7 +50,7 @@ public class ModelBoxPlate extends ModelBoxBase {
 		boolean lotherplane = (pPlane & 0x04) > 0;
 		int lPlane = pPlane & 0x03;
 		
-		// i1 は平面の生成位置
+		
 		switch (lPlane) {
 		case planeXY:
 			// xy
@@ -120,7 +116,7 @@ public class ModelBoxPlate extends ModelBoxBase {
 		}
 		
 		quadList = new TexturedQuad[1];
-		// 面の法面を反転する
+		
 		if (modelrenderer.mirror) {
 			if (lPlane == 0) {
 				// xy
@@ -207,7 +203,7 @@ public class ModelBoxPlate extends ModelBoxBase {
 			}
 		} else {
 			if (lotherplane) {
-				// 逆周り
+				
 				quadList[0] = new TexturedQuad(
 						new PositionTextureVertex[] {
 								vertexPositions[0],

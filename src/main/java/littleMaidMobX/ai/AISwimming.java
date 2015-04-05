@@ -15,7 +15,7 @@ public class AISwimming extends EntityAISwimming {
 
 	@Override
 	public boolean shouldExecute() {
-		// 足がつくなら泳がない
+		
 		return (theEntity.getNavigator().noPath() ?
 				(!theEntity.onGround || theEntity.isInsideOfMaterial(Material.water)) : theEntity.isInWater())
 				|| theEntity.handleLavaMovement();
