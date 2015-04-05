@@ -31,7 +31,7 @@ import modchu.model.multimodel.base.MultiModel;public class MultiModel_Elsie e
 		bipedRightArm = new Modchu_ModelRenderer(this, 56, 20);
 		bipedRightArm.addBox(-1.0F, 0.0F, -1.0F, 2, 10, 2, f);
 		bipedRightArm.setRotationPoint(-3.0F, 0.0F, 0.0F);
-		bipedLeftArm = new Modchu_ModelRenderer(this, 56, 20);
+		bipedLeftArm = new Modchu_ModelRenderer(this, 56, 20, "bipedLeftArm");
 		bipedLeftArm.mirror = true;
 		bipedLeftArm.addBox(-1.0F, 0.0F, -1F, 2, 10, 2, f);
 		bipedLeftArm.setRotationPoint(3.0F, 0.0F, 0.0F);
@@ -107,8 +107,7 @@ import modchu.model.multimodel.base.MultiModel;public class MultiModel_Elsie e
 				rightArm2.showModel = leftArm2.showModel = rightLeg.showModel =
 				rightLeg2.showModel = leftLeg.showModel = leftLeg2.showModel = false;
 	}	@Override
-	public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, ModchuModel_IEntityCaps entityCaps) {
-		super.setRotationAnglesLM(f, f1, f2, f3, f4, f5, entityCaps);
+	public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, ModchuModel_IEntityCaps entityCaps) {		super.setRotationAnglesLM(f, f1, f2, f3, f4, f5, entityCaps);
 		Arms[0].setRotationPoint(0.5F, 9.0F, 0F);
 		Arms[1].setRotationPoint(-0.5F, 9.0F, 0F);
 		mainFrame.setRotationPoint(0.0F, 0.0F, 0.0F);
@@ -162,7 +161,7 @@ import modchu.model.multimodel.base.MultiModel;public class MultiModel_Elsie e
 		SideTailR.rotateAngleX = mh_cos(f2 * 0.05F) * 0.03F;
 		SideTailL.rotateAngleX = mh_cos(f2 * 0.05F) * 0.03F;
 		//bipedHeadwear.rotateAngleX = -(mh_sin(f2 * 0.09F) * 0.03F + 0.03F);
-		setRotationAnglesGulliverAfter(f, f1, f2, f3, f4, f5, entityCaps);
+		setRotationAnglesGulliverAfter(f, f1, f2, f3, f4, f5, entityCaps);
 	}	@Override
 	public void defaultAddChildSetting() {
 		super.defaultAddChildSetting();

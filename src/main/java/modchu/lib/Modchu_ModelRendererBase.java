@@ -8,6 +8,7 @@ import java.util.List;
 import modchu.lib.characteristic.Modchu_AS;
 import modchu.lib.characteristic.Modchu_ModelBoxBase;
 import modchu.model.ModchuModel_ModelPlate;
+import net.minecraft.client.Minecraft;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;

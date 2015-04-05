@@ -1,19 +1,19 @@
 package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.modchu.ModelModchuBaseMulti;import littleMaidMobX.render.model.ModelRenderer;import modchu.lib.Modchu_EntityCapsHelper;
 import modchu.lib.characteristic.Modchu_AS;
-import modchu.model.multimodel.base.MultiModel;public class MultiModel_Elsie extends ModelModchuBaseMulti {	public ModelRenderer RightSkirt;
+import modchu.model.multimodel.base.MultiModel;public class MultiModel_Elsie2 extends ModelModchuBaseMulti {	public ModelRenderer RightSkirt;
 	public ModelRenderer LeftSkirt;
 	public ModelRenderer bipedHeadwearB;
 	public ModelRenderer SkirtTopL;
 	public ModelRenderer SkirtFrontL;
 	public ModelRenderer SkirtLeftL;
 	public ModelRenderer SkirtBackL;
-	public ModelRenderer SkirtRightL;	public MultiModel_Elsie() {
+	public ModelRenderer SkirtRightL;	public MultiModel_Elsie2() {
 		this(0.0F);
-	}	public MultiModel_Elsie(float f) {
+	}	public MultiModel_Elsie2(float f) {
 		this(f, 0.0F);
-	}	public MultiModel_Elsie(float f, float f1) {
+	}	public MultiModel_Elsie2(float f, float f1) {
 		this(f, f1, 64, 32);
-	}	public MultiModel_Elsie(float f, float f1, int i, int j) {
+	}	public MultiModel_Elsie2(float f, float f1, int i, int j) {
 		super(f, f1, i < 0 ? 64 : i, j < 0 ? 32 : j);
 	}	@Override
 	public void initModel(float f, float f1, boolean isAfterInit) {
@@ -29,7 +29,7 @@ import modchu.model.multimodel.base.MultiModel;public class MultiModel_Elsie e
 		bipedRightArm = new ModelRenderer(this, 56, 20);
 		bipedRightArm.addBox(-1.0F, 0.0F, -1.0F, 2, 10, 2, f);
 		bipedRightArm.setRotationPoint(-3.0F, 0.0F, 0.0F);
-		bipedLeftArm = new ModelRenderer(this, 56, 20);
+		bipedLeftArm = new ModelRenderer(this, 56, 20, "bipedLeftArm");
 		bipedLeftArm.mirror = true;
 		bipedLeftArm.addBox(-1.0F, 0.0F, -1F, 2, 10, 2, f);
 		bipedLeftArm.setRotationPoint(3.0F, 0.0F, 0.0F);
@@ -105,8 +105,7 @@ import modchu.model.multimodel.base.MultiModel;public class MultiModel_Elsie e
 				rightArm2.showModel = leftArm2.showModel = rightLeg.showModel =
 				rightLeg2.showModel = leftLeg.showModel = leftLeg2.showModel = false;
 	}	@Override
-	public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, IModelCaps entityCaps) {
-		super.setRotationAnglesLM(f, f1, f2, f3, f4, f5, entityCaps);
+	public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, IModelCaps entityCaps) {		super.setRotationAnglesLM(f, f1, f2, f3, f4, f5, entityCaps);
 		Arms[0].setRotationPoint(0.5F, 9.0F, 0F);
 		Arms[1].setRotationPoint(-0.5F, 9.0F, 0F);
 		mainFrame.setRotationPoint(0.0F, 0.0F, 0.0F);
@@ -123,8 +122,7 @@ import modchu.model.multimodel.base.MultiModel;public class MultiModel_Elsie e
 		bipedHead.rotationPointY = 0.0F;
 		bipedBody.rotationPointY = 4.0F;
 		bipedRightLeg.rotationPointY =
-		bipedLeftLeg.rotationPointY = 8.0F;
-		bipedRightArm.rotationPointY += 3.0F;
+		bipedLeftLeg.rotationPointY = 8.0F;		bipedRightArm.rotationPointY += 3.0F;
 		bipedLeftArm.rotationPointY += 3.0F;
 		bipedBody.rotationPointZ = 0.0F;
 		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isRiding)) {
@@ -160,7 +158,7 @@ import modchu.model.multimodel.base.MultiModel;public class MultiModel_Elsie e
 		SideTailR.rotateAngleX = mh_cos(f2 * 0.05F) * 0.03F;
 		SideTailL.rotateAngleX = mh_cos(f2 * 0.05F) * 0.03F;
 		//bipedHeadwear.rotateAngleX = -(mh_sin(f2 * 0.09F) * 0.03F + 0.03F);
-//		setRotationAnglesGulliverAfter(f, f1, f2, f3, f4, f5, entityCaps);
+//		setRotationAnglesGulliverAfter(f, f1, f2, f3, f4, f5, entityCaps);		rightHand.showModel = leftHand.showModel = rightArm.showModel =				leftArm.showModel = rightArmPlus.showModel = rightArmPlus2.showModel =				leftArmPlus.showModel = leftArmPlus2.showModel = rightLegPlus.showModel =				rightLegPlus2.showModel = leftLegPlus.showModel = leftLegPlus2.showModel =				rightArm2.showModel = leftArm2.showModel = rightLeg.showModel =				rightLeg2.showModel = leftLeg.showModel = leftLeg2.showModel = false;
 	}	@Override
 	public void defaultAddChildSetting() {
 		super.defaultAddChildSetting();

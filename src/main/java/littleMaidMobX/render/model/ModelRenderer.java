@@ -14,6 +14,7 @@ import littleMaidMobX.model.ModelBase;
 import littleMaidMobX.model.ModelMultiBase;
 import littleMaidMobX.model.caps.IModelCaps;
 import littleMaidMobX.model.caps.ModelCapsHelper;
+import littleMaidMobX.model.maids.MultiModel_Elsie2;
 import littleMaidMobX.model.maids.MultiModel_Evelyn4;
 import littleMaidMobX.wrapper.MinecraftClientWrapper;
 import modchu.lib.Modchu_Reflect;
@@ -116,7 +117,7 @@ public class ModelRenderer {
 		isRendering = true;
 		cubeList = new ArrayList<ModelBoxBase>();
 		baseModel = pModelBase;
-		if (pModelBase instanceof MultiModel_Evelyn4) {
+		if (pModelBase instanceof MultiModel_Elsie2) {
 			System.out.println("our: "+pModelBase.boxList.size()+" = "+pName);
 		}
 		
@@ -209,8 +210,9 @@ public class ModelRenderer {
 
 	// TODO:アップデート時はここをチェックすること
 	public void render(float par1, boolean pIsRender) {
-		if (isHidden) return;
-		if (!showModel) return;
+		if (isHidden || !showModel) {
+			return;
+		}
 		
 		if (!compiled) {
 			compileDisplayList(par1);
@@ -233,9 +235,9 @@ public class ModelRenderer {
 	}
 
 	public void renderWithRotation(float par1) {
-		if (isHidden) return;
-		if (!showModel) return;
-		
+		if (isHidden || !showModel) {
+			return;
+		}
 		if (!compiled) {
 			compileDisplayList(par1);
 		}
@@ -244,7 +246,7 @@ public class ModelRenderer {
 		GL11.glTranslatef(rotationPointX * par1, rotationPointY * par1, rotationPointZ * par1);
 		
 		setRotation();
-		
+
 		GL11.glCallList(displayList);
 		GL11.glPopMatrix();
 	}
@@ -272,7 +274,9 @@ public class ModelRenderer {
 	}
 
 	protected void compileDisplayList(float par1) {
-		displayList = GLAllocation.generateDisplayLists(1);
+		if (displayList <= 0) {
+			displayList = GLAllocation.generateDisplayLists(1);			
+		}
 		GL11.glNewList(displayList, GL11.GL_COMPILE);
 		Tessellator tessellator = Tessellator.instance;
 		
@@ -687,6 +691,10 @@ public class ModelRenderer {
 	}
 
 	public void setVisible(boolean flag) {
+		if (boxName!=null&&boxName.toLowerCase().contains("Arm")) {
+			System.err.println(this.baseModel+" set arm "+(flag?"visible":"hidden"));
+			Thread.dumpStack();
+		}
 		showModel = flag;
 	}
 

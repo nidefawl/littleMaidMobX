@@ -7,8 +7,8 @@ import net.minecraft.client.model.TexturedQuad;
 import net.minecraft.client.renderer.Tessellator;
 
 public class Modchu_ModelBoxBase {
-	protected PositionTextureVertex[] vertexPositions;
-	protected TexturedQuad[] quadList;
+	public PositionTextureVertex[] vertexPositions;
+	public TexturedQuad[] quadList;
 	public float posX1;
 	public float posY1;
 	public float posZ1;

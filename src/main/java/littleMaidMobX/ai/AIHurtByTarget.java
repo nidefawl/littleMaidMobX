@@ -47,15 +47,15 @@ public class AIHurtByTarget extends EntityAIHurtByTarget {
 	@Override
 	public void updateTask() {
 		super.updateTask();
-		String s1 = taskOwner.getAITarget() == null ? "Null" : taskOwner.getAITarget().getClass().toString();
-		String s2 = taskOwner.getAttackTarget() == null ? "Null" : taskOwner.getAttackTarget().getClass().toString();
+//		String s1 = taskOwner.getAITarget() == null ? "Null" : taskOwner.getAITarget().getClass().toString();
+//		String s2 = taskOwner.getAttackTarget() == null ? "Null" : taskOwner.getAttackTarget().getClass().toString();
 //		System.out.println(String.format("ID:%d, target:%s, attack:%s", taskOwner.entityId, s1, s2));
 		
 		// 殴られた仕返し
 		EntityLivingBase leliving = taskOwner.getAITarget();
 		if (leliving != null && leliving != taskOwner.getAttackTarget()) {
 			taskOwner.setAttackTarget(null);
-			System.out.println(String.format("ID:%d, ChangeTarget.", taskOwner.getEntityId()));
+//			System.out.println(String.format("ID:%d, ChangeTarget.", taskOwner.getEntityId()));
 		}
 		
 	}

@@ -20,6 +20,7 @@ import modchu.lib.characteristic.Modchu_IEntityCapsBase;
 import modchu.lib.characteristic.Modchu_ModelBoxBase;
 import modchu.lib.characteristic.Modchu_ModelPlateFreeShape;
 import modchu.lib.characteristic.Modchu_ModelRenderer;
+import net.minecraft.client.Minecraft;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;

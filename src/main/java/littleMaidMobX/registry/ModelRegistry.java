@@ -10,7 +10,7 @@ import littleMaidMobX.model.maids.ModelLittleMaid_RX0;
 import littleMaidMobX.model.maids.ModelLittleMaid_SR2;
 import littleMaidMobX.model.maids.ModelMulti_Stef;
 import littleMaidMobX.model.maids.ModelMulti_Steve;
-import littleMaidMobX.model.maids.MultiModel_Elsie;
+import littleMaidMobX.model.maids.MultiModel_Elsie2;
 import littleMaidMobX.model.maids.MultiModel_Evelyn4;
 
 public class ModelRegistry {
@@ -25,7 +25,7 @@ public class ModelRegistry {
 //		list.add(ModelMulti_Stef.class);
 //		list.add(ModelMulti_Steve.class);
 //		list.add(MultiModel_Evelyn4.class);
-		list.add(MultiModel_Elsie.class);
+		list.add(MultiModel_Elsie2.class);
 	}
 
 }

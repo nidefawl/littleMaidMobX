@@ -60,9 +60,9 @@ package modchu.model.multimodel.base;import modchu.lib.Modchu_Debug;import mo
 	}	@Override
 	public void armsinit(float f, float f1) {
 		// 手持ち
-		Arms[0] = new Modchu_ModelRenderer(this, 0, 0);
+		Arms[0] = new Modchu_ModelRenderer(this, 0, 0, "Arm0");
 		Arms[0].setRotationPoint(0.5F, 6.5F, 0F);
-		Arms[1] = new Modchu_ModelRenderer(this, 0, 0);
+		Arms[1] = new Modchu_ModelRenderer(this, 0, 0, "Arm1");
 		Arms[1].setRotationPoint(-0.5F, 6.5F, 0F);
 		Arms[1].isInvertX = true;
 		HeadMount = new Modchu_ModelRenderer(this, "HeadMount");
@@ -71,7 +71,7 @@ package modchu.model.multimodel.base;import modchu.lib.Modchu_Debug;import mo
 		HeadTop.setRotationPoint(0.0F, -8.0F, 0.0F);
 	}	@Override
 	public void actionPartsInit(float f, float f1) {
-		rightArm = new Modchu_ModelRenderer(this, 48, 0);
+		rightArm = new Modchu_ModelRenderer(this, 48, 0, "rightArm");
 		rightArm.addBox(-1.0F, 0.0F, -1.0F, 2, 4, 2, f);
 		rightArm.setRotationPoint(-3.0F, 9.5F, 0.0F);		rightArmPlus = new Modchu_ModelRenderer(this);
 		//rightArmPlus.setTextureOffset(52, 0.addPlate(-1.0F, -1.0F, -3.01F, 2, 2, 4, f);
