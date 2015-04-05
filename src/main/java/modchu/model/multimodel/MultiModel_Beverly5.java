@@ -207,7 +207,7 @@ public class MultiModel_Beverly5 extends MultiModelBeverlyBase {	//added field
 			BunchR.rotateAngleZ -= bipedHead.rotateAngleZ * 0.2F;
 		} else {
 			BunchL.rotateAngleZ -= bipedHead.rotateAngleZ * 0.2F;
-		}		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_getIsRiding)) {
+		}		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isRiding)) {
 			// 背負われている
 			if (isRidingMaster) {
 				rightArm2.rotateAngleX -= 1.3F;

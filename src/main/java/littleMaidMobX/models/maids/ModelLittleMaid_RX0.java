@@ -56,7 +56,7 @@ public class ModelLittleMaid_RX0 extends ModelLittleMaidBase {
 
 
 	@Override
-	public void initModel(float psize, float pyoffset) {
+	public void initModel(float psize, float pyoffset, boolean isAfterInit) {
 		bipedHead = new ModelRenderer(this);
 		bipedHead.setTextureOffset(0, 0).addBox(-4F, -8F, -4F, 8, 8, 8, psize - 0.2F);
 		bipedForelock = new ModelRenderer(this);
@@ -427,7 +427,7 @@ public class ModelLittleMaid_RX0 extends ModelLittleMaidBase {
 	}
 
 	@Override
-	public int showArmorParts(int parts, int index) {
+	public int showArmorParts(IModelCaps iModelCaps, int parts, int index) {
 		
 		// 鎧の表示用
 		boolean f;

@@ -122,10 +122,6 @@ public abstract class Modchu_ModelBaseMaster implements Modchu_IEntityCapsBase, 
 		return Modchu_AS.getInt(Modchu_AS.mathHelperGetRandomIntegerInRange, random, i, j);
 	}
 	// 独自定義関数群
-	/**
-	 * モデルの初期化コード
-	 */
-	public abstract void initModel(float psize, float pyoffset, Object... o);
 
 	/**
 	 * アーマーモデルのサイズを返す。

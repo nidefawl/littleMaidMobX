@@ -293,7 +293,7 @@ package modchu.model.multimodel;import modchu.lib.Modchu_Debug;import modchu.
 		WingLroot.rotateAngleY=Modchu_AS.getFloat(Modchu_AS.mathHelperCos, f2 * 0.5F) * 0.22F + 0.35F;
 		WingRroot.rotateAngleY=-WingLroot.rotateAngleY;
 		Ahoge.rotateAngleY=Modchu_AS.getFloat(Modchu_AS.mathHelperCos, f2 * 0.2F + Modchu_AS.getFloat(Modchu_AS.mathHelperCos, f2*0.05F) * 1.0F) * 0.2F;
-		Ahoge.rotateAngleX=2.9F;		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_getIsRiding)) {
+		Ahoge.rotateAngleX=2.9F;		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isRiding)) {
 			Skirt.rotateAngleX -= 0.8F;
 		}
 		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_aimedBow)) {

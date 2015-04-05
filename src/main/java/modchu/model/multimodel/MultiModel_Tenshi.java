@@ -688,7 +688,7 @@ import modchu.model.multimodel.base.MultiModel_SR2;public class MultiModel_Ten
 	public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, ModchuModel_IEntityCaps entityCaps) {
 		super.setRotationAnglesLM(f, f1, f2, f3, f4, f5, entityCaps);
 		Skirt.rotationPointY = 4.0F;
-		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_getIsRiding)) {
+		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isRiding)) {
 			Skirt.rotateAngleX -= 0.8F;
 		}
 		skirtFloats(f, f1, f2, f3, f4, f5, entityCaps);

@@ -129,7 +129,7 @@ import modchu.model.multimodel.base.MultiModel;public class MultiModel_Elsie e
 		bipedRightArm.rotationPointY += 3.0F;
 		bipedLeftArm.rotationPointY += 3.0F;
 		bipedBody.rotationPointZ = 0.0F;
-		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_getIsRiding)) {
+		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isRiding)) {
 			RightSkirt.rotationPointY =
 					LeftSkirt.rotationPointY = -2.4F;
 		} else {

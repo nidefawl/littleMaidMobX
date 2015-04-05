@@ -118,9 +118,9 @@ public class ModelBaseSolo extends ModelBaseNihil implements IModelBaseMMM {
 	}
 
 	@Override
-	public void showArmorParts(int pParts) {
+	public void showArmorParts(IModelCaps iModelCaps, int pParts) {
 		if (model != null) {
-			model.showArmorParts(pParts, 0);
+			model.showArmorParts(null, pParts, 0);
 		}
 	}
 
@@ -173,9 +173,9 @@ public class ModelBaseSolo extends ModelBaseNihil implements IModelBaseMMM {
 	}
 
 	@Override
-	public void showAllParts() {
+	public void showAllParts(IModelCaps iModelCaps) {
 		if (model != null) {
-			model.showAllParts();
+			model.showAllParts(iModelCaps);
 		}
 	}
 

@@ -38,8 +38,8 @@ public class ModelLittleMaid_Aug extends ModelLittleMaid_SR2 {
 
 
 	@Override
-	public void initModel(float psize, float pyoffset) {
-		super.initModel(psize, pyoffset);
+	public void initModel(float psize, float pyoffset, boolean isAfterInit) {
+		super.initModel(psize, pyoffset, isAfterInit);
 		
 		// 再構成パーツ
 		SideTailR = new ModelRenderer(this);

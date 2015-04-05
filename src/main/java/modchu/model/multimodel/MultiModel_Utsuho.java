@@ -476,7 +476,7 @@ import modchu.model.multimodel.base.MultiModel_SR2;public class MultiModel_Uts
 			WingLroot.rotateAngleY = -0.3F;
 			WingRroot.rotateAngleY = 0.3F;
 		}
-		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_getIsRiding)) {
+		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isRiding)) {
 			Skirt.rotateAngleX -= 0.8F;
 		}
 		Skirt.rotationPointY = 4.0F;

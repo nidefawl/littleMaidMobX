@@ -147,8 +147,14 @@ public interface IModelCaps {
 	public static final int caps_textureData		= 0x0313;
 	/** 発光テクスチャの色補正 */
 	public static final int caps_textureLightColor	= 0x0314;
+	public static final int caps_oldwalking	= 0x0315;
+	public static final int caps_breastFloats	= 0x0316;
 
+	public static final int caps_skirtFloats	= 0x0317;
+	public static final int caps_skirtFloatsMotionY	= 0x0318;
+	public static final int caps_visible	= 0x0319;
 
+	public static final int caps_armorType					 					= 0x031a;
 	/**
 	 * モデルが実装している機能をリストに入れて返す。
 	 * @return

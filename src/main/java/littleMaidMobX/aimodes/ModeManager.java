@@ -20,9 +20,9 @@ public class ModeManager {
 		maidModeList.add(Mode_Ripper.class);
 		maidModeList.add(Mode_Test.class);
 		maidModeList.add(Mode_Torcher.class);
-		maidModeList.add(Mode_Basic.class);
 		maidModeList.add(Mode_Cooking.class);
 		maidModeList.add(Mode_Pharmacist.class);
+		maidModeList.add(Mode_Basic.class);
 	}
 
 	public List<ModeBase> createMaidModes(EntityLittleMaid pentity) {

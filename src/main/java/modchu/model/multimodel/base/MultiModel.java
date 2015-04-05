@@ -17,9 +17,6 @@ package modchu.model.multimodel.base;import modchu.lib.Modchu_Debug;import mo
 		this(f, f1, 64, 32);
 	}	public MultiModel(float f, float f1, int i, int j) {
 		super(f, f1, i < 0 ? 64 : i, j < 0 ? 32 : j);
-	}	@Override
-	public void initModel(float f, float f1, Object... o) {
-		initModel(f, f1, true);
 	}	public void initModel(float f, float f1, boolean isAfterInit) {
 		bipedCloak = new Modchu_ModelRenderer(this);
 		bipedEars = new Modchu_ModelRenderer(this);
@@ -280,7 +277,7 @@ package modchu.model.multimodel.base;import modchu.lib.Modchu_Debug;import mo
 		bipedRightArm.rotateAngleX = Modchu_AS.getFloat(Modchu_AS.mathHelperCos, f * 0.6662F + 3.141593F) * 2.0F * f1 * 0.5F;
 		bipedLeftArm.rotateAngleX = Modchu_AS.getFloat(Modchu_AS.mathHelperCos, f * 0.6662F) * 2.0F * f1 * 0.5F;
 		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_getIsSneak)
-				&& !Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_getIsRiding)
+				&& !Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isRiding)
 				&& Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_oldwalking)) {
 			bipedRightArm.rotateAngleX = Modchu_AS.getFloat(Modchu_AS.mathHelperCos, f * 0.6662F + (float) Math.PI) * 1.4F * f1;
 			bipedLeftArm.rotateAngleX = Modchu_AS.getFloat(Modchu_AS.mathHelperCos, f * 0.6662F) * 1.4F * f1;
@@ -293,7 +290,7 @@ package modchu.model.multimodel.base;import modchu.lib.Modchu_Debug;import mo
 		bipedRightLeg.rotateAngleX = Modchu_AS.getFloat(Modchu_AS.mathHelperCos, f * 0.6662F) * 1.4F * f1;
 		bipedLeftLeg.rotateAngleX = Modchu_AS.getFloat(Modchu_AS.mathHelperCos, f * 0.6662F + 3.141593F) * 1.4F * f1;
 		bipedRightLeg.rotateAngleY = bipedLeftLeg.rotateAngleY = bipedRightLeg.rotateAngleZ = bipedLeftLeg.rotateAngleZ = 0.0F;
-		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_getIsRiding)) {
+		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isRiding)) {
 			// 乗り物に乗っている
 			bipedRightArm.rotateAngleX += -0.6283185F;
 			bipedLeftArm.rotateAngleX += -0.6283185F;

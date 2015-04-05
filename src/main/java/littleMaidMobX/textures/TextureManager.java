@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,17 +17,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import littleMaidMobX.ClientHelper;
-import littleMaidMobX.LittleMaidMobX;
 import littleMaidMobX.Helper;
+import littleMaidMobX.LittleMaidMobX;
 import littleMaidMobX.models.ModelMultiBase;
-import littleMaidMobX.models.maids.ModelLittleMaid_AC;
-import littleMaidMobX.models.maids.ModelLittleMaid_Archetype;
-import littleMaidMobX.models.maids.ModelLittleMaid_Aug;
-import littleMaidMobX.models.maids.ModelLittleMaid_Orign;
-import littleMaidMobX.models.maids.ModelLittleMaid_RX0;
-import littleMaidMobX.models.maids.ModelLittleMaid_SR2;
-import littleMaidMobX.models.maids.ModelMulti_Stef;
-import littleMaidMobX.models.maids.ModelMulti_Steve;
 import littleMaidMobX.network.NetConstants;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.entity.Entity;
@@ -190,54 +181,21 @@ public class TextureManager {
 		// this is called server and client side
 
 		// this can be simplified
-		addModelClass(ModelLittleMaid_AC.class, "AC", "mmmlibx.lib.multiModel.model.mc162.ModelLittleMaid_AC");
-		addModelClass(ModelLittleMaid_Orign.class, "Orign", "mmmlibx.lib.multiModel.model.mc162.ModelLittleMaid_Orign");
-		addModelClass(ModelLittleMaid_Archetype.class, "Archetype", "mmmlibx.lib.multiModel.model.mc162.ModelLittleMaid_Archetype");
-		addModelClass(ModelLittleMaid_Aug.class, "Aug", "mmmlibx.lib.multiModel.model.mc162.ModelLittleMaid_Aug");
-		addModelClass(ModelLittleMaid_RX0.class, "RX0", "mmmlibx.lib.multiModel.model.mc162.ModelLittleMaid_RX0");
-		addModelClass(ModelLittleMaid_SR2.class, "SR2", "mmmlibx.lib.multiModel.model.mc162.ModelLittleMaid_SR2");
-		addModelClass(ModelMulti_Stef.class, "Stef", "mmmlibx.lib.MMM_ModelMulti_Stef");
-		addModelClass(ModelMulti_Steve.class, "Steve", "mmmlibx.lib.MMM_ModelMulti_Steve");
-		addModelClass(ModelMulti_Steve.class, "Steve", "mmmlibx.lib.MMM_ModelMulti_Steve");
+		for (Class c : ModelList.list) {
+			try {
+				addModelClass(c);
+			} catch (Throwable e) {
+				e.printStackTrace();
+			}
+		}
+		for (String texturePath : TextureList.list) {
+			try {
+				addTexture(texturePath);
+			} catch (Throwable e) {
+				e.printStackTrace();
+			}
+		}
 		
-
-		// these textures are not loaded until they get rendered
-		addTexture("/assets/littlemaid/textures/entity/littleMaid/ALTERNATIVE/default_40.png");
-		addTexture("/assets/littlemaid/textures/entity/littleMaid/ALTERNATIVE/default_50.png");
-		addTexture("/assets/littlemaid/textures/entity/littleMaid/ALTERNATIVE/littlemaidinventory_20.png");
-		addTexture("/assets/littlemaid/textures/entity/littleMaid/ALTERNATIVE/mob_littlemaid_3c.png");
-		addTexture("/assets/littlemaid/textures/entity/littleMaid/ALTERNATIVE/mob_littlemaid_9.png");
-		addTexture("/assets/littlemaid/textures/entity/littleMaid/ALTERNATIVE/mob_littlemaid_c.png");
-		addTexture("/assets/littlemaid/textures/entity/littleMaid/ALTERNATIVE/mob_littlemaid_d.png");
-		addTexture("/assets/littlemaid/textures/entity/littleMaid/ALTERNATIVE/Stabilizer_MagicHat.png");
-		addTexture("/assets/littlemaid/textures/entity/littleMaid/ALTERNATIVE/testx64.png");
-		addTexture("/assets/littlemaid/textures/entity/littleMaid/default/default_40.png");
-		addTexture("/assets/littlemaid/textures/entity/littleMaid/default/default_50.png");
-		addTexture("/assets/littlemaid/textures/entity/littleMaid/default/mob_littlemaid_00.png");
-		addTexture("/assets/littlemaid/textures/entity/littleMaid/default/mob_littlemaid_01.png");
-		addTexture("/assets/littlemaid/textures/entity/littleMaid/default/mob_littlemaid_02.png");
-		addTexture("/assets/littlemaid/textures/entity/littleMaid/default/mob_littlemaid_03.png");
-		addTexture("/assets/littlemaid/textures/entity/littleMaid/default/mob_littlemaid_04.png");
-		addTexture("/assets/littlemaid/textures/entity/littleMaid/default/mob_littlemaid_05.png");
-		addTexture("/assets/littlemaid/textures/entity/littleMaid/default/mob_littlemaid_06.png");
-		addTexture("/assets/littlemaid/textures/entity/littleMaid/default/mob_littlemaid_07.png");
-		addTexture("/assets/littlemaid/textures/entity/littleMaid/default/mob_littlemaid_08.png");
-		addTexture("/assets/littlemaid/textures/entity/littleMaid/default/mob_littlemaid_09.png");
-		addTexture("/assets/littlemaid/textures/entity/littleMaid/default/mob_littlemaid_0a.png");
-		addTexture("/assets/littlemaid/textures/entity/littleMaid/default/mob_littlemaid_0b.png");
-		addTexture("/assets/littlemaid/textures/entity/littleMaid/default/mob_littlemaid_0c.png");
-		addTexture("/assets/littlemaid/textures/entity/littleMaid/default/mob_littlemaid_0d.png");
-		addTexture("/assets/littlemaid/textures/entity/littleMaid/default/mob_littlemaid_0e.png");
-		addTexture("/assets/littlemaid/textures/entity/littleMaid/default/mob_littlemaid_0f.png");
-		addTexture("/assets/littlemaid/textures/entity/littleMaid/default/mob_littlemaid_3c.png");
-		addTexture("/assets/littlemaid/textures/entity/littleMaid/maiduv.png");
-		addTexture("/assets/littlemaid/textures/entity/littleMaid/MMM_Aug/Aug_02.png");
-		addTexture("/assets/littlemaid/textures/entity/littleMaid/MMM_Aug/Aug_08.png");
-		addTexture("/assets/littlemaid/textures/entity/littleMaid/MMM_Aug/Aug_0c.png");
-		addTexture("/assets/littlemaid/textures/entity/littleMaid/MMM_Aug/Aug_0d.png");
-		addTexture("/assets/littlemaid/textures/entity/littleMaid/MMM_SR2/EngageOctaver_0c.png");
-		addTexture("/assets/littlemaid/textures/entity/littleMaid/MMM_SR2/EngageOctaver_3c.png");
-		addTexture("/assets/littlemaid/textures/entity/littleMaid/mob_littlemaid.png");
 		
 		// TODO:実験コード
 		buildCrafterTexture();
@@ -412,28 +370,19 @@ public class TextureManager {
 		}
 	}
 
-	private void addModelClass(Class lclass, String pn, String cn) {
-		try {
-			if (!(ModelMultiBase.class).isAssignableFrom(lclass) || Modifier.isAbstract(lclass.getModifiers())) {
-				LittleMaidMobX.Debug("getModelClass-fail.");
-				return;
-			}
-			ModelMultiBase mlm[] = new ModelMultiBase[3];
-			Constructor < ModelMultiBase > cm = lclass.getConstructor(float.class);
-			mlm[0] = cm.newInstance(0.0F);
-			float[] lsize = mlm[0].getArmorModelsSize();
-			mlm[1] = cm.newInstance(lsize[0]);
-			mlm[2] = cm.newInstance(lsize[1]);
-			modelMap.put(pn, mlm);
-			LittleMaidMobX.Debug("getModelClass-%s:%s", pn, cn);
-		} catch (Exception exception) {
-			LittleMaidMobX.Debug("getModelClass-Exception-%s:%s", pn, cn);
-			// TODO ★一時的に無効化
-			exception.printStackTrace();
-		} catch (Error error) {
-			LittleMaidMobX.Debug("getModelClass-Error-%s:%s", pn, cn);
-			error.printStackTrace();
+	private void addModelClass(Class lclass) throws Throwable {
+		String modelName = lclass.getSimpleName();
+		int n = modelName.indexOf("_");
+		if (n > 0 && n < modelName.length()-1) {
+			modelName = modelName.substring(modelName.indexOf("_")+1);
 		}
+		ModelMultiBase mlm[] = new ModelMultiBase[3];
+		Constructor < ModelMultiBase > cm = lclass.getConstructor(float.class);
+		mlm[0] = cm.newInstance(0.0F);
+		float[] lsize = mlm[0].getArmorModelsSize();
+		mlm[1] = cm.newInstance(lsize[0]);
+		mlm[2] = cm.newInstance(lsize[1]);
+		modelMap.put(modelName, mlm);
 	}
 	protected void addTexture(String path) {
 

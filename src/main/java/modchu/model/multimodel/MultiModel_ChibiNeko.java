@@ -439,7 +439,7 @@ import modchu.model.multimodel.base.MultiModel_SR2;public class MultiModel_Chi
 		Shippo4.rotateAngleZ = 0.2F * Modchu_AS.getFloat(Modchu_AS.mathHelperSin, -t * 0.3F + 0.000015F + idFactor);
 		Shippo5.rotateAngleZ = 0.2F * Modchu_AS.getFloat(Modchu_AS.mathHelperSin, -t * 0.3F + 0.00002F + idFactor);
 		Shippo6.rotateAngleZ = 0.2F * Modchu_AS.getFloat(Modchu_AS.mathHelperSin, -t * 0.3F + 0.000025F + idFactor);		Skirt.rotationPointX = 0.0F;
-		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_getIsRiding)) {
+		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isRiding)) {
 			Shippo1.rotateAngleX = 125F / 180F * (float) Math.PI + 0.025F * Modchu_AS.getFloat(Modchu_AS.mathHelperSin, -t * 0.4F + idFactor);
 			Shippo1.rotateAngleY = 0.2F * Modchu_AS.getFloat(Modchu_AS.mathHelperSin, t * 0.2F + idFactor);
 			Shippo2.rotateAngleZ = 0.2F * Modchu_AS.getFloat(Modchu_AS.mathHelperSin, -t * 0.2F + 0.0002F + idFactor);

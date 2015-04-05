@@ -625,7 +625,7 @@ import modchu.model.multimodel.base.MultiModel_SR2;public class MultiModel_Yom
 		Hanrei5.rotationPointZ = pastZ[9] + 3.5F;		HanreiC.rotationPointX = x1 + Modchu_AS.getFloat(Modchu_AS.mathHelperCos, (f2 + entityId + 0.01F * f4) * 0.11F) * 0.5F;
 		HanreiC.rotationPointZ = z1 + Modchu_AS.getFloat(Modchu_AS.mathHelperCos, (f2 + entityId + 0.01F * f4) * 0.07F) * 0.5F;
 		HanreiC.rotationPointY = y1 + Modchu_AS.getFloat(Modchu_AS.mathHelperCos, (f2 + entityId + 0.01F * f4) * 0.13F) * 0.5F;		Skirt.rotateAngleX = 0.0F;
-		Skirt.rotationPointZ = 0.0F;		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_getIsRiding)) {
+		Skirt.rotationPointZ = 0.0F;		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isRiding)) {
 			Skirt.rotationPointZ -= 0.8F;
 			Skirt.rotateAngleX = Modchu_EntityCapsHelper.getCapsValueFloat(this, entityCaps, caps_convertDegtoRad, -25.0F);
 		}

@@ -153,7 +153,7 @@ import modchu.model.multimodel.base.MultiModel;public class MultiModel_QB exte
 		tail1.rotateAngleX = -0.2F;
 		bipedHead.rotationPointY = -3.0F;
 		bipedHead.rotationPointX = 0F;
-		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_getIsRiding)) {
+		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isRiding)) {
 			// 乗り物に乗っている
 			float f15 = 1.5F;
 			if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isSitting)) f15 = 1.0F;
@@ -200,20 +200,20 @@ import modchu.model.multimodel.base.MultiModel;public class MultiModel_QB exte
 		}
 		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_getIsSneak)) {
 			// しゃがみ
-			float f12 = Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_getIsRiding) ? -5F : 0F;
+			float f12 = Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isRiding) ? -5F : 0F;
 			//bipedHead.rotationPointY = 9.0F + f12;
 			bipedBody.rotationPointY = 12.0F + f12;
 			bipedBody.rotateAngleX = 0.1F;
 			rightLeg.rotationPointY = 1.0F;
 			leftLeg.rotationPointY = 1.0F;
-			if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_getIsRiding)) {
+			if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isRiding)) {
 				bipedBody.rotationPointY += 1.8F;
 				//bipedHead.rotationPointY += 2.8F;
 				rightLeg.rotationPointX += 1.0F;
 				leftLeg.rotationPointX -= 1.0F;
 			}
 		}
-		if (!Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_getIsRiding)) {
+		if (!Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isRiding)) {
 			//bipedHead.rotationPointY = 9F;
 			bipedBody.rotationPointY = 12F;
 			bipedRightArm.rotateAngleX = bipedLeftArm.rotateAngleX = Modchu_AS.getFloat(Modchu_AS.mathHelperCos, f * 0.6662F + 3.141593F) * 2.0F * f1 * 0.5F;
@@ -228,7 +228,7 @@ import modchu.model.multimodel.base.MultiModel;public class MultiModel_QB exte
 			bipedRightArm.rotateAngleZ = -0.4F;
 			bipedLeftArm.rotateAngleX = Modchu_AS.getFloat(Modchu_AS.mathHelperSin, f2 * 0.067F) * 0.05F - 0.7F;
 			bipedLeftArm.rotateAngleZ = 0.4F;
-			if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_getIsRiding)) {
+			if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isRiding)) {
 				bipedRightArm.rotateAngleX += 1.5F;
 				bipedLeftArm.rotateAngleX += 1.5F;
 			}
@@ -255,7 +255,7 @@ import modchu.model.multimodel.base.MultiModel;public class MultiModel_QB exte
 			bipedLeftArm.rotationPointX = 2.0F;
 			bipedRightArm.rotationPointZ += 1.5F;
 			bipedLeftArm.rotationPointZ += 1.5F;
-			if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_getIsRiding)) {
+			if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isRiding)) {
 				bipedRightArm.rotationPointZ = bipedLeftArm.rotationPointZ -= 4.0F;
 			}
 		}		rightearhair.rotationPointX = -3.0F;

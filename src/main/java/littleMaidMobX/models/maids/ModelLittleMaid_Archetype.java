@@ -35,7 +35,7 @@ public class ModelLittleMaid_Archetype extends ModelLittleMaidBase {
 	}
 
 	@Override
-	public void initModel(float psize, float pyoffset) {
+	public void initModel(float psize, float pyoffset, boolean isAfterInit) {
 		pyoffset += 8F;
 
 		// 装備位置

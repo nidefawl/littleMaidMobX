@@ -189,7 +189,7 @@ public class MultiModel_Elsa4 extends MultiModel_SR2 {	public Modchu_ModelRend
 		bipedRightLeg.rotateAngleX += Modchu_AS.getFloat(Modchu_AS.mathHelperCos, f * 0.5656F) * 1.2F * f1;
 		bipedLeftLeg.rotateAngleX -= Modchu_AS.getFloat(Modchu_AS.mathHelperCos, f * 0.5656F) * 1.2F * f1;
 		Skirt.rotateAngleY += Modchu_AS.getFloat(Modchu_AS.mathHelperCos, f * 0.5656F) * 0.15F * f1;
-		hemSkirt.rotateAngleY += Modchu_AS.getFloat(Modchu_AS.mathHelperCos, f * 0.5656F) * 0.25F * f1;		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_getIsRiding)) {
+		hemSkirt.rotateAngleY += Modchu_AS.getFloat(Modchu_AS.mathHelperCos, f * 0.5656F) * 0.25F * f1;		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isRiding)) {
 			// 乗り物に乗っている
 			bipedRightArm.rotateAngleX -= 0.3F;
 			bipedLeftArm.rotateAngleX -= 0.3F;

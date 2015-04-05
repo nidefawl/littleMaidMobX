@@ -10,7 +10,10 @@ import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
+import littleMaidMobX.models.maids.MultiModel_Evelyn4;
 import littleMaidMobX.wrapper.MinecraftClientWrapper;
+import modchu.lib.Modchu_Reflect;
+import modchu.model.multimodel.MultiModel_Evelyn3;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.TextureOffset;
@@ -109,6 +112,10 @@ public class ModelRenderer {
 		isRendering = true;
 		cubeList = new ArrayList<ModelBoxBase>();
 		baseModel = pModelBase;
+		if (pModelBase instanceof MultiModel_Evelyn4) {
+			System.out.println("our: "+pModelBase.boxList.size()+" = "+pName);
+		}
+		
 		pModelBase.boxList.add(this);
 		boxName = pName;
 		setTextureSize(pModelBase.textureWidth, pModelBase.textureHeight);
@@ -128,6 +135,10 @@ public class ModelRenderer {
 //		renderBlocksIr.useInventoryTint = false;
 	}
 
+	public ModelRenderer(ModelBase pModelBase, int px, int py, String s) {
+		this(pModelBase, s);
+		setTextureOffset(px, py);
+	}
 	public ModelRenderer(ModelBase pModelBase, int px, int py) {
 		this(pModelBase, null);
 		setTextureOffset(px, py);
@@ -819,4 +830,40 @@ public class ModelRenderer {
 		return scaleZ = pValue;
 	}
 
+	public void removeChild(ModelRenderer par1ModelRenderer) {
+		if (this.childModels != null)
+			this.childModels.remove(par1ModelRenderer);
+	}
+	public void clearChildModels() {
+		if (this.childModels != null)
+			this.childModels.clear();
+	}
+
+//
+//	public int getBoxSizeX() {
+//		return getboxSizeX(0);
+//	}
+//
+//	public int getBoxSizeY() {
+//		return getboxSizeY(0);
+//	}
+//
+//	public int getBoxSizeZ() {
+//		return getboxSizeZ(0);
+//	}
+//
+//	public int getboxSizeX(int i) {
+//		return this.cubeList != null
+//				&& this.cubeList.size() > i ? (Integer) Modchu_Reflect.getFieldObject(this.cubeList.get(i).getClass(), "boxSizeX", this.cubeList.get(i)) : -1;
+//	}
+//
+//	public int getboxSizeY(int i) {
+//		return this.cubeList != null
+//				&& this.cubeList.size() > i ? (Integer) Modchu_Reflect.getFieldObject(this.cubeList.get(i).getClass(), "boxSizeY", this.cubeList.get(i)) : -1;
+//	}
+//
+//	public int getboxSizeZ(int i) {
+//		return this.cubeList != null
+//				&& this.cubeList.size() > i ? this.cubeList.get(i).setBoxName(Integer) Modchu_Reflect.getFieldObject(this.cubeList.get(i).getClass(), "boxSizeZ", this.cubeList.get(i)) : -1;
+//	}
 }

@@ -41,7 +41,7 @@ public class RenderModelMulti extends RenderLiving {
 		modelFATT.renderCount = 0;
 		ItemStack is = par1EntityLiving.getEquipmentInSlot(par2 + 1);
 		if (is != null && is.stackSize > 0) {
-			modelFATT.showArmorParts(par2);
+			modelFATT.showArmorParts(null, par2);
 			return is.isItemEnchanted() ? 15 : 1;
 		}
 		
@@ -81,8 +81,8 @@ public class RenderModelMulti extends RenderLiving {
 		modelFATT.setEntityCaps(pEntityCaps);
 		modelMain.setRender(this);
 		modelFATT.setRender(this);
-		modelMain.showAllParts();
-		modelFATT.showAllParts();
+		modelMain.showAllParts(pEntityCaps);
+		modelFATT.showAllParts(pEntityCaps);
 		modelMain.isAlphablend = true;
 		modelFATT.isAlphablend = true;
 		modelMain.renderCount = 0;

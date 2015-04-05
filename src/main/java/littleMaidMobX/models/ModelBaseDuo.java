@@ -178,12 +178,12 @@ public class ModelBaseDuo extends ModelBaseNihil implements IModelBaseMMM {
 	}
 
 	@Override
-	public void showArmorParts(int pParts) {
+	public void showArmorParts(IModelCaps iModelCaps, int pParts) {
 		if (modelInner != null) {
-			modelInner.showArmorParts(pParts, 0);
+			modelInner.showArmorParts(null, pParts, 0);
 		}
 		if (modelOuter != null) {
-			modelOuter.showArmorParts(pParts, 1);
+			modelOuter.showArmorParts(null, pParts, 1);
 		}
 	}
 
@@ -240,14 +240,14 @@ public class ModelBaseDuo extends ModelBaseNihil implements IModelBaseMMM {
 		}
 		return false;
 	}
-
+	
 	@Override
-	public void showAllParts() {
+	public void showAllParts(IModelCaps iModelCaps) {
 		if (modelInner != null) {
-			modelInner.showAllParts();
+			modelInner.showAllParts(iModelCaps);
 		}
 		if (modelOuter != null) {
-			modelOuter.showAllParts();
+			modelOuter.showAllParts(iModelCaps);
 		}
 	}
 

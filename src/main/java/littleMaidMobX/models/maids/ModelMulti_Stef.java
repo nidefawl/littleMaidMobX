@@ -22,7 +22,7 @@ public class ModelMulti_Stef extends ModelMulti_Steve {
 	}
 
 	@Override
-	public void initModel(float psize, float pyoffset) {
+	public void initModel(float psize, float pyoffset, boolean isAfterInit) {
 		bipedCloak = new ModelRenderer(this, 0, 0);
 		bipedCloak.addBox(-5.0F, 0.0F, -1.0F, 10, 16, 1, psize);
 		bipedEars = new ModelRenderer(this, 24, 0);
@@ -122,13 +122,13 @@ public class ModelMulti_Stef extends ModelMulti_Steve {
 	}
 
 	@Override
-	public int showArmorParts(int parts, int index) {
+	public int showArmorParts(IModelCaps iModelCaps, int parts, int index) {
 		if (index == 0) {
 			bust.isRendering = parts == 1;
 		} else {
 			bust.isRendering = parts == 2;
 		}
-		return super.showArmorParts(parts, index);
+		return super.showArmorParts(iModelCaps, parts, index);
 	}
 
 }

@@ -93,12 +93,12 @@ import modchu.model.multimodel.base.MultiModel_SR2;public class MultiModel_Dre
 		if (entity != null); else return;		float t;
 		Object ridingEntity = Modchu_AS.get(Modchu_AS.entityRidingEntity, entity);
 		int ticksExisted = Modchu_AS.getInt(Modchu_AS.entityTicksExisted, entity);
-		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_getIsRiding)
+		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isRiding)
 				&& ridingEntity != null) t = (float)ticksExisted;
 		else t = f2;		Ahoge.rotateAngleY = Modchu_AS.getFloat(Modchu_AS.mathHelperCos, t * 0.2F + Modchu_AS.getFloat(Modchu_AS.mathHelperCos, t * 0.05F + IdOffset) * 1.0F) * 0.2F;
 		Ahoge.rotateAngleX = 2.9F;		Skirt.rotateAngleX = 0f;
 		Skirt.rotationPointY -= 9F;
-		Skirt.rotationPointZ = 0f;		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_getIsRiding)) {
+		Skirt.rotationPointZ = 0f;		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isRiding)) {
 			Skirt.rotationPointY -= 0.2f;
 			Skirt.rotationPointZ += 1.0f;
 			Skirt.rotateAngleX = Modchu_EntityCapsHelper.getCapsValueFloat(this, entityCaps, caps_convertDegtoRad, -25F);

@@ -41,7 +41,7 @@ public abstract class ModelLittleMaidBase extends ModelMultiMMMBase {
 
 
 	@Override
-	public void initModel(float psize, float pyoffset) {
+	public void initModel(float psize, float pyoffset, boolean isAfterInit) {
 		// 標準型
 		// 手持ち
 		Arms[0] = new ModelRenderer(this);
@@ -305,7 +305,7 @@ public abstract class ModelLittleMaidBase extends ModelMultiMMMBase {
 	}
 
 	@Override
-	public void showAllParts() {
+	public void showAllParts(IModelCaps pEntityCaps) {
 		// 表示制限を解除してすべての部品を表示
 		bipedHead.setVisible(true);
 		bipedBody.setVisible(true);
@@ -317,7 +317,7 @@ public abstract class ModelLittleMaidBase extends ModelMultiMMMBase {
 	}
 
 	@Override
-	public int showArmorParts(int parts, int index) {
+	public int showArmorParts(IModelCaps iModelCaps, int parts, int index) {
 		// 鎧の表示用
 		boolean f;
 		// 兜

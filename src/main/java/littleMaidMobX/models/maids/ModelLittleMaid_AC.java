@@ -38,7 +38,7 @@ public class ModelLittleMaid_AC extends ModelMultiMMMBase {
 	}
 
 	@Override
-	public void initModel(float psize, float pyoffset) {
+	public void initModel(float psize, float pyoffset, boolean isAfterInit) {
 		// TODO Auto-generated method stub
 		/*
 		Arms = new ModelRenderer[18];

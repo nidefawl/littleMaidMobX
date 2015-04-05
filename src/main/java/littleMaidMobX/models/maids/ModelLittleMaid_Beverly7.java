@@ -62,7 +62,7 @@ public class ModelLittleMaid_Beverly7 extends ModelLittleMaidBase {
 	}
 
 	@Override
-	public void initModel(float psize, float pyoffset)
+	public void initModel(float psize, float pyoffset, boolean isAfterInit)
 	{
 		offsetY = (byte)(pyoffset + 5); //Global to Local
 

@@ -29,16 +29,19 @@ public class ModelMulti_Steve extends ModelMultiBase {
 
 	public ModelMulti_Steve() {
 		super();
+		initModel(1, 0, true);
 	}
 	public ModelMulti_Steve(float psize) {
 		super(psize);
+		initModel(psize, 0, true);
 	}
 	public ModelMulti_Steve(float psize, float pyoffset, int pTextureWidth, int pTextureHeight) {
 		super(psize, pyoffset, pTextureWidth, pTextureHeight);
+		initModel(psize, pyoffset, true);
 	}
 
 	@Override
-	public void initModel(float psize, float pyoffset) {
+	public void initModel(float psize, float pyoffset, boolean isAfterInit) {
 		bipedCloak = new ModelRenderer(this, 0, 0);
 		bipedCloak.addBox(-5.0F, 0.0F, -1.0F, 10, 16, 1, psize);
 		bipedEars = new ModelRenderer(this, 24, 0);
@@ -323,7 +326,7 @@ public class ModelMulti_Steve extends ModelMultiBase {
 	}
 
 	@Override
-	public int showArmorParts(int parts, int index) {
+	public int showArmorParts(IModelCaps iModelCaps, int parts, int index) {
 		if (index == 0) {
 			bipedHead.isRendering = parts == 3;
 			bipedHeadwear.isRendering = parts == 3;
@@ -344,4 +347,9 @@ public class ModelMulti_Steve extends ModelMultiBase {
 		return -1;
 	}
 
+
+	@Override
+	public void showAllParts(IModelCaps pEntityCaps) {
+		
+	}
 }

@@ -85,7 +85,7 @@ import modchu.model.ModchuModel_IEntityCaps;public class MultiModel_usagi exte
 		UsaEL.rotationPointZ = UsaER.rotationPointZ = mh_cos(f2 * 0.05F) * 0.5F - 0.2F;
 		CatEL.rotationPointZ = CatER.rotationPointZ = mh_cos(f2 * 0.05F) * 0.5F;
 		Usasippo.setRotateAngleY(mh_sin(f * 0.6662F) * 0.3F);
-		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_getIsRiding)) {
+		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isRiding)) {
 			UsaER.rotateAngleX = UsaEL.rotateAngleX = 2.094F;
 			UsaEL.rotationPointX = -2F;
 			UsaER.rotationPointX = 2.0F;

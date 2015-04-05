@@ -131,7 +131,7 @@ import modchu.model.multimodel.base.MultiModel;public class MultiModel_Shion e
 		setCapsValue(entityCaps, caps_visible, sodeR, true);
 		setCapsValue(entityCaps, caps_visible, WsodeL, false);
 		setCapsValue(entityCaps, caps_visible, WsodeR, false);
-		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_getIsRiding)) {
+		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isRiding)) {
 			bipedRightLeg.rotateAngleY = 0.0F;
 			bipedLeftLeg.rotateAngleY = 0.0F;
 		} else {
@@ -219,7 +219,7 @@ import modchu.model.multimodel.base.MultiModel;public class MultiModel_Shion e
 				bipedRightArm.rotationPointZ = 0.0F;
 				bipedLeftArm.rotationPointZ = 0.0F;
 			}
-			if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_getIsRiding)) {
+			if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isRiding)) {
 				Object entity = entityCaps.getCapsValue(entityCaps.caps_Entity);
 				if (entity != null && Modchu_Reflect.getFieldObject("Entity", "field_70154_o", "ridingEntity", entity) != null) {
 					bipedRightArm.rotateAngleX += -0.6283185F;

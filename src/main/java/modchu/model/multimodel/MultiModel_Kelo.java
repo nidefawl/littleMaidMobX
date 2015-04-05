@@ -229,7 +229,7 @@ import modchu.model.ModchuModel_IEntityCaps;public class MultiModel_Kelo exten
 		setCapsValue(entityCaps, caps_visible, KeloeyeL1, true);
 		setCapsValue(entityCaps, caps_visible, KeloeyeR1, true);
 		setCapsValue(entityCaps, caps_visible, KeloeyeL2, false);
-		setCapsValue(entityCaps, caps_visible, KeloeyeR2, false);		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_getIsRiding)) {
+		setCapsValue(entityCaps, caps_visible, KeloeyeR2, false);		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isRiding)) {
 			bipedRightLeg.rotateAngleX = -1.256637F;
 			bipedLeftLeg.rotateAngleX = -1.256637F;
 			bipedRightLeg.rotateAngleY = 0.3141593F;

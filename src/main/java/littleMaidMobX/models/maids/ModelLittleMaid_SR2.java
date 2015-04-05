@@ -28,8 +28,8 @@ public class ModelLittleMaid_SR2 extends ModelLittleMaidBase {
 
 
 	@Override
-	public void initModel(float psize, float pyoffset) {
-		super.initModel(psize, pyoffset);
+	public void initModel(float psize, float pyoffset, boolean isAfterInit) {
+		super.initModel(psize, pyoffset, isAfterInit);
 		
 		// 追加パーツ
 		eyeR = new ModelRenderer(this, 32, 19);

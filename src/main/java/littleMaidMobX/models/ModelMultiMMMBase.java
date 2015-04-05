@@ -33,12 +33,15 @@ public abstract class ModelMultiMMMBase extends ModelMultiBase {
 
 	public ModelMultiMMMBase() {
 		super();
+		initModel(1, 0, true);
 	}
 	public ModelMultiMMMBase(float pSizeAdjust) {
 		super(pSizeAdjust);
+		initModel(pSizeAdjust, 0, true);
 	}
 	public ModelMultiMMMBase(float pSizeAdjust, float pYOffset, int pTextureWidth, int pTextureHeight) {
 		super(pSizeAdjust, pYOffset, pTextureWidth, pTextureHeight);
+		initModel(pSizeAdjust, pYOffset, true);
 	}
 
 	/**
@@ -141,6 +144,10 @@ public abstract class ModelMultiMMMBase extends ModelMultiBase {
 
 	public float[] getTextureLightColor(IModelCaps pEntityCaps) {
 		return null;
+	}
+
+	@Override
+	public void showAllParts(IModelCaps iModelCaps) {
 	}
 
 }

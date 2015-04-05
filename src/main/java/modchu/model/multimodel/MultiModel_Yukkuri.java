@@ -534,7 +534,7 @@ public class MultiModel_Yukkuri extends MultiModelOkotaSR2 {	public Modchu_Mod
 		HaneR2.rotationPointY = (Modchu_AS.getFloat(Modchu_AS.mathHelperSin, h2) * -8F) - 6F;
 		HaneR2.rotationPointZ = 6F;
 		HaneR2.rotateAngleX = 0.349F;
-		HaneR2.rotateAngleY = h2 - 0.262F;		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_getIsRiding)) {
+		HaneR2.rotateAngleY = h2 - 0.262F;		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isRiding)) {
 			bipedHead.rotationPointY = basebipedHeadRotationPointY - 5F;
 		} else {
 			setRotationAnglesGulliverBefore(f, f1, f2, f3, f4, f5, entityCaps);
@@ -686,7 +686,7 @@ public class MultiModel_Yukkuri extends MultiModelOkotaSR2 {	public Modchu_Mod
 	}	@Override
 	public float getMountedYOffset(ModchuModel_IEntityCaps entityCaps) {
 		float d = 1.4F;
-		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_getIsRiding)) d -= 0.1F;
+		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isRiding)) d -= 0.1F;
 		return d;
 	}	@Override
 	public String getUsingTexture() {

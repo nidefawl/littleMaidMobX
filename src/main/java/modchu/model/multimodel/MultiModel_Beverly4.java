@@ -187,7 +187,7 @@ package modchu.model.multimodel;import modchu.lib.Modchu_Debug;import modchu.
 		float f6 = (float) Math.cos(f2 * 0.09F) * 0.05F;
 		rightArm.rotateAngleZ = 0.2F + f6;
 		leftArm.rotateAngleZ = -0.2F - f6;
-		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_getIsRiding)) {
+		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isRiding)) {
 			//bipedHead.rotationPointY = 1.0F;
 			bipedBody.rotationPointY = 0.5F;
 			rightLeg.rotationPointY += 4.5F;
@@ -317,7 +317,7 @@ package modchu.model.multimodel;import modchu.lib.Modchu_Debug;import modchu.
 			leftArm2.rotateAngleZ = 0.0F;
 			rightArm2.rotateAngleX = 0.0F;
 			leftArm2.rotateAngleX = 0.0F;
-			if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_getIsRiding)) {
+			if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isRiding)) {
 				Arms[0].rotationPointX -= 1.0F;
 				Arms[0].rotationPointY -= 2.0F;
 				Arms[0].rotateAngleZ -= 2.0F;

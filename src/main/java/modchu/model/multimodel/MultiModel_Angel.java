@@ -510,7 +510,7 @@ package modchu.model.multimodel;import modchu.lib.Modchu_Debug;import modchu.
 			WingLroot.rotateAngleY= -0.3F;
 			WingRroot.rotateAngleY= 0.3F;
 		}
-		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_getIsRiding)) {
+		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isRiding)) {
 			Skirt.rotateAngleX -= 0.8F;
 			Skirt.rotationPointX = 0.0F;
 			Skirt.rotationPointY = -1.0F;

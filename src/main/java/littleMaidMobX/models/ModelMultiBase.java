@@ -68,8 +68,6 @@ public abstract class ModelMultiBase extends ModelBase implements IModelCaps {
 			Arms = new ModelRenderer[2];
 			HeadMount = new ModelRenderer(this, "HeadMount");
 			HeadTop = new ModelRenderer(this, "HeadTop");
-			
-			initModel(pSizeAdjust, pYOffset);
 		}
 	}
 
@@ -77,8 +75,9 @@ public abstract class ModelMultiBase extends ModelBase implements IModelCaps {
 
 	/**
 	 * モデルの初期化コード
+	 * @param isAfterInit TODO
 	 */
-	public abstract void initModel(float psize, float pyoffset);
+	public abstract void initModel(float psize, float pyoffset, boolean isAfterInit);
 
 	/**
 	 * モデル指定詞に依らずに使用するテクスチャパック名。
@@ -159,18 +158,11 @@ public abstract class ModelMultiBase extends ModelBase implements IModelCaps {
 	/**
 	 * 表示すべきすべての部品
 	 */
-	@Deprecated
-	public void showAllParts() {
-	}
-	/**
-	 * 表示すべきすべての部品
-	 */
-	public void showAllParts(IModelCaps pEntityCaps) {
-		showAllParts();
-	}
+	public abstract void showAllParts(IModelCaps pEntityCaps);
 
 	/**
 	 * 部位ごとの装甲表示。
+	 * @param iModelCaps TODO
 	 * @param parts
 	 * 3:頭部。
 	 * 2:胴部。
@@ -182,7 +174,7 @@ public abstract class ModelMultiBase extends ModelBase implements IModelCaps {
 	 * @return
 	 * 戻り値は基本 -1
 	 */
-	public int showArmorParts(int parts, int index) {
+	public int showArmorParts(IModelCaps iModelCaps, int parts, int index) {
 		return -1;
 	}
 
@@ -229,12 +221,23 @@ public abstract class ModelMultiBase extends ModelBase implements IModelCaps {
 			return scaleFactor;
 		case caps_dominantArm:
 			return dominantArm;
+		case caps_oldwalking:
+			return false;
+		case caps_breastFloats:
+			return false;
+		case caps_skirtFloats:
+			return 0;
+		case caps_skirtFloatsMotionY:
+			return 0.0D;
 		}
 		return null;
 	}
-
 	@Override
 	public boolean setCapsValue(int pIndex, Object... pArg) {
+		return setCapsValue(null, pIndex, pArg);
+	}
+
+	public boolean setCapsValue(IModelCaps caps, int pIndex, Object... pArg) {
 		switch (pIndex) {
 		case caps_onGround:
 			for (int li = 0; li < onGrounds.length && li < pArg.length; li++) {
@@ -274,6 +277,15 @@ public abstract class ModelMultiBase extends ModelBase implements IModelCaps {
 		case caps_dominantArm:
 			dominantArm = (Integer)pArg[0];
 			return true;
+		case caps_visible:
+			if (pArg != null
+			&& pArg.length > 1
+			&& pArg[0] != null
+			&& pArg[1] != null) {
+				((ModelRenderer) pArg[0]).setVisible((Boolean)pArg[1]);
+				return true;
+			}
+			return false;
 		}
 		
 		return false;

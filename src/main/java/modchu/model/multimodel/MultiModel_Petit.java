@@ -160,7 +160,7 @@ import modchu.model.ModchuModel_ModelPlate;public class MultiModel_Petit exten
 		bipedRightArm.rotationPointY = bipedLeftArm.rotationPointY = 2.0F;
 		bipedHead.rotationPointZ = 0.0F;
 		boolean isSitting = Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isSitting);
-		boolean isRiding = Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_getIsRiding);
+		boolean isRiding = Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isRiding);
 		bipedRightLeg.rotationPointY = bipedLeftLeg.rotationPointY = 5.2F;		if (isSitting
 				| isRiding) {
 			Skirt.rotationPointY = 4.0F;

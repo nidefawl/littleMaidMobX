@@ -574,7 +574,7 @@ import modchu.model.multimodel.base.MultiModel_Aug;public class MultiModel_Yuk
 	public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, ModchuModel_IEntityCaps entityCaps) {
 		super.setRotationAnglesLM(f, f1, f2, f3, f4, f5, entityCaps);
 		Skirt.setRotationPoint(0.0F, 3.5F, 0.0F);
-		Skirt.setRotateAngle(0.0F, 0.0F, 0.0F);		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_getIsRiding)) {
+		Skirt.setRotateAngle(0.0F, 0.0F, 0.0F);		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isRiding)) {
 			RabbitEar_RB1.setRotateAngleX(0.08726461F);
 			RabbitEar_LB1.setRotateAngleX(0.08726461F);
 			RabbitEar_RB2.setRotateAngleX(0.6108523F);

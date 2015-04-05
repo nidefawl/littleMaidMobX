@@ -63,7 +63,7 @@ import modchu.model.ModchuModel_IEntityCaps;public class MultiModel_tareusa ex
 	public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, ModchuModel_IEntityCaps entityCaps) {
 		super.setRotationAnglesLM(f, f1, f2, f3, f4, f5, entityCaps);		Usasippo.setRotateAngleY(mh_sin(f * 0.6662F) * 0.3F);
 		UsaER.rotateAngleX = UsaEL.rotateAngleX = mh_sin(f2 * 0.2F) * 0.1F + 0.2F;
-		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_getIsRiding)) {
+		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isRiding)) {
 			Usasippo.setRotateAngleY(mh_sin(f * 0.6662F) * 0.5F);
 		}
 		if (armSwingFlag(entityCaps)) {

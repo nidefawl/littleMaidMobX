@@ -77,6 +77,7 @@ public class Modchu_ModelRendererBase {
 		cubeList = new ArrayList<Modchu_ModelBoxBase>();
 		baseModel = pModelBase;
 		List boxList = Modchu_AS.getList(Modchu_AS.modelBaseBoxList, pModelBase);
+		System.out.println("chu "+boxList.size()+" = "+pName);
 		boxList.add(this);
 		boxName = pName;
 		setTextureSize(Modchu_AS.getInt(Modchu_AS.modelBaseTextureWidth, pModelBase), Modchu_AS.getInt(Modchu_AS.modelBaseTextureHeight, pModelBase));
@@ -96,6 +97,11 @@ public class Modchu_ModelRendererBase {
 
 	public Modchu_ModelRendererBase(Object modelBase, int px, int py) {
 		this(modelBase, null);
+		setTextureOffset(px, py);
+	}
+
+	public Modchu_ModelRendererBase(Object modelBase, int px, int py, String s) {
+		this(modelBase, s);
 		setTextureOffset(px, py);
 	}
 

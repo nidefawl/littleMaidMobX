@@ -430,7 +430,7 @@ import modchu.model.multimodel.base.MultiModel_SR2;public class MultiModel_NM1
 		bipedRightArm.rotationPointY = bipedLeftArm.rotationPointY = -3.5F;
 		bipedLeftArm.rotationPointX = 3.0F;
 		bipedLeftArm.rotationPointZ = 0.0F;
-		Breast.rotationPointY = -2.5F;		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_getIsRiding)) {
+		Breast.rotationPointY = -2.5F;		if (Modchu_EntityCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isRiding)) {
 			bipedRightArm.rotateAngleX += -((float) Math.PI / 5F);
 			bipedLeftArm.rotateAngleX += -((float) Math.PI / 5F);
 			bipedRightLeg.rotateAngleX = -((float) Math.PI * 2F / 5F);
