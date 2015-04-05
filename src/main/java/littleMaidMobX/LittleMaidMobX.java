@@ -11,9 +11,6 @@ import littleMaidMobX.network.Message;
 import littleMaidMobX.network.NetConstants;
 import littleMaidMobX.network.Network;
 import littleMaidMobX.registry.ModelManager;
-import modchu.lib.Modchu_Reflect;
-import modchu.lib.characteristic.Modchu_AS;
-import modchu.model.ModchuModel_Main;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.player.EntityPlayer;
@@ -146,8 +143,6 @@ public class LittleMaidMobX {
 	@EventHandler
 	public void PreInit(FMLPreInitializationEvent evt)
 	{
-		Modchu_AS.instanceCheck();
-		Modchu_Reflect.initNameMap();
 		{
 
 			File configFile = evt.getSuggestedConfigurationFile();
@@ -219,7 +214,6 @@ public class LittleMaidMobX {
 
 		
 		proxy.loadSounds();
-		ModchuModel_Main.load();
 		
 //		Debug("GUID-sneak: %s", LMM_EntityLittleMaid.maidUUIDSneak.toString());
 

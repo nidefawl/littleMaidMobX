@@ -205,30 +205,6 @@ public class ModelRenderer {
 
 	
 	public void render(float par1, boolean pIsRender) {
-//		boolean hide = isHidden || !showModel;
-//		if (Minecraft.FRAME_NUM%100==0) {
-//			if (this.baseModel instanceof MultiModel_NM2) {
-//				MultiModel_NM2 mm = (MultiModel_NM2)this.baseModel;	
-//				if (this.boxName!=null&&this.boxName.toLowerCase().contains("skirt")&&!this.boxName.equals("Skirt")) {
-//					System.out.println("render skirt "+boxName+" "+this.baseModel+ " - "+hide);
-//					System.out.println("render skirt rotationPointX "+rotationPointX);
-//					System.out.println("render skirt rotationPointY "+rotationPointY);
-//					System.out.println("render skirt rotationPointZ "+rotationPointZ);
-//					System.out.println("render skirt offsetX "+offsetX);
-//					System.out.println("render skirt offsetY "+offsetY);
-//					System.out.println("render skirt offsetZ "+offsetZ);
-//				}
-//	//			int a = 0;
-//	//			for (ModelRenderer mb : this.baseModel.boxList) {
-//	//				if (mb == mm.SkirtTop) {
-//	//					a++;
-//	//				}
-//	//			}
-//	//			if (a > 0) {
-//	//				System.out.println("found "+a+" skirttops");
-//	//			}
-//			}
-//		}
 		if (isHidden) {
 			return;
 		}
@@ -694,10 +670,6 @@ public class ModelRenderer {
 	}
 
 	public void setVisible(boolean flag) {
-		if (boxName!=null&&boxName.toLowerCase().contains("Arm")) {
-			System.err.println(this.baseModel+" set arm "+(flag?"visible":"hidden"));
-			Thread.dumpStack();
-		}
 		showModel = flag;
 	}
 

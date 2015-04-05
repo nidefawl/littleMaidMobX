@@ -1,4 +1,4 @@
-package littleMaidMobX.model.modchu;import littleMaidMobX.Helper;import littleMaidMobX.LittleMaidMobX;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.render.model.ModelBoxPlate;import littleMaidMobX.render.model.ModelRenderer;import modchu.lib.Modchu_EntityCapsHelper;import modchu.model.ModchuModel_IEntityCaps;public class ModelModchuBaseMulti extends ModelModchuBaseSkirt {	public ModelRenderer ChignonR;
+package littleMaidMobX.model.modchu;import littleMaidMobX.Helper;import littleMaidMobX.LittleMaidMobX;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.render.model.ModelBoxPlate;import littleMaidMobX.render.model.ModelRenderer;public class ModelModchuBaseMulti extends ModelModchuBaseSkirt {	public ModelRenderer ChignonR;
 	public ModelRenderer ChignonL;
 	public ModelRenderer ChignonB;
 	public ModelRenderer Tail;
@@ -255,9 +255,9 @@ package littleMaidMobX.model.modchu;import littleMaidMobX.Helper;import littl
 			if (SkirtFront != null) SkirtTop.addChild(SkirtFront);
 			if (SkirtRight != null) SkirtTop.addChild(SkirtRight);
 			if (SkirtLeft != null) SkirtTop.addChild(SkirtLeft);
-			if (SkirtBack != null) SkirtTop.addChild(SkirtBack);			System.err.println("add 4 skirt parts to skirt top!");
+			if (SkirtBack != null) SkirtTop.addChild(SkirtBack);
 		}
-		if (Skirt != null) {			if (SkirtTop != null)			System.err.println("add SkirtTop to Skirt!");
+		if (Skirt != null) {			if (SkirtTop != null)
 			if (SkirtTop != null) Skirt.addChild(SkirtTop);
 			setCapsValue(null, caps_visible, Skirt, false);
 		}
