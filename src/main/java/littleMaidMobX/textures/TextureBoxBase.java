@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import littleMaidMobX.models.IModelCaps;
+import littleMaidMobX.model.caps.IModelCaps;
 
 public abstract class TextureBoxBase {
 
 	public String textureName;
-	protected int contractColor;
+	public int contractColor;
 	public int wildColor;
 	protected float modelHeight;
 	protected float modelWidth;

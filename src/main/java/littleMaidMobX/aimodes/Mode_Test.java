@@ -6,10 +6,10 @@ import java.util.Map.Entry;
 
 import littleMaidMobX.Statics;
 import littleMaidMobX.entity.EntityLittleMaid;
+import littleMaidMobX.registry.ModelManager;
 import littleMaidMobX.render.RenderLittleMaid;
 import littleMaidMobX.textures.TextureBox;
 import littleMaidMobX.textures.TextureBoxServer;
-import littleMaidMobX.textures.TextureManager;
 import littleMaidMobX.wrapper.MinecraftWrapper;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandTime;
@@ -138,22 +138,22 @@ public class Mode_Test extends ModeBase implements ICommand {
 				// textureIndex
 				
 				var1.addChatMessage(new ChatComponentText("textureServer:"));
-				for (int li = 0; li < TextureManager.instance.textureServer.size(); li++) {
-					TextureBoxServer lb = TextureManager.instance.getTextureBoxServer(li);
+				for (int li = 0; li < ModelManager.instance.textureServer.size(); li++) {
+					TextureBoxServer lb = ModelManager.instance.getTextureBoxServer(li);
 					var1.addChatMessage(new ChatComponentText(String.format("%4d : %04x : %s", li, lb.wildColor, lb.textureName)));
 				}
 				break;
 			case 3:
 				// textures
 				var1.addChatMessage(new ChatComponentText("textures:"));
-				for (TextureBox ltb : TextureManager.getTextureList()) {
+				for (TextureBox ltb : ModelManager.getTextureList()) {
 					var1.addChatMessage(new ChatComponentText(ltb.textureName));
 				}
 				break;
 			case 4:
 				// textures
 				var1.addChatMessage(new ChatComponentText("textureServerIndex:"));
-				for (Entry<TextureBox, Integer> ltb : TextureManager.instance.textureServerIndex.entrySet()) {
+				for (Entry<TextureBox, Integer> ltb : ModelManager.instance.textureServerIndex.entrySet()) {
 					var1.addChatMessage(new ChatComponentText(String.format("%04x, %s", ltb.getValue(), ltb.getKey().textureName)));
 				}
 				break;

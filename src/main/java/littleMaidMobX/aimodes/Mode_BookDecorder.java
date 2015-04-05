@@ -1,8 +1,8 @@
 package littleMaidMobX.aimodes;
 
 import littleMaidMobX.entity.EntityLittleMaid;
+import littleMaidMobX.registry.ModelManager;
 import littleMaidMobX.textures.TextureBoxBase;
-import littleMaidMobX.textures.TextureManager;
 import net.minecraft.entity.ai.EntityAITasks;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -57,14 +57,14 @@ public class Mode_BookDecorder extends ModeBase {
 								lflag = true;
 							}
 							else if (lcom[0].equals("texture")) {
-								TextureBoxBase lbox = TextureManager.instance.getTextureBox(lcom[1]);
+								TextureBoxBase lbox = ModelManager.instance.getTextureBox(lcom[1]);
 								if (lbox != null) {
 									lboxs[0] = lbox;
 									lflag = true;
 								}
 							}
 							else if (lcom[0].equals("armor")) {
-								TextureBoxBase lbox = TextureManager.instance.getTextureBox(lcom[1]);
+								TextureBoxBase lbox = ModelManager.instance.getTextureBox(lcom[1]);
 								if (lbox != null) {
 									lboxs[1] = lbox;
 									lflag = true;
@@ -82,7 +82,7 @@ public class Mode_BookDecorder extends ModeBase {
 				}
 				if (pentityplayer.worldObj.isRemote) {
 					if (lflag) {
-						TextureManager.instance.postSetTexturePack(owner, lcolor, lboxs);
+						ModelManager.instance.postSetTexturePack(owner, lcolor, lboxs);
 					}
 				}
 				return true;

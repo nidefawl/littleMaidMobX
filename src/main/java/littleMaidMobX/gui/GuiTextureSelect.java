@@ -1,8 +1,8 @@
 package littleMaidMobX.gui;
 
+import littleMaidMobX.registry.ModelManager;
 import littleMaidMobX.textures.ITextureEntity;
 import littleMaidMobX.textures.TextureBox;
-import littleMaidMobX.textures.TextureManager;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -116,7 +116,7 @@ public class GuiTextureSelect extends GuiScreen {
 			}
 			target.getTextureData().setTextureNames();
 			if (toServer) {
-				TextureManager.instance.postSetTexturePack(target, selectColor, target.getTextureBox());
+				ModelManager.instance.postSetTexturePack(target, selectColor, target.getTextureBox());
 			} else {
 				TextureBox lboxs[] = new TextureBox[2];
 				lboxs[0] = (TextureBox)target.getTextureBox()[0];

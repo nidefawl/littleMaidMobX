@@ -3,8 +3,8 @@ package modchu.lib.lmm.characteristic;
 import java.util.Random;
 
 import littleMaidMobX.textures.TextureBox;
-import littleMaidMobX.models.IModelCaps;
-import littleMaidMobX.models.ModelMultiBase;
+import littleMaidMobX.model.ModelMultiBase;
+import littleMaidMobX.model.caps.IModelCaps;
 import modchu.lib.characteristic.Modchu_TextureBoxBase;
 import modchu.model.ModchuModel_IEntityCaps;
 import modchu.model.ModchuModel_ModelDataMaster;

@@ -2,13 +2,13 @@ package littleMaidMobX.entity;
 
 import java.util.Map;
 
-import littleMaidMobX.models.IModelCaps;
-import littleMaidMobX.render.EntityCapsBase;
+import littleMaidMobX.model.caps.EntityCapsBase;
+import littleMaidMobX.model.caps.IModelCaps;
+import littleMaidMobX.registry.ModelManager;
 import littleMaidMobX.textures.ITextureEntity;
 import littleMaidMobX.textures.TextureBox;
 import littleMaidMobX.textures.TextureBoxBase;
 import littleMaidMobX.textures.TextureData;
-import littleMaidMobX.textures.TextureManager;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -137,11 +137,11 @@ public class EntitySelect extends EntityLiving implements IModelCaps, ITextureEn
 		textureData.textureModel[2] = null;
 		
 		if (textureData.textureBox[0] instanceof TextureBox) {
-			int lc = (textureData.color & 0x00ff) + (textureData.contract ? 0 : TextureManager.tx_wild);
+			int lc = (textureData.color & 0x00ff) + (textureData.contract ? 0 : ModelManager.tx_wild);
 			lbox = (TextureBox)textureData.textureBox[0];
 			if (lbox.hasColor(lc)) {
 				textureData.textures[0][0] = lbox.getTextureName(lc);
-				lc = (textureData.color & 0x00ff) + (textureData.contract ? TextureManager.tx_eyecontract : TextureManager.tx_eyewild);
+				lc = (textureData.color & 0x00ff) + (textureData.contract ? ModelManager.tx_eyecontract : ModelManager.tx_eyewild);
 				textureData.textures[0][1] = lbox.getTextureName(lc);
 				textureData.textureModel[0] = lbox.models[0];
 			}
@@ -149,10 +149,10 @@ public class EntitySelect extends EntityLiving implements IModelCaps, ITextureEn
 		if (textureData.textureBox[1] instanceof TextureBox) {
 			lbox = (TextureBox)textureData.textureBox[1];
 			for (int i = 0; i < 4; i++) {
-				textureData.textures[1][i] = lbox.getArmorTextureName(TextureManager.tx_armor1, pArmorName, 0);
-				textureData.textures[2][i] = lbox.getArmorTextureName(TextureManager.tx_armor2, pArmorName, 0);
-				textureData.textures[3][i] = lbox.getArmorTextureName(TextureManager.tx_armor1light, pArmorName, 0);
-				textureData.textures[4][i] = lbox.getArmorTextureName(TextureManager.tx_armor2light, pArmorName, 0);
+				textureData.textures[1][i] = lbox.getArmorTextureName(ModelManager.tx_armor1, pArmorName, 0);
+				textureData.textures[2][i] = lbox.getArmorTextureName(ModelManager.tx_armor2, pArmorName, 0);
+				textureData.textures[3][i] = lbox.getArmorTextureName(ModelManager.tx_armor1light, pArmorName, 0);
+				textureData.textures[4][i] = lbox.getArmorTextureName(ModelManager.tx_armor2light, pArmorName, 0);
 			}
 			textureData.textureModel[1] = lbox.models[1];
 			textureData.textureModel[2] = lbox.models[2];

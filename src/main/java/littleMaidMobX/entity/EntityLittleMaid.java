@@ -59,16 +59,16 @@ import littleMaidMobX.aimodes.IFF;
 import littleMaidMobX.aimodes.SwingStatus;
 import littleMaidMobX.gui.GuiCommonHandler;
 import littleMaidMobX.inventory.InventoryLittleMaid;
-import littleMaidMobX.models.IModelCaps;
+import littleMaidMobX.model.caps.EntityCapsMaid;
+import littleMaidMobX.model.caps.IModelCaps;
 import littleMaidMobX.network.Net;
-import littleMaidMobX.render.EntityCapsMaid;
+import littleMaidMobX.registry.ModelManager;
 import littleMaidMobX.sound.EnumSound;
 import littleMaidMobX.textures.ITextureEntity;
 import littleMaidMobX.textures.TextureBox;
 import littleMaidMobX.textures.TextureBoxBase;
 import littleMaidMobX.textures.TextureBoxServer;
 import littleMaidMobX.textures.TextureData;
-import littleMaidMobX.textures.TextureManager;
 import littleMaidMobX.wrapper.MinecraftWrapper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoublePlant;
@@ -270,7 +270,7 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 		textureData = new TextureData(this, maidCaps);
 		textureData.setColor(12);
 		TextureBox ltb[] = new TextureBox[2];
-		ltb[0] = ltb[1] = TextureManager.instance.getDefaultTexture(this);
+		ltb[0] = ltb[1] = ModelManager.instance.getDefaultTexture(this);
 		setTexturePackName(ltb);
 		
 		entityIdFactor = (float)(getEntityId() * 70);
@@ -316,7 +316,7 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 		// テクスチャーをランダムで選択
 		String ls;
 		if (LittleMaidMobX.cfg_defaultTexture.isEmpty()) {
-			ls = TextureManager.instance.getRandomTextureString(rand);
+			ls = ModelManager.instance.getRandomTextureString(rand);
 		} else {
 			ls = LittleMaidMobX.cfg_defaultTexture;
 		}
@@ -1055,10 +1055,10 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 			setMaidWait(par1nbtTagCompound.getBoolean("Wait"));
 			setFreedom(par1nbtTagCompound.getBoolean("Freedom"));
 			setTracer(par1nbtTagCompound.getBoolean("Tracer"));
-			textureData.textureIndex[0] = TextureManager.instance.getIndexTextureBoxServer(this, par1nbtTagCompound.getString("texName"));
-			textureData.textureIndex[1] = TextureManager.instance.getIndexTextureBoxServer(this, par1nbtTagCompound.getString("texArmor"));
-			textureData.textureBox[0] = TextureManager.instance.getTextureBoxServer(textureData.textureIndex[0]);
-			textureData.textureBox[1] = TextureManager.instance.getTextureBoxServer(textureData.textureIndex[1]);
+			textureData.textureIndex[0] = ModelManager.instance.getIndexTextureBoxServer(this, par1nbtTagCompound.getString("texName"));
+			textureData.textureIndex[1] = ModelManager.instance.getIndexTextureBoxServer(this, par1nbtTagCompound.getString("texArmor"));
+			textureData.textureBox[0] = ModelManager.instance.getTextureBoxServer(textureData.textureIndex[0]);
+			textureData.textureBox[1] = ModelManager.instance.getTextureBoxServer(textureData.textureIndex[1]);
 			byte b = par1nbtTagCompound.getByte("ModeColor");
 			setColor(b & 0x0f);
 			switch ((b & 0xf0) >> 4) {
@@ -1158,10 +1158,10 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 			if (mstatSwingStatus.length <= maidDominantArm) {
 				maidDominantArm = 0;
 			}
-			textureData.textureIndex[0] = TextureManager.instance.getIndexTextureBoxServer(this, par1nbtTagCompound.getString("texName"));
-			textureData.textureIndex[1] = TextureManager.instance.getIndexTextureBoxServer(this, par1nbtTagCompound.getString("texArmor"));
-			textureData.textureBox[0] = TextureManager.instance.getTextureBoxServer(textureData.textureIndex[0]);
-			textureData.textureBox[1] = TextureManager.instance.getTextureBoxServer(textureData.textureIndex[1]);
+			textureData.textureIndex[0] = ModelManager.instance.getIndexTextureBoxServer(this, par1nbtTagCompound.getString("texName"));
+			textureData.textureIndex[1] = ModelManager.instance.getIndexTextureBoxServer(this, par1nbtTagCompound.getString("texArmor"));
+			textureData.textureBox[0] = ModelManager.instance.getTextureBoxServer(textureData.textureIndex[0]);
+			textureData.textureBox[1] = ModelManager.instance.getTextureBoxServer(textureData.textureIndex[1]);
 			textureData.setColor(par1nbtTagCompound.getInteger("Color"));
 			setTexturePackIndex(textureData.color, textureData.getTextureIndex());
 			
@@ -3084,7 +3084,7 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 	 */
 	public boolean sendTextureToServer() {
 		// 16bitあればテクスチャパックの数にたりんべ
-		TextureManager.instance.postSetTexturePack(this, textureData.getColor(), textureData.getTextureBox());
+		ModelManager.instance.postSetTexturePack(this, textureData.getColor(), textureData.getTextureBox());
 		return true;
 	}
 
@@ -3107,7 +3107,7 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 			lflag = true;
 		}
 		if (lflag) {
-			TextureManager.instance.postGetTexturePack(this, textureData.getTextureIndex());
+			ModelManager.instance.postGetTexturePack(this, textureData.getTextureIndex());
 		}
 		return lflag;
 	}

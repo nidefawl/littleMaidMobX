@@ -2,9 +2,9 @@ package littleMaidMobX.render;
 
 import littleMaidMobX.ClientHelper;
 import littleMaidMobX.LittleMaidMobX;
-import littleMaidMobX.models.IModelCaps;
-import littleMaidMobX.models.ModelBaseDuo;
-import littleMaidMobX.models.ModelBaseSolo;
+import littleMaidMobX.model.caps.IModelCaps;
+import littleMaidMobX.render.model.ModelMCArmor;
+import littleMaidMobX.render.model.ModelMCMain;
 import littleMaidMobX.textures.ITextureEntity;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
@@ -17,18 +17,18 @@ import org.lwjgl.opengl.GL11;
 
 public class RenderModelMulti extends RenderLiving {
 
-	public ModelBaseSolo modelMain;
-	public ModelBaseDuo modelFATT;
+	public ModelMCMain modelMain;
+	public ModelMCArmor modelFATT;
 	public IModelCaps fcaps;
 
 
 
 	public RenderModelMulti(float pShadowSize) {
 		super(null, pShadowSize);
-		modelFATT = new ModelBaseDuo(this);
+		modelFATT = new ModelMCArmor(this);
 		modelFATT.isModelAlphablend = LittleMaidMobX.cfg_isModelAlphaBlend;
 		modelFATT.isRendering = true;
-		modelMain = new ModelBaseSolo(this);
+		modelMain = new ModelMCMain(this);
 		modelMain.isModelAlphablend = LittleMaidMobX.cfg_isModelAlphaBlend;
 		modelMain.capsLink = modelFATT;
 		mainModel = modelMain;

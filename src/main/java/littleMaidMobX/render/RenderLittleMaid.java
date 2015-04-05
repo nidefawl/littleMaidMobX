@@ -1,7 +1,7 @@
 package littleMaidMobX.render;
 
 import littleMaidMobX.entity.EntityLittleMaid;
-import littleMaidMobX.models.IModelCaps;
+import littleMaidMobX.model.caps.IModelCaps;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;

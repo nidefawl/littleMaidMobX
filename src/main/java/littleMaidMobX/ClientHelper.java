@@ -2,13 +2,13 @@ package littleMaidMobX;
 
 import java.util.Random;
 
-import littleMaidMobX.models.ModelBase;
-import littleMaidMobX.models.ModelBoxBase;
-import littleMaidMobX.models.ModelRenderer;
+import littleMaidMobX.model.ModelBase;
 import littleMaidMobX.network.NetConstants;
 import littleMaidMobX.network.Message;
 import littleMaidMobX.network.Network;
-import littleMaidMobX.textures.TextureManager;
+import littleMaidMobX.registry.ModelManager;
+import littleMaidMobX.render.model.ModelBoxBase;
+import littleMaidMobX.render.model.ModelRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
@@ -71,11 +71,11 @@ public class ClientHelper {
 		switch (lmode) {
 		case NetConstants.Client_SetTextureIndex:
 			// 問い合わせたテクスチャパックの管理番号を受け取る
-			TextureManager.instance.reciveFormServerSetTexturePackIndex(var2.data);
+			ModelManager.instance.reciveFormServerSetTexturePackIndex(var2.data);
 			break;
 		case NetConstants.Client_SetTexturePackName:
 			// 管理番号に登録されているテクスチャパックの情報を受け取る
-			TextureManager.instance.reciveFromServerSetTexturePackName(var2.data);
+			ModelManager.instance.reciveFromServerSetTexturePackName(var2.data);
 			break;
 		}
 	}

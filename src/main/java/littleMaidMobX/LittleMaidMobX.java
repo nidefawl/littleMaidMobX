@@ -10,7 +10,7 @@ import littleMaidMobX.item.ItemSpawnEgg;
 import littleMaidMobX.network.NetConstants;
 import littleMaidMobX.network.Message;
 import littleMaidMobX.network.Network;
-import littleMaidMobX.textures.TextureManager;
+import littleMaidMobX.registry.ModelManager;
 import modchu.lib.Modchu_ASBase;
 import modchu.lib.Modchu_Reflect;
 import modchu.lib.characteristic.Modchu_AS;
@@ -157,13 +157,13 @@ public class LittleMaidMobX {
 			lconf.save();
 			
 
-			TextureManager.instance.loadTextures();
+			ModelManager.instance.loadTextures();
 			if (Helper.isClient) {
 //				MMM_TextureManager.loadTextures();
 				Debug("Localmode: InitTextureList.");
-				TextureManager.instance.initTextureList(true);
+				ModelManager.instance.initTextureList(true);
 			} else {
-				TextureManager.instance.loadTextureServer();
+				ModelManager.instance.loadTextureServer();
 			}
 		}
 		Config.init();
@@ -241,7 +241,7 @@ public class LittleMaidMobX {
 		MinecraftForge.EVENT_BUS.register(new EventHook());
 		
 		// デフォルトモデルの設定
-		TextureManager.instance.setDefaultTexture(EntityLittleMaid.class, TextureManager.instance.getTextureBox("default_Orign"));
+		ModelManager.instance.setDefaultTexture(EntityLittleMaid.class, ModelManager.instance.getTextureBox("default_Orign"));
 		
 		// Dominant
 		BiomeGenBase[] biomeList = null;
@@ -322,13 +322,13 @@ public class LittleMaidMobX {
 		
 		switch (lmode) {
 		case NetConstants.Server_SetTexturePackIndex:
-			TextureManager.instance.reciveFromClientSetTexturePackIndex(lentity, var2.data);
+			ModelManager.instance.reciveFromClientSetTexturePackIndex(lentity, var2.data);
 			break;
 		case NetConstants.Server_GetTextureIndex:
-			TextureManager.instance.reciveFromClientGetTexturePackIndex(playerEntity, var2.data);
+			ModelManager.instance.reciveFromClientGetTexturePackIndex(playerEntity, var2.data);
 			break;
 		case NetConstants.Server_GetTexturePackName:
-			TextureManager.instance.reciveFromClientGetTexturePackName(playerEntity, var2.data);
+			ModelManager.instance.reciveFromClientGetTexturePackName(playerEntity, var2.data);
 			break;
 		}
 	}
