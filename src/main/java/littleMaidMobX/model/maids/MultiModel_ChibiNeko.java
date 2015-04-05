@@ -1,4 +1,4 @@
-package littleMaidMobX.model.maids;import java.util.Map;import littleMaidMobX.Helper;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.render.model.ModelRenderer;import littleMaidMobX.model.modchu.ModelModchuBaseSR2;public class MultiModel_ChibiNeko2 extends ModelModchuBaseSR2 {	public ModelRenderer Prim;
+package littleMaidMobX.model.maids;import java.util.Map;import littleMaidMobX.Helper;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.render.model.ModelRenderer;import littleMaidMobX.model.modchu.ModelModchuBaseSR2;public class MultiModel_ChibiNeko extends ModelModchuBaseSR2 {	public ModelRenderer Prim;
 	public ModelRenderer Tail2;
 	public ModelRenderer Tail3;
 	public ModelRenderer Tail4;
@@ -42,13 +42,13 @@ package littleMaidMobX.model.maids;import java.util.Map;import littleMaidMob
 	public ModelRenderer DrowaR2;
 	public ModelRenderer DrowaL2;
 	public ModelRenderer pink;
-	private Map sizeMap;	private static final float Scale = 0.4F;	public MultiModel_ChibiNeko2() {
+	private Map sizeMap;	private static final float Scale = 0.4F;	public MultiModel_ChibiNeko() {
 		this(0.0F);
-	}	public MultiModel_ChibiNeko2(float f) {
+	}	public MultiModel_ChibiNeko(float f) {
 		this(f, 0.0F);
-	}	public MultiModel_ChibiNeko2(float f, float f1) {
+	}	public MultiModel_ChibiNeko(float f, float f1) {
 		this(f, f1, 64, 64);
-	}	public MultiModel_ChibiNeko2(float f, float f1, int i, int j) {
+	}	public MultiModel_ChibiNeko(float f, float f1, int i, int j) {
 		super(f, f1, i < 0 ? 64 : i, j < 0 ? 64 : j);
 	}	@Override
 	public void initModel(float f, float f1, boolean isAfterInit) {

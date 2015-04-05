@@ -14,8 +14,8 @@ import littleMaidMobX.model.ModelBase;
 import littleMaidMobX.model.ModelMultiBase;
 import littleMaidMobX.model.caps.IModelCaps;
 import littleMaidMobX.model.caps.ModelCapsHelper;
-import littleMaidMobX.model.maids.MultiModel_Elsie2;
-import littleMaidMobX.model.maids.MultiModel_NM2;
+import littleMaidMobX.model.maids.MultiModel_Elsie;
+import littleMaidMobX.model.maids.MultiModel_NM;
 import littleMaidMobX.wrapper.MinecraftClientWrapper;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -112,7 +112,7 @@ public class ModelRenderer {
 		isRendering = true;
 		cubeList = new ArrayList<ModelBoxBase>();
 		baseModel = pModelBase;
-		if (pModelBase instanceof MultiModel_NM2 && pModelBase.modelSize==0) {
+		if (pModelBase instanceof MultiModel_NM && pModelBase.modelSize==0) {
 			System.out.println("our: "+pModelBase.boxList.size()+" = "+pName);
 		}
 		

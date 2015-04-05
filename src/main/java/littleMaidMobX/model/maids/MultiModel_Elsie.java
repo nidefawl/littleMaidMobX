@@ -1,17 +1,17 @@
-package littleMaidMobX.model.maids;import littleMaidMobX.Helper;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.model.modchu.ModelModchuBaseMulti;import littleMaidMobX.render.model.ModelRenderer;public class MultiModel_Elsie2 extends ModelModchuBaseMulti {	public ModelRenderer RightSkirt;
+package littleMaidMobX.model.maids;import littleMaidMobX.Helper;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.model.modchu.ModelModchuBaseMulti;import littleMaidMobX.render.model.ModelRenderer;public class MultiModel_Elsie extends ModelModchuBaseMulti {	public ModelRenderer RightSkirt;
 	public ModelRenderer LeftSkirt;
 	public ModelRenderer bipedHeadwearB;
 	public ModelRenderer SkirtTopL;
 	public ModelRenderer SkirtFrontL;
 	public ModelRenderer SkirtLeftL;
 	public ModelRenderer SkirtBackL;
-	public ModelRenderer SkirtRightL;	public MultiModel_Elsie2() {
+	public ModelRenderer SkirtRightL;	public MultiModel_Elsie() {
 		this(0.0F);
-	}	public MultiModel_Elsie2(float f) {
+	}	public MultiModel_Elsie(float f) {
 		this(f, 0.0F);
-	}	public MultiModel_Elsie2(float f, float f1) {
+	}	public MultiModel_Elsie(float f, float f1) {
 		this(f, f1, 64, 32);
-	}	public MultiModel_Elsie2(float f, float f1, int i, int j) {
+	}	public MultiModel_Elsie(float f, float f1, int i, int j) {
 		super(f, f1, i < 0 ? 64 : i, j < 0 ? 32 : j);
 	}	@Override
 	public void initModel(float f, float f1, boolean isAfterInit) {
