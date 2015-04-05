@@ -2,7 +2,6 @@ package modchu.lib.characteristic;
 
 import java.util.Random;
 
-import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_IModelBaseMaster;
 import modchu.lib.Modchu_Reflect;
 import net.minecraft.client.model.ModelBase;

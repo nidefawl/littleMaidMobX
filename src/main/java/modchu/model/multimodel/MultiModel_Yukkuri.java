@@ -1,7 +1,4 @@
-package modchu.model.multimodel;import modchu.lib.Modchu_EntityCapsHelper;
-import modchu.lib.characteristic.Modchu_AS;
-import modchu.lib.characteristic.Modchu_ModelRenderer;
-import modchu.model.ModchuModel_IEntityCaps;
+package modchu.model.multimodel;import modchu.lib.Modchu_EntityCapsHelper;import modchu.lib.characteristic.Modchu_AS;import modchu.lib.characteristic.Modchu_ModelRenderer;import modchu.model.ModchuModel_IEntityCaps;
 public class MultiModel_Yukkuri extends MultiModelOkotaSR2 {	public Modchu_ModelRenderer Item1;
 	public Modchu_ModelRenderer Item2;
 	public Modchu_ModelRenderer HeadR;

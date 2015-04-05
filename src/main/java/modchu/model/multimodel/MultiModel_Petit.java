@@ -1,7 +1,4 @@
-package modchu.model.multimodel;import modchu.lib.Modchu_EntityCapsHelper;
-import modchu.lib.characteristic.Modchu_ModelRenderer;
-import modchu.model.ModchuModel_IEntityCaps;
-import modchu.model.ModchuModel_ModelPlate;public class MultiModel_Petit extends MultiModelOkotaSR2 {	public Modchu_ModelRenderer Prim;
+package modchu.model.multimodel;import modchu.lib.Modchu_EntityCapsHelper;import modchu.lib.characteristic.Modchu_ModelRenderer;import modchu.model.ModchuModel_IEntityCaps;import modchu.model.ModchuModel_ModelPlate;public class MultiModel_Petit extends MultiModelOkotaSR2 {	public Modchu_ModelRenderer Prim;
 	public Modchu_ModelRenderer FaceR;
 	public Modchu_ModelRenderer FaceL;
 	public Modchu_ModelRenderer rightHandPlus;

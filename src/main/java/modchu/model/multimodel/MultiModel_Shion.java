@@ -1,9 +1,4 @@
-package modchu.model.multimodel;import modchu.lib.Modchu_EntityCapsHelper;
-import modchu.lib.Modchu_Reflect;
-import modchu.lib.characteristic.Modchu_AS;
-import modchu.lib.characteristic.Modchu_ModelRenderer;
-import modchu.model.ModchuModel_IEntityCaps;
-import modchu.model.multimodel.base.MultiModel;public class MultiModel_Shion extends MultiModel {	public Modchu_ModelRenderer longtail;
+package modchu.model.multimodel;import modchu.lib.Modchu_EntityCapsHelper;import modchu.lib.Modchu_Reflect;import modchu.lib.characteristic.Modchu_AS;import modchu.lib.characteristic.Modchu_ModelRenderer;import modchu.model.ModchuModel_IEntityCaps;import modchu.model.multimodel.base.MultiModel;public class MultiModel_Shion extends MultiModel {	public Modchu_ModelRenderer longtail;
 	public Modchu_ModelRenderer Headwear;
 	public Modchu_ModelRenderer HeadwearR;
 	public Modchu_ModelRenderer HeadwearL;

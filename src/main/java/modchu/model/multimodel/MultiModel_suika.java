@@ -1,6 +1,4 @@
-package modchu.model.multimodel;import modchu.lib.Modchu_EntityCapsHelper;
-import modchu.lib.characteristic.Modchu_ModelRenderer;
-import modchu.model.ModchuModel_IEntityCaps;public class MultiModel_suika extends MultiModelOkotaSR2 {	public Modchu_ModelRenderer RibonL;
+package modchu.model.multimodel;import modchu.lib.Modchu_EntityCapsHelper;import modchu.lib.characteristic.Modchu_ModelRenderer;import modchu.model.ModchuModel_IEntityCaps;public class MultiModel_suika extends MultiModelOkotaSR2 {	public Modchu_ModelRenderer RibonL;
 	public Modchu_ModelRenderer RibonR;
 	public Modchu_ModelRenderer CatEL;
 	public Modchu_ModelRenderer CatER;

@@ -3,8 +3,8 @@ package littleMaidMobX.ai;
 import java.lang.reflect.Field;
 import java.util.List;
 
-import littleMaidMobX.LittleMaidMobX;
 import littleMaidMobX.Helper;
+import littleMaidMobX.LittleMaidMobX;
 import littleMaidMobX.aimodes.SwingStatus;
 import littleMaidMobX.entity.EntityLittleMaid;
 import littleMaidMobX.entity.EntityLittleMaidAvatar;

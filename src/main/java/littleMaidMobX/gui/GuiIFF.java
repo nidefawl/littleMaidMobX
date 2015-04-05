@@ -1,9 +1,9 @@
 package littleMaidMobX.gui;
 
 import littleMaidMobX.ClientHelper;
+import littleMaidMobX.Helper;
 import littleMaidMobX.LittleMaidMobX;
 import littleMaidMobX.Statics;
-import littleMaidMobX.Helper;
 import littleMaidMobX.aimodes.IFF;
 import littleMaidMobX.entity.EntityLittleMaid;
 import littleMaidMobX.network.Net;

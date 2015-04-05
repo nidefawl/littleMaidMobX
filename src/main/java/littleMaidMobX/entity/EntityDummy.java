@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import littleMaidMobX.ClientHelper;
-import littleMaidMobX.LittleMaidMobX;
 import littleMaidMobX.Helper;
+import littleMaidMobX.LittleMaidMobX;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;

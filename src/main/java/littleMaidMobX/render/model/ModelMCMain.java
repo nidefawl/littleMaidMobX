@@ -5,8 +5,6 @@ import java.util.Map;
 import littleMaidMobX.ClientHelper;
 import littleMaidMobX.model.ModelMultiBase;
 import littleMaidMobX.model.caps.IModelCaps;
-import littleMaidMobX.model.lmm.ModelMultiMMMBase;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.TextureOffset;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RendererLivingEntity;

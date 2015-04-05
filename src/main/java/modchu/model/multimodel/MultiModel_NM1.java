@@ -1,9 +1,4 @@
-package modchu.model.multimodel;import modchu.lib.Modchu_EntityCapsHelper;
-import modchu.lib.Modchu_Reflect;
-import modchu.lib.characteristic.Modchu_AS;
-import modchu.lib.characteristic.Modchu_ModelRenderer;
-import modchu.model.ModchuModel_IEntityCaps;
-import modchu.model.multimodel.base.MultiModel_SR2;public class MultiModel_NM1 extends MultiModel_SR2 {
+package modchu.model.multimodel;import modchu.lib.Modchu_EntityCapsHelper;import modchu.lib.Modchu_Reflect;import modchu.lib.characteristic.Modchu_AS;import modchu.lib.characteristic.Modchu_ModelRenderer;import modchu.model.ModchuModel_IEntityCaps;import modchu.model.multimodel.base.MultiModel_SR2;public class MultiModel_NM1 extends MultiModel_SR2 {
 	public Modchu_ModelRenderer Headwear;
 	public Modchu_ModelRenderer HornR1;
 	public Modchu_ModelRenderer HornR2;

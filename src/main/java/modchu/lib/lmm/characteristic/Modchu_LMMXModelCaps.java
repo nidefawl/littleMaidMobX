@@ -2,7 +2,6 @@ package modchu.lib.lmm.characteristic;
 
 import littleMaidMobX.model.caps.EntityCapsBase;
 import modchu.lib.characteristic.Modchu_EntityCapsBase;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 
 public class Modchu_LMMXModelCaps extends EntityCapsBase {

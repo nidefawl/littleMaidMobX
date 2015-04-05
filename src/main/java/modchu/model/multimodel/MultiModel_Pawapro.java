@@ -1,6 +1,4 @@
-package modchu.model.multimodel;import modchu.lib.Modchu_EntityCapsHelper;
-import modchu.lib.characteristic.Modchu_ModelRenderer;
-import modchu.model.ModchuModel_IEntityCaps;public class MultiModel_Pawapro extends MultiModelOkotaSR2 {	public Modchu_ModelRenderer tuba1;
+package modchu.model.multimodel;import modchu.lib.Modchu_EntityCapsHelper;import modchu.lib.characteristic.Modchu_ModelRenderer;import modchu.model.ModchuModel_IEntityCaps;public class MultiModel_Pawapro extends MultiModelOkotaSR2 {	public Modchu_ModelRenderer tuba1;
 	public Modchu_ModelRenderer tuba2;
 	public Modchu_ModelRenderer HandR;
 	public Modchu_ModelRenderer HandL;

@@ -1,6 +1,5 @@
 package modchu.lib.characteristic;
 
-import java.util.Map;
 
 /**
  * モデル共通化用インターフェース。

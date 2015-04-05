@@ -1,5 +1,4 @@
-package modchu.model.multimodel;import modchu.lib.characteristic.Modchu_ModelRenderer;
-import modchu.model.ModchuModel_ModelRendererMaster;public class MultiModel_DogAngel2 extends MultiModel_DogAngel {	public MultiModel_DogAngel2()
+package modchu.model.multimodel;import modchu.lib.characteristic.Modchu_ModelRenderer;import modchu.model.ModchuModel_ModelRendererMaster;public class MultiModel_DogAngel2 extends MultiModel_DogAngel {	public MultiModel_DogAngel2()
 	{
 		this(0.0F);
 	}	public MultiModel_DogAngel2(float f)

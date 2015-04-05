@@ -3,8 +3,8 @@ package littleMaidMobX.gui;
 import java.util.List;
 
 import littleMaidMobX.ClientHelper;
-import littleMaidMobX.LittleMaidMobX;
 import littleMaidMobX.Helper;
+import littleMaidMobX.LittleMaidMobX;
 import littleMaidMobX.aimodes.TriggerSelect;
 import littleMaidMobX.inventory.ContainerTriggerSelect;
 import net.minecraft.client.gui.GuiButton;

@@ -1,4 +1,4 @@
-package littleMaidMobX.model.modchu;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.render.model.ModelRenderer;import modchu.lib.Modchu_Debug;import modchu.lib.Modchu_EntityCapsHelper;import modchu.lib.Modchu_Main;import modchu.lib.characteristic.Modchu_AS;import modchu.lib.characteristic.Modchu_GlStateManager;import modchu.model.ModchuModel_ModelPlate;public class ModelModchuBaseMulti extends ModelModchuBaseSkirt {	public ModelRenderer ChignonR;
+package littleMaidMobX.model.modchu;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.render.model.ModelRenderer;import modchu.lib.Modchu_EntityCapsHelper;import modchu.lib.Modchu_Main;import modchu.lib.characteristic.Modchu_AS;import modchu.model.ModchuModel_ModelPlate;public class ModelModchuBaseMulti extends ModelModchuBaseSkirt {	public ModelRenderer ChignonR;
 	public ModelRenderer ChignonL;
 	public ModelRenderer ChignonB;
 	public ModelRenderer Tail;

@@ -11,7 +11,6 @@ import littleMaidMobX.render.RenderLittleMaid;
 import littleMaidMobX.textures.TextureBox;
 import littleMaidMobX.textures.TextureBoxServer;
 import littleMaidMobX.wrapper.MinecraftWrapper;
-import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandTime;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;

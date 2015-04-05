@@ -1,4 +1,4 @@
-package modchu.model.multimodel.base;import modchu.lib.Modchu_Debug;import modchu.lib.Modchu_EntityCapsHelper;import modchu.lib.Modchu_Main;import modchu.lib.characteristic.Modchu_AS;import modchu.lib.characteristic.Modchu_GlStateManager;import modchu.lib.characteristic.Modchu_ModelRenderer;import modchu.model.ModchuModel_IEntityCaps;import modchu.model.ModchuModel_ModelPlate;public class MultiModel extends MultiModelSkirtFloats {	public Modchu_ModelRenderer ChignonR;
+package modchu.model.multimodel.base;import modchu.lib.Modchu_EntityCapsHelper;import modchu.lib.Modchu_Main;import modchu.lib.characteristic.Modchu_AS;import modchu.lib.characteristic.Modchu_ModelRenderer;import modchu.model.ModchuModel_IEntityCaps;import modchu.model.ModchuModel_ModelPlate;public class MultiModel extends MultiModelSkirtFloats {	public Modchu_ModelRenderer ChignonR;
 	public Modchu_ModelRenderer ChignonL;
 	public Modchu_ModelRenderer ChignonB;
 	public Modchu_ModelRenderer Tail;

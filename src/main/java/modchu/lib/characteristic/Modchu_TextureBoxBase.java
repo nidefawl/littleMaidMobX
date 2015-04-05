@@ -4,12 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-import net.minecraft.util.ResourceLocation;
 import modchu.lib.Modchu_EntityCapsHelper;
 import modchu.lib.Modchu_Main;
 import modchu.lib.Modchu_Reflect;
 import modchu.lib.Modchu_TextureManagerBase;
 import modchu.model.multimodel.base.MultiModelBaseBiped;
+import net.minecraft.util.ResourceLocation;
 
 public class Modchu_TextureBoxBase extends Modchu_TextureBoxBaseBase {
 

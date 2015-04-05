@@ -1,8 +1,4 @@
-package modchu.model.multimodel;import modchu.lib.Modchu_EntityCapsHelper;
-import modchu.lib.characteristic.Modchu_ModelRenderer;
-import modchu.model.ModchuModel_IEntityCaps;
-import modchu.model.ModchuModel_ModelPlate;
-import modchu.model.multimodel.base.MultiModel;public class MultiModel_Mabel extends MultiModel {	public Modchu_ModelRenderer aboveHeadwear;
+package modchu.model.multimodel;import modchu.lib.Modchu_EntityCapsHelper;import modchu.lib.characteristic.Modchu_ModelRenderer;import modchu.model.ModchuModel_IEntityCaps;import modchu.model.ModchuModel_ModelPlate;import modchu.model.multimodel.base.MultiModel;public class MultiModel_Mabel extends MultiModel {	public Modchu_ModelRenderer aboveHeadwear;
 	public Modchu_ModelRenderer innerBody;
 	public Modchu_ModelRenderer innerRightLeg;
 	public Modchu_ModelRenderer innerLeftLeg;

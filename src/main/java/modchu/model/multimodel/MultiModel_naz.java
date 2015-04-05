@@ -1,6 +1,4 @@
-package modchu.model.multimodel;import modchu.lib.Modchu_EntityCapsHelper;
-import modchu.lib.characteristic.Modchu_ModelRenderer;
-import modchu.model.ModchuModel_IEntityCaps;public class MultiModel_naz extends MultiModelOkotaSR2 {	public Modchu_ModelRenderer CatEL;
+package modchu.model.multimodel;import modchu.lib.Modchu_EntityCapsHelper;import modchu.lib.characteristic.Modchu_ModelRenderer;import modchu.model.ModchuModel_IEntityCaps;public class MultiModel_naz extends MultiModelOkotaSR2 {	public Modchu_ModelRenderer CatEL;
 	public Modchu_ModelRenderer CatER;
 	public Modchu_ModelRenderer CatTail;
 	public Modchu_ModelRenderer Prim;	public MultiModel_naz() {

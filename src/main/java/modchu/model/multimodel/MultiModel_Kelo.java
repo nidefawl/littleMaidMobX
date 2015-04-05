@@ -1,7 +1,4 @@
-package modchu.model.multimodel;import modchu.lib.Modchu_EntityCapsHelper;
-import modchu.lib.characteristic.Modchu_AS;
-import modchu.lib.characteristic.Modchu_ModelRenderer;
-import modchu.model.ModchuModel_IEntityCaps;public class MultiModel_Kelo extends MultiModelOkotaSR2 {	public Modchu_ModelRenderer tailL1;
+package modchu.model.multimodel;import modchu.lib.Modchu_EntityCapsHelper;import modchu.lib.characteristic.Modchu_AS;import modchu.lib.characteristic.Modchu_ModelRenderer;import modchu.model.ModchuModel_IEntityCaps;public class MultiModel_Kelo extends MultiModelOkotaSR2 {	public Modchu_ModelRenderer tailL1;
 	public Modchu_ModelRenderer tailL2;
 	public Modchu_ModelRenderer tailR1;
 	public Modchu_ModelRenderer tailR2;

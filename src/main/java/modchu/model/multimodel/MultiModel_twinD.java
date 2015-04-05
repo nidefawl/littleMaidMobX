@@ -1,6 +1,4 @@
-package modchu.model.multimodel;import modchu.lib.characteristic.Modchu_ModelRenderer;
-import modchu.model.ModchuModel_IEntityCaps;
-import modchu.model.multimodel.base.MultiModel_SR2;public class MultiModel_twinD extends MultiModel_SR2 {
+package modchu.model.multimodel;import modchu.lib.characteristic.Modchu_ModelRenderer;import modchu.model.multimodel.base.MultiModel_SR2;public class MultiModel_twinD extends MultiModel_SR2 {
 	public Modchu_ModelRenderer longhearR;
 	public Modchu_ModelRenderer longhearL;
 	public Modchu_ModelRenderer kamidomeR;

@@ -1,7 +1,7 @@
 package littleMaidMobX.textures;
 
-import littleMaidMobX.LittleMaidMobX;
 import littleMaidMobX.Helper;
+import littleMaidMobX.LittleMaidMobX;
 import littleMaidMobX.entity.EntityLittleMaid;
 import littleMaidMobX.entity.EntitySelect;
 import littleMaidMobX.model.ModelMultiBase;

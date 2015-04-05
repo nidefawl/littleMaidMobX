@@ -3,8 +3,8 @@ package littleMaidMobX;
 import java.util.Random;
 
 import littleMaidMobX.model.ModelBase;
-import littleMaidMobX.network.NetConstants;
 import littleMaidMobX.network.Message;
+import littleMaidMobX.network.NetConstants;
 import littleMaidMobX.network.Network;
 import littleMaidMobX.registry.ModelManager;
 import littleMaidMobX.render.model.ModelBoxBase;

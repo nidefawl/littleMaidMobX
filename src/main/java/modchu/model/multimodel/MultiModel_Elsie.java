@@ -1,8 +1,4 @@
-package modchu.model.multimodel;import modchu.lib.Modchu_EntityCapsHelper;
-import modchu.lib.characteristic.Modchu_AS;
-import modchu.lib.characteristic.Modchu_ModelRenderer;
-import modchu.model.ModchuModel_IEntityCaps;
-import modchu.model.multimodel.base.MultiModel;public class MultiModel_Elsie extends MultiModel {	public Modchu_ModelRenderer RightSkirt;
+package modchu.model.multimodel;import modchu.lib.Modchu_EntityCapsHelper;import modchu.lib.characteristic.Modchu_AS;import modchu.lib.characteristic.Modchu_ModelRenderer;import modchu.model.ModchuModel_IEntityCaps;import modchu.model.multimodel.base.MultiModel;public class MultiModel_Elsie extends MultiModel {	public Modchu_ModelRenderer RightSkirt;
 	public Modchu_ModelRenderer LeftSkirt;
 	public Modchu_ModelRenderer bipedHeadwearB;
 	public Modchu_ModelRenderer SkirtTopL;

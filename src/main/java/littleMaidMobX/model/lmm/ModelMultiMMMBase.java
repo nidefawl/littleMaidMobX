@@ -1,9 +1,5 @@
 package littleMaidMobX.model.lmm;
 
-import java.util.Map;
-import java.util.Map.Entry;
-
-import littleMaidMobX.ClientHelper;
 import littleMaidMobX.model.ModelMultiBase;
 import littleMaidMobX.model.caps.IModelCaps;
 

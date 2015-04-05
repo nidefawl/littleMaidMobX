@@ -1,8 +1,4 @@
-package modchu.model.multimodel;import modchu.lib.Modchu_EntityCapsHelper;
-import modchu.lib.characteristic.Modchu_ModelRenderer;
-import modchu.model.ModchuModel_IEntityCaps;
-import modchu.model.ModchuModel_ModelPlate;
-import modchu.model.multimodel.base.MultiModel_Aug;
+package modchu.model.multimodel;import modchu.lib.Modchu_EntityCapsHelper;import modchu.lib.characteristic.Modchu_ModelRenderer;import modchu.model.ModchuModel_IEntityCaps;import modchu.model.ModchuModel_ModelPlate;import modchu.model.multimodel.base.MultiModel_Aug;
 public class MultiModel_VUD1 extends MultiModel_Aug {
 	public Modchu_ModelRenderer SideTailRoot_R;
 	public Modchu_ModelRenderer SideTailRoot_L;

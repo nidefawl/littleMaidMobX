@@ -1,6 +1,5 @@
 package modchu.lib.characteristic;
 
-import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_ModelRendererBase;
 import net.minecraft.client.model.PositionTextureVertex;
 import net.minecraft.client.model.TexturedQuad;

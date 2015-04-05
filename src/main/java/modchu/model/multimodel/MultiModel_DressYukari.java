@@ -1,8 +1,4 @@
-package modchu.model.multimodel;import modchu.lib.Modchu_EntityCapsHelper;
-import modchu.lib.characteristic.Modchu_AS;
-import modchu.lib.characteristic.Modchu_ModelRenderer;
-import modchu.model.ModchuModel_IEntityCaps;
-import modchu.model.multimodel.base.MultiModel_SR2;public class MultiModel_DressYukari extends MultiModel_SR2 {	public Modchu_ModelRenderer Ahoge;
+package modchu.model.multimodel;import modchu.lib.Modchu_EntityCapsHelper;import modchu.lib.characteristic.Modchu_AS;import modchu.lib.characteristic.Modchu_ModelRenderer;import modchu.model.ModchuModel_IEntityCaps;import modchu.model.multimodel.base.MultiModel_SR2;public class MultiModel_DressYukari extends MultiModel_SR2 {	public Modchu_ModelRenderer Ahoge;
 	public Modchu_ModelRenderer overHear;
 	public Modchu_ModelRenderer Glass;
 	public Modchu_ModelRenderer specialModel[];

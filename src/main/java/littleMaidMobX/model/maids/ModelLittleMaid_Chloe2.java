@@ -3,14 +3,14 @@ package littleMaidMobX.model.maids;
 import java.util.Random;
 
 import littleMaidMobX.entity.EntityLittleMaid;
-//import net.minecraft.client.renderer.entity.RendererLivingEntity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.passive.EntityAnimal;
 import littleMaidMobX.model.caps.IModelCaps;
 import littleMaidMobX.model.caps.ModelCapsHelper;
 import littleMaidMobX.model.lmm.ModelLittleMaidBase;
 import littleMaidMobX.render.model.ModelRenderer;
+//import net.minecraft.client.renderer.entity.RendererLivingEntity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.player.EntityPlayer;
 
 /**
  * ���֐߃��f��

@@ -1,9 +1,4 @@
-package modchu.model.multimodel;import modchu.lib.Modchu_EntityCapsHelper;
-import modchu.lib.characteristic.Modchu_AS;
-import modchu.lib.characteristic.Modchu_ModelRenderer;
-import modchu.model.ModchuModel_IEntityCaps;
-import modchu.model.ModchuModel_ModelPlate;
-import modchu.model.multimodel.base.MultiModel_SR2;public class MultiModel_Elsa2 extends MultiModel_SR2 {	public MultiModel_Elsa2() {
+package modchu.model.multimodel;import modchu.lib.Modchu_EntityCapsHelper;import modchu.lib.characteristic.Modchu_AS;import modchu.lib.characteristic.Modchu_ModelRenderer;import modchu.model.ModchuModel_IEntityCaps;import modchu.model.ModchuModel_ModelPlate;import modchu.model.multimodel.base.MultiModel_SR2;public class MultiModel_Elsa2 extends MultiModel_SR2 {	public MultiModel_Elsa2() {
 		this(0.0F);
 	}	public MultiModel_Elsa2(float f) {
 		this(f, 0.0F);

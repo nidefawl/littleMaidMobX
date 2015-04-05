@@ -1,5 +1,4 @@
-package modchu.model.multimodel;import modchu.lib.characteristic.Modchu_ModelRenderer;
-import modchu.model.multimodel.base.MultiModel_SR2;public class MultiModel_Kagami extends MultiModel_SR2 {
+package modchu.model.multimodel;import modchu.lib.characteristic.Modchu_ModelRenderer;import modchu.model.multimodel.base.MultiModel_SR2;public class MultiModel_Kagami extends MultiModel_SR2 {
 	public Modchu_ModelRenderer tailR;
 	public Modchu_ModelRenderer tailRFA;
 	public Modchu_ModelRenderer tailRBA;

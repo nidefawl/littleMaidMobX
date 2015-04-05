@@ -1,6 +1,5 @@
 package modchu.lib.characteristic;
 
-import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_Reflect;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityList;

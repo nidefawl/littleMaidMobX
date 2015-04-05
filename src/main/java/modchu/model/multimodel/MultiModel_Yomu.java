@@ -1,10 +1,4 @@
-package modchu.model.multimodel;import java.util.ArrayList;
-import java.util.List;import modchu.lib.Modchu_EntityCapsHelper;
-import modchu.lib.characteristic.Modchu_AS;
-import modchu.lib.characteristic.Modchu_ModelRenderer;
-import modchu.model.ModchuModel_IEntityCaps;
-import modchu.model.ModchuModel_ModelRendererMaster;
-import modchu.model.multimodel.base.MultiModel_SR2;public class MultiModel_Yomu extends MultiModel_SR2 {	public Modchu_ModelRenderer Prim;
+package modchu.model.multimodel;import java.util.ArrayList;import java.util.List;import modchu.lib.Modchu_EntityCapsHelper;import modchu.lib.characteristic.Modchu_AS;import modchu.lib.characteristic.Modchu_ModelRenderer;import modchu.model.ModchuModel_IEntityCaps;import modchu.model.ModchuModel_ModelRendererMaster;import modchu.model.multimodel.base.MultiModel_SR2;public class MultiModel_Yomu extends MultiModel_SR2 {	public Modchu_ModelRenderer Prim;
 	public Modchu_ModelRenderer Tail2;
 	public Modchu_ModelRenderer Skirt1;
 	public Modchu_ModelRenderer Skirt2;

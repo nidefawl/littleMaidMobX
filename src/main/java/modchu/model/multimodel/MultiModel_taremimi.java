@@ -1,6 +1,4 @@
-package modchu.model.multimodel;import modchu.lib.Modchu_EntityCapsHelper;
-import modchu.lib.characteristic.Modchu_ModelRenderer;
-import modchu.model.ModchuModel_IEntityCaps;public class MultiModel_taremimi extends MultiModelOkotaSR2 {	public Modchu_ModelRenderer ChignonR;
+package modchu.model.multimodel;import modchu.lib.Modchu_EntityCapsHelper;import modchu.lib.characteristic.Modchu_ModelRenderer;import modchu.model.ModchuModel_IEntityCaps;public class MultiModel_taremimi extends MultiModelOkotaSR2 {	public Modchu_ModelRenderer ChignonR;
 	public Modchu_ModelRenderer ChignonL;
 	public Modchu_ModelRenderer ChignonB;
 	public Modchu_ModelRenderer WTail;

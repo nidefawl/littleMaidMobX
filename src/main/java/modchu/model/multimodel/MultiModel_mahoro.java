@@ -1,7 +1,4 @@
-package modchu.model.multimodel;import modchu.lib.Modchu_EntityCapsHelper;
-import modchu.lib.characteristic.Modchu_ModelRenderer;
-import modchu.model.ModchuModel_IEntityCaps;
-import modchu.model.multimodel.base.MultiModel;public class MultiModel_mahoro extends MultiModel {	public Modchu_ModelRenderer Prim;
+package modchu.model.multimodel;import modchu.lib.Modchu_EntityCapsHelper;import modchu.lib.characteristic.Modchu_ModelRenderer;import modchu.model.ModchuModel_IEntityCaps;import modchu.model.multimodel.base.MultiModel;public class MultiModel_mahoro extends MultiModel {	public Modchu_ModelRenderer Prim;
 	public Modchu_ModelRenderer RibonUR;
 	public Modchu_ModelRenderer RibonUL;
 	public Modchu_ModelRenderer RibonBR;

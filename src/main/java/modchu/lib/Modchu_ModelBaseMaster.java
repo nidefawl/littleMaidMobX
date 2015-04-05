@@ -1,19 +1,13 @@
 package modchu.lib;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import modchu.lib.characteristic.Modchu_AS;
 import modchu.lib.characteristic.Modchu_IEntityCapsBase;
 import modchu.lib.characteristic.Modchu_ModelBase;
 import modchu.lib.characteristic.Modchu_ModelRenderer;
-import modchu.lib.Modchu_EntityCapsHelper;
-import modchu.model.ModchuModel_ModelDataMaster;
-
-import org.lwjgl.opengl.GL11;
 
 public abstract class Modchu_ModelBaseMaster implements Modchu_IEntityCapsBase, Modchu_IModelBaseMaster {
 	public Modchu_ModelBase base;

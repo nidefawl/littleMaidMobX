@@ -1,8 +1,4 @@
-package modchu.model.multimodel;import modchu.lib.Modchu_EntityCapsHelper;
-import modchu.lib.characteristic.Modchu_AS;
-import modchu.lib.characteristic.Modchu_ModelRenderer;
-import modchu.model.ModchuModel_IEntityCaps;
-import modchu.model.multimodel.base.MultiModel;public class MultiModel_ExtraArms extends MultiModel {	public Modchu_ModelRenderer Backpack;
+package modchu.model.multimodel;import modchu.lib.Modchu_EntityCapsHelper;import modchu.lib.characteristic.Modchu_AS;import modchu.lib.characteristic.Modchu_ModelRenderer;import modchu.model.ModchuModel_IEntityCaps;import modchu.model.multimodel.base.MultiModel;public class MultiModel_ExtraArms extends MultiModel {	public Modchu_ModelRenderer Backpack;
 	public Modchu_ModelRenderer Antena;
 	public Modchu_ModelRenderer Cwave;
 	public Modchu_ModelRenderer FirstAidSet;

@@ -3,13 +3,6 @@ package littleMaidMobX.model.maids;
 import java.util.Random;
 
 //import net.minecraft.client.renderer.entity.RendererLivingEntity;
-
-
-
-
-
-
-
 import littleMaidMobX.model.caps.IModelCaps;
 import littleMaidMobX.model.caps.ModelCapsHelper;
 import littleMaidMobX.model.lmm.ModelLittleMaidBase;

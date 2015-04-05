@@ -1,8 +1,4 @@
-package modchu.model.multimodel.base;import modchu.lib.Modchu_Debug;
-import modchu.lib.Modchu_EntityCapsHelper;
-import modchu.lib.characteristic.Modchu_AS;
-import modchu.lib.characteristic.Modchu_ModelRenderer;
-import modchu.model.ModchuModel_IEntityCaps;public class MultiModel_Aug extends MultiModel_SR2 {	public Modchu_ModelRenderer sidetailUpperR;
+package modchu.model.multimodel.base;import modchu.lib.Modchu_EntityCapsHelper;import modchu.lib.characteristic.Modchu_AS;import modchu.lib.characteristic.Modchu_ModelRenderer;import modchu.model.ModchuModel_IEntityCaps;public class MultiModel_Aug extends MultiModel_SR2 {	public Modchu_ModelRenderer sidetailUpperR;
 	public Modchu_ModelRenderer sidetailUpperL;	public Modchu_ModelRenderer shaggyB;
 	public Modchu_ModelRenderer shaggyR;
 	public Modchu_ModelRenderer shaggyL;	public Modchu_ModelRenderer sensor1;

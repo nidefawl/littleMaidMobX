@@ -4,7 +4,6 @@ import java.nio.FloatBuffer;
 import java.util.concurrent.ConcurrentHashMap;
 
 import modchu.lib.characteristic.Modchu_AS;
-import modchu.lib.characteristic.Modchu_CastHelper;
 
 import org.lwjgl.opengl.GL11;
 
