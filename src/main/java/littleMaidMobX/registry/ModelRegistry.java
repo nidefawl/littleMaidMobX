@@ -24,8 +24,8 @@ public class ModelRegistry {
 //		list.add(ModelLittleMaid_SR2.class);
 //		list.add(ModelMulti_Stef.class);
 //		list.add(ModelMulti_Steve.class);
-		list.add(MultiModel_Evelyn4.class);
-//		list.add(MultiModel_Elsie.class);
+//		list.add(MultiModel_Evelyn4.class);
+		list.add(MultiModel_Elsie.class);
 	}
 
 }
