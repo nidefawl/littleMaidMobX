@@ -1,4 +1,4 @@
-package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.model.modchu.ModelModchuBaseMulti;import littleMaidMobX.render.model.ModelRenderer;public class MultiModel_Shion extends ModelModchuBaseMulti {	public ModelRenderer longtail;
+package littleMaidMobX.model.maids;import littleMaidMobX.Helper;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.model.modchu.ModelModchuBaseMulti;import littleMaidMobX.render.model.ModelRenderer;public class MultiModel_Shion extends ModelModchuBaseMulti {	public ModelRenderer longtail;
 	public ModelRenderer Headwear;
 	public ModelRenderer HeadwearR;
 	public ModelRenderer HeadwearL;
@@ -132,7 +132,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 		} else {
 //			setRotationAnglesGulliverBefore(f, f1, f2, f3, f4, f5, entityCaps);
 		}
-		boolean modchuRemodelingModel = ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_modchuRemodelingModel);
+		final boolean modchuRemodelingModel = false; //ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_modchuRemodelingModel);
 		if (ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isSneak)) {
 			if (!modchuRemodelingModel) {
 				bipedRightLeg.rotateAngleX -= 0.5F;
@@ -216,7 +216,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 			}
 			if (ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isRiding)) {
 				Object entity = entityCaps.getCapsValue(entityCaps.caps_Entity);
-				if (entity != null && Modchu_Reflect.getFieldObject("Entity", "field_70154_o", "ridingEntity", entity) != null) {
+				if (entity != null && Helper.getRidingEntity(entity) != null) {
 					bipedRightArm.rotateAngleX += -0.6283185F;
 					bipedLeftArm.rotateAngleX += -0.6283185F;
 					bipedRightLeg.rotateAngleX = -1.256637F;

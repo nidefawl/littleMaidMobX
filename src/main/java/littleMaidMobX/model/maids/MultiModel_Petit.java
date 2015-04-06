@@ -156,7 +156,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 		bipedLeftArm.rotationPointX = 1.7F;
 		bipedRightArm.rotationPointY = bipedLeftArm.rotationPointY = 2.0F;
 		bipedHead.rotationPointZ = 0.0F;
-		boolean isSitting = ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isSitting);
+		boolean isSitting = false;//ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isSitting);
 		boolean isRiding = ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isRiding);
 		bipedRightLeg.rotationPointY = bipedLeftLeg.rotationPointY = 5.2F;		if (isSitting
 				| isRiding) {
@@ -219,7 +219,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 		return 0.7F;
 	}	@Override
 	public float getRidingYOffset(IModelCaps entityCaps) {
-		return getYOffset(entityCaps) + 0.4F;
+		return getyOffset(entityCaps) + 0.4F;
 	}	@Override
 	public float getMountedYOffset(IModelCaps entityCaps) {
 		return 1.6F;

@@ -1,5 +1,5 @@
-package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.render.model.ModelBoxPlate;import littleMaidMobX.render.model.ModelRenderer;import modchu.model.multimodel.base.MultiModel_Aug;
-public class MultiModel_VUD1 extends MultiModel_Aug {
+package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.model.modchu.ModelModchuBaseAug;import littleMaidMobX.render.model.ModelBoxPlate;import littleMaidMobX.render.model.ModelRenderer;
+public class MultiModel_VUD1 extends ModelModchuBaseAug {
 	public ModelRenderer SideTailRoot_R;
 	public ModelRenderer SideTailRoot_L;
 	public ModelRenderer SideTailM_RU;
@@ -627,17 +627,7 @@ public class MultiModel_VUD1 extends MultiModel_Aug {
 			Tail_U.setRotateAngleX(0.0F);
 			Tail_B.setRotateAngleX(-bipedHead.getRotateAngleX() + Skirt.getRotateAngleX());
 		}
-		if (ModelCapsHelper.getCapsValueByte(this, entityCaps, entityCaps.caps_EntityType) == entityCaps.entityType_LMM) {
-			if (ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isSneak)) {
-				setCapsValue(entityCaps, caps_visible, Negi1, true);
-				setCapsValue(entityCaps, caps_visible, Negi2, true);
-				setCapsValue(entityCaps, caps_visible, Negi3, true);
-			} else {
-				setCapsValue(entityCaps, caps_visible, Negi1, false);
-				setCapsValue(entityCaps, caps_visible, Negi2, false);
-				setCapsValue(entityCaps, caps_visible, Negi3, false);
-			}
-		}
+		if (ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isSneak)) {			setCapsValue(entityCaps, caps_visible, Negi1, true);			setCapsValue(entityCaps, caps_visible, Negi2, true);			setCapsValue(entityCaps, caps_visible, Negi3, true);		} else {			setCapsValue(entityCaps, caps_visible, Negi1, false);			setCapsValue(entityCaps, caps_visible, Negi2, false);			setCapsValue(entityCaps, caps_visible, Negi3, false);		}
 		float f6 = mh_sin(f2 * 0.09F) * 0.05F + 0.05F;
 		SideTailM_RU.rotateAngleZ = SideTailF_RU.rotateAngleZ = SideTailN_LU.rotateAngleZ = SideTailR_R.rotateAngleZ = f6;
 		SideTailM_LU.rotateAngleZ = SideTailF_LU.rotateAngleZ = SideTailN_LB.rotateAngleZ = SideTailR_L.rotateAngleZ = -f6;

@@ -151,7 +151,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 		if (ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isRiding)) {
 			// 乗り物に乗っている
 			float f15 = 1.5F;
-			if (ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isSitting)) f15 = 1.0F;
+//			if (ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isSitting)) f15 = 1.0F;
 			float f9 = littleMaidMobX.Helper.cos(f * 0.3F);
 			if (f9 < 0) {
 				f9 = -f9 * 2;
@@ -268,44 +268,44 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 		ringL.rotationPointX = ff1 * 2 + 4.0F;
 		ringR.rotationPointY = -ff1 + 1.0F;
 		ringL.rotationPointY = -ff1 + 1.0F;
-		if (ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isSleeping)) {
-			sleepingInit = true;
-			bipedHead.rotationPointX = 1F;
-			//bipedHead.rotationPointY = 0F;
-			bipedHead.rotationPointZ = -1F;
-			bipedBody.rotationPointY = 9F;
-			bipedBody.rotationPointZ = -3F;
-			bipedRightArm.rotationPointY = 2.0F;
-			bipedLeftArm.rotationPointY = bipedRightArm.rotationPointY;
-			rightLeg.rotationPointY = 0.5F;
-			leftLeg.rotationPointY = 0.5F;
-			rightLegbottom.rotationPointY = 1.5F;
-			leftLegbottom.rotationPointY = 1.5F;
-			tail1.rotationPointX = 0.0F;
-			tail1.rotationPointY = 0.0F;
-			tail1.rotationPointZ = 3.5F;
-			tail2.rotationPointY = 1.0F;
-			tail2.rotationPointX = 2.0F;
-			tail2.rotationPointZ = 3.0F;
-			tail3.rotationPointY = 0.0F;
-			tail3.rotationPointX = 1.0F;
-			tail3.rotationPointZ = 3.0F;			//bipedHead.rotateAngleX = 1.770796313F + f4 / 57.29578F;
-			bipedHead.rotateAngleX = 0.870796313F + f4 / 57.29578F;
-			//bipedHead.rotateAngleX -= bipedBody.rotateAngleX;
-			bipedHead.rotateAngleY = -1.77F;
-			bipedHead.rotateAngleZ = -0.6F + f3 / 57.29578F;
-			bipedBody.rotateAngleX = 1.570796313F;
-			bipedBody.rotateAngleY = 0.0F;
-			bipedBody.rotateAngleZ = 1.570796313F;			bipedRightArm.rotateAngleX = -1.57F;
-			bipedLeftArm.rotateAngleX = bipedRightArm.rotateAngleX;
-			tail1.rotateAngleX = bipedBody.rotateAngleX - 1.8F;
-			tail1.rotateAngleY = 0.2F;			tail2.rotateAngleX = 0.0F;
-			tail2.rotateAngleY = 1.5F;
-			tail2.rotateAngleZ = 0.5F;
-			tail3.rotateAngleX = 0.0F;
-			tail3.rotateAngleY = 1.0F;
-			tail3.rotateAngleZ = 0.0F;
-		}
+//		if (ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isSleeping)) {
+//			sleepingInit = true;
+//			bipedHead.rotationPointX = 1F;
+//			//bipedHead.rotationPointY = 0F;
+//			bipedHead.rotationPointZ = -1F;
+//			bipedBody.rotationPointY = 9F;
+//			bipedBody.rotationPointZ = -3F;
+//			bipedRightArm.rotationPointY = 2.0F;
+//			bipedLeftArm.rotationPointY = bipedRightArm.rotationPointY;
+//			rightLeg.rotationPointY = 0.5F;
+//			leftLeg.rotationPointY = 0.5F;
+//			rightLegbottom.rotationPointY = 1.5F;
+//			leftLegbottom.rotationPointY = 1.5F;
+//			tail1.rotationPointX = 0.0F;
+//			tail1.rotationPointY = 0.0F;
+//			tail1.rotationPointZ = 3.5F;
+//			tail2.rotationPointY = 1.0F;
+//			tail2.rotationPointX = 2.0F;
+//			tail2.rotationPointZ = 3.0F;
+//			tail3.rotationPointY = 0.0F;
+//			tail3.rotationPointX = 1.0F;
+//			tail3.rotationPointZ = 3.0F;////			//bipedHead.rotateAngleX = 1.770796313F + f4 / 57.29578F;
+//			bipedHead.rotateAngleX = 0.870796313F + f4 / 57.29578F;
+//			//bipedHead.rotateAngleX -= bipedBody.rotateAngleX;
+//			bipedHead.rotateAngleY = -1.77F;
+//			bipedHead.rotateAngleZ = -0.6F + f3 / 57.29578F;
+//			bipedBody.rotateAngleX = 1.570796313F;
+//			bipedBody.rotateAngleY = 0.0F;
+//			bipedBody.rotateAngleZ = 1.570796313F;////			bipedRightArm.rotateAngleX = -1.57F;
+//			bipedLeftArm.rotateAngleX = bipedRightArm.rotateAngleX;
+//			tail1.rotateAngleX = bipedBody.rotateAngleX - 1.8F;
+//			tail1.rotateAngleY = 0.2F;////			tail2.rotateAngleX = 0.0F;
+//			tail2.rotateAngleY = 1.5F;
+//			tail2.rotateAngleZ = 0.5F;
+//			tail3.rotateAngleX = 0.0F;
+//			tail3.rotateAngleY = 1.0F;
+//			tail3.rotateAngleZ = 0.0F;
+//		}
 //		setRotationAnglesGulliverAfter(f, f1, f2, f3, f4, f5, entityCaps);
 	}	@Override
 	public void setDefaultPause(float f, float f1, float f2, float f3, float f4, float f5, IModelCaps entityCaps) {

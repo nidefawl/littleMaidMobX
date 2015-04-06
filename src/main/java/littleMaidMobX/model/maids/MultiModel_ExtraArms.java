@@ -123,34 +123,34 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 			} else {
 				Cwave.setVisible(false);
 			}
-		}
-		boolean aimedBowBinoculars = ModelCapsHelper.getCapsValueBoolean(entityCaps, caps_freeVariable, "aimedBowBinoculars");
-		if (ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_aimedBow) || ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isWait)) {
-			if (!aimedBowBinoculars) {
-				entityCaps.setCapsValue(caps_freeVariable, "aimedBowBinoculars", true);
-				bipedLeftArm.removeChild(Binoculars);
-				bipedLeftLeg.addChild(Binoculars);
-				if (ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_aimedBow)) {
-					Binoculars.setRotationPoint(0.0F, -10.0F, 0.0F);
-				} else {
-					Binoculars.setRotationPoint(0.0F, -10.0F, -2.0F);
-				}
-				float f10 = 2.3F;
-				Binoculars.rotateAngleX = f10;
-				Binoculars.rotateAngleY = f10 - 0.8F;
-				Binoculars.rotateAngleZ = f10;
-			}
-		} else {
-			if (aimedBowBinoculars) {
-				entityCaps.setCapsValue(caps_freeVariable, "aimedBowBinoculars", false);
-				bipedLeftLeg.removeChild(Binoculars);
-				bipedLeftArm.addChild(Binoculars);
-				Binoculars.setRotationPoint(-0.49F, -2.0F, -4.0F);
-				Binoculars.setRotateAngleX(0.0F);
-				Binoculars.setRotateAngleY(0.0F);
-				Binoculars.setRotateAngleZ(0.0F);
-			}
-		}
+		}		// this logic should stay outside of the model code
+//		boolean aimedBowBinoculars = ModelCapsHelper.getCapsValueBoolean(entityCaps, caps_freeVariable, "aimedBowBinoculars");
+//		if (ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_aimedBow) || ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isWait)) {
+//			if (!aimedBowBinoculars) {
+//				entityCaps.setCapsValue(caps_freeVariable, "aimedBowBinoculars", true);
+//				bipedLeftArm.removeChild(Binoculars);
+//				bipedLeftLeg.addChild(Binoculars);
+//				if (ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_aimedBow)) {
+//					Binoculars.setRotationPoint(0.0F, -10.0F, 0.0F);
+//				} else {
+//					Binoculars.setRotationPoint(0.0F, -10.0F, -2.0F);
+//				}
+//				float f10 = 2.3F;
+//				Binoculars.rotateAngleX = f10;
+//				Binoculars.rotateAngleY = f10 - 0.8F;
+//				Binoculars.rotateAngleZ = f10;
+//			}
+//		} else {
+//			if (aimedBowBinoculars) {
+//				entityCaps.setCapsValue(caps_freeVariable, "aimedBowBinoculars", false);
+//				bipedLeftLeg.removeChild(Binoculars);
+//				bipedLeftArm.addChild(Binoculars);
+//				Binoculars.setRotationPoint(-0.49F, -2.0F, -4.0F);
+//				Binoculars.setRotateAngleX(0.0F);
+//				Binoculars.setRotateAngleY(0.0F);
+//				Binoculars.setRotateAngleZ(0.0F);
+//			}
+//		}
 		if (ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_aimedBow)) {
 			setCapsValue(entityCaps, caps_visible, eyeL, true);
 			setCapsValue(entityCaps, caps_visible, eyeR, false);

@@ -1,4 +1,4 @@
-package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.render.model.ModelBoxPlate;import littleMaidMobX.render.model.ModelRenderer;import modchu.lib.Modchu_Debug;import modchu.model.multimodel.base.MultiModel_Aug;public class MultiModel_Yukari extends MultiModel_Aug {	public ModelRenderer Skirt_R;
+package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.model.modchu.ModelModchuBaseAug;import littleMaidMobX.render.model.ModelBoxPlate;import littleMaidMobX.render.model.ModelRenderer;public class MultiModel_Yukari extends ModelModchuBaseAug {	public ModelRenderer Skirt_R;
 	public ModelRenderer Skirt_L;
 	public ModelRenderer Skirt_RF;
 	public ModelRenderer Skirt_RB;
@@ -366,7 +366,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 		bipedHead.removeChild(SideTailL);
 		bipedHead.removeChild(Tail);
 		((ModelRenderer) mainFrame).removeChild(Skirt);
-		lowerBody.removeBoneChild(Skirt);
+//		lowerBody.removeBoneChild(Skirt);
 		Skirt_R.clearChildModels();
 		Skirt_L.clearChildModels();
 		Skirt_RF.clearChildModels();
@@ -581,23 +581,23 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 		}
 	}	@Override
 	public void skirtFloats(float f, float f1, float f2, float f3, float f4, float f5, IModelCaps entityCaps) {
-	}	@Override
-	public void actionPartsAddChild() {
-		Modchu_Debug.mDebug("actionPartsAddChild");
-		super.actionPartsAddChild();
-		bipedRightLeg.removeChild(Skirt_R);
-		bipedRightArm.removeChild(Arm_RF);
-		bipedRightArm.removeChild(ArmAccessory_RF);
-		bipedLeftLeg.removeChild(Skirt_L);
-		bipedLeftArm.removeChild(Arm_LF);
-		rightLeg.addChild(Skirt_R);
-		rightArm.addChild(Arm_RF);
-		rightArm2.addChild(ArmAccessory_RF);
-		leftLeg.addChild(Skirt_L);
-		leftArm.addChild(Arm_LF);
-		//((ModchuModel_ModelRenderer) mainFrame).removeChild(Skirt);
-		//bipedBody.addChild(Skirt);
-	}	@Override
+	}////	@Override
+//	public void actionPartsAddChild() {
+//		Modchu_Debug.mDebug("actionPartsAddChild");
+//		super.actionPartsAddChild();
+//		bipedRightLeg.removeChild(Skirt_R);
+//		bipedRightArm.removeChild(Arm_RF);
+//		bipedRightArm.removeChild(ArmAccessory_RF);
+//		bipedLeftLeg.removeChild(Skirt_L);
+//		bipedLeftArm.removeChild(Arm_LF);
+//		rightLeg.addChild(Skirt_R);
+//		rightArm.addChild(Arm_RF);
+//		rightArm2.addChild(ArmAccessory_RF);
+//		leftLeg.addChild(Skirt_L);
+//		leftArm.addChild(Arm_LF);
+//		//((ModchuModel_ModelRenderer) mainFrame).removeChild(Skirt);
+//		//bipedBody.addChild(Skirt);
+//	}	@Override
 	public void setArmorBipedHeadShowModel(IModelCaps entityCaps, boolean b) {
 		bipedHead.isHidden = !b;
 		super.setArmorBipedHeadShowModel(entityCaps, b);

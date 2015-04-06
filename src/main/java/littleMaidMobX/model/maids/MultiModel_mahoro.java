@@ -34,8 +34,8 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 		RibonUL.setRotationPoint(0.0F, 0.0F, 0.0F);
 		RibonBR = new ModelRenderer(this, 42, 19);
 		RibonBR.addBox(-4.5F, -2F, 3.5F, 4, 2, 1, f);
-		RibonBR.setRotationPoint(0.0F, 0.0F, 0.0F);
-		RibonBR.setParentModel(bipedHead);
+		RibonBR.setRotationPoint(0.0F, 0.0F, 0.0F);		// this requires a lot of changes.. see ModchuModel_ModelRendererMaster parentModel field access hierachy
+//		RibonBR.setParentModel(bipedHead); 		
 		RibonBR.rotateAngleZ = -70F / 180F * 3.141526F;
 		RibonBL = new ModelRenderer(this, 42, 19);
 		RibonBL.setMirror(true);

@@ -101,52 +101,52 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 		}
 		if (ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_aimedBow)) {
 			Usasippo.setRotateAngleY(0.0F);
-		}		if (ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_modchuRemodelingModel)) {
-			if (ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isSneak)) {
-				UsaER.rotateAngleX = UsaEL.rotateAngleX = 2.268928F;
-				UsaEL.rotationPointX = -2F;
-				UsaER.rotationPointX = 2.0F;
-				UsaEL.rotationPointY = UsaER.rotationPointY = -13.3F;
-				UsaEL.rotationPointZ = UsaER.rotationPointZ = mh_cos(f2 * 0.05F) * 0.5F + 7.8F;
-			}
-			if (ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isWait)) {
-				if (!isTaremimi && 0.0D > (mh_sin(f2 * 0.1F) * 0.2F) + Math.random() * 0.10000000149011612D + 0.18000000715255737D) {
-					isTaremimi = true;
-				}
-				if (!isTareRightmimi && 0.0D > (mh_sin(f2 * 0.1F) * 0.2F) + Math.random() * 0.10000000149011612D + 0.18000000715255737D) {
-					isTareRightmimi = true;
-				}
-				if (isTaremimi) {
-					UsaER.rotateAngleX = 2.268928F;
-					if (!isTareRightmimi) {
-						UsaEL.rotateAngleX = 2.268928F;
-						UsaEL.rotationPointX = -2F;
-						UsaEL.rotationPointY = -13.3F;
-						UsaEL.rotationPointZ = mh_cos(f2 * 0.05F) * 0.5F + 7.8F;
-					} else {
-						UsaEL.rotateAngleX = 0.6981317F;
-						UsaEL.rotationPointX = 0.0F;
-						UsaEL.rotationPointY = 0.0F;
-						UsaEL.rotationPointZ = mh_cos(f2 * 0.05F) * 0.5F - 0.2F;
-					}
-					UsaER.rotationPointX = 2.0F;
-					UsaER.rotationPointY = -13.3F;
-					UsaER.rotationPointZ = mh_cos(f2 * 0.05F) * 0.5F + 7.8F;
-				} else {
-					UsaER.rotateAngleX = UsaEL.rotateAngleX = 0.6981317F;
-					UsaEL.rotationPointX = 0.0F;
-					UsaER.rotationPointX = -0.1F;
-					UsaEL.rotationPointY = UsaER.rotationPointY = 0.0F;
-					UsaEL.rotationPointZ = UsaER.rotationPointZ = mh_cos(f2 * 0.05F) * 0.5F - 0.2F;
-				}
-				if (isTaremimi && 0.0D > (mh_sin(f2 * 0.1F) * 0.2F) + Math.random() * 0.10000000149011612D + 0.18000000715255737D) {
-					isTaremimi = false;
-				}
-				if (isTareRightmimi && 0.0D > (mh_sin(f2 * 0.1F) * 0.2F) + Math.random() * 0.10000000149011612D + 0.08000000715255737D) {
-					isTareRightmimi = false;
-				}
-			}
-		}
+		}//		if (ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_modchuRemodelingModel)) {
+//			if (ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isSneak)) {
+//				UsaER.rotateAngleX = UsaEL.rotateAngleX = 2.268928F;
+//				UsaEL.rotationPointX = -2F;
+//				UsaER.rotationPointX = 2.0F;
+//				UsaEL.rotationPointY = UsaER.rotationPointY = -13.3F;
+//				UsaEL.rotationPointZ = UsaER.rotationPointZ = mh_cos(f2 * 0.05F) * 0.5F + 7.8F;
+//			}
+//			if (ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isWait)) {
+//				if (!isTaremimi && 0.0D > (mh_sin(f2 * 0.1F) * 0.2F) + Math.random() * 0.10000000149011612D + 0.18000000715255737D) {
+//					isTaremimi = true;
+//				}
+//				if (!isTareRightmimi && 0.0D > (mh_sin(f2 * 0.1F) * 0.2F) + Math.random() * 0.10000000149011612D + 0.18000000715255737D) {
+//					isTareRightmimi = true;
+//				}
+//				if (isTaremimi) {
+//					UsaER.rotateAngleX = 2.268928F;
+//					if (!isTareRightmimi) {
+//						UsaEL.rotateAngleX = 2.268928F;
+//						UsaEL.rotationPointX = -2F;
+//						UsaEL.rotationPointY = -13.3F;
+//						UsaEL.rotationPointZ = mh_cos(f2 * 0.05F) * 0.5F + 7.8F;
+//					} else {
+//						UsaEL.rotateAngleX = 0.6981317F;
+//						UsaEL.rotationPointX = 0.0F;
+//						UsaEL.rotationPointY = 0.0F;
+//						UsaEL.rotationPointZ = mh_cos(f2 * 0.05F) * 0.5F - 0.2F;
+//					}
+//					UsaER.rotationPointX = 2.0F;
+//					UsaER.rotationPointY = -13.3F;
+//					UsaER.rotationPointZ = mh_cos(f2 * 0.05F) * 0.5F + 7.8F;
+//				} else {
+//					UsaER.rotateAngleX = UsaEL.rotateAngleX = 0.6981317F;
+//					UsaEL.rotationPointX = 0.0F;
+//					UsaER.rotationPointX = -0.1F;
+//					UsaEL.rotationPointY = UsaER.rotationPointY = 0.0F;
+//					UsaEL.rotationPointZ = UsaER.rotationPointZ = mh_cos(f2 * 0.05F) * 0.5F - 0.2F;
+//				}
+//				if (isTaremimi && 0.0D > (mh_sin(f2 * 0.1F) * 0.2F) + Math.random() * 0.10000000149011612D + 0.18000000715255737D) {
+//					isTaremimi = false;
+//				}
+//				if (isTareRightmimi && 0.0D > (mh_sin(f2 * 0.1F) * 0.2F) + Math.random() * 0.10000000149011612D + 0.08000000715255737D) {
+//					isTareRightmimi = false;
+//				}
+//			}
+//		}
 		CatER.rotateAngleX = CatEL.rotateAngleX = 0.3839724F;
 		CatER.rotateAngleY = 0.2617994F;
 		CatEL.rotateAngleY = -0.2617994F;

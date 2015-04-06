@@ -1,4 +1,4 @@
-package littleMaidMobX.model.maids;import net.minecraft.entity.Entity;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.render.model.ModelRenderer;import littleMaidMobX.model.modchu.ModelModchuBaseSR2;public class MultiModel_DressYukari extends ModelModchuBaseSR2 {	public ModelRenderer Ahoge;
+package littleMaidMobX.model.maids;import net.minecraft.entity.Entity;import littleMaidMobX.Helper;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.render.model.ModelRenderer;import littleMaidMobX.model.modchu.ModelModchuBaseSR2;public class MultiModel_DressYukari extends ModelModchuBaseSR2 {	public ModelRenderer Ahoge;
 	public ModelRenderer overHear;
 	public ModelRenderer Glass;
 	public ModelRenderer specialModel[];
@@ -97,9 +97,9 @@ package littleMaidMobX.model.maids;import net.minecraft.entity.Entity;import 
 		Skirt.rotationPointZ = 0f;		if (ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isRiding)) {
 			Skirt.rotationPointY -= 0.2f;
 			Skirt.rotationPointZ += 1.0f;
-			Skirt.rotateAngleX = ModelCapsHelper.getCapsValueFloat(this, entityCaps, caps_convertDegtoRad, -25F);
+			Skirt.rotateAngleX = Helper.degToRad(-25F);
 		}
-		if(ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_getIsSneak)){
+		if(ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isSneak)){
 			Skirt.rotationPointZ += 1.5F;
 		} else {
 			Skirt.rotationPointZ = 0.0F;

@@ -1,4 +1,4 @@
-package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.render.model.ModelRenderer;import modchu.model.multimodel.base.MultiModel_Aug;public class MultiModel_SA extends MultiModel_Aug {
+package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.model.modchu.ModelModchuBaseAug;import littleMaidMobX.render.model.ModelRenderer;public class MultiModel_SA extends ModelModchuBaseAug {
 	public ModelRenderer ChignonAug_R;
 	public ModelRenderer ChignonAug_L;
 	public ModelRenderer Chignon_RB;
