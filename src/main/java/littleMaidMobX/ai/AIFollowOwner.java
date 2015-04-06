@@ -98,7 +98,7 @@ public class AIFollowOwner extends EntityAIBase implements IEntityAI {
 		if (theMaid.isSitting()) {
 			return;
 		}
-		// 指定距離以上ならダッシュ
+		
 		theMaid.setSprinting(toDistance > sprintDist);
 		if (--field_48310_h > 0) {
 			return;

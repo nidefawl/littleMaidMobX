@@ -43,28 +43,28 @@ public class AIAvoidPlayer extends EntityAIBase implements
 
 		theMaster = theMaid.mstatMasterEntity;
 
-		// 不具合対策：プレイヤーがログアウトすると theMaster がNULLになって以降の処理でクラッシュ
+		
 		// http://forum.minecraftuser.jp/viewtopic.php?f=13&t=23347&start=180#p211806
 		if(theMaster==null)
 		{
 			return false;
 		}
 
-		// 対象は見えるか？てかこれいらなくね？
+		
 		if (!theMaid.getEntitySenses().canSee(theMaster)) {
 			return false;
 		}
 
-		// 移動先を策定
+		
 		Vec3 vec3d = RandomPositionGenerator.findRandomTargetBlockAwayFrom(
 				theMaid, minDist, 7, Vec3.createVectorHelper(theMaster.posX,
 						theMaster.posY, theMaster.posZ));
 
-		// 移動先が無い
+		
 		if (vec3d == null) {
 			return false;
 		}
-		// 移動先の距離が近い
+		
 		if (theMaster.getDistanceSq(vec3d.xCoord, vec3d.yCoord, vec3d.zCoord) < theMaid.mstatMasterDistanceSq) {
 			return false;
 		}
@@ -95,11 +95,11 @@ public class AIAvoidPlayer extends EntityAIBase implements
 	}
 
 	public void setActive() {
-		// 動作開始
+		
 		isActive = true;
 	}
 
-	// 実行可能フラグ
+	
 	@Override
 	public void setEnable(boolean pFlag) {
 		isEnable = pFlag;

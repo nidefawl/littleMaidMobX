@@ -72,7 +72,7 @@ public class RenderDummy extends Render {
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity var1) {
-		// TODO 自動生成されたメソッド・スタブ
+		
 		return null;
 	}
 

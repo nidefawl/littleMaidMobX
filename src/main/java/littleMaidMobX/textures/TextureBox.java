@@ -4,42 +4,31 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-import littleMaidMobX.models.IModelCaps;
-import littleMaidMobX.models.ModelCapsHelper;
-import littleMaidMobX.models.ModelMultiBase;
+import littleMaidMobX.model.ModelMultiBase;
+import littleMaidMobX.model.caps.IModelCaps;
+import littleMaidMobX.model.caps.ModelCapsHelper;
+import littleMaidMobX.registry.ModelManager;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 public class TextureBox extends TextureBoxBase {
 
-	/**
-	 * テクスチャパックの名称、モデル指定詞の前までの文字列。
-	 */
+	
 	public String packegeName;
-	/**
-	 * テクスチャファイルのファイル名リスト。
-	 */
+	
 	public Map<Integer, ResourceLocation> textures;
-	/**
-	 * アーマーファイルのファイル名リスト。
-	 */
+	
 	public Map<String, Map<Integer, ResourceLocation>> armors;
-	/**
-	 * モデル指定詞
-	 */
+	
 	public String modelName;
-	/**
-	 * マルチモデルクラス
-	 */
+	
 	public ModelMultiBase[] models;
 	/**
 	 * pName, pTextureDir, pClassPrefix
 	 */
 	public String[] textureDir;
-	/**
-	 * テクスチャの格納されているパックの名前（モデルに関係なし）
-	 */
+	
 	public String fileName;
 
 
@@ -73,24 +62,21 @@ public class TextureBox extends TextureBoxBase {
 		isUpdateSize = (models != null && models[0] != null) ? ModelCapsHelper.getCapsValueBoolean(models[0], IModelCaps.caps_isUpdateSize) : false;
 	}
 
-	/**
-	 * テクスチャのフルパスを返す。
-	 * 登録インデックスが無い場合はNULLを返す。
-	 */
+	
 	public ResourceLocation getTextureName(int pIndex) {
 		if (textures.containsKey(pIndex)) {
 			return textures.get(pIndex);
-		} else if (pIndex >= TextureManager.tx_eyecontract && pIndex < (16 + TextureManager.tx_eyecontract)) {
-			return getTextureName(TextureManager.tx_oldeye);
-		} else if (pIndex >= TextureManager.tx_eyewild && pIndex < (16 + TextureManager.tx_eyewild)) {
-			return getTextureName(TextureManager.tx_oldeye);
+		} else if (pIndex >= ModelManager.tx_eyecontract && pIndex < (16 + ModelManager.tx_eyecontract)) {
+			return getTextureName(ModelManager.tx_oldeye);
+		} else if (pIndex >= ModelManager.tx_eyewild && pIndex < (16 + ModelManager.tx_eyewild)) {
+			return getTextureName(ModelManager.tx_oldeye);
 		}
 		return null;
 	}
 
 	public ResourceLocation getArmorTextureName(int pIndex, ItemStack itemstack) {
-		// indexは0x40,0x50番台
-		// lightも追加
+		
+		
 		if (armors.isEmpty() || itemstack == null) return null;
 		if (!(itemstack.getItem() instanceof ItemArmor)) return null;
 		
@@ -99,19 +85,19 @@ public class TextureBox extends TextureBoxBase {
 			l = (10 * itemstack.getItemDamage() / itemstack.getMaxDamage());
 		}
 		
-		// 不具合修正
-		// 他MODの影響と思われるが、インデックスがarmorFilenamePrefixのサイズをオーバーしクラッシュすることがあるので丸める
+		
+		
 		// http://forum.minecraftuser.jp/viewtopic.php?f=13&t=23347&start=160#p211172
 		int renderIndex = ((ItemArmor)itemstack.getItem()).renderIndex;
-		if(renderIndex >= TextureManager.armorFilenamePrefix.length && TextureManager.armorFilenamePrefix.length > 0)
+		if(renderIndex >= ModelManager.armorFilenamePrefix.length && ModelManager.armorFilenamePrefix.length > 0)
 		{
-			renderIndex = renderIndex % TextureManager.armorFilenamePrefix.length;
+			renderIndex = renderIndex % ModelManager.armorFilenamePrefix.length;
 		}
 		
-		return getArmorTextureName(pIndex, TextureManager.armorFilenamePrefix[renderIndex], l);
+		return getArmorTextureName(pIndex, ModelManager.armorFilenamePrefix[renderIndex], l);
 	}
 	public ResourceLocation getArmorTextureName(int pIndex, String pArmorPrefix, int pDamage) {
-		// indexは0x40,0x50番台
+		
 		if (armors.isEmpty() || pArmorPrefix == null) return null;
 		
 		Map<Integer, ResourceLocation> m = armors.get(pArmorPrefix);
@@ -131,9 +117,7 @@ public class TextureBox extends TextureBoxBase {
 		return ls;
 	}
 
-	/**
-	 * 契約色の有無をビット配列にして返す
-	 */
+	
 	@Override
 	public int getContractColorBits() {
 		if (contractColor == -1) {
@@ -147,15 +131,13 @@ public class TextureBox extends TextureBoxBase {
 		}
 		return contractColor;
 	}
-	/**
-	 * 野生色の有無をビット配列にして返す
-	 */
+	
 	@Override
 	public int getWildColorBits() {
 		if (wildColor == -1) {
 			int li = 0;
 			for (Integer i : textures.keySet()) {
-				if (i >= TextureManager.tx_wild && i <= (TextureManager.tx_wild + 0x0f)) {
+				if (i >= ModelManager.tx_wild && i <= (ModelManager.tx_wild + 0x0f)) {
 					li |= 1 << (i & 0x0f);
 				}
 			}
@@ -169,7 +151,7 @@ public class TextureBox extends TextureBoxBase {
 	}
 
 	public boolean hasColor(int pIndex, boolean pContract) {
-		return textures.containsKey(pIndex + (pContract ? 0 : TextureManager.tx_wild));
+		return textures.containsKey(pIndex + (pContract ? 0 : ModelManager.tx_wild));
 	}
 
 	public boolean hasArmor() {
@@ -221,12 +203,12 @@ public class TextureBox extends TextureBoxBase {
 		}
 		boolean lflag = false;
 		switch ((pIndex & 0xfff0)) {
-		case TextureManager.tx_armor1:
-		case TextureManager.tx_armor2:
-		case TextureManager.tx_armor1light:
-		case TextureManager.tx_armor2light:
-		case TextureManager.tx_oldarmor1:
-		case TextureManager.tx_oldarmor2:
+		case ModelManager.tx_armor1:
+		case ModelManager.tx_armor2:
+		case ModelManager.tx_armor1light:
+		case ModelManager.tx_armor2light:
+		case ModelManager.tx_oldarmor1:
+		case ModelManager.tx_oldarmor2:
 			ls = pLocation.substring(pLocation.lastIndexOf("/") + 1, pLocation.lastIndexOf("_"));
 			Map<Integer, ResourceLocation> lmap;
 			if (armors.containsKey(ls)) {

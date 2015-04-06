@@ -9,13 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-/**
- * コンフィグファイルの保存用。<br>
- * 渡されたClass名称と同名のConfigファイルを操作する。<br>
- * 対象となるFieldはStaticでPrivateではないこと、「cfg_」で始まる名称であること。<br>
- * 対象となる型はint、float、double、boolean、string。<br>
- * cfg_commentは予約変数String[]型でコメントを記述する。<br>
- */
+
 public class Config {
 
 	public static File configDir;
@@ -26,18 +20,12 @@ public class Config {
 	public static String cfg_tests = "test string";
 
 
-	/**
-	 * 初期化。
-	 */
+	
 	public static void init() {
 		configDir = new File(FileManager.minecraftDir, "config");
 	}
 
-	/**
-	 * Configファイルを返す。
-	 * @param pClass
-	 * @return
-	 */
+	
 	protected static File getConfigFile(Class pClass) {
 		return new File(configDir, pClass.getSimpleName() + ".cfg");
 	}
@@ -59,10 +47,7 @@ public class Config {
 		return llist;
 	}
 
-	/**
-	 * cfgファイルに値を保存する。
-	 * @param pClass
-	 */
+	
 	public static void saveConfig(Class pClass) {
 		File lfile = getConfigFile(pClass);
 		List<Field> llist = getConfigFields(pClass);
@@ -139,10 +124,7 @@ public class Config {
 		}
 	}
 
-	/**
-	 * MLPropの標準動作に近い動き
-	 * @param pClass
-	 */
+	
 	public static void checkConfig(Class pClass) {
 		loadConfig(pClass);
 		saveConfig(pClass);

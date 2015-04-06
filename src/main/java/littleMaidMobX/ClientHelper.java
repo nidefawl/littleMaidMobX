@@ -2,13 +2,13 @@ package littleMaidMobX;
 
 import java.util.Random;
 
-import littleMaidMobX.models.ModelBase;
-import littleMaidMobX.models.ModelBoxBase;
-import littleMaidMobX.models.ModelRenderer;
-import littleMaidMobX.network.NetConstants;
+import littleMaidMobX.model.ModelBase;
 import littleMaidMobX.network.Message;
+import littleMaidMobX.network.NetConstants;
 import littleMaidMobX.network.Network;
-import littleMaidMobX.textures.TextureManager;
+import littleMaidMobX.registry.ModelManager;
+import littleMaidMobX.render.model.ModelBoxBase;
+import littleMaidMobX.render.model.ModelRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
@@ -27,37 +27,10 @@ public class ClientHelper {
 
 //	public static ItemRenderer itemRenderer;
 
-	/**
-	 * 初期化時実行コード
-	 */
-/*
-	public static void init() {
-		try {
-			// TODO: バージョンアップ時には確認すること
-			List lresourcePacks = (List)ModLoader.getPrivateValue(Minecraft.class, Minecraft.getMinecraft(), 63);
-			lresourcePacks.add(new ModOldResourcePack(mod_MMMLib.class));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	
 
-	public static void setItemRenderer() {
-		if (itemRenderer == null) {
-			itemRenderer = new ItemRenderer(Helper.mc);
-		}
-		if (!(Helper.mc.entityRenderer.itemRenderer instanceof ItemRenderer)) {
-			mod_LMM_LittleMaidMobX.Debug("replace entityRenderer.itemRenderer.");
-			Helper.mc.entityRenderer.itemRenderer = itemRenderer;
-		}
-		if (!(RenderManager.instance.itemRenderer instanceof ItemRenderer)) {
-			mod_LMM_LittleMaidMobX.Debug("replace RenderManager.itemRenderer.");
-			RenderManager.instance.itemRenderer = itemRenderer;
-		}
-		// GUIの表示を変えるには常時監視が必要？
-	}
-*/
 	public static void clientCustomPayload(Message var2) {
-		// クライアント側の特殊パケット受信動作
+		
 		byte lmode = var2.data[0];
 		int leid = 0;
 		Entity lentity = null;
@@ -70,12 +43,12 @@ public class ClientHelper {
 		
 		switch (lmode) {
 		case NetConstants.Client_SetTextureIndex:
-			// 問い合わせたテクスチャパックの管理番号を受け取る
-			TextureManager.instance.reciveFormServerSetTexturePackIndex(var2.data);
+			
+			ModelManager.instance.reciveFormServerSetTexturePackIndex(var2.data);
 			break;
 		case NetConstants.Client_SetTexturePackName:
-			// 管理番号に登録されているテクスチャパックの情報を受け取る
-			TextureManager.instance.reciveFromServerSetTexturePackName(var2.data);
+			
+			ModelManager.instance.reciveFromServerSetTexturePackName(var2.data);
 			break;
 		}
 	}
@@ -105,11 +78,7 @@ public class ClientHelper {
 		return Minecraft.getMinecraft().isIntegratedServerRunning();
 	}
 
-	/**
-	 * Duoを使う時は必ずRender側のこの関数を置き換えること。
-	 * @param par1EntityLiving
-	 * @param par2
-	 */
+	
 	public static void renderArrowsStuckInEntity(EntityLivingBase par1EntityLiving, float par2,
 			Render pRender, ModelBase pModel) {
 		int lacount = par1EntityLiving.getArrowCountInEntity();

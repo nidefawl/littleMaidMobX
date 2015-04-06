@@ -29,7 +29,7 @@ public class AIHurtByTarget extends EntityAIHurtByTarget {
 	@Override
 	public boolean shouldExecute() {
 		if (theMaid.isContract() && !theMaid.isBlocking() && theMaid.mstatMasterEntity != null) {
-			// フェンサー系は主に対する攻撃に反応
+			
 			EntityLivingBase lentity = theMaid.mstatMasterEntity.getAITarget();
 			if (isSuitableTarget(lentity, false)) {
 				theMaid.setRevengeTarget(lentity);
@@ -47,22 +47,22 @@ public class AIHurtByTarget extends EntityAIHurtByTarget {
 	@Override
 	public void updateTask() {
 		super.updateTask();
-		String s1 = taskOwner.getAITarget() == null ? "Null" : taskOwner.getAITarget().getClass().toString();
-		String s2 = taskOwner.getAttackTarget() == null ? "Null" : taskOwner.getAttackTarget().getClass().toString();
+//		String s1 = taskOwner.getAITarget() == null ? "Null" : taskOwner.getAITarget().getClass().toString();
+//		String s2 = taskOwner.getAttackTarget() == null ? "Null" : taskOwner.getAttackTarget().getClass().toString();
 //		System.out.println(String.format("ID:%d, target:%s, attack:%s", taskOwner.entityId, s1, s2));
 		
-		// 殴られた仕返し
+		
 		EntityLivingBase leliving = taskOwner.getAITarget();
 		if (leliving != null && leliving != taskOwner.getAttackTarget()) {
 			taskOwner.setAttackTarget(null);
-			System.out.println(String.format("ID:%d, ChangeTarget.", taskOwner.getEntityId()));
+//			System.out.println(String.format("ID:%d, ChangeTarget.", taskOwner.getEntityId()));
 		}
 		
 	}
 	
 	@Override
 	protected boolean isSuitableTarget(EntityLivingBase par1EntityLiving, boolean par2) {
-		// LMM用にカスタム
+		
 		if (par1EntityLiving == null) {
 			return false;
 		}
@@ -87,17 +87,17 @@ public class AIHurtByTarget extends EntityAIHurtByTarget {
 			}
 		}
 		
-		// 基点から一定距離離れている場合も攻撃しない
+		
 		if (!taskOwner.isWithinHomeDistance(MathHelper.floor_double(par1EntityLiving.posX), MathHelper.floor_double(par1EntityLiving.posY), MathHelper.floor_double(par1EntityLiving.posZ))) {
 			return false;
 		}
 		
-		// ターゲットが見えない
+		
 		if (shouldCheckSight && !taskOwner.getEntitySenses().canSee(par1EntityLiving)) {
 			return false;
 		}
 		
-		// 攻撃中止判定？
+		
 		if (this.field_75303_a) {
 			if (--this.field_75302_c <= 0) {
 				this.field_75301_b = 0;

@@ -2,9 +2,9 @@ package littleMaidMobX.render;
 
 import littleMaidMobX.ClientHelper;
 import littleMaidMobX.LittleMaidMobX;
-import littleMaidMobX.models.IModelCaps;
-import littleMaidMobX.models.ModelBaseDuo;
-import littleMaidMobX.models.ModelBaseSolo;
+import littleMaidMobX.model.caps.IModelCaps;
+import littleMaidMobX.render.model.ModelMCArmor;
+import littleMaidMobX.render.model.ModelMCMain;
 import littleMaidMobX.textures.ITextureEntity;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
@@ -17,18 +17,18 @@ import org.lwjgl.opengl.GL11;
 
 public class RenderModelMulti extends RenderLiving {
 
-	public ModelBaseSolo modelMain;
-	public ModelBaseDuo modelFATT;
+	public ModelMCMain modelMain;
+	public ModelMCArmor modelFATT;
 	public IModelCaps fcaps;
 
 
 
 	public RenderModelMulti(float pShadowSize) {
 		super(null, pShadowSize);
-		modelFATT = new ModelBaseDuo(this);
+		modelFATT = new ModelMCArmor(this);
 		modelFATT.isModelAlphablend = LittleMaidMobX.cfg_isModelAlphaBlend;
 		modelFATT.isRendering = true;
-		modelMain = new ModelBaseSolo(this);
+		modelMain = new ModelMCMain(this);
 		modelMain.isModelAlphablend = LittleMaidMobX.cfg_isModelAlphaBlend;
 		modelMain.capsLink = modelFATT;
 		mainModel = modelMain;
@@ -36,12 +36,12 @@ public class RenderModelMulti extends RenderLiving {
 	}
 
 	protected int showArmorParts(EntityLivingBase par1EntityLiving, int par2, float par3) {
-		// アーマーの表示設定
+		
 		modelFATT.renderParts = par2;
 		modelFATT.renderCount = 0;
 		ItemStack is = par1EntityLiving.getEquipmentInSlot(par2 + 1);
 		if (is != null && is.stackSize > 0) {
-			modelFATT.showArmorParts(par2);
+			modelFATT.showArmorParts(null, par2);
 			return is.isItemEnchanted() ? 15 : 1;
 		}
 		
@@ -81,8 +81,8 @@ public class RenderModelMulti extends RenderLiving {
 		modelFATT.setEntityCaps(pEntityCaps);
 		modelMain.setRender(this);
 		modelFATT.setRender(this);
-		modelMain.showAllParts();
-		modelFATT.showAllParts();
+		modelMain.showAllParts(pEntityCaps);
+		modelFATT.showAllParts(pEntityCaps);
 		modelMain.isAlphablend = true;
 		modelFATT.isAlphablend = true;
 		modelMain.renderCount = 0;
@@ -105,7 +105,7 @@ public class RenderModelMulti extends RenderLiving {
 	public void renderModelMulti(EntityLiving par1EntityLiving, double par2,
 			double par4, double par6, float par8, float par9, IModelCaps pEntityCaps) {
 		setModelValues(par1EntityLiving, par2, par4, par6, par8, par9, pEntityCaps);
-		// TODO:1.6.2-MCP805 なぜか変なとこに飛んでループする
+		
 //		super.func_130000_a(par1EntityLiving, par2, par4, par6, par8, par9);
 		super.doRender(par1EntityLiving, par2, par4, par6, par8, par9);
 	}
@@ -120,8 +120,8 @@ public class RenderModelMulti extends RenderLiving {
 	@Override
 	protected void func_110827_b(EntityLiving par1EntityLiving, double par2,
 			double par4, double par6, float par8, float par9) {
-		// 縄の位置のオフセット
-		// TODO：MCP-804対策
+		
+		
 		float lf = 0F;
 		if (modelMain.model != null && fcaps != null) {
 			lf = modelMain.model.getLeashOffset(fcaps);
@@ -137,13 +137,13 @@ public class RenderModelMulti extends RenderLiving {
 		} else {
 			modelMain.setArmorRendering(false);
 		}
-		// アイテムのレンダリング位置を獲得するためrenderを呼ぶ必要がある
+		
 		mainModel.render(par1EntityLiving, par2, par3, par4, par5, par6, par7);
 	}
 
 	@Override
 	protected void renderEquippedItems(EntityLivingBase par1EntityLiving, float par2) {
-		// ハードポイントの描画
+		
 		modelMain.renderItems(par1EntityLiving, this);
 		renderArrowsStuckInEntity(par1EntityLiving, par2);
 	}
@@ -155,7 +155,7 @@ public class RenderModelMulti extends RenderLiving {
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity var1) {
-		// テクスチャリソースを返すところだけれど、基本的に使用しない。
+		
 		return null;
 	}
 

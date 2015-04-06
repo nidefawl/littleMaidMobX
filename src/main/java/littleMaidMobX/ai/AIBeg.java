@@ -14,7 +14,7 @@ public class AIBeg extends EntityAIBase {
 	protected World worldObj;
 	protected float effectiveRange;
 	protected double effectiveRangeSq;
-	protected int field_48347_e; // 興味を持っている時間？
+	protected int field_48347_e; 
 
 	public AIBeg(EntityLittleMaid pentityLittlemaid, float par2) {
 		littleMaid = pentityLittlemaid;
@@ -76,7 +76,7 @@ public class AIBeg extends EntityAIBase {
 
 	@Override
 	public void updateTask() {
-		// 目で殺す
+		
 		littleMaid.getLookHelper().setLookPositionWithEntity(targetPlayer, 10F,
 				littleMaid.getVerticalFaceSpeed());
 		if (littleMaid.getNavigator().noPath()) {

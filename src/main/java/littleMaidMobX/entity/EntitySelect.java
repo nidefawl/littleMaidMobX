@@ -2,13 +2,13 @@ package littleMaidMobX.entity;
 
 import java.util.Map;
 
-import littleMaidMobX.models.IModelCaps;
-import littleMaidMobX.render.EntityCapsBase;
+import littleMaidMobX.model.caps.EntityCapsBase;
+import littleMaidMobX.model.caps.IModelCaps;
+import littleMaidMobX.registry.ModelManager;
 import littleMaidMobX.textures.ITextureEntity;
 import littleMaidMobX.textures.TextureBox;
 import littleMaidMobX.textures.TextureBoxBase;
 import littleMaidMobX.textures.TextureData;
-import littleMaidMobX.textures.TextureManager;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -39,11 +39,11 @@ public class EntitySelect extends EntityLiving implements IModelCaps, ITextureEn
 
 	@Override
 	protected void entityInit() {
-		// Select用だから、これ別にいらんけどな。
+		
 		super.entityInit();
 		// color
 		dataWatcher.addObject(19, Integer.valueOf(0));
-		// 20:選択テクスチャインデックス
+		
 		dataWatcher.addObject(20, Integer.valueOf(0));
 	}
 
@@ -87,7 +87,7 @@ public class EntitySelect extends EntityLiving implements IModelCaps, ITextureEn
 		dataWatcher.updateObject(20, (Integer.valueOf(pIndex[0]) & 0xffff) | ((Integer.valueOf(pIndex[1]) & 0xffff) << 16));
 //		textureBox[0] = MMM_TextureManager.instance.getTextureBoxServer(textureIndex[0]);
 //		textureBox[1] = MMM_TextureManager.instance.getTextureBoxServer(textureIndex[1]);
-		// サイズの変更
+		
 //		setSize(textureBox[0].getWidth(entityCaps), textureBox[0].getHeight(entityCaps));
 	}
 
@@ -98,16 +98,14 @@ public class EntitySelect extends EntityLiving implements IModelCaps, ITextureEn
 //		textureBox[0] = pTextureBox[0];
 //		textureBox[1] = pTextureBox[1];
 //		setTextureNames();
-//		// 身長変更用
+
 //		setSize(textureBox[0].getWidth(null), textureBox[0].getHeight(null));
 //		setPosition(posX, posY, posZ);
-		// モデルの初期化
+		
 //		((MMM_TextureBox)textureBox[0]).models[0].setCapsValue(MMM_IModelCaps.caps_changeModel, this);
 	}
 
-	/**
-	 * テクスチャのファイル名を獲得
-	 */
+	
 	public void setTextureNames() {
 		textureData.setTextureNames();
 //		textures[0][0] = ((MMM_TextureBox)textureBox[0]).getTextureName(color + (contract ? 0 : MMM_TextureManager.tx_wild));
@@ -137,11 +135,11 @@ public class EntitySelect extends EntityLiving implements IModelCaps, ITextureEn
 		textureData.textureModel[2] = null;
 		
 		if (textureData.textureBox[0] instanceof TextureBox) {
-			int lc = (textureData.color & 0x00ff) + (textureData.contract ? 0 : TextureManager.tx_wild);
+			int lc = (textureData.color & 0x00ff) + (textureData.contract ? 0 : ModelManager.tx_wild);
 			lbox = (TextureBox)textureData.textureBox[0];
 			if (lbox.hasColor(lc)) {
 				textureData.textures[0][0] = lbox.getTextureName(lc);
-				lc = (textureData.color & 0x00ff) + (textureData.contract ? TextureManager.tx_eyecontract : TextureManager.tx_eyewild);
+				lc = (textureData.color & 0x00ff) + (textureData.contract ? ModelManager.tx_eyecontract : ModelManager.tx_eyewild);
 				textureData.textures[0][1] = lbox.getTextureName(lc);
 				textureData.textureModel[0] = lbox.models[0];
 			}
@@ -149,10 +147,10 @@ public class EntitySelect extends EntityLiving implements IModelCaps, ITextureEn
 		if (textureData.textureBox[1] instanceof TextureBox) {
 			lbox = (TextureBox)textureData.textureBox[1];
 			for (int i = 0; i < 4; i++) {
-				textureData.textures[1][i] = lbox.getArmorTextureName(TextureManager.tx_armor1, pArmorName, 0);
-				textureData.textures[2][i] = lbox.getArmorTextureName(TextureManager.tx_armor2, pArmorName, 0);
-				textureData.textures[3][i] = lbox.getArmorTextureName(TextureManager.tx_armor1light, pArmorName, 0);
-				textureData.textures[4][i] = lbox.getArmorTextureName(TextureManager.tx_armor2light, pArmorName, 0);
+				textureData.textures[1][i] = lbox.getArmorTextureName(ModelManager.tx_armor1, pArmorName, 0);
+				textureData.textures[2][i] = lbox.getArmorTextureName(ModelManager.tx_armor2, pArmorName, 0);
+				textureData.textures[3][i] = lbox.getArmorTextureName(ModelManager.tx_armor1light, pArmorName, 0);
+				textureData.textures[4][i] = lbox.getArmorTextureName(ModelManager.tx_armor2light, pArmorName, 0);
 			}
 			textureData.textureModel[1] = lbox.models[1];
 			textureData.textureModel[2] = lbox.models[2];
@@ -245,7 +243,7 @@ public class EntitySelect extends EntityLiving implements IModelCaps, ITextureEn
 
 	@Override
 	public int getBrightnessForRender(float par1) {
-		// 一定の明るさを返す
+		
 		return 0x00f000f0;
 	}
 

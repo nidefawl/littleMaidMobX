@@ -48,7 +48,7 @@ public class ContainerTriggerSelect extends ContainerCreative {
 	}
 
 	private void initAllSelections() {
-		// コンテナ表示用アイテムの設定
+		
 		this.itemList.clear();
 
 		for (Object o : Item.itemRegistry.getKeys())
@@ -60,7 +60,7 @@ public class ContainerTriggerSelect extends ContainerCreative {
 			}
 		}
 
-		// List 生成 (ソート用)
+		
 		Comparator cmp = new Comparator<ItemStack>()
 			{
 				public int compare(ItemStack i1, ItemStack i2)
@@ -95,7 +95,7 @@ public class ContainerTriggerSelect extends ContainerCreative {
 
 	@Override
 	public void scrollTo(float f) {
-		// スクロールポジション
+		
 		int i = (itemList.size() / 8 - 5) + 1;
 		int j = (int) ((double) (f * (float) i) + 0.5D);
 		if (j < 0) {
@@ -118,7 +118,7 @@ public class ContainerTriggerSelect extends ContainerCreative {
 	@Override
 	public ItemStack slotClick(int i, int j, int flag, EntityPlayer entityplayer) {
 		if (i >= 40) {
-			// セットされたアイテムを定義
+			
 			int lk = (i - 40) + weaponOffset * 8;
 			for (; weaponSelect.size() <= lk + 7;) {
 				weaponSelect.add(null);
@@ -136,7 +136,7 @@ public class ContainerTriggerSelect extends ContainerCreative {
 
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int i) {
-		// Shiftクリック時の反応
+		
 		ItemStack itemstack = null;
 		Slot slot = (Slot) inventorySlots.get(i);
 		if (slot != null && slot.getHasStack()) {
@@ -153,16 +153,16 @@ public class ContainerTriggerSelect extends ContainerCreative {
 
 	@Override
 	protected boolean mergeItemStack(ItemStack itemstack, int i, int j, boolean flag) {
-		// itemstack以外は無効
+		
 		boolean flag1 = false;
 		int k = 0;
 		
-		// 同じのがあったときは追加しない
+		
 		while (itemstack.stackSize > 0 && k < weaponSelect.size()) {
 			ItemStack itemstack1 = weaponSelect.get(k);
 			if (itemstack1 != null) {
 				if (itemstack1.isItemEqual(itemstack)) {
-					// 同一アイテムである
+					
 					flag1 = true;
 					break;
 				}
@@ -191,7 +191,7 @@ public class ContainerTriggerSelect extends ContainerCreative {
 	}
 
 	public void setWeaponlist(float f) {
-		// スクロールポジション
+		
 		int i = (weaponSelect.size() / 8 - 4) + 1;
 		weaponOffset = (int) ((double) (f * (float) i) + 0.5D);
 		if (weaponOffset < 0) {

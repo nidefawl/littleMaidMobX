@@ -3,7 +3,7 @@ package littleMaidMobX.wrapper;
 import net.minecraft.client.renderer.tileentity.TileEntitySkullRenderer;
 import cpw.mods.fml.common.Loader;
 
-// バージョン差分吸収をおこなう。
+
 public class MinecraftClientWrapper
 {
 	private static final IClientVersion instance = getInstance();

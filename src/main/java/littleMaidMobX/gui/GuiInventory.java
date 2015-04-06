@@ -95,7 +95,7 @@ public class GuiInventory extends GuiContainer {
 				"littleMaidMob.mode.".concat(entitylittlemaid.getMaidModeString())), 86, 61, 0x404040);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		
-		// キャラ
+		
 		int lj = 0;
 		int lk = 0;
 		GL11.glEnable(EXTRescaleNormal.GL_RESCALE_NORMAL_EXT);
@@ -136,7 +136,7 @@ public class GuiInventory extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j) {
-		// 背景
+		
 		ResourceLocation lrl = entitylittlemaid.textureData.getGUITexture();
 		if (lrl == null) {
 			lrl = fguiTex;
@@ -340,14 +340,14 @@ public class GuiInventory extends GuiContainer {
 		int ii = i - guiLeft;
 		int jj = j - guiTop;
 		if (ii > 25 && ii < 78 && jj > 7 && jj < 60) {
-			// ボタンの表示
+			
 			txbutton[0].visible = true;
 			txbutton[1].visible = true;
 			txbutton[2].visible = true;
 			txbutton[3].visible = true;
 			selectbutton.visible = true;
 			
-			// テクスチャ名称の表示
+			
 			GL11.glPushMatrix();
 			GL11.glTranslatef(i - ii, j - jj, 0.0F);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -394,23 +394,7 @@ public class GuiInventory extends GuiContainer {
 	@Override
 	protected void mouseClicked(int i, int j, int k) {
 		super.mouseClicked(i, j, k);
-/*
-		// 26,8-77,59
-		int ii = i - guiLeft;
-		int jj = j - guiTop;
-		
-		// TODO:メイドアセンブル画面を作る
-		if (ii > 25 && ii < 78 && jj > 7 && jj < 60) {
-			// 伽羅表示領域
-			if (Keyboard.isKeyDown(42) || Keyboard.isKeyDown(54)) {
-				// Shift+で逆周り
-				LMM_Client.setPrevTexturePackege(entitylittlemaid, k);
-			} else {
-				LMM_Client.setNextTexturePackege(entitylittlemaid, k);
-			}
-			LMM_Client.setTextureValue(entitylittlemaid);
-		}
-*/
+
 	}
 
 	@Override
@@ -458,7 +442,7 @@ public class GuiInventory extends GuiContainer {
 	}
 
 	private void displayDebuffEffects() {
-		// ポーションエフェクトの表示
+		
 		int lx = guiLeft - 124;
 		int ly = guiTop;
 		Collection collection = entitylittlemaid.getActivePotionEffects();

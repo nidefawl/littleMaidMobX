@@ -31,13 +31,8 @@ public class Mode_Healer extends ModeBase {
 
 	@Override
 	public void init() {
-		// 登録モードの名称追加
-		/* langファイルに移動
-		ModLoader.addLocalization("littleMaidMob.mode.Healer", "Healer");
-		ModLoader.addLocalization("littleMaidMob.mode.F-Healer", "F-Healer");
-		ModLoader.addLocalization("littleMaidMob.mode.T-Healer", "T-Healer");
-		ModLoader.addLocalization("littleMaidMob.mode.D-Healer", "D-Healer");
-		*/
+		
+		
 	}
 
 	@Override
@@ -47,7 +42,7 @@ public class Mode_Healer extends ModeBase {
 		ltasks[0] = pDefaultMove;
 		ltasks[1] = new EntityAITasks(owner.aiProfiler);
 		
-		// 索敵系
+		
 		ltasks[1].addTask(1, new EntityAIHurtByTarget(owner, true));
 		owner.addMaidMode(ltasks, "Healer", mmode_Healer);
 	}
@@ -85,7 +80,7 @@ public class Mode_Healer extends ModeBase {
 			for (int i = 0; i < owner.maidInventory.getSizeInventory(); i++) {
 				ItemStack is = owner.maidInventory.getStackInSlot(i);
 				if (is == null) continue;
-				// 対象は食料かポーション
+				
 				if (is.getItem() instanceof ItemFood || (is.getItem() instanceof ItemPotion && Helper.hasEffect(is))) {
 					return i;
 				}
@@ -103,20 +98,20 @@ public class Mode_Healer extends ModeBase {
 	@Override
 	public void updateAITick(int pMode) {
 		if (pMode == mmode_Healer) {
-			// 近接した主に食物を突っ込む
+			
 			if (owner.getSwingStatusDominant().canAttack()) {
-				// 主の回復
+				
 				if (owner.isContractEX() && owner.mstatMasterDistanceSq < 16D
 						&& owner.mstatMasterEntity != null && owner.mstatMasterEntity.isEntityAlive()
 						&& owner.mstatMasterEntity instanceof EntityPlayer
 						&& owner.canEntityBeSeen(owner.mstatMasterEntity)) {
 					EntityPlayer lmaster = owner.mstatMasterEntity; 
 					int h = lmaster.getFoodStats().getFoodLevel();
-					// マスクドメイドは賢いな
+					
 					while (owner.isMaskedMaid()) {
-						// 主の状態に合わせてアイテムを選択
+						
 						if (lmaster.getHealth() < 9F) {
-							// HPが減っているときはポーションを使う
+							
 							int j = owner.maidInventory.getInventorySlotContainItemPotion(false, Potion.heal.id, lmaster.isEntityUndead());
 							if (j > -1) {
 								owner.setEquipItem(j);
@@ -124,7 +119,7 @@ public class Mode_Healer extends ModeBase {
 							}
 						} 
 						if (h < 18) {
-							// 自然回復できない腹具合なら食料
+							
 							int j = owner.maidInventory.getInventorySlotContainItemFood();
 							if (j > -1) {
 								owner.setEquipItem(j);
@@ -137,7 +132,7 @@ public class Mode_Healer extends ModeBase {
 					ItemStack itemstack1 = owner.maidInventory.getCurrentItem();
 					if (itemstack1 != null) {
 						if (itemstack1.getItem() instanceof ItemFood) {
-							// 食料を突っ込む
+							
 							if (h < 18) {
 								owner.setSwing(10, EnumSound.healing);
 								itemstack1 = itemstack1.onFoodEaten(owner.worldObj, lmaster);
@@ -151,7 +146,7 @@ public class Mode_Healer extends ModeBase {
 						}
 						else if (itemstack1.getItem() instanceof ItemPotion) {
 							boolean lswing = true;
-							// ポーションの効果が重複しないように使う
+							
 							List list = ((ItemPotion)itemstack1.getItem()).getEffects(itemstack1);
 							if (list != null) {
 								PotionEffect potioneffect;

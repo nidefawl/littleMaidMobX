@@ -11,9 +11,7 @@ import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 
-/**
- * 独自基準としてモード定数は0x0080は平常、0x00c0は血まみれモードと区別。
- */
+
 public class Mode_Fencer extends ModeBase {
 
 	public static final int mmode_Fencer		= 0x0080;
@@ -31,21 +29,8 @@ public class Mode_Fencer extends ModeBase {
 
 	@Override
 	public void init() {
-		// 登録モードの名称追加
-		/* langファイルに移動
-		ModLoader.addLocalization("littleMaidMob.mode.Fencer", "Fencer");
-		ModLoader.addLocalization("littleMaidMob.mode.Fencer", "ja_JP", "護衛剣士");
-		ModLoader.addLocalization("littleMaidMob.mode.F-Fencer", "F-Fencer");
-		ModLoader.addLocalization("littleMaidMob.mode.F-Fencer", "ja_JP", "自由剣士");
-		ModLoader.addLocalization("littleMaidMob.mode.T-Fencer", "T-Fencer");
-		ModLoader.addLocalization("littleMaidMob.mode.D-Fencer", "D-Fencer");
-		ModLoader.addLocalization("littleMaidMob.mode.Bloodsucker", "Bloodsucker");
-		ModLoader.addLocalization("littleMaidMob.mode.Bloodsucker", "ja_JP", "血に飢えた冥土");
-		ModLoader.addLocalization("littleMaidMob.mode.F-Bloodsucker", "F-Bloodsucker");
-		ModLoader.addLocalization("littleMaidMob.mode.F-Bloodsucker", "ja_JP", "通魔冥土");
-		ModLoader.addLocalization("littleMaidMob.mode.T-Bloodsucker", "T-Bloodsucker");
-		ModLoader.addLocalization("littleMaidMob.mode.D-Bloodsucker", "D-Bloodsucker");
-		*/
+		
+		
 		TriggerSelect.appendTriggerItem(null, "Sword", "");
 		TriggerSelect.appendTriggerItem(null, "Axe", "");
 	}
@@ -116,19 +101,19 @@ public class Mode_Fencer extends ModeBase {
 		double lld;
 		ItemStack litemstack;
 		
-		// モードに応じた識別判定、速度優先
+		
 		switch (pMode) {
 		case mmode_Fencer : 
 			for (li = 0; li < owner.maidInventory.maxInventorySize; li++) {
 				litemstack = owner.maidInventory.getStackInSlot(li);
 				if (litemstack == null) continue;
 				
-				// 剣
+				
 				if (litemstack.getItem() instanceof ItemSword || TriggerSelect.checkWeapon(owner.getMaidMaster(), "Sword", litemstack)) {
 					return li;
 				}
 				
-				// 攻撃力な高いものを記憶する
+				
 				lld = 1;
 				try {
 					lld = Helper.getAttackVSEntity(litemstack);
@@ -146,12 +131,12 @@ public class Mode_Fencer extends ModeBase {
 				litemstack = owner.maidInventory.getStackInSlot(li);
 				if (litemstack == null) continue;
 				
-				// 斧
+				
 				if (litemstack.getItem() instanceof ItemAxe || TriggerSelect.checkWeapon(owner.getMaidMaster(), "Axe", litemstack)) {
 					return li;
 				}
 				
-				// 攻撃力な高いものを記憶する
+				
 				lld = 1;
 				try {
 					lld = Helper.getAttackVSEntity(litemstack);
@@ -171,7 +156,7 @@ public class Mode_Fencer extends ModeBase {
 
 	@Override
 	public boolean checkItemStack(ItemStack pItemStack) {
-		// 装備アイテムを回収
+		
 		return pItemStack.getItem() instanceof ItemSword || pItemStack.getItem() instanceof ItemAxe;
 	}
 

@@ -29,7 +29,7 @@ public class AIRestrictRain extends EntityAIBase implements
 		theEntity.getNavigator().setAvoidSun(false);
 	}
 
-	// 実行可能フラグ
+	
 	@Override
 	public void setEnable(boolean pFlag) {
 		isEnable = pFlag;

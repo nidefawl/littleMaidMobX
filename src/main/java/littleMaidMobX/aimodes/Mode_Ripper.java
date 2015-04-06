@@ -41,26 +41,8 @@ public class Mode_Ripper extends ModeBase {
 
 	@Override
 	public void init() {
-		// 登録モードの名称追加
-		/* langファイルに移動
-		ModLoader.addLocalization("littleMaidMob.mode.Ripper", "Ripper");
-		ModLoader.addLocalization("littleMaidMob.mode.F-Ripper", "F-Ripper");
-		ModLoader.addLocalization("littleMaidMob.mode.D-Ripper", "D-Ripper");
-		ModLoader.addLocalization("littleMaidMob.mode.T-Ripper", "T-Ripper");
-		ModLoader.addLocalization("littleMaidMob.mode.Ripper", "ja_JP", "毛狩り隊");
-		ModLoader.addLocalization("littleMaidMob.mode.F-Ripper", "ja_JP", "毛狩り隊");
-		ModLoader.addLocalization("littleMaidMob.mode.D-Ripper", "ja_JP", "毛狩り隊");
-		ModLoader.addLocalization("littleMaidMob.mode.T-Ripper", "ja_JP", "毛狩り隊");
-		ModLoader.addLocalization("littleMaidMob.mode.TNT-D", "TNT-D");
-		ModLoader.addLocalization("littleMaidMob.mode.F-TNT-D", "TNT-D");
-		ModLoader.addLocalization("littleMaidMob.mode.D-TNT-D", "TNT-D");
-		ModLoader.addLocalization("littleMaidMob.mode.T-TNT-D", "TNT-D");
-//		ModLoader.addLocalization("littleMaidMob.mode.TNT-D", "ja_JP", "TNT-D");
-		ModLoader.addLocalization("littleMaidMob.mode.Detonator", "Detonator");
-		ModLoader.addLocalization("littleMaidMob.mode.F-Detonator", "F-Detonator");
-		ModLoader.addLocalization("littleMaidMob.mode.D-Detonator", "D-Detonator");
-		ModLoader.addLocalization("littleMaidMob.mode.T-Detonator", "T-Detonator");
-		*/
+		
+		
 	}
 
 	@Override
@@ -137,7 +119,7 @@ public class Mode_Ripper extends ModeBase {
 
 	@Override
 	public void onUpdate(int pMode) {
-		// 自爆モード
+		
 		if (pMode == mmode_Detonator && owner.isEntityAlive()) {
 			if (timeSinceIgnited < 0) {
 				if (lastTimeSinceIgnited != timeSinceIgnited) {
@@ -149,20 +131,20 @@ public class Mode_Ripper extends ModeBase {
 			}
 			lastTimeSinceIgnited = timeSinceIgnited;
 			if (timeSinceIgnited > -1) {
-				// 最期の瞬間はセツナイ
+				
 				if (owner.isMovementCeased() || timeSinceIgnited > 22) {
 					owner.getLookHelper().setLookPositionWithEntity(owner.getMaidMasterEntity(), 40F, 40F);
 				}
 				LittleMaidMobX.Debug(String.format("ID:%d(%s)-dom:%d(%d)", owner.getEntityId(), owner.worldObj.isRemote ? "C" : "W", owner.maidDominantArm, owner.maidInventory.currentItem));
 				
 				if (owner.maidInventory.isItemExplord(owner.maidInventory.currentItem) && timeSinceIgnited++ > 30) {
-					// TODO:自爆威力を対応させたいけど無理ぽ？
+					
 					owner.maidInventory.decrStackSize(owner.maidInventory.currentItem, 1);
-					// インベントリをブチマケロ！
+					
 					owner.maidInventory.dropAllItems(true);
 					timeSinceIgnited = -1;
 					owner.setDead();
-					// Mobによる破壊の是非
+					
 //					boolean lflag = owner.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing");
 //					owner.worldObj.createExplosion(owner, owner.posX, owner.posY, owner.posZ, 3F, lflag);
 				}
@@ -211,7 +193,7 @@ public class Mode_Ripper extends ModeBase {
 		int li;
 		ItemStack litemstack;
 		
-		// モードに応じた識別判定、速度優先
+		
 		switch (pMode) {
 		case mmode_Ripper :
 		case mmode_TNTD :
@@ -219,7 +201,7 @@ public class Mode_Ripper extends ModeBase {
 				litemstack = owner.maidInventory.getStackInSlot(li);
 				if (litemstack == null) continue;
 				
-				// はさみ
+				
 				if (litemstack.getItem() instanceof ItemShears) {
 					return li;
 				}
@@ -227,7 +209,7 @@ public class Mode_Ripper extends ModeBase {
 			break;
 		case mmode_Detonator :
 			for (li = 0; li < owner.maidInventory.maxInventorySize; li++) {
-				// 爆発物
+				
 				if (owner.maidInventory.isItemExplord(li)) {
 					return li;
 				}
@@ -243,15 +225,15 @@ public class Mode_Ripper extends ModeBase {
 	@Override
 	public boolean attackEntityAsMob(int pMode, Entity pEntity) {
 		if (pMode == mmode_Detonator) {
-			// 通常殴り
+			
 			return false;
 		}
 		
 		if (owner.getSwingStatusDominant().canAttack()) {
 			ItemStack lis = owner.getCurrentEquippedItem();
 			if (pEntity instanceof EntityCreeper) {
-				// TODO:カットオフ
-				// なんでPrivateにかえたし
+				
+				
 				try {
 					lis.damageItem((Integer)ObfuscationReflectionHelper.getPrivateValue(EntityCreeper.class,
 							(EntityCreeper)pEntity, "field_70833_d", "timeSinceIgnited"), owner);
@@ -314,7 +296,7 @@ public class Mode_Ripper extends ModeBase {
 	}
 	
 	protected float setLittleMaidFlashTime(float f) {
-		// 爆発カウントダウン発光時間
+		
 		if (timeSinceIgnited > -1) {
 			return ((float)this.lastTimeSinceIgnited + (float)(this.timeSinceIgnited - this.lastTimeSinceIgnited) * f) / 28.0F;
 		} else { 
@@ -347,7 +329,7 @@ public class Mode_Ripper extends ModeBase {
 	
 	@Override
 	public boolean damageEntity(int pMode, DamageSource par1DamageSource, float par2) {
-		// 起爆
+		
 		if (pMode == mmode_Detonator && owner.maidInventory.isItemExplord(owner.getCurrentEquippedItem())) {
 			if (timeSinceIgnited == -1) {
 				owner.playSound("random.fuse", 1.0F, 0.5F);

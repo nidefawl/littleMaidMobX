@@ -27,17 +27,11 @@ import net.minecraft.world.Explosion;
 
 public class InventoryLittleMaid extends InventoryPlayer {
 
-	/**
-	 * 最大インベントリ数
-	 */
+	
 	public static final int maxInventorySize = 18;
-	/**
-	 * オーナー
-	 */
+	
 	public EntityLittleMaid entityLittleMaid;
-	/**
-	 * スロット変更チェック用
-	 */
+	
 	public ItemStack prevItems[];
 
 	public InventoryLittleMaid(EntityLittleMaid par1EntityLittleMaid) {
@@ -79,7 +73,7 @@ public class InventoryLittleMaid extends InventoryPlayer {
 
 	@Override
 	public int getSizeInventory() {
-		// 一応
+		
 		return mainInventory.length + armorInventory.length;
 	}
 
@@ -110,13 +104,13 @@ public class InventoryLittleMaid extends InventoryPlayer {
 
 	@Override
 	public int getTotalArmorValue() {
-		// 身に着けているアーマーの防御力の合算
-		// 頭部以外
+		
+		
 		ItemStack lis = armorInventory[3];
 		armorInventory[3] = null;
 		// int li = super.getTotalArmorValue() * 20 / 17;
 		int li = super.getTotalArmorValue();
-		// 兜分の補正
+		
 		for (int lj = 0; lj < armorInventory.length; lj++) {
 			if (armorInventory[lj] != null
 					&& armorInventory[lj].getItem() instanceof ItemArmor) {
@@ -129,40 +123,19 @@ public class InventoryLittleMaid extends InventoryPlayer {
 
 	@Override
 	public void damageArmor(float pDamage) {
-		// 装備アーマーに対するダメージ
-		// 頭部は除外
+		
+		
 		ItemStack lis = armorInventory[3];
 		armorInventory[3] = null;
 		super.damageArmor(pDamage);
 		armorInventory[3] = lis;
 	}
-/*
-	@Override
-	public int getDamageVsEntity(Entity entity) {
-		return getDamageVsEntity(entity, currentItem);
-	}
 
-	public int getDamageVsEntity(Entity entity, int index) {
-		if (index < 0 || index >= getSizeInventory()) return 1;
-		ItemStack itemstack = getStackInSlot(index);
-		if (itemstack != null) {
-			if (itemstack.getItem() instanceof ItemAxe) {
-				// アックスの攻撃力を補正
-				return itemstack.getDamageVsEntity(entity) * 3 / 2 + 1;
-
-			} else {
-				return itemstack.getDamageVsEntity(entity);
-			}
-		} else {
-			return 1;
-		}
-	}
-*/
 	public void dropAllItems(boolean detonator) {
-		// インベントリをブチマケロ！
+		
 		Explosion lexp = null;
 		if (detonator) {
-			// Mobによる破壊の是非
+			
 			lexp = new Explosion(entityLittleMaid.worldObj, entityLittleMaid,
 					entityLittleMaid.posX, entityLittleMaid.posY, entityLittleMaid.posZ, 3F);
 			lexp.isFlaming = false;
@@ -176,7 +149,7 @@ public class InventoryLittleMaid extends InventoryPlayer {
 				if (detonator && isItemExplord(i)) {
 					Item j = it.getItem();
 					for (int l = 0; l < it.stackSize; l++) {
-						// 爆薬ぶちまけ
+						
 						((BlockTNT)Block.getBlockFromItem(j)).onBlockDestroyedByExplosion(
 								entityLittleMaid.worldObj,
 								MathHelper.floor_double(entityLittleMaid.posX)
@@ -226,9 +199,7 @@ public class InventoryLittleMaid extends InventoryPlayer {
 		return super.addItemStackToInventory(par1ItemStack);
 	}
 
-	/**
-	 * 頭部の追加アイテムを返す。
-	 */
+	
 	public ItemStack getHeadMount() {
 		return mainInventory[mainInventory.length - 1];
 	}
@@ -240,7 +211,7 @@ public class InventoryLittleMaid extends InventoryPlayer {
 	}
 
 	public int getInventorySlotContainItem(Item item) {
-		// 指定されたアイテムIDの物を持っていれば返す
+		
 		for (int j = 0; j < mainInventory.length; j++) {
 			if (mainInventory[j] != null && mainInventory[j].getItem() == item) {
 				return j;
@@ -251,7 +222,7 @@ public class InventoryLittleMaid extends InventoryPlayer {
 	}
 
 	public int getInventorySlotContainItem(Class itemClass) {
-		// 指定されたアイテムクラスの物を持っていれば返す
+		
 		for (int j = 0; j < mainInventory.length; j++) {
 			// if (mainInventory[j] != null &&
 			// mainInventory[j].getItem().getClass().isAssignableFrom(itemClass))
@@ -266,7 +237,7 @@ public class InventoryLittleMaid extends InventoryPlayer {
 	}
 
 	protected int getInventorySlotContainItemAndDamage(Item item, int damege) {
-		// とダメージ値
+		
 		for (int i = 0; i < mainInventory.length; i++) {
 			if (mainInventory[i] != null && mainInventory[i].getItem() == item
 					&& mainInventory[i].getItemDamage() == damege) {
@@ -278,19 +249,19 @@ public class InventoryLittleMaid extends InventoryPlayer {
 	}
 
 	protected ItemStack getInventorySlotContainItemStack(Item item) {
-		// いらんかも？
+		
 		int j = getInventorySlotContainItem(item);
 		return j > -1 ? mainInventory[j] : null;
 	}
 
 	protected ItemStack getInventorySlotContainItemStackAndDamege(Item item, int damege) {
-		// いらんかも？
+		
 		int j = getInventorySlotContainItemAndDamage(item, damege);
 		return j > -1 ? mainInventory[j] : null;
 	}
 
 	public int getInventorySlotContainItemFood() {
-		// インベントリの最初の食料を返す
+		
 		for (int j = 0; j < mainInventory.length; j++) {
 			ItemStack mi = mainInventory[j];
 			if (mi != null && mi.getItem() instanceof ItemFood) {
@@ -303,15 +274,15 @@ public class InventoryLittleMaid extends InventoryPlayer {
 	}
 
 	public int getSmeltingItem() {
-		// 調理可能アイテムを返す
+		
 		for (int i = 0; i < mainInventory.length; i++) {
 			if (isItemSmelting(i) && i != currentItem) {
 				ItemStack mi = mainInventory[i];
 				if (mi.getMaxDamage() > 0 && mi.getItemDamage() == 0) {
-					// 修復レシピ対策
+					
 					continue;
 				}
-				// レシピ対応品
+				
 				return i;
 			}
 		}
@@ -319,9 +290,9 @@ public class InventoryLittleMaid extends InventoryPlayer {
 	}
 
 	public int getInventorySlotContainItemPotion(boolean flag, int potionID, boolean isUndead) {
-		// インベントリの最初のポーションを返す
-		// flag = true: 攻撃・デバフ系、 false: 回復・補助系
-		// potionID: 要求ポーションのID
+		
+		
+		
 		for (int j = 0; j < mainInventory.length; j++) {
 			if (mainInventory[j] != null
 					&& mainInventory[j].getItem() instanceof ItemPotion) {
@@ -363,7 +334,7 @@ public class InventoryLittleMaid extends InventoryPlayer {
 	}
 
 	public boolean isItemBurned(int index) {
-		// 燃えるアイテムか?
+		
 		return index > -1 && isItemBurned(getStackInSlot(index));
 	}
 
@@ -373,7 +344,7 @@ public class InventoryLittleMaid extends InventoryPlayer {
 	}
 
 	public boolean isItemSmelting(int index) {
-		// 燃えるアイテムか?
+		
 		return isItemSmelting(getStackInSlot(index));
 	}
 
@@ -382,7 +353,7 @@ public class InventoryLittleMaid extends InventoryPlayer {
 	}
 
 	public boolean isItemExplord(int index) {
-		// 爆発物？
+		
 		return (index >= 0) && isItemExplord(getStackInSlot(index));
 	}
 
@@ -393,9 +364,9 @@ public class InventoryLittleMaid extends InventoryPlayer {
 		return (pItemstack != null && li instanceof ItemBlock && Block.getBlockFromItem(li).getMaterial() == Material.tnt);
 	}
 
-	// インベントリの転送関連
+	
 	public boolean isChanged(int pIndex) {
-		// 変化があったかの判定
+		
 		ItemStack lis = getStackInSlot(pIndex);
 		return !ItemStack.areItemStacksEqual(lis, prevItems[pIndex]);
 		// return (lis == null || prevItems[pIndex] == null) ?
@@ -409,13 +380,13 @@ public class InventoryLittleMaid extends InventoryPlayer {
 	}
 
 	public void resetChanged(int pIndex) {
-		// 処理済みのチェック
+		
 		ItemStack lis = getStackInSlot(pIndex);
 		prevItems[pIndex] = (lis == null ? null : lis.copy());
 	}
 
 	public void clearChanged() {
-		// 強制リロード用、ダミーを登録して強制的に一周させる
+		
 		ItemStack lis = new ItemStack(Items.sugar);
 		for (int li = 0; li < prevItems.length; li++) {
 			prevItems[li] = lis;

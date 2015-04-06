@@ -85,7 +85,7 @@ public class AIFleeRain extends EntityAIBase implements IEntityAI {
 		return null;
 	}
 
-	// 実行可能フラグ
+	
 	@Override
 	public void setEnable(boolean pFlag) {
 		isEnable = pFlag;

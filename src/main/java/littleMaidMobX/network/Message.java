@@ -5,28 +5,21 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 
 public class Message implements IMessage
 {
-	/** チャネル番号 */
+	
 	public byte   ch;
-	/** 実データ */
+	
 	public byte[] data;
 	
 	public Message(){}
 
-	/** 
-	 * @param ch どこ宛かを示すチャネル番号。LMM宛か、MMMLib宛かを区別するために追加した
-	 * @param sendData 送信する実データ
-	 *  */
+	
 	public Message(int ch, byte[] sendData)
 	{
 		this.ch		= (byte)ch;
 		this.data	= sendData;
 	}
 
-	/** IMessageのメソッド。ByteBufからデータを読み取る。
-	 * data[0] ... 通信パケットに勝手につくMOD側から見ればゴミ
-	 * data[1] ... チャネル番号
-	 * data[2] ... 以降が実データ
-	 * */
+	
 	@Override
 	public void fromBytes(ByteBuf buf)
 	{
@@ -43,7 +36,7 @@ public class Message implements IMessage
 		}
 	}
 
-	@Override//IMessageのメソッド。ByteBufにデータを書き込む。
+	@Override
 	public void toBytes(ByteBuf buf)
 	{
 		buf.writeByte(this.ch);
