@@ -1,4 +1,4 @@
-package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.render.model.ModelRenderer;public class MultiModel_Pawapro extends MultiModelOkotaSR2 {	public ModelRenderer tuba1;
+package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.model.modchu.ModelModchuBaseOkota;import littleMaidMobX.render.model.ModelRenderer;public class MultiModel_Pawapro extends ModelModchuBaseOkota {	public ModelRenderer tuba1;
 	public ModelRenderer tuba2;
 	public ModelRenderer HandR;
 	public ModelRenderer HandL;

@@ -1,4 +1,4 @@
-package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.render.model.ModelRenderer;public class MultiModel_tareusa extends MultiModelOkotaSR2 {	public ModelRenderer ChignonR;
+package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.model.modchu.ModelModchuBaseOkota;import littleMaidMobX.render.model.ModelRenderer;public class MultiModel_tareusa extends ModelModchuBaseOkota {	public ModelRenderer ChignonR;
 	public ModelRenderer ChignonL;
 	public ModelRenderer ChignonB;
 	public ModelRenderer SideTailR;

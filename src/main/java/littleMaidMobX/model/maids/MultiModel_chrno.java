@@ -1,4 +1,4 @@
-package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.render.model.ModelRenderer;public class MultiModel_chrno extends MultiModelOkotaSR2 {	public ModelRenderer RibonL;
+package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.model.modchu.ModelModchuBaseOkota;import littleMaidMobX.render.model.ModelRenderer;public class MultiModel_chrno extends ModelModchuBaseOkota {	public ModelRenderer RibonL;
 	public ModelRenderer RibonR;
 	public ModelRenderer CatEL;
 	public ModelRenderer CatER;

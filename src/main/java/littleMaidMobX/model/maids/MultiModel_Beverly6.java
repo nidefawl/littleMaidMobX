@@ -1,5 +1,5 @@
-package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.render.model.ModelRenderer;
-public class MultiModel_Beverly6 extends MultiModelBeverlyBase {	//added fields
+package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.model.modchu.ModelModchuBaseBeverly;import littleMaidMobX.render.model.ModelRenderer;
+public class MultiModel_Beverly6 extends ModelModchuBaseBeverly {	//added fields
 	public ModelRenderer Ponytail;
 	public ModelRenderer BunchR;
 	public ModelRenderer BunchL;

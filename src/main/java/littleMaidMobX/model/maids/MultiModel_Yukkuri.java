@@ -1,5 +1,5 @@
-package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.render.model.ModelRenderer;
-public class MultiModel_Yukkuri extends MultiModelOkotaSR2 {	public ModelRenderer Item1;
+package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.model.modchu.ModelModchuBaseOkota;import littleMaidMobX.render.model.ModelRenderer;
+public class MultiModel_Yukkuri extends ModelModchuBaseOkota {	public ModelRenderer Item1;
 	public ModelRenderer Item2;
 	public ModelRenderer HeadR;
 	public ModelRenderer HeadL;

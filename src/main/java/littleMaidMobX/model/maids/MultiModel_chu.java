@@ -1,4 +1,4 @@
-package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.render.model.ModelRenderer;public class MultiModel_chu extends MultiModelOkotaSR2 {	public ModelRenderer CatEL;
+package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.model.modchu.ModelModchuBaseOkota;import littleMaidMobX.render.model.ModelRenderer;public class MultiModel_chu extends ModelModchuBaseOkota {	public ModelRenderer CatEL;
 	public ModelRenderer CatER;
 	public ModelRenderer CatTail;
 	public ModelRenderer Prim;	public MultiModel_chu()

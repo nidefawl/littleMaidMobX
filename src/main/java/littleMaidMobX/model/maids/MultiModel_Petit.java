@@ -1,4 +1,4 @@
-package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.render.model.ModelBoxPlate;import littleMaidMobX.render.model.ModelRenderer;public class MultiModel_Petit extends MultiModelOkotaSR2 {	public ModelRenderer Prim;
+package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.model.modchu.ModelModchuBaseOkota;import littleMaidMobX.render.model.ModelBoxPlate;import littleMaidMobX.render.model.ModelRenderer;public class MultiModel_Petit extends ModelModchuBaseOkota {	public ModelRenderer Prim;
 	public ModelRenderer FaceR;
 	public ModelRenderer FaceL;
 	public ModelRenderer rightHandPlus;

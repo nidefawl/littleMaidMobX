@@ -1,4 +1,4 @@
-package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.render.model.ModelBoxPlate;import littleMaidMobX.render.model.ModelRenderer;public class MultiModel_Beverly4 extends MultiModelBeverlyBase {	public ModelRenderer Headwear;
+package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.model.modchu.ModelModchuBaseBeverly;import littleMaidMobX.render.model.ModelBoxPlate;import littleMaidMobX.render.model.ModelRenderer;public class MultiModel_Beverly4 extends ModelModchuBaseBeverly {	public ModelRenderer Headwear;
 	public ModelRenderer Body2;
 	public ModelRenderer Bodywear;
 	public ModelRenderer Body3;
