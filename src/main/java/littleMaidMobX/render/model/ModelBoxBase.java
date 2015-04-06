@@ -4,7 +4,7 @@ import net.minecraft.client.model.PositionTextureVertex;
 import net.minecraft.client.model.TexturedQuad;
 import net.minecraft.client.renderer.Tessellator;
 
-public abstract class ModelBoxBase {
+public abstract class ModelBoxBase implements IRenderable {
 
 	public PositionTextureVertex[] vertexPositions;
 	public TexturedQuad[] quadList;

@@ -14,7 +14,6 @@ import littleMaidMobX.model.ModelBase;
 import littleMaidMobX.model.ModelMultiBase;
 import littleMaidMobX.model.caps.IModelCaps;
 import littleMaidMobX.model.caps.ModelCapsHelper;
-import littleMaidMobX.model.maids.MultiModel_Elsie;
 import littleMaidMobX.model.maids.MultiModel_NM;
 import littleMaidMobX.wrapper.MinecraftClientWrapper;
 import net.minecraft.block.Block;
@@ -62,6 +61,7 @@ public class ModelRenderer {
 	public boolean isRendering;
 	public List<ModelBoxBase> cubeList;
 	public List<ModelRenderer> childModels;
+	public List<IRenderable> customShapes;
 	public final String boxName;
 	protected ModelBase baseModel;
 	public ModelRenderer pearent;
@@ -111,6 +111,7 @@ public class ModelRenderer {
 		isHidden = false;
 		isRendering = true;
 		cubeList = new ArrayList<ModelBoxBase>();
+		customShapes = new ArrayList<IRenderable>(0);
 		baseModel = pModelBase;
 		if (pModelBase instanceof MultiModel_NM && pModelBase.modelSize==0) {
 			System.out.println("our: "+pModelBase.boxList.size()+" = "+pName);
@@ -279,9 +280,12 @@ public class ModelRenderer {
 		}
 		GL11.glNewList(displayList, GL11.GL_COMPILE);
 		Tessellator tessellator = Tessellator.instance;
-		
+
 		for (int i = 0; i < cubeList.size(); i++) {
 			cubeList.get(i).render(tessellator, par1);
+		}
+		for (int i = 0; i < customShapes.size(); i++) {
+			customShapes.get(i).render(tessellator, par1);
 		}
 		
 		GL11.glEndList();
@@ -324,23 +328,9 @@ public class ModelRenderer {
 		return lobject;
 	}
 
-	public ModelRenderer addParts(Class<? extends ModelBoxBase> pModelBoxBase, String pName, Object ... pArg) {
-		pName = (new StringBuilder()).append(boxName).append(".").append(pName).toString();
-		TextureOffset ltextureoffset = baseModel.getTextureOffset(pName);
-		setTextureOffset(ltextureoffset.textureOffsetX, ltextureoffset.textureOffsetY);
-		addCubeList(getModelBoxBase(pModelBoxBase, getArg(pArg)).setBoxName(pName));
-		return this;
-	}
 
 	public ModelRenderer addParts(Class<? extends ModelBoxBase> pModelBoxBase, Object ... pArg) {
 		addCubeList(getModelBoxBase(pModelBoxBase, getArg(pArg)));
-		return this;
-	}
-
-	
-	public ModelRenderer addPartsTexture(Class<? extends ModelBoxBase> pModelBoxBase, String pName, Object ... pArg) {
-		pName = (new StringBuilder()).append(boxName).append(".").append(pName).toString();
-		addCubeList(getModelBoxBase(pModelBoxBase, pArg).setBoxName(pName));
 		return this;
 	}
 
@@ -873,12 +863,11 @@ public class ModelRenderer {
 	}
 
 	public ModelRenderer addPlateFreeShape(float[][] var1, float[][] var2, float[][] var3, float[] var4) {
-		addParts(ModelBoxPlate.class, var1, var2, var3, var4, 0.0F);
+		this.customShapes.add(new ModelBoxTriangles(this, textureOffsetX, textureOffsetY, var1, var3, var3, var4, 0F));
 		return this;
 	}
 	public ModelRenderer addPlateFreeShape(float[][] vertex, float[][] texUV, float[][] vertexN) {
-		addParts(ModelBoxPlate.class, vertex, texUV, vertexN, null, 0.0F);
-		return this;
+		return addPlateFreeShape(vertex, texUV, vertexN, null);
 	}
 
 
