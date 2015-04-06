@@ -1,8 +1,8 @@
 package littleMaidMobX.ai;
 
 import littleMaidMobX.aimodes.ModeBase;
-import littleMaidMobX.entity.EntityLittleMaid;
 import littleMaidMobX.entity.EntityDummy;
+import littleMaidMobX.entity.EntityLittleMaid;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
@@ -39,7 +39,7 @@ public class AIFindBlock extends EntityAIBase implements IEntityAI {
 			return fmodeBase.shouldBlock(theMaid.maidMode);
 		}
 		
-		// ターゲットをサーチ
+		
 		int lx = MathHelper.floor_double(theMaid.posX);
 		int ly = MathHelper.floor_double(theMaid.posY);
 		int lz = MathHelper.floor_double(theMaid.posZ);
@@ -52,7 +52,7 @@ public class AIFindBlock extends EntityAIBase implements IEntityAI {
 		EntityDummy.clearDummyEntity(theMaid);
 		boolean flagdammy = false;
 		
-		// CW方向に検索領域を広げる 
+		
 		for (int d = 0; d < 4; d++) {
 			for (int a = 0; a < 18; a += 2) {
 				int del = a / 2;
@@ -135,19 +135,19 @@ public class AIFindBlock extends EntityAIBase implements IEntityAI {
 	@Override
 	public boolean continueExecuting() {
 		fmodeBase.updateBlock();
-		// 移動中は継続
+		
 		if (!theMaid.getNavigator().noPath()) return true;
 		
 		double ld = theMaid.getDistanceTilePos();
 		if (ld > 100.0D) {
-			// 索敵範囲外
+			
 			theMaid.getActiveModeClass().farrangeBlock();
 			return false;
 		} else if (ld > 5.0D) {
-			// 射程距離外
+			
 			return theMaid.getActiveModeClass().outrangeBlock(theMaid.maidMode);
 		} else {
-			// 射程距離
+			
 			return theMaid.getActiveModeClass().executeBlock(theMaid.maidMode);
 		}
 	}
@@ -164,7 +164,7 @@ public class AIFindBlock extends EntityAIBase implements IEntityAI {
 
 	@Override
 	public void updateTask() {
-		// ターゲットを見つけている
+		
 		theMaid.looksTilePos();
 	}
 

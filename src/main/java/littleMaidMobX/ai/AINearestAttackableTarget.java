@@ -51,10 +51,10 @@ public class AINearestAttackableTarget extends EntityAINearestAttackableTarget {
 			double lfollowRange = this.getTargetDistance();
 			List llist = this.taskOwner.worldObj.getEntitiesWithinAABB(targetClass, taskOwner.boundingBox.expand(lfollowRange, 8.0D, lfollowRange));
 			if (theMaid.mstatMasterEntity != null && !theMaid.isBloodsuck()) {
-				// ソーターを主中心へ
+				
 				theNearestAttackableTargetSorter.setEntity(theMaid.mstatMasterEntity);
 			} else {
-				// 自分中心にソート
+				
 				theNearestAttackableTargetSorter.setEntity(theMaid);
 			}
 			Collections.sort(llist, theNearestAttackableTargetSorter);
@@ -85,8 +85,8 @@ public class AINearestAttackableTarget extends EntityAINearestAttackableTarget {
 
 //	@Override
 	protected boolean isSuitableTargetLM(Entity pTarget, boolean par2) {
-		// LMM用にカスタム
-		// 非生物も対象のため別クラス
+		
+		
 		if (pTarget == null) {
 			return false;
 		}
@@ -112,19 +112,13 @@ public class AINearestAttackableTarget extends EntityAINearestAttackableTarget {
 				return false;
 			}
 		}
-/*		
-		// 基点から一定距離離れている場合も攻撃しない
-		if (!taskOwner.func_110176_b(MathHelper.floor_double(pTarget.posX), MathHelper.floor_double(pTarget.posY), MathHelper.floor_double(pTarget.posZ))) {
-//		if (!taskOwner.isWithinHomeDistance(MathHelper.floor_double(par1EntityLiving.posX), MathHelper.floor_double(par1EntityLiving.posY), MathHelper.floor_double(par1EntityLiving.posZ))) {
-			return false;
-		}
-*/		
-		// ターゲットが見えない
+		
+		
 		if (shouldCheckSight && !taskOwner.getEntitySenses().canSee(pTarget)) {
 			return false;
 		}
 		
-		// 攻撃中止判定？
+		
 		if (this.fretarget) {
 			if (--this.fretryCounter <= 0) {
 				this.fcanAttack = 0;
@@ -142,7 +136,7 @@ public class AINearestAttackableTarget extends EntityAINearestAttackableTarget {
 		return true;
 	}
 
-	// 最終位置が攻撃の間合いでなければ失敗
+	
 	protected boolean func_75295_a(Entity par1EntityLiving) {
 		this.fretryCounter = 10 + this.taskOwner.getRNG().nextInt(5);
 		PathEntity var2 = taskOwner.getNavigator().getPathToXYZ(par1EntityLiving.posX, par1EntityLiving.posY, par1EntityLiving.posZ);

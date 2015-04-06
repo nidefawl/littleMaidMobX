@@ -34,19 +34,8 @@ public class Mode_Archer extends ModeBase {
 
 	@Override
 	public void init() {
-		// 登録モードの名称追加
-		/* langファイルに移動
-		ModLoader.addLocalization("littleMaidMob.mode.Archer", "Archer");
-		ModLoader.addLocalization("littleMaidMob.mode.F-Archer", "F-Archer");
-		ModLoader.addLocalization("littleMaidMob.mode.T-Archer", "T-Archer");
-		ModLoader.addLocalization("littleMaidMob.mode.D-Archer", "D-Archer");
-//		ModLoader.addLocalization("littleMaidMob.mode.Archer", "ja_JP", "射手");
-		ModLoader.addLocalization("littleMaidMob.mode.Blazingstar", "Blazingstar");
-		ModLoader.addLocalization("littleMaidMob.mode.F-Blazingstar", "F-Blazingstar");
-		ModLoader.addLocalization("littleMaidMob.mode.T-Blazingstar", "T-Blazingstar");
-		ModLoader.addLocalization("littleMaidMob.mode.D-Blazingstar", "D-Blazingstar");
-//		ModLoader.addLocalization("littleMaidMob.mode.Blazingstar", "ja_JP", "刃鳴散らす者");
-		*/
+		
+		
 		TriggerSelect.appendTriggerItem(null, "Bow", "");
 		TriggerSelect.appendTriggerItem(null, "Arrow", "");
 	}
@@ -116,7 +105,7 @@ public class Mode_Archer extends ModeBase {
 		int li;
 		ItemStack litemstack;
 
-		// モードに応じた識別判定、速度優先
+		
 		switch (pMode) {
 		case mmode_Archer :
 		case mmode_Blazingstar :
@@ -124,7 +113,7 @@ public class Mode_Archer extends ModeBase {
 				litemstack = owner.maidInventory.getStackInSlot(li);
 				if (litemstack == null) continue;
 
-				// 射手
+				
 				if (litemstack.getItem() instanceof ItemBow || TriggerSelect.checkWeapon(owner.getMaidMaster(), "Bow", litemstack)) {
 					return li;
 				}
@@ -164,13 +153,13 @@ public class Mode_Archer extends ModeBase {
 		case mmode_Blazingstar:
 //			owner.getWeaponStatus();
 			updateGuns();
-			// Blazingstarの特殊効果
+			
 			World lworld = owner.worldObj;
 			List<Entity> llist = lworld.getEntitiesWithinAABB(Entity.class, owner.boundingBox.expand(16D, 16D, 16D));
 			for (int li = 0; li < llist.size(); li++) {
 				Entity lentity = llist.get(li); 
 				if (lentity.isEntityAlive() && lentity.isBurning() && owner.getRNG().nextFloat() > 0.9F) {
-					// 発火！
+					
 					int lx = (int)owner.posX;
 					int ly = (int)owner.posY;
 					int lz = (int)owner.posZ;
@@ -186,10 +175,10 @@ public class Mode_Archer extends ModeBase {
 
 	protected void updateGuns() {
 		if (owner.getAttackTarget() == null || !owner.getAttackTarget().isEntityAlive()) {
-			// 対象が死んだ
+			
 			if (!owner.weaponReload) {
 				if (owner.maidAvatar.isUsingItem()) {
-					// ターゲットが死んでいる時はアイテムの使用をクリア
+					
 					if (owner.maidAvatar.isItemReload) {
 						owner.maidAvatar.stopUsingItem();
 						LittleMaidMobX.Debug(String.format("id:%d cancel reload.", owner.getEntityId()));
@@ -203,7 +192,7 @@ public class Mode_Archer extends ModeBase {
 			}
 		}
 		if (owner.weaponReload && !owner.maidAvatar.isUsingItem()) {
-			// 特殊リロード
+			
 			owner.maidInventory.getCurrentItem().useItemRightClick(owner.worldObj, owner.maidAvatar);
 			LittleMaidMobX.Debug("id:%d force reload.", owner.getEntityId());
 			owner.mstatAimeBow = true;

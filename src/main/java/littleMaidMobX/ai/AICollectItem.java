@@ -98,7 +98,7 @@ public class AICollectItem extends EntityAIBase {
 	}
 
 	public boolean canEntityItemBeSeen(Entity entity) {
-		// アイテムの可視判定
+		
 		return theMaid.worldObj.rayTraceBlocks(Vec3.createVectorHelper(theMaid.posX, theMaid.posY + (double)theMaid.getEyeHeight(), theMaid.posZ), Vec3.createVectorHelper(entity.posX, entity.posY + ((entity.boundingBox.minY - entity.boundingBox.minY) / 2), entity.posZ)) == null;
 	}
 

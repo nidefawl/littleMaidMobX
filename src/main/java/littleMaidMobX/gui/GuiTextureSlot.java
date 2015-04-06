@@ -6,10 +6,10 @@ import java.util.Map;
 
 import littleMaidMobX.ClientHelper;
 import littleMaidMobX.entity.EntitySelect;
-import littleMaidMobX.models.ModelMultiBase;
+import littleMaidMobX.model.ModelMultiBase;
+import littleMaidMobX.registry.ModelManager;
 import littleMaidMobX.textures.TextureBox;
 import littleMaidMobX.textures.TextureBoxBase;
-import littleMaidMobX.textures.TextureManager;
 import net.minecraft.client.gui.GuiSlot;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
@@ -57,8 +57,8 @@ public class GuiTextureSlot extends GuiSlot {
 		isContract = owner.target.isContract();
 		entity.setContract(isContract);
 		TextureBoxBase ltbox[] = owner.target.getTextureBox();
-		for (int li = 0; li < TextureManager.instance.getTextureCount(); li++) {
-			TextureBox lbox = TextureManager.getTextureList().get(li);
+		for (int li = 0; li < ModelManager.instance.getTextureCount(); li++) {
+			TextureBox lbox = ModelManager.getTextureList().get(li);
 			if (isContract) {
 				if (lbox.getContractColorBits() > 0) {
 					indexTexture.add(lbox);
@@ -147,7 +147,7 @@ public class GuiTextureSlot extends GuiSlot {
 			entity.textureData.textureBox[0] = lbox;
 			entity.textureData.textureBox[1] = blankBox;
 		}
-		TextureManager.instance.checkTextureBoxServer(lbox);
+		ModelManager.instance.checkTextureBoxServer(lbox);
 		GL11.glDisable(GL11.GL_BLEND);
 		
 		owner.drawString(this.owner.mc.fontRenderer, lbox.textureName, var2 + 16, var3 + 25, -1);
@@ -157,7 +157,7 @@ public class GuiTextureSlot extends GuiSlot {
 		entity.rotationYawHead = 15F;
 		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240.0F, 240.0F);
 		if (mode) {
-			// アーマー
+			
 			ResourceLocation ltxname[];
 			GL11.glTranslatef(1F, 0, 0);
 			Map<Integer, ResourceLocation> lmap = lbox.armors.get("default");
@@ -171,7 +171,7 @@ public class GuiTextureSlot extends GuiSlot {
 				entity.setTextureNames("default");
 				RenderManager.instance.renderEntityWithPosYaw(entity, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F);
 			}
-			for (String ls : TextureManager.armorFilenamePrefix) {
+			for (String ls : ModelManager.armorFilenamePrefix) {
 				GL11.glTranslatef(1F, 0, 0);
 				if (lbox.armors.containsKey(ls)) {
 //					ltxname = entity.getTextures(1);
@@ -186,7 +186,7 @@ public class GuiTextureSlot extends GuiSlot {
 				}
 			}
 		} else {
-			// テクスチャ表示
+			
 			for (int li = 0; li < 16; li++) {
 				GL11.glTranslatef(1F, 0, 0);
 				if (lbox.hasColor(li, isContract)) {

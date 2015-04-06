@@ -1,7 +1,7 @@
 package littleMaidMobX.render;
 
 import littleMaidMobX.entity.EntityLittleMaid;
-import littleMaidMobX.models.IModelCaps;
+import littleMaidMobX.model.caps.IModelCaps;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -48,12 +48,12 @@ public class RenderLittleMaid extends RenderModelMulti {
 		modelMain.setCapsValue(IModelCaps.caps_entityIdFactor, lmaid.entityIdFactor);
 		modelMain.setCapsValue(IModelCaps.caps_ticksExisted, lmaid.ticksExisted);
 		modelMain.setCapsValue(IModelCaps.caps_dominantArm, lmaid.maidDominantArm);
-		// だが無意味だ
+		
 //		plittleMaid.textureModel0.isChild = plittleMaid.textureModel1.isChild = plittleMaid.textureModel2.isChild = plittleMaid.isChild();
 	}
 
 	protected void renderString(EntityLittleMaid plittleMaid, double px, double py, double pz, float f, float f1) {
-		// ひも
+		
 		if(plittleMaid.mstatgotcha != null && plittleMaid.mstatgotcha instanceof EntityLivingBase) {
 			EntityLivingBase lel = (EntityLivingBase)plittleMaid.mstatgotcha;
 			py -= 0.5D;
@@ -102,41 +102,7 @@ public class RenderLittleMaid extends RenderModelMulti {
 			GL11.glEnable(GL11.GL_TEXTURE_2D);
 		}
 	}
-/*
-	public void doRenderLitlleMaid(LMM_EntityLittleMaid plittleMaid, double px, double py, double pz, float f, float f1) {
-		// いくつか重複してるのであとで確認
-		// 姿勢による高さ調整
-		
-		// ここは本来的には要らない。
-		if (plittleMaid.worldObj instanceof WorldServer) {
-			// RSHUD-ACV用
-			MMM_TextureBox ltbox0 = ((MMM_TextureBoxServer)plittleMaid.textureData.textureBox[0]).localBox;
-			MMM_TextureBox ltbox1 = ((MMM_TextureBoxServer)plittleMaid.textureData.textureBox[1]).localBox;
-			modelMain.model = ltbox0.models[0];
-			modelFATT.modelInner = ltbox1.models[1];
-			modelFATT.modelOuter = ltbox1.models[2];
-			plittleMaid.textureData.setTextureNamesServer();
-			modelMain.textures = plittleMaid.textureData.getTextures(0);
-			modelFATT.textureInner = plittleMaid.textureData.getTextures(1);
-			modelFATT.textureOuter = plittleMaid.textureData.getTextures(2);
-			modelFATT.textureInnerLight = plittleMaid.textureData.getTextures(3);
-			modelFATT.textureOuterLight = plittleMaid.textureData.getTextures(4);
-		} else {
-			modelMain.model = ((MMM_TextureBox)plittleMaid.textureData.textureBox[0]).models[0];
-			modelFATT.modelInner = ((MMM_TextureBox)plittleMaid.textureData.textureBox[1]).models[1];
-			modelFATT.modelOuter = ((MMM_TextureBox)plittleMaid.textureData.textureBox[1]).models[2];
-			modelMain.textures = plittleMaid.textureData.getTextures(0);
-			modelFATT.textureInner = plittleMaid.textureData.getTextures(1);
-			modelFATT.textureOuter = plittleMaid.textureData.getTextures(2);
-			modelFATT.textureInnerLight = plittleMaid.textureData.getTextures(3);
-			modelFATT.textureOuterLight = plittleMaid.textureData.getTextures(4);
-		}
-		
-//		doRenderLiving(plittleMaid, px, py, pz, f, f1);
-		renderModelMulti(plittleMaid, px, py, pz, f, f1, plittleMaid.maidCaps);
-		renderString(plittleMaid, px, py, pz, f, f1);
-	}
-*/
+
 	@Override
 	public void doRender(EntityLiving par1EntityLiving,
 			double par2, double par4, double par6, float par8, float par9) {
@@ -146,7 +112,7 @@ public class RenderLittleMaid extends RenderModelMulti {
 //		doRenderLitlleMaid(lmm, par2, par4, par6, par8, par9);
 		renderModelMulti(lmm, par2, par4, par6, par8, par9, fcaps);
 		renderString(lmm, par2, par4, par6, par8, par9);
-		// ロープ
+		
 //		func_110827_b(lmm, par2, par4 - modelMain.model.getLeashOffset(lmm.maidCaps), par6, par8, par9);
 	}
 
@@ -158,7 +124,7 @@ public class RenderLittleMaid extends RenderModelMulti {
 		} else {
 			modelMain.setArmorRendering(false);
 		}
-		// アイテムのレンダリング位置を獲得するためrenderを呼ぶ必要がある
+		
 		mainModel.render(par1EntityLiving, par2, par3, par4, par5, par6, par7);
 	}
 
@@ -167,7 +133,7 @@ public class RenderLittleMaid extends RenderModelMulti {
 		super.passSpecialRender(par1EntityLiving, par2, par4, par6);
 		
 		EntityLittleMaid llmm = (EntityLittleMaid)par1EntityLiving;
-		// 追加分
+		
 		for (int li = 0; li < llmm.maidEntityModeList.size(); li++) {
 			llmm.maidEntityModeList.get(li).showSpecial(this, par2, par4, par6);
 		}

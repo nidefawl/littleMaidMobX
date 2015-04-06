@@ -9,11 +9,7 @@ import littleMaidMobX.Helper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-/**
- * モード切り替え用トリガーアイテムのコンテナ。
- * マルチ対策用。
- * データの読み込みはIFFで行っている。
- */
+
 public class TriggerSelect {
 
 	public static List<String> selector = new ArrayList<String>();
@@ -26,13 +22,13 @@ public class TriggerSelect {
 			return defaultTrigger;
 		}
 		if (Helper.isLocalPlay()) {
-			// シングル実行時は名称ブランクに。
+			
 			pUsername = "";
 		}
-		// 存在チェック、無かったら追加
+		
 		if (!usersTrigger.containsKey(pUsername)) {
 			if (pUsername.isEmpty()) {
-				// 名称がブランクの時はデフォルトのものへリンク。
+				
 				usersTrigger.put(pUsername, defaultTrigger);
 			} else {
 				Map<Integer, List<Item>> lmap = new HashMap<Integer, List<Item>>();
@@ -61,17 +57,13 @@ public class TriggerSelect {
 	}
 
 
-	/**
-	 * ユーザー毎にトリガーアイテムを設定する。
-	 */
+	
 	public static void appendTriggerItem(String pUsername, String pSelector, String pIndexstr) {
-		// トリガーアイテムの追加
+		
 		appendWeaponsIndex(pIndexstr, getuserTriggerList(pUsername, pSelector));
 	}
 
-	/**
-	 * トリガーアイテムを解析して登録。
-	 */
+	
 	private static void appendWeaponsIndex(String indexstr, List<Item> indexlist) {
 		if (indexstr.isEmpty()) return;
 		String[] s = indexstr.split(",");
@@ -84,9 +76,7 @@ public class TriggerSelect {
 		}
 	}
 
-	/**
-	 * アイテムが指定されたトリガーに登録されているかを判定
-	 */
+	
 	public static boolean checkWeapon(String pUsername, String pSelector, ItemStack pItemStack) {
 		if (!selector.contains(pSelector)) {
 			return false;

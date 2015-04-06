@@ -1,12 +1,12 @@
 package littleMaidMobX.textures;
 
 import littleMaidMobX.Helper;
-import littleMaidMobX.models.IModelCaps;
-import littleMaidMobX.models.ModelCapsHelper;
+import littleMaidMobX.model.caps.IModelCaps;
+import littleMaidMobX.model.caps.ModelCapsHelper;
 
 public class TextureBoxServer extends TextureBoxBase {
 
-	// ローカルでモデルを保持している時にリンク
+	
 	protected TextureBox localBox;
 
 

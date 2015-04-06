@@ -4,24 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import littleMaidMobX.ClientHelper;
-import littleMaidMobX.LittleMaidMobX;
 import littleMaidMobX.Helper;
+import littleMaidMobX.LittleMaidMobX;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-/**
- * マーカーを表示します。
- */
+
 public class EntityDummy extends Entity {
 	
 	private int livecount;
 	private final int maxlivecount = 16;
 	private int entityColor;
 	public Entity entityOwner;
-	/**
-	 * 有効判定
-	 */
+	
 	public static boolean isEnable = false;
 	
 	public static List<EntityDummy> appendList = new ArrayList<EntityDummy>();
@@ -76,9 +72,7 @@ public class EntityDummy extends Entity {
 		return false;
 	}
 
-	/**
-	 * 指定されたオーナーに対応するマーカーを削除します。
-	 */
+	
 	public static void clearDummyEntity(Entity entity) {
 		if (!isEnable) return;
 		if (!Helper.isClient) return;
@@ -91,14 +85,12 @@ public class EntityDummy extends Entity {
 		}
 	}
 
-	/**
-	 * マーカーを表示する
-	 */
+	
 	public static void setDummyEntity(Entity owner, int color, double posx, double posy, double posz) {
 		if (!isEnable) return;
 		if (!Helper.isClient) return;
 		
-		// サーバー側でしか呼ばれないっぽい
+		
 		if (owner.worldObj.isRemote) {
 			LittleMaidMobX.Debug("L");
 		}

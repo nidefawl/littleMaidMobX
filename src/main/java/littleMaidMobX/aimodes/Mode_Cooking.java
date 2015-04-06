@@ -27,12 +27,7 @@ public class Mode_Cooking extends ModeBlockBase {
 
 	@Override
 	public void init() {
-		/* langファイルに移動
-		ModLoader.addLocalization("littleMaidMob.mode.Cooking", "Cooking");
-		ModLoader.addLocalization("littleMaidMob.mode.T-Cooking", "T-Cooking");
-		ModLoader.addLocalization("littleMaidMob.mode.F-Cooking", "F-Cooking");
-		ModLoader.addLocalization("littleMaidMob.mode.D-Cooking", "D-Cooking");
-		*/
+		
 	}
 
 	@Override
@@ -78,11 +73,11 @@ public class Mode_Cooking extends ModeBlockBase {
 		int li;
 		ItemStack litemstack;
 		
-		// モードに応じた識別判定、速度優先
+		
 		switch (pMode) {
 		case mmode_Cooking :
 			for (li = 0; li < owner.maidInventory.maxInventorySize; li++) {
-				// 調理
+				
 				if (owner.maidInventory.isItemBurned(li)) {
 					return li;
 				}
@@ -102,7 +97,7 @@ public class Mode_Cooking extends ModeBlockBase {
 	public boolean isSearchBlock() {
 		if (!super.isSearchBlock()) return false;
 		
-		// 燃焼アイテムを持っている？
+		
 		if (owner.getCurrentEquippedItem() != null && owner.maidInventory.getSmeltingItem() > -1) {
 			fDistance = Double.MAX_VALUE;
 			owner.clearTilePos();
@@ -126,9 +121,9 @@ public class Mode_Cooking extends ModeBlockBase {
 			return false;
 		}
 		
-		// 世界のメイドから
+		
 		if (checkWorldMaid(ltile)) return false;
-		// 使用していた竈ならそこで終了
+		
 		if (owner.isUsingTile(ltile)) return true;
 		
 		double ldis = owner.getDistanceTilePosSq(ltile);
@@ -152,7 +147,7 @@ public class Mode_Cooking extends ModeBlockBase {
 		int li;
 		
 		if (owner.getSwingStatusDominant().canAttack()) {
-			// 完成品回収
+			
 			litemstack = ltile.getStackInSlot(2);
 			if (litemstack != null) {
 				if (litemstack.stackSize > 0) {
@@ -170,14 +165,14 @@ public class Mode_Cooking extends ModeBlockBase {
 				ltile.setInventorySlotContents(2, null);
 			}
 				
-			// 調理可能品を竈にぽーい
+			
 			if (!lflag && ltile.getStackInSlot(0) == null) {
 				litemstack = ltile.getStackInSlot(2);
 				li = owner.maidInventory.getSmeltingItem();
 				owner.setEquipItem(li);
 				if (li > -1) {
 					litemstack = owner.maidInventory.getStackInSlot(li);
-					// レシピ対応品
+					
 					if (litemstack.stackSize >= ltile.getInventoryStackLimit()) {
 						ltile.setInventorySlotContents(0, litemstack.splitStack(ltile.getInventoryStackLimit()));
 					} else {
@@ -192,7 +187,7 @@ public class Mode_Cooking extends ModeBlockBase {
 				}
 			}
 			
-			// 手持ちの燃料をぽーい
+			
 			if (!lflag && ltile.getStackInSlot(1) == null && ltile.getStackInSlot(0) != null) {
 				owner.getNextEquipItem();
 				litemstack = owner.getCurrentEquippedItem();
@@ -213,7 +208,7 @@ public class Mode_Cooking extends ModeBlockBase {
 					if (ltile.isBurning()) {
 						lflag = true;
 					} else {
-						// 燃やせるアイテムを持ってないので調理可能品を回収
+						
 						ItemStack litemstack2 = ltile.getStackInSlotOnClosing(0);
 						if (owner.maidInventory.addItemStackToInventory(litemstack2)) {
 							owner.playSound("random.pop");
@@ -227,7 +222,7 @@ public class Mode_Cooking extends ModeBlockBase {
 				}
 			} 
 			
-			// 燃え終わってるのに燃料口に何かあるなら回収する
+			
 			if (!lflag && !ltile.isBurning() && ltile.getStackInSlot(1) != null) {
 				ItemStack litemstack2 = ltile.getStackInSlotOnClosing(1);
 				if (owner.maidInventory.addItemStackToInventory(litemstack2)) {

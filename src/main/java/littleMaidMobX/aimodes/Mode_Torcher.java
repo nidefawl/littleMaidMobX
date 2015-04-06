@@ -31,12 +31,7 @@ public class Mode_Torcher extends ModeBase {
 
 	@Override
 	public void init() {
-		/* langファイルに移動
-		ModLoader.addLocalization("littleMaidMob.mode.Torcher", "Torcher");
-		ModLoader.addLocalization("littleMaidMob.mode.F-Torcher", "F-Torcher");
-		ModLoader.addLocalization("littleMaidMob.mode.D-Torcher", "D-Torcher");
-		ModLoader.addLocalization("littleMaidMob.mode.T-Torcher", "T-Torcher");
-		*/
+		
 		TriggerSelect.appendTriggerItem(null, "Torch", "");
 	}
 
@@ -80,14 +75,14 @@ public class Mode_Torcher extends ModeBase {
 		int li;
 		ItemStack litemstack;
 		
-		// モードに応じた識別判定、速度優先
+		
 		switch (pMode) {
 		case mmode_Torcher : 
 			for (li = 0; li < owner.maidInventory.maxInventorySize; li++) {
 				litemstack = owner.maidInventory.getStackInSlot(li);
 				if (litemstack == null) continue;
 				
-				// 松明
+				
 				if (litemstack.getItem() == Item.getItemFromBlock(Blocks.torch) || TriggerSelect.checkWeapon(owner.getMaidMaster(), "Torch", litemstack)) {
 					return li;
 				}
@@ -135,30 +130,13 @@ public class Mode_Torcher extends ModeBase {
 
 	@Override
 	public boolean executeBlock(int pMode, int px, int py, int pz) {
-		/*
-		ItemStack lis = owner.getCurrentEquippedItem();
-		if (lis == null) return false;
 		
-		int li = lis.stackSize;
-		// TODO:当たり判定をどうするか
-		if (lis.tryPlaceItemIntoWorld(owner.maidAvatar, owner.worldObj, px, py - 1, pz, 1, 0.5F, 1.0F, 0.5F)) {
-			owner.setSwing(10, LMM_EnumSound.installation);
-			
-			if (owner.maidAvatar.capabilities.isCreativeMode) {
-				lis.stackSize = li;
-			}
-			if (lis.stackSize <= 0) {
-				owner.maidInventory.setInventoryCurrentSlotContents(null);
-				owner.getNextEquipItem();
-			}
-		}
-		*/
 		return false;
 	}
 
 	public boolean canPlaceItemBlockOnSide(World par1World, int par2, int par3, int par4, int par5,
 			EntityPlayer par6EntityPlayer, ItemStack par7ItemStack, ItemBlock pItemBlock) {
-		// TODO:マルチ対策用、ItemBlockから丸パクリバージョンアップ時は確認すること
+		
 		Block var8 = par1World.getBlock(par2, par3, par4);
 		
 		if (Block.isEqualTo(var8, Blocks.snow)) {
@@ -195,14 +173,14 @@ public class Mode_Torcher extends ModeBase {
 
 	@Override
 	public void updateAITick(int pMode) {
-		// トーチの設置
+		
 		if (pMode == mmode_Torcher && owner.getNextEquipItem()) {
 			ItemStack lis = owner.getCurrentEquippedItem();
 			int lic = lis.stackSize;
 			Item lii = lis.getItem();
 			World lworld = owner.worldObj;
 			
-			// 周囲を検索
+			
 			int lxx = MathHelper.floor_double(owner.posX);
 			int lyy = MathHelper.floor_double(owner.posY);
 			int lzz = MathHelper.floor_double(owner.posZ);

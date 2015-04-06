@@ -41,7 +41,7 @@ public abstract class GuiMobSelect extends GuiScreen {
 
 
 	public void initEntitys(World world, boolean pForce) {
-		// 表示用EntityListの初期化
+		
 		if (entityMapClass.isEmpty()) {
 			try {
 				Map lmap = EntityList.classToStringMapping;// (Map)ModLoader.getPrivateValue(EntityList.class, null, 1);
@@ -60,7 +60,7 @@ public abstract class GuiMobSelect extends GuiScreen {
 			int li = 0;
 			Entity lentity = null;
 			try {
-				// 表示用のEntityを作る
+				
 				do {
 					lentity = (EntityLivingBase)le.getKey().getConstructor(World.class).newInstance(world);
 //					lentity = (EntityLivingBase)EntityList.createEntityByName(le.getValue(), world);
@@ -71,10 +71,7 @@ public abstract class GuiMobSelect extends GuiScreen {
 		}
 	}
 
-	/**
-	 * 渡されたEntityのチェック及び加工。
-	 * trueを返すと同じクラスのエンティティを再度渡してくる、そのときpIndexはカウントアップされる
-	 */
+	
 	protected boolean checkEntity(String pName, Entity pEntity, int pIndex) {
 		entityMap.put(pName, pEntity);
 		return false;
@@ -98,21 +95,17 @@ public abstract class GuiMobSelect extends GuiScreen {
 		drawCenteredString(this.mc.fontRenderer, StatCollector.translateToLocal(screenTitle), width / 2, 20, 0xffffff);
 		super.drawScreen(px, py, pf);
 		
-		// GUIで表示した分のボスのステータスを表示しない
+		
 		BossStatus.healthScale = lhealthScale;
 		BossStatus.statusBarTime = lstatusBarLength;
 		BossStatus.bossName = lbossName;
 		BossStatus.hasColorModifier = lfield_82825_d;
 	}
 
-	/**
-	 *  スロットがクリックされた
-	 */
+	
 	public abstract void clickSlot(int pIndex, boolean pDoubleClick, String pName, EntityLivingBase pEntity);
 
-	/**
-	 *  スロットの描画
-	 */
+	
 	public abstract void drawSlot(int pSlotindex, int pX, int pY, int pDrawheight, Tessellator pTessellator, String pName, Entity pEntity);
 	
 }

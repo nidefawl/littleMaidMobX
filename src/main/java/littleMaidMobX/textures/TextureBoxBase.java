@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import littleMaidMobX.models.IModelCaps;
+import littleMaidMobX.model.caps.IModelCaps;
 
 public abstract class TextureBoxBase {
 
 	public String textureName;
-	protected int contractColor;
+	public int contractColor;
 	public int wildColor;
 	protected float modelHeight;
 	protected float modelWidth;
@@ -41,16 +41,12 @@ public abstract class TextureBoxBase {
 		}
 	}
 
-	/**
-	 * 契約色の有無をビット配列にして返す
-	 */
+	
 	public int getContractColorBits() {
 		return contractColor;
 	}
 
-	/**
-	 * 野生色の有無をビット配列にして返す
-	 */
+	
 	public int getWildColorBits() {
 		return wildColor;
 	}
@@ -59,16 +55,12 @@ public abstract class TextureBoxBase {
 //		return (((pContract ? contractColor : wildColor) >>> pIndex) & 0x01) != 0;
 //	}
 
-	/**
-	 * 野生のメイドの色をランダムで返す
-	 */
+	
 	public int getRandomWildColor(Random pRand) {
 		return getRandomColor(getWildColorBits(), pRand);
 	}
 
-	/**
-	 * 契約のメイドの色をランダムで返す
-	 */
+	
 	public int getRandomContractColor(Random pRand) {
 		return getRandomColor(getContractColorBits(), pRand);
 	}

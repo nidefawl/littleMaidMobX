@@ -15,13 +15,11 @@ public abstract class ModeBlockBase extends ModeBase {
 
 	@Override
 	public void updateBlock() {
-		// 基準となるTileをセット
+		
 		owner.setTilePos(0);
 	}
 
-	/**
-	 * すでに使用中のTileがある場合はshouldBlockへ飛ぶようにする。
-	 */
+	
 	@Override
 	public boolean isSearchBlock() {
 		boolean lflag = false;
@@ -48,18 +46,15 @@ public abstract class ModeBlockBase extends ModeBase {
 	}
 
 
-	/**
-	 * 他のメイドが使用しているかをチェック。
-	 * @return
-	 */
+	
 	protected boolean checkWorldMaid(TileEntity pTile) {
-		// 世界のメイドから
+		
 		for (Object lo : owner.worldObj.loadedEntityList) {
 			if (lo == owner) continue;
 			if (lo instanceof EntityLittleMaid) {
 				EntityLittleMaid lem = (EntityLittleMaid)lo;
 				if (lem.isUsingTile(pTile)) {
-					// 誰かが使用中
+					
 					return true;
 				}
 			}

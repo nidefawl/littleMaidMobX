@@ -12,8 +12,8 @@ import java.util.Map.Entry;
 import java.util.Random;
 import java.util.TreeMap;
 
-import littleMaidMobX.LittleMaidMobX;
 import littleMaidMobX.Helper;
+import littleMaidMobX.LittleMaidMobX;
 import littleMaidMobX.entity.EntityLittleMaid;
 import littleMaidMobX.wrapper.MinecraftWrapper;
 import net.minecraft.entity.Entity;
@@ -27,28 +27,19 @@ import net.minecraft.item.Item;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 
-/**
- * IFFを管理するためのクラス、ほぼマルチ用。
- * username : null=ローカルプレイ時、Defaultを使う
- */
+
 public class IFF {
 
 	public static final int iff_Enemy = 0;
 	public static final int iff_Unknown = 1;
 	public static final int iff_Friendry = 2;
 
-	/**
-	 * ローカル用、若しくはマルチのデフォルト設定
-	 */
+	
 	public static Map<String, Integer> DefaultIFF = new TreeMap<String, Integer>();
-	/**
-	 * ユーザ毎のIFF
-	 */
+	
 	public static Map<String, Map<String, Integer>> UserIFF = new HashMap<String, Map<String, Integer>>();
 
-	/**
-	 * IFFのゲット
-	 */
+	
 	public static Map<String, Integer> getUserIFF(String pUsername) {
 		if (pUsername == null) {
 			return DefaultIFF;
@@ -58,7 +49,7 @@ public class IFF {
 		}
 		
 		if (!UserIFF.containsKey(pUsername)) {
-			// IFFがないので作成
+			
 			if (pUsername.isEmpty()) {
 				UserIFF.put(pUsername, DefaultIFF);
 			} else {
@@ -67,7 +58,7 @@ public class IFF {
 				UserIFF.put(pUsername, lmap);
 			}
 		}
-		// 既にある
+		
 		return UserIFF.get(pUsername);
 	}
 
@@ -83,17 +74,17 @@ public class IFF {
 			if (pEntity instanceof EntityLittleMaid) {
 				switch (pIndex) {
 				case 0:
-					// 野生種
+					
 					liff = IFF.iff_Unknown;
 					break;
 				case 1:
-					// 自分の契約者
+					
 					pName = (new StringBuilder()).append(pName).append(":Contract").toString();
 					((EntityLittleMaid) pEntity).setContract(true);
 					liff = IFF.iff_Friendry;
 					break;
 				case 2:
-					// 他人の契約者
+					
 					pName = (new StringBuilder()).append(pName).append(":Others").toString();
 					((EntityLittleMaid) pEntity).setContract(true);
 					liff = IFF.iff_Friendry;
@@ -102,10 +93,10 @@ public class IFF {
 			} else if (pEntity instanceof IEntityOwnable) {
 				switch (pIndex) {
 				case 0:
-					// 野生種
+					
 					break;
 				case 1:
-					// 自分の家畜
+					
 					pName = (new StringBuilder()).append(pName).append(":Taim").toString();
 					if (pEntity instanceof EntityTameable) {
 						((EntityTameable) pEntity).setTamed(true);
@@ -113,7 +104,7 @@ public class IFF {
 					liff = IFF.iff_Friendry;
 					break;
 				case 2:
-					// 他人の家畜
+					
 					pName = (new StringBuilder()).append(pName).append(":Others").toString();
 					if (pEntity instanceof EntityTameable) {
 						((EntityTameable) pEntity).setTamed(true);
@@ -128,12 +119,12 @@ public class IFF {
 				}
 			}
 			if (pMap != null) {
-				// 表示用Entityの追加
+				
 				pMap.put(pName, pEntity);
 				LittleMaidMobX.Debug(pName + " added.");
 			}
 			
-			// IFFの初期値
+			
 			if (!DefaultIFF.containsKey(pName)) {
 				if (pEntity instanceof IMob) {
 					liff = IFF.iff_Enemy;
@@ -145,9 +136,7 @@ public class IFF {
 		return liff;
 	}
 
-	/**
-	 * 敵味方識別判定
-	 */
+	
 	public static int getIFF(String pUsername, String entityname, World world) {
 		if (entityname == null) {
 			return LittleMaidMobX.cfg_Aggressive ? iff_Enemy : iff_Friendry;
@@ -157,11 +146,11 @@ public class IFF {
 		if (lmap.containsKey(entityname)) {
 			lt = lmap.get(entityname);
 		} else if (lmap != DefaultIFF && DefaultIFF.containsKey(entityname)) {
-			// 未登録だけどDefaultには設定がある時は値をコピー
+			
 			lt = DefaultIFF.get(entityname);
 			lmap.put(entityname, lt);
 		} else {
-			// 未登録Entityの場合は登録動作
+			
 			int li = entityname.indexOf(":");
 			String ls;
 			if (li > -1) {
@@ -186,9 +175,7 @@ public class IFF {
 		return lt;
 	}
 
-	/**
-	 * 敵味方識別判定
-	 */
+	
 	public static int getIFF(String pUsername, Entity entity) {
 		if (entity == null || !(entity instanceof EntityLivingBase)) {
 			return LittleMaidMobX.cfg_Aggressive ? iff_Enemy : iff_Friendry;
@@ -196,7 +183,7 @@ public class IFF {
 		String lename = EntityList.getEntityString(entity);
 		String lcname = lename;
 		if (lename == null) {
-			// 名称未定義MOB、プレーヤーとか？
+			
 			return iff_Friendry;
 			// return mod_LMM_littleMaidMob.Aggressive ? iff_Unknown :
 			// iff_Friendry;
@@ -205,11 +192,11 @@ public class IFF {
 		if (entity instanceof EntityLittleMaid) {
 			if (((EntityLittleMaid) entity).isContract()) {
 				if (((EntityLittleMaid) entity).getMaidMaster().contentEquals(pUsername)) {
-					// 自分の
+					
 					lcname = (new StringBuilder()).append(lename).append(":Contract").toString();
 					li = 1;
 				} else {
-					// 他人の
+					
 					lcname = (new StringBuilder()).append(lename).append(":Others").toString();
 					li = 2;
 				}
@@ -218,11 +205,11 @@ public class IFF {
 			String loname = MinecraftWrapper.getOwnerName((IEntityOwnable)entity);
 			if (!loname.isEmpty()) {
 				if (loname.contentEquals(pUsername)) {
-					// 自分の
+					
 					lcname = (new StringBuilder()).append(lename).append(":Taim").toString();
 					li = 1;
 				} else {
-					// 他人の
+					
 					lcname = (new StringBuilder()).append(lename).append(":Others").toString();
 					li = 2;
 				}
@@ -235,9 +222,9 @@ public class IFF {
 	}
 
 	public static void loadIFFs() {
-		// サーバー側の
+		
 		if (!Helper.isClient) {
-			// サーバー側処理
+			
 			loadIFF("");
 			File lfile = MinecraftServer.getServer().getFile("");
 			for (File lf : lfile.listFiles()) {
@@ -248,7 +235,7 @@ public class IFF {
 				}
 			}
 		} else {
-			// クライアント側
+			
 			loadIFF(null);
 		}
 	}
@@ -271,8 +258,8 @@ public class IFF {
 	}
 
 	public static void loadIFF(String pUsername) {
-		// IFF ファイルの読込み
-		// 動作はサーバー側で想定
+		
+		
 		File lfile = getFile(pUsername);
 		if (!(lfile.exists() && lfile.canRead())) {
 			return;
@@ -307,7 +294,7 @@ public class IFF {
 	}
 
 	public static void saveIFF(String pUsername) {
-		// IFF ファイルの書込み
+		
 		File lfile = getFile(LittleMaidMobX.proxy.isSinglePlayer() ? null : pUsername);
 		Map<String, Integer> lmap = getUserIFF(pUsername);
 		
@@ -316,7 +303,7 @@ public class IFF {
 				FileWriter fw = new FileWriter(lfile);
 				BufferedWriter bw = new BufferedWriter(fw);
 				
-				// トリガーアイテムのリスト
+				
 				for (Entry<Integer, List<Item>> le : TriggerSelect.getUserTrigger(pUsername).entrySet())
 				{
 					StringBuilder sb = new StringBuilder();

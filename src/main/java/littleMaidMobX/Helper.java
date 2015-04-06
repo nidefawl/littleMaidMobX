@@ -9,6 +9,14 @@ import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockDoublePlant;
+import net.minecraft.block.BlockFlower;
+import net.minecraft.block.BlockLeavesBase;
+import net.minecraft.block.BlockMushroom;
+import net.minecraft.block.BlockPumpkin;
+import net.minecraft.block.BlockSapling;
+import net.minecraft.block.BlockTallGrass;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -52,7 +60,7 @@ public class Helper {
 	protected static Map<String, Integer> entityIDList = new HashMap<String, Integer>();
 	
 	static {
-		// TODO 必要ない？
+		
 //		fpackage = ModLoader.class.getPackage();
 //		packegeBase = "";//fpackage == null ? "" : fpackage.getName().concat(".");
 
@@ -84,22 +92,15 @@ public class Helper {
 		*/
 	}
 
-	/**
-	 * 現在の実行環境がローカルかどうかを判定する。
-	 */
+	
 	public static boolean isLocalPlay() {
 		return isClient && mc.isIntegratedServerRunning();
 	}
 
-	/**
-	 * マルチ対応用。
-	 * ItemStackに情報更新を行うと、サーバー側との差異からSlotのアップデートが行われる。
-	 * その際、UsingItemの更新処理が行われないため違うアイテムに持替えられたと判定される。
-	 * ここでは比較用に使われるスタックリストを強制的に書換える事により対応した。
-	 */
+	
 	public static void updateCheckinghSlot(Entity pEntity, ItemStack pItemstack) {
 		if (pEntity instanceof EntityPlayerMP) {
-			// サーバー側でのみ処理
+			
 			EntityPlayerMP lep = (EntityPlayerMP)pEntity;
 			Container lctr = lep.openContainer;
 			for (int li = 0; li < lctr.inventorySlots.size(); li++) {
@@ -117,22 +118,10 @@ public class Helper {
 		return player.getGameProfile().getName();
 	}
 	
-	/**
-	 * Forge用クラス獲得。
-	 */
-	/*
-	使用箇所無し 削除
-	public static Class getForgeClass(BaseMod pMod, String pName) {
-		if (isForge) {
-			pName = pName.concat("_Forge");
-		}
-		return getNameOfClass(pName);
-	}
-	*/
+	
+	
 
-	/**
-	 * 名前からクラスを獲得する
-	 */
+	
 	public static Class getNameOfClass(String pName) {
 		if (fpackage != null) {
 			pName = fpackage.getName() + "." + pName;
@@ -147,9 +136,7 @@ public class Helper {
 		return lclass;
 	}
 
-	/**
-	 * 送信用データのセット
-	 */
+	
 	public static void setValue(byte[] pData, int pIndex, int pVal, int pSize) {
 		for (int li = 0; li < pSize; li++) {
 			pData[pIndex++] = (byte)(pVal & 0xff);
@@ -200,9 +187,9 @@ public class Helper {
 		}
 	}
 
-	// 状況判断要関数群
+	
 	public static boolean canBlockBeSeen(Entity pEntity, int x, int y, int z, boolean toTop, boolean do1, boolean do2) {
-		// ブロックの可視判定
+		
 		Vec3 vec3d = Vec3.createVectorHelper(pEntity.posX, pEntity.posY + pEntity.getEyeHeight(), pEntity.posZ);
 		Vec3 vec3d1 = Vec3.createVectorHelper((double)x + 0.5D, (double)y + (toTop ? 0.9D : 0.5D), (double)z + 0.5D);
 		
@@ -221,10 +208,10 @@ public class Helper {
 	}
 
 	public static boolean setPathToTile(EntityLiving pEntity, TileEntity pTarget, boolean flag) {
-		// Tileまでのパスを作る
+		
 		PathNavigate lpn = pEntity.getNavigator();
 		float lspeed = 1.0F;
-		// 向きに合わせて距離を調整
+		
 		int i = (pTarget.yCoord == MathHelper.floor_double(pEntity.posY) && flag) ? 2 : 1;
 		switch (pEntity.worldObj.getBlockMetadata(pTarget.xCoord, pTarget.yCoord, pTarget.zCoord)) {
 		case 3:
@@ -240,95 +227,11 @@ public class Helper {
 		}
 	}
 
-	/**
-	 * Modloader環境下で空いているEntityIDを返す。
-	 * 有効な値を獲得できなければ-1を返す。
-	 */
-	/*
-	private static int getNextEntityID(boolean isLiving) {
-		if (isLiving) {
-			// 生物用
-			for (int li = 1; li < 256; li++) {
-				if (EntityList.getClassFromID(li) == null) {
-					return li;
-				}
-			}
-		} else {
-			// 物用
-			for (int li = MMMLib.cfg_startVehicleEntityID; li < MMMLib.cfg_startVehicleEntityID + 2048; li++) {
-				if (EntityList.getClassFromID(li) == null) {
-					return li;
-				}
-			}
-		}
-		return -1;
-	}
-	*/
+	
+	
 
-	/**
-	 * Entityを登録する。
-	 * RML、Forge両対応。
-	 * @param entityclass
-	 * @param entityName
-	 * @param defaultId
-	 * 0 : オートアサイン
-	 * @param mod
-	 * @param uniqueModeName
-	 * @param trackingRange
-	 * @param updateFrequency
-	 * @param sendVelocityUpdate
-	 */
-	/*
-	public static int registerEntity(
-			Class<? extends Entity> entityclass, String entityName, int defaultId,
-			BaseMod mod, int trackingRange, int updateFrequency, boolean sendVelocityUpdate,
-			int pEggColor1, int pEggColor2) {
-		int lid = 0;
-		lid = getModEntityID(mod.getName());
-		if (isForge) {
-			try {
-				Method lmethod;
-				// EntityIDの獲得
-				lmethod = entityRegistry.getMethod("findGlobalUniqueEntityId");
-				defaultId = (Integer)lmethod.invoke(null);
-				
-				if (pEggColor1 == 0 && pEggColor2 == 0) {
-					lmethod = entityRegistry.getMethod("registerGlobalEntityID",
-							Class.class, String.class, int.class);
-					lmethod.invoke(null, entityclass, entityName, defaultId);
-				} else {
-					lmethod = entityRegistry.getMethod("registerGlobalEntityID",
-							Class.class, String.class, int.class, int.class, int.class);
-					lmethod.invoke(null, entityclass, entityName, defaultId, pEggColor1, pEggColor2);
-				}
-				// EntityListへの登録は適当な数字でよい。
-				registerModEntity.invoke(
-						null, entityclass, entityName, lid,
-						mod, trackingRange, updateFrequency, sendVelocityUpdate);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else {
-			// EntityListへの登録は
-			if (defaultId == 0) {
-				defaultId = getNextEntityID(entityclass.isAssignableFrom(EntityLivingBase.class));
-			}
-			if (pEggColor1 == 0 && pEggColor2 == 0) {
-				ModLoader.registerEntityID(entityclass, entityName, defaultId);
-			} else {
-				ModLoader.registerEntityID(entityclass, entityName, defaultId, pEggColor1, pEggColor2);
-			}
-			ModLoader.addEntityTracker(mod, entityclass, defaultId, trackingRange, updateFrequency, sendVelocityUpdate);
-		}
-		LMM_LittleMaidMobX.Debug("RegisterEntity ID:%d / %s-%d : %s", defaultId, mod.getName(), lid, entityName);
-		return defaultId;
-	}
-	public static int registerEntity(
-			Class<? extends Entity> entityclass, String entityName, int defaultId,
-			BaseMod mod, int trackingRange, int updateFrequency, boolean sendVelocityUpdate) {
-		return registerEntity(entityclass, entityName, defaultId, mod, trackingRange, updateFrequency, sendVelocityUpdate, 0, 0);
-	}
-	*/
+	
+	
 
 	private static int getModEntityID(String uniqueModeName) {
 		int li = 0;
@@ -339,23 +242,17 @@ public class Helper {
 		return li;
 	}
 
-	/**
-	 * Entityを返す。
-	 */
+	
 	public static Entity getEntity(byte[] pData, int pIndex, World pWorld) {
 		return pWorld.getEntityByID(Helper.getInt(pData, pIndex));
 	}
 
-	/**
-	 * 変数「avatar」から値を取り出し戻り値として返す。
-	 * avatarが存在しない場合は元の値を返す。
-	 * avatarはEntityLiving互換。
-	 */
+	
 	public static Entity getAvatarEntity(Entity pEntity){
-		// littleMaid用コードここから
+		
 		if (pEntity == null) return null;
 		try {
-			// 射手の情報をEntityLittleMaidAvatarからEntityLittleMaidへ置き換える
+			
 			Field field = pEntity.getClass().getField("avatar");
 			pEntity = (EntityLivingBase)field.get(pEntity);
 		} catch (NoSuchFieldException e) {
@@ -364,17 +261,13 @@ public class Helper {
 		} catch (Error e) {
 			e.printStackTrace();
 		}
-		// ここまで
+		
 		return pEntity;
 	}
 
-	/**
-	 * 変数「maidAvatar」から値を取り出し戻り値として返す。
-	 * maidAvatarが存在しない場合は元の値を返す。
-	 * maidAvatarはEntityPlayer互換。
-	 */
+	
 	public static Entity getAvatarPlayer(Entity entity) {
-		// メイドさんチェック
+		
 		try {
 			Field field = entity.getClass().getField("maidAvatar");
 			entity = (Entity)field.get(entity);
@@ -386,9 +279,7 @@ public class Helper {
 		return entity;
 	}
 
-	/**
-	 * プレーヤのインベントリからアイテムを減らす
-	 */
+	
 	public static ItemStack decPlayerInventory(EntityPlayer par1EntityPlayer, int par2Index, int par3DecCount) {
 		if (par1EntityPlayer == null) {
 			return null;
@@ -403,7 +294,7 @@ public class Helper {
 		}
 		
 		if (!par1EntityPlayer.capabilities.isCreativeMode) {
-			// クリエイティブだと減らない
+			
 			itemstack1.stackSize -= par3DecCount;
 		}
 		
@@ -437,28 +328,24 @@ public class Helper {
 		return lf;
 	}
 	protected static float convRevision() {
-		// TODO ★後回し
+		
 		return 0;// convRevision(MMMLib.Revision);
 	}
 
-	/**
-	 * 指定されたリビジョンよりも古ければ例外を投げてストップ
-	 */
+	
 	public static void checkRevision(String pRev) {
 		if (convRevision() < convRevision(pRev)) {
-			// 適合バージョンではないのでストップ
-		// TODO ★後回し
+			
+		
 		//	ModLoader.getLogger().warning("you must check MMMLib revision.");
 		//	throw new RuntimeException("The revision of MMMLib is old.");
 		}
 	}
 
-	/**
-	 * EntityListに登録されていいるEntityを置き換える。
-	 */
+	
 	public static void replaceEntityList(Class pSrcClass, Class pDestClass) {
-		// EntityList登録情報を置き換え
-		// 古いEntityでもスポーンできるように一部の物は二重登録
+		
+		
 		try {
 			// stringToClassMapping
 			Map lmap;
@@ -484,7 +371,7 @@ public class Helper {
 					le.setValue(pDestClass);
 				}
 			}
-			// classToIDMapping なんぜコイツだけprivateのまま？
+			
 			lmap = (Map)ObfuscationReflectionHelper.getPrivateValue(EntityList.class, null, "field_75624_e", "classToIDMapping");
 			if (lmap.containsKey(pSrcClass)) {
 				lint = (Integer)lmap.get(pSrcClass);
@@ -510,12 +397,9 @@ public class Helper {
 		}
 	}
 
-	/**
-	 * バイオームの設定Entityを置き換えられたEntityへ置き換える。
-	 * 基本的にMMMLib以外からは呼ばれない。
-	 */
+	
 	protected static void replaceBaiomeSpawn() {
-		// バイオームの発生処理をのっとる
+		
 		if (replaceEntitys.isEmpty()) return;
 		BiomeGenBase[] biomeList = BiomeGenBase.getBiomeGenArray();
 		for (int i = 0; i < biomeList.length; i++) {
@@ -533,18 +417,7 @@ public class Helper {
 		}
 	}
 
-	/**
-	 * 視線の先にいる最初のEntityを返す
-	 * @param pEntity
-	 * 視点
-	 * @param pRange
-	 * 視線の有効距離
-	 * @param pDelta
-	 * 時刻補正
-	 * @param pExpand
-	 * 検知領域の拡大範囲
-	 * @return
-	 */
+	
 	public static Entity getRayTraceEntity(EntityLivingBase pEntity, double pRange, float pDelta, float pExpand) {
 		Vec3 lvpos = Vec3.createVectorHelper(
 				pEntity.posX, pEntity.posY + pEntity.getEyeHeight(), pEntity.posZ);
@@ -582,11 +455,9 @@ public class Helper {
 	}
 
 
-	// Forge対策
+	
 
-	/**
-	 * Forge対策用のメソッド
-	 */
+	
 	public static ItemStack getSmeltingResult(ItemStack pItemstack) {
 /*
 		if (methGetSmeltingResultForge != null) {
@@ -599,14 +470,9 @@ public class Helper {
 		return FurnaceRecipes.smelting().getSmeltingResult(pItemstack);
 	}
 
-	/**
-	 * アイテムに追加効果が在るかを判定する。
-	 * Forge対策。
-	 * @param pItemStack
-	 * @return
-	 */
+	
 	public static boolean hasEffect(ItemStack pItemStack) {
-		// マジClientSIDEとか辞めてほしい。
+		
 		if (pItemStack != null) {
 			Item litem = pItemStack.getItem();
 			if (litem instanceof ItemPotion) {
@@ -617,46 +483,10 @@ public class Helper {
 		return false;
 	}
 
-	/**
-	 * Blockのインスタンスを置き換える。
-	 * static finalの変数に対して行うのでForgeでは無効。
-	 * @param pOriginal
-	 * @param pReplace
-	 * @return
-	 */
-	/*
-	public static boolean replaceBlock(Block pOriginal, Block pReplace) {
-		if (isForge) {
-			return false;
-		}
-		try {
-			// Blockのstatic final分の置換え
-			Field[] lfield = Block.class.getDeclaredFields();
-			for (int li = 0; li < lfield.length; li++) {
-				if (!Modifier.isStatic(lfield[li].getModifiers())) {
-					// static以外は対象外
-					continue;
-				}
-				
-				Object lobject = lfield[li].get(null);
-				if (lobject == pOriginal) {
-					ModLoader.setPrivateValue(Block.class, null, li, pReplace);
-					return true;
-				}
-			}
-		}
-		catch(Exception exception) {
-		}
-		return false;
-	}
-	*/
+	
+	
 
-	/**
-	 * 16進数の文字列をIntへ変換する。
-	 * 0xffffffff対策。
-	 * @param pValue
-	 * @return
-	 */
+	
 	public static int getHexToInt(String pValue) {
 		String ls = "00000000".concat(pValue);
 		int llen = ls.length();
@@ -665,14 +495,93 @@ public class Helper {
 		return (lj << 16) | li;
 	}
 
-	/**
-	 *  アイテムに設定された攻撃力を見る
-	 * @param pItemStack
-	 * @return
-	 */
+	
 	public static double getAttackVSEntity(ItemStack pItemStack) {
 		AttributeModifier lam = (AttributeModifier)pItemStack.getAttributeModifiers().get(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName());
 		return lam == null ? 0 : lam.getAmount();
 	}
 
+
+	public static float sin(float f) {
+		return MathHelper.sin(f);
+	}
+
+
+	public static float cos(float f) {
+		return MathHelper.cos(f);
+	}
+
+
+	public static float sqrt(float f) {
+		return MathHelper.sqrt_float(f);
+	}
+
+
+	public static int getEntityTicksExisted(Object entity) {
+		if (entity instanceof Entity) {
+			return ((Entity)entity).ticksExisted;
+		}
+		return 0;
+	}
+
+
+	public static Object getRidingEntity(Object entity) {
+		if (entity instanceof Entity) {
+			return ((Entity)entity).ridingEntity;
+		}
+		return null;
+	}
+
+
+	public static boolean isRidingMaster(Object entityliving) {
+		// TODO Auto-generated method stub
+//		Modchu_Reflect.loadClass("EntityPlayer").isInstance(Modchu_Reflect.getFieldObject("Entity", "field_70154_o", "ridingEntity", entityliving));
+		return false;
+	}
+
+
+	public static int normalize(int i, int min, int max, int minOver, int maxOver) {
+		return i < min ? minOver : i > max ? maxOver : i;
+	}
+
+	public static long normalize(long l, long min, long max, long minOver, long maxOver) {
+		return l < min ? minOver : l > max ? maxOver : l;
+	}
+
+	public static float normalize(float f, float min, float max, float minOver, float maxOver) {
+		return f < min ? minOver : f > max ? maxOver : f;
+	}
+
+	public static double normalize(double d, double min, double max, double minOver, double maxOver) {
+		return d < min ? minOver : d > max ? maxOver : d;
+	}
+	public static Block getBlock(Object itemstack) {
+		if (itemstack instanceof ItemStack) {
+			Item item = ((ItemStack)itemstack).getItem();
+			return item != null ? Block.getBlockFromItem(item) : null;
+		}
+		return null;
+	}
+
+	public static boolean isCamouflage(Object itemstack) {
+		Block block = getBlock(itemstack);
+		if (block instanceof BlockLeavesBase || block instanceof BlockPumpkin) {
+			return true;
+		}
+		return false;
+	}
+
+	public static boolean isPlanter(Object stack) {
+		Block itemStackOrBlockOrItem = getBlock(stack);
+		return itemStackOrBlockOrItem instanceof BlockFlower
+				|| itemStackOrBlockOrItem instanceof BlockDoublePlant
+				|| itemStackOrBlockOrItem instanceof BlockMushroom
+				|| itemStackOrBlockOrItem instanceof BlockSapling
+				|| itemStackOrBlockOrItem instanceof BlockTallGrass;
+	}
+
+
+	public static float degToRad(float deg) {
+		return deg / 180F * (float) Math.PI;
+	}
 }
