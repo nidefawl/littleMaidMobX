@@ -2,69 +2,101 @@ package littleMaidMobX.render.model;
 
 import net.minecraft.client.model.PositionTextureVertex;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.util.Vec3;
+
+import org.lwjgl.opengl.GL11;
 
 public class ModelBoxTriangles implements IRenderable {
 
-	private PositionTextureVertex[] positionTextureVertex;
-	private TextureTriangle[] triList;
-	public final float posX1;
-	public final float posY1;
-	public final float posZ1;
-	public final float posX2;
-	public final float posY2;
-	public final float posZ2;
-	public final float posX3;
-	public final float posY3;
-	public final float posZ3;
-	public final float[][] vn;
-
-
-	public ModelBoxTriangles(ModelRenderer var1, int var2, int var3,
-			float[][] var4, float[][] var5, float[][] var6, float[] var7, float var8) {
-		int var21 = var4.length;
-		posX1 = var4[0][0];
-		posY1 = var4[0][1];
-		posZ1 = var4[0][2];
-		posX2 = var4[1][0];
-		posY2 = var4[1][1];
-		posZ2 = var4[1][2];
-		posX3 = var4[2][0];
-		posY3 = var4[2][1];
-		posZ3 = var4[2][2];
-		vn = var6;
-		float var22 = 8.0F;
-		float var23 = 8.0F;
-		positionTextureVertex = new PositionTextureVertex[var21];
-		//Modchu_Debug.mDebug("ModchuModel_ModelPlateFreeShape positionTextureVertex="+positionTextureVertex);
-		triList = new TextureTriangle[1];
-
-		for (int var24 = 0; var24 < var21; ++var24) {
-			positionTextureVertex[var24] = new PositionTextureVertex(var4[var24][0], var4[var24][1], var4[var24][2], 0.0F, 0.0F );
-			//Modchu_Debug.mDebug("ModchuModel_ModelPlateFreeShape positionTextureVertex["+var24+"]="+positionTextureVertex[var24]);
+	//keep it private, if it doesnt change we can calculate normals once, plus use display lists later on
+	private PositionTextureVertex[] vertexPositions;
+	
+	public int nVertices;
+	private boolean invertNormal;
+	public int red;
+	public int green;
+	public int blue;
+	public int alpha;
+	private boolean setColor;
+	Vec3[] normals;
+	public ModelBoxTriangles(int texOffsetX, int texOffsetY,
+			float[][] vertices, float[][] texCoords, float[][] normalf, float[] rgba) {
+		if (rgba != null) {
+			red = (int) (255.0F * rgba[0]);
+			green = (int) (255.0F * rgba[1]);
+			blue = (int) (255.0F * rgba[2]);
+			alpha = (int) (255.0F * rgba[3] * 0.5F);
+			setColor = true;
+		} else {
+			red = 255;
+			green = 255;
+			blue = 255;
+			alpha = 255;
+			setColor = false;
 		}
+		float texScaleX = 1.0F;
+		float texScaleY = 1.0F;
+		nVertices = vertices.length;
+		vertexPositions = new PositionTextureVertex[nVertices];
+		normals = new Vec3[nVertices];
+		
+		for (int i = 0; i < nVertices; ++i) {
+			vertexPositions[i] = new PositionTextureVertex(vertices[i][0], vertices[i][1], vertices[i][2], texCoords[i][0] / texScaleX, texCoords[i][1] / texScaleY );
+		}
+		if (normalf == null) {
+			Vec3 vec3_1 = vertexPositions[1].vector3D;
+			Vec3 vec3_0 = vec3_1.subtract(vertexPositions[0].vector3D);
+			Vec3 vec3_2 = vec3_1.subtract(vertexPositions[2].vector3D);
 
-		float[][] var27 = new float[3][2];
-		var27[0][0] = (float)var2 + var22;
-		var27[0][1] = (float)var3;
-		var27[1][0] = (float)var2;
-		var27[1][1] = (float)var3;
-		var27[2][0] = (float)var2;
-		var27[2][1] = (float)var3 + var23;
-		triList[0] = new TextureTriangle(positionTextureVertex, var5, vn, var7, 0.0F, 0.0F );
-		//Modchu_Debug.mDebug("ModchuModel_ModelPlateFreeShape triList[0]="+triList[0]);
-
-		if (var1.mirror) {
-			for (var2 = 0; var2 < triList.length; ++var2) {
-				triList[var2].flipFace();
-				//Modchu_Debug.mDebug("ModchuModel_ModelPlateFreeShape triList["+var2+"]="+triList[var2]);
+			for (int i = 0; i < nVertices; ++i) {
+				normals[i] = vec3_2.crossProduct(vec3_0).normalize();
+			}
+		} else {
+			for (int i = 0; i < nVertices; ++i) {
+				normals[i] = Vec3.createVectorHelper((double) normalf[i][0], (double) normalf[i][1], (double) normalf[i][2]);
 			}
 		}
 	}
 
-	public void render(Tessellator o, float f) {
-		for (int var3 = 0; var3 < triList.length; ++var3) {
-			triList[var3].draw(o, f);
+	public void flipFace() {
+		PositionTextureVertex[] o = new PositionTextureVertex[vertexPositions.length];
+		for (int var2 = 0; var2 < vertexPositions.length; ++var2) {
+			o[var2] = vertexPositions[vertexPositions.length - var2 - 1];
 		}
+		vertexPositions = o;
 	}
+
+	@Override
+	public void render(Tessellator tessellator, float f) {
+
+		GL11.glShadeModel(GL11.GL_SMOOTH);
+		byte by = GL11.GL_TRIANGLE_FAN;
+//
+		if (nVertices % 4 == 0) {
+			by = GL11.GL_QUADS;
+		}
+		tessellator.startDrawing(by);
+
+		for (int i1 = 0; i1 < nVertices; ++i1) {
+			if (invertNormal) {
+				tessellator.setNormal((float)-normals[i1].xCoord, (float)-normals[i1].yCoord, (float)-normals[i1].zCoord);
+			} else {
+				tessellator.setNormal((float) normals[i1].xCoord, (float) normals[i1].yCoord, (float) normals[i1].zCoord);
+			}
+
+			PositionTextureVertex vertexPosition = vertexPositions[i1];
+			Vec3 vertexPositionVec3 = vertexPosition.vector3D;
+			tessellator.addVertexWithUV(
+					vertexPositionVec3.xCoord*f,
+					vertexPositionVec3.yCoord*f,
+					vertexPositionVec3.zCoord*f,
+					vertexPosition.texturePositionX,
+					vertexPosition.texturePositionY
+				);
+		}
+
+		tessellator.draw();
+	}
+
 
 }
