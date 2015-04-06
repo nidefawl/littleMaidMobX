@@ -1,4 +1,4 @@
-package littleMaidMobX.model.maids;import littleMaidMobX.render.model.ModelRenderer;import modchu.model.ModchuModel_ModelRendererMaster;public class MultiModel_DogAngel2 extends MultiModel_DogAngel {	public MultiModel_DogAngel2()
+package littleMaidMobX.model.maids;import littleMaidMobX.render.model.ModelRenderer;public class MultiModel_DogAngel2 extends MultiModel_DogAngel {	public MultiModel_DogAngel2()
 	{
 		this(0.0F);
 	}	public MultiModel_DogAngel2(float f)

@@ -17,8 +17,6 @@ import littleMaidMobX.model.caps.ModelCapsHelper;
 import littleMaidMobX.model.maids.MultiModel_Elsie;
 import littleMaidMobX.model.maids.MultiModel_NM;
 import littleMaidMobX.wrapper.MinecraftClientWrapper;
-import modchu.lib.characteristic.Modchu_ModelPlateFreeShape;
-import modchu.lib.characteristic.Modchu_ModelRenderer;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.TextureOffset;
