@@ -249,7 +249,7 @@ public class AIAttackArrow extends EntityAIBase implements IEntityAI {
 						fInventory.setInventoryCurrentSlotContents(litemstack);
 					}
 					
-					
+					// this is so hacky, its really shitty
 					List<Entity> newentitys = worldObj.loadedEntityList.subList(lastentityid, worldObj.loadedEntityList.size());
 					boolean shootingflag = false;
 					if (newentitys != null && newentitys.size() > 0) {
@@ -268,17 +268,20 @@ public class AIAttackArrow extends EntityAIBase implements IEntityAI {
 									ff.setAccessible(true);
 									Object eo = ff.get(te);
 									if (eo.equals(fAvatar)) {
-										ff.set(te, this);
+//										ff.set(te, this); // this is plain wrong 
+										ff.set(te, this.fMaid); 
 										LittleMaidMobX.Debug("Replace FO Owner.");
 									}
 								}
 							}
 							catch (Exception exception) {
+								exception.printStackTrace(); // print exception so we see the wrong code throwing!
 							}
 						}
 					}
 					
 					if (shootingflag) {
+						// this is also very shitty
 						for (Object obj : worldObj.loadedEntityList) {
 							if (obj instanceof EntityCreature && !(obj instanceof EntityLittleMaid)) {
 								EntityCreature ecr = (EntityCreature)obj;
