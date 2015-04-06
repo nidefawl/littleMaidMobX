@@ -100,6 +100,13 @@ public class LittleMaidMobX {
 	
 	public static void Debug(String pText, Object... pData) {
 		if (isDebugMessage) {
+			// TODO: use Logger class instead with proper names and a way to enable/disable (one logger for sound, one for AI, one for models, etc)
+//			if (pText.contains("Sound")) { 
+//				return;
+//			}			
+//			if (pText.contains("daytime")) { 
+//				return;
+//			}
 //			System.out.println(String.format("MMMLib-" + pText, pData));
 		}
 	}
