@@ -5,7 +5,6 @@ import static littleMaidMobX.model.caps.IModelCaps.caps_Entity;
 import static littleMaidMobX.model.caps.IModelCaps.caps_HeadMount;
 import static littleMaidMobX.model.caps.IModelCaps.caps_Items;
 
-import java.lang.reflect.Constructor;
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.List;
@@ -185,24 +184,6 @@ public class ModelRenderer {
 		return this;
 	}
 
-	public ModelRenderer addBox(String pName, float pX, float pY, float pZ,
-			int pWidth, int pHeight, int pDepth) {
-		addParts(ModelBox.class, pName, pX, pY, pZ, pWidth, pHeight, pDepth, 0.0F);
-		return this;
-	}
-
-	public ModelRenderer addBox(float pX, float pY, float pZ,
-			int pWidth, int pHeight, int pDepth) {
-		addParts(ModelBox.class, pX, pY, pZ, pWidth, pHeight, pDepth, 0.0F);
-		return this;
-	}
-
-	public ModelRenderer addBox(float pX, float pY, float pZ,
-			int pWidth, int pHeight, int pDepth, float pSizeAdjust) {
-		addParts(ModelBox.class, pX, pY, pZ, pWidth, pHeight, pDepth, pSizeAdjust);
-		return this;
-	}
-
 	public ModelRenderer setRotationPoint(float pX, float pY, float pZ) {
 		rotationPointX = pX;
 		rotationPointY = pY;
@@ -297,66 +278,49 @@ public class ModelRenderer {
 		textureHeight = (float)pHeight;
 		return this;
 	}
-
-
 	
-
-	
-	public ModelRenderer addCubeList(ModelBoxBase pModelBoxBase) {
-		cubeList.add(pModelBoxBase);
+	public ModelRenderer addBox(String pName, float pX, float pY, float pZ, 
+			int pWidth, int pHeight, int pDepth, float pSizeAdjust) {
+		ModelBox box = new ModelBox(this, this.textureOffsetX, this.textureOffsetY, 
+				pX, pY, pZ, pWidth, pHeight, pDepth, pSizeAdjust);
+		box.setBoxName(pName);
+		this.cubeList.add(box);
 		return this;
 	}
 
-	protected ModelBoxBase getModelBoxBase(Class<? extends ModelBoxBase> pModelBoxBase, Object ... pArg) {
-		try {
-			Constructor<? extends ModelBoxBase> lconstructor =
-					pModelBoxBase.getConstructor(ModelRenderer.class, Object[].class);
-			return lconstructor.newInstance(this, pArg);
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		return null;
+	public ModelRenderer addBox(float pX, float pY, float pZ, 
+			int pWidth, int pHeight, int pDepth, float pSizeAdjust) {
+		return this.addBox(null, pX, pY, pZ, pWidth, pHeight, pDepth, pSizeAdjust);
 	}
 
-	protected Object[] getArg(Object ... pArg) {
-		Object lobject[] = new Object[pArg.length + 2];
-		lobject[0] = textureOffsetX;
-		lobject[1] = textureOffsetY;
-		for (int li = 0; li < pArg.length; li++) {
-			lobject[2 + li] = pArg[li];
-		}
-		return lobject;
+	public ModelRenderer addBox(float pX, float pY, float pZ, 
+			int pWidth, int pHeight, int pDepth) {
+		return this.addBox(null, pX, pY, pZ, pWidth, pHeight, pDepth, 0F);
 	}
 
 
-	public ModelRenderer addParts(Class<? extends ModelBoxBase> pModelBoxBase, Object ... pArg) {
-		addCubeList(getModelBoxBase(pModelBoxBase, getArg(pArg)));
+	public ModelRenderer addPlate(String pName, float pX, float pY, float pZ,
+			int pWidth, int pHeight, int pFacePlane, float pSizeAdjust) {
+		ModelBoxPlate plate = new ModelBoxPlate(this, this.textureOffsetX, this.textureOffsetY, 
+				pX, pY, pZ, pWidth, pHeight, pFacePlane, pSizeAdjust);
+		plate.setBoxName(pName);
+		this.cubeList.add(plate);
 		return this;
 	}
-
-	
-	public ModelRenderer addPartsTexture(Class<? extends ModelBoxBase> pModelBoxBase, Object ... pArg) {
-		addCubeList(getModelBoxBase(pModelBoxBase, pArg));
-		return this;
-	}
-
 
 	public ModelRenderer addPlate(float pX, float pY, float pZ,
 			int pWidth, int pHeight, int pFacePlane) {
-		addParts(ModelBoxPlate.class, pX, pY, pZ, pWidth, pHeight, pFacePlane, 0.0F);
-		return this;
+		return this.addPlate(null, pX, pY, pZ, pWidth, pHeight, pFacePlane, 0F);
 	}
 
 	public ModelRenderer addPlate(float pX, float pY, float pZ,
 			int pWidth, int pHeight, int pFacePlane, float pSizeAdjust) {
-		addParts(ModelBoxPlate.class, pX, pY, pZ, pWidth, pHeight, pFacePlane, pSizeAdjust);
-		return this;
+		return this.addPlate(null, pX, pY, pZ, pWidth, pHeight, pFacePlane, pSizeAdjust);
 	}
 
 	public ModelRenderer addPlate(String pName, float pX, float pY, float pZ,
 			int pWidth, int pHeight, int pFacePlane) {
-		addParts(ModelBoxPlate.class, pName, pX, pY, pZ, pWidth, pHeight, pFacePlane, 0.0F);
-		return this;
+		return this.addPlate(pName, pX, pY, pZ, pWidth, pHeight, pFacePlane, 0F);
 	}
 
 	
@@ -877,35 +841,4 @@ public class ModelRenderer {
 	public ModelRenderer addPlateFreeShape(float[][] vertex, float[][] texUV, float[][] vertexN) {
 		return addPlateFreeShape(vertex, texUV, vertexN, null);
 	}
-
-
-
-
-//
-//	public int getBoxSizeX() {
-//		return getboxSizeX(0);
-//	}
-//
-//	public int getBoxSizeY() {
-//		return getboxSizeY(0);
-//	}
-//
-//	public int getBoxSizeZ() {
-//		return getboxSizeZ(0);
-//	}
-//
-//	public int getboxSizeX(int i) {
-//		return this.cubeList != null
-//				&& this.cubeList.size() > i ? (Integer) Modchu_Reflect.getFieldObject(this.cubeList.get(i).getClass(), "boxSizeX", this.cubeList.get(i)) : -1;
-//	}
-//
-//	public int getboxSizeY(int i) {
-//		return this.cubeList != null
-//				&& this.cubeList.size() > i ? (Integer) Modchu_Reflect.getFieldObject(this.cubeList.get(i).getClass(), "boxSizeY", this.cubeList.get(i)) : -1;
-//	}
-//
-//	public int getboxSizeZ(int i) {
-//		return this.cubeList != null
-//				&& this.cubeList.size() > i ? this.cubeList.get(i).setBoxName(Integer) Modchu_Reflect.getFieldObject(this.cubeList.get(i).getClass(), "boxSizeZ", this.cubeList.get(i)) : -1;
-//	}
 }

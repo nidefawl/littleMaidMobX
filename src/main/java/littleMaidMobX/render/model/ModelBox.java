@@ -10,15 +10,7 @@ public class ModelBox extends ModelBoxBase {
 	 * @param pArg
 	 * textureX, textureY, posX, posY, posZ, width, height, depth, sizeAdjust
 	 */
-	public ModelBox(ModelRenderer pMRenderer, Object... pArg) {
-		super(pMRenderer, pArg);
-		init(pMRenderer, (Integer)pArg[0], (Integer)pArg[1],
-				(Float)pArg[2], (Float)pArg[3], (Float)pArg[4],
-				(Integer)pArg[5], (Integer)pArg[6], (Integer)pArg[7],
-				pArg.length < 9 ? 0.0F : (Float)pArg[8]);
-	}
-
-	private void init(ModelRenderer pMRenderer, int pTexX, int pTexY,
+	public ModelBox(ModelRenderer pMRenderer, int pTexX, int pTexY,
 			float pX, float pY, float pZ,
 			int pW, int pH, int pD, float pSize) {
 		posX1 = pX;

@@ -149,23 +149,7 @@ public class MultiModel_Beverly5 extends ModelModchuBaseBeverly {	//added fiel
 		fwBuf2 = fwBuf2 < -0.7F ? -0.7F : fwBuf2;
 		Ponytail.rotateAngleX -= fwBuf2;
 		BunchR.rotateAngleZ -= fwBuf2;
-		BunchL.rotateAngleZ += fwBuf2;//		if (isMatingFlag && Modchu_Reflect.loadClass("EntityVillager").isInstance(entityliving)) { //村人モデルとしての使用時
-//			//if ((EntityVillager)entityliving.isMating()) { //"KIMASHITAWA-!"
-//			if ((Boolean) Modchu_Reflect.invokeMethod("EntityVillager", "isMating", entityliving)) {
-//				bipedHead.rotateAngleX += 0.15F;
-//				bipedHead.rotateAngleZ += 0.25F;
-//				rightArm.rotateAngleX -= 0.3F;
-//				leftArm.rotateAngleX -= 0.3F;
-//				rightArm2.rotateAngleX -= 2.1F;
-//				leftArm2.rotateAngleX -= 2.1F;
-//				rightArm.rotateAngleZ -= 0.3F;
-//				leftArm.rotateAngleZ += 0.3F;
-//				rightArm.rotateAngleY -= 0.3F;
-//				leftArm.rotateAngleY += 0.3F;
-//				rightArm2.rotateAngleY -= 0.3F;
-//				leftArm2.rotateAngleY += 0.3F;
-//			}
-//		}	}	/**
+		BunchL.rotateAngleZ += fwBuf2;	}	/**
 	 * 姿勢制御・更新差分
 	 */
 	@Override
