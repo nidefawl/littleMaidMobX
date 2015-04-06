@@ -588,12 +588,12 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 				ltasksDoDEST.clear();
 				ltasksDoDEST.addAll(ltasksDoSRC);
 				
-				for (EntityAITaskEntry ltask : ltasksDoSRC) {
-					if (ltask instanceof IEntityAI)
-					{
-//						((LMM_IEntityAI)ltask).setDefaultEnable();
-					}
-				}
+//				for (EntityAITaskEntry ltask : ltasksDoSRC) {
+//					if (ltask instanceof IEntityAI)
+//					{
+////						((LMM_IEntityAI)ltask).setDefaultEnable();
+//					}
+//				}
 			}
 		} catch (Exception s) {
 		}
