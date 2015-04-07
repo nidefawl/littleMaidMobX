@@ -63,7 +63,7 @@ public class ModelRenderer {
 	public List<IRenderable> customShapes;
 	public final String boxName;
 	protected ModelBase baseModel;
-	public ModelRenderer pearent;
+	public ModelRenderer parent;
 	public float offsetX;
 	public float offsetY;
 	public float offsetZ;
@@ -149,7 +149,7 @@ public class ModelRenderer {
 		scaleY = 1.0F;
 		scaleZ = 1.0F;
 		
-		pearent = null;
+		parent = null;
 		
 //		renderBlocksIr.useInventoryTint = false;
 	}
@@ -194,7 +194,7 @@ public class ModelRenderer {
 			childModels = new ArrayList<ModelRenderer>();
 		}
 		childModels.add(pModelRenderer);
-		pModelRenderer.pearent = this;
+		pModelRenderer.parent = this;
 	}
 
 	public ModelRenderer setTextureOffset(int pOffsetX, int pOffsetY) {
@@ -294,8 +294,8 @@ public class ModelRenderer {
 			compileDisplayList(par1);
 		}
 		
-		if (pearent != null) {
-			pearent.postRender(par1);
+		if (parent != null) {
+			parent.postRender(par1);
 		}
 		
 		GL11.glTranslatef(offsetX, offsetY, offsetZ);
@@ -382,7 +382,7 @@ public class ModelRenderer {
 		compiled = false;
 		if (childModels != null) {
 			for (ModelRenderer r : childModels) {
-				r.pearent = null;
+				r.parent = null;
 			}
 			childModels.clear();
 		}
@@ -836,8 +836,8 @@ public class ModelRenderer {
 	public void removeChild(ModelRenderer par1ModelRenderer) {
 		if (this.childModels != null) {
 			this.childModels.remove(par1ModelRenderer);
-			if (par1ModelRenderer != null && par1ModelRenderer.pearent == this) {
-				par1ModelRenderer.pearent = null;
+			if (par1ModelRenderer != null && par1ModelRenderer.parent == this) {
+				par1ModelRenderer.parent = null;
 			}
 			
 		}
