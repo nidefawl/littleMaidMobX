@@ -19,6 +19,7 @@ public class ModelBox extends ModelBoxBase {
 		posX2 = pX + (float)pW;
 		posY2 = pY + (float)pH;
 		posZ2 = pZ + (float)pD;
+		pSizeAdj = pSize;
 		vertexPositions = new PositionTextureVertex[8];
 		quadList = new TexturedQuad[6];
 		float lx = pX + (float)pW;

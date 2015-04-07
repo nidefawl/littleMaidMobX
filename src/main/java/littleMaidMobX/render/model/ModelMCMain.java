@@ -68,6 +68,7 @@ public class ModelMCMain extends ModelMCBase {
 			
 			if (textures.length > 0 && textures[0] != null) {
 				ClientHelper.setTexture(textures[0]);
+//				System.out.println(textures[0]);
 			}
 			model.render(entityCaps, par2, par3, par4, par5, par6, par7, isRendering);
 		}

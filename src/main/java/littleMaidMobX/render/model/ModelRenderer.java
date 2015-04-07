@@ -7,17 +7,17 @@ import static littleMaidMobX.model.caps.IModelCaps.caps_Items;
 
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Stack;
 
 import littleMaidMobX.model.ModelBase;
 import littleMaidMobX.model.ModelMultiBase;
 import littleMaidMobX.model.caps.IModelCaps;
 import littleMaidMobX.model.caps.ModelCapsHelper;
-import littleMaidMobX.model.maids.MultiModel_NM;
 import littleMaidMobX.wrapper.MinecraftClientWrapper;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.TextureOffset;
 import net.minecraft.client.renderer.GLAllocation;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -43,8 +43,8 @@ public class ModelRenderer {
 	
 	public float textureWidth;
 	public float textureHeight;
-	private int textureOffsetX;
-	private int textureOffsetY;
+	public int textureOffsetX;
+	public int textureOffsetY;
 	public float rotationPointX;
 	public float rotationPointY;
 	public float rotationPointZ;
@@ -112,9 +112,28 @@ public class ModelRenderer {
 		cubeList = new ArrayList<ModelBoxBase>();
 		customShapes = new ArrayList<IRenderable>(0);
 		baseModel = pModelBase;
-		if (pModelBase instanceof MultiModel_NM && pModelBase.modelSize==0) {
-			System.out.println("our: "+pModelBase.boxList.size()+" = "+pName);
-		}
+//		if (pModelBase instanceof MultiModel_NM && pModelBase.modelSize==0) {
+//			System.out.println("our: "+pModelBase.boxList.size()+" = "+pName);
+//		}
+//		if (pName != null && pModelBase.modelSize == 0F) {
+//			String s = "";
+//			for (int i = 0; i < pModelBase.boxList.size(); i++) {
+//				ModelRenderer r = pModelBase.boxList.get(i);
+//				if (pName.equals(r.boxName)) {
+//					if (s.isEmpty()) {
+//						s = "While adding body part "+pName;
+//					}
+//					s+="\nAlready have body part "+r.boxName+" at index "+i;
+//				}
+//			}
+//			if (!s.isEmpty()) {
+//				System.err.println(s);
+//				Thread.dumpStack();
+//			}
+//		}
+//		if (pModelBase instanceof MultiModel_NM && pModelBase.modelSize==0) {
+//			System.out.println("our: "+pModelBase.boxList.size()+" = "+pName);
+//		}
 		
 		pModelBase.boxList.add(this);
 		boxName = pName;
@@ -190,7 +209,41 @@ public class ModelRenderer {
 		rotationPointZ = pZ;
 		return this;
 	}
-
+	public List<ModelRenderer> getRendered() {
+		Stack<ModelRenderer> stack = new Stack<ModelRenderer>();
+		ArrayList<ModelRenderer> list = new ArrayList<ModelRenderer>();
+		ArrayList<ModelBoxBase> clist = new ArrayList<ModelBoxBase>();
+		HashSet<ModelRenderer> visited = new HashSet<ModelRenderer>();
+		stack.push(this);
+		while (!stack.isEmpty()) {
+			ModelRenderer r = stack.pop();
+			if (visited.contains(r)) {
+				System.err.println("already visited "+r.boxName);
+				continue;
+			}
+			visited.add(r);
+			if (!r.isHidden) {
+				if (r.showModel && r.isRendering) {
+					list.add(r);
+				}
+				if (r.childModels != null) {
+					for (int li = 0; li < r.childModels.size(); li++) {
+						ModelRenderer r2 = r.childModels.get(li);
+						if (r2 == r) {
+							System.err.println("has self as child (and "+(r.childModels.size()-1)+" others)!!");
+							continue;
+						}
+						stack.push(r2);
+					}
+				}
+				if (r.cubeList != null) {
+					clist.addAll(r.cubeList);
+				}
+			}
+		}
+		System.out.println("rendered "+clist.size()+" boxes");
+		return list;
+	}
 	
 	public void render(float par1, boolean pIsRender) {
 		if (isHidden) {
@@ -328,6 +381,9 @@ public class ModelRenderer {
 		cubeList.clear();
 		compiled = false;
 		if (childModels != null) {
+			for (ModelRenderer r : childModels) {
+				r.pearent = null;
+			}
 			childModels.clear();
 		}
 	}
@@ -778,8 +834,13 @@ public class ModelRenderer {
 	}
 
 	public void removeChild(ModelRenderer par1ModelRenderer) {
-		if (this.childModels != null)
+		if (this.childModels != null) {
 			this.childModels.remove(par1ModelRenderer);
+			if (par1ModelRenderer.pearent == this) {
+				par1ModelRenderer.pearent = null;
+			}
+			
+		}
 	}
 	public void clearChildModels() {
 		if (this.childModels != null)

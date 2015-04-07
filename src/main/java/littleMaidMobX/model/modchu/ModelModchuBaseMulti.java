@@ -19,44 +19,44 @@ package littleMaidMobX.model.modchu;import littleMaidMobX.Helper;import littl
 		super(f, f1, i < 0 ? 64 : i, j < 0 ? 32 : j);
 	}	@Override
 	public void initModel(float f, float f1, boolean isAfterInit) {
-		bipedCloak = new ModelRenderer(this);
-		bipedEars = new ModelRenderer(this);
-		bipedHead = new ModelRenderer(this, 0, 0);
+		bipedCloak = new ModelRenderer(this, "bipedCloak");
+		bipedEars = new ModelRenderer(this, "bipedEars");
+		bipedHead = new ModelRenderer(this, 0, 0, "bipedHead");
 		bipedHead.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8, f);
-		bipedHeadwear = new ModelRenderer(this, 24, 0);
+		bipedHeadwear = new ModelRenderer(this, 24, 0, "bipedHeadwear");
 		bipedHeadwear.addBox(-4.0F, 0.0F, 1.0F, 8, 4, 3, f);
-		bipedBody = new ModelRenderer(this, 32, 8);
+		bipedBody = new ModelRenderer(this, 32, 8, "bipedBody");
 		bipedBody.addBox(-3.0F, -3.5F, -2.0F, 6, 7, 4, f);
-		bipedRightArm = new ModelRenderer(this, 48, 0);
+		bipedRightArm = new ModelRenderer(this, 48, 0, "bipedRightArm");
 		bipedRightArm.addBox(-1.0F, 0.0F, -1.0F, 2, 8, 2, f);
-		bipedLeftArm = new ModelRenderer(this, 56, 0);
+		bipedLeftArm = new ModelRenderer(this, 56, 0, "bipedLeftArm");
 		bipedLeftArm.addBox(-1.0F, 0.0F, -1.0F, 2, 8, 2, f);
-		bipedRightLeg = new ModelRenderer(this, 32, 19);
+		bipedRightLeg = new ModelRenderer(this, 32, 19, "bipedRightLeg");
 		bipedRightLeg.addBox(-1.5F, 0.0F, -2.0F, 3, 9, 4, f);
-		bipedLeftLeg = new ModelRenderer(this, 32, 19);
+		bipedLeftLeg = new ModelRenderer(this, 32, 19, "bipedLeftLeg");
 		bipedLeftLeg.mirror = true;
 		bipedLeftLeg.addBox(-1.5F, 0.0F, -2.0F, 3, 9, 4, f);
 		Skirt = new ModelRenderer(this, 0, 16, "Skirt");
 		Skirt.addBox(-4F, -4F, -4F, 8, 8, 8, f);
-		ChignonR = new ModelRenderer(this, 24, 18);
+		ChignonR = new ModelRenderer(this, 24, 18, "ChignonR");
 		ChignonR.addBox(-5F, -7F, 0.2F, 1, 3, 3, f);
 		ChignonR.setRotationPoint(0.0F, -1.5F, 0.0F);
-		ChignonL = new ModelRenderer(this, 24, 18);
+		ChignonL = new ModelRenderer(this, 24, 18, "ChignonL");
 		ChignonL.addBox(4F, -7F, 0.2F, 1, 3, 3, f);
 		ChignonL.setRotationPoint(0.0F, -1.5F, 0.0F);
-		ChignonB = new ModelRenderer(this, 52, 10);
+		ChignonB = new ModelRenderer(this, 52, 10, "ChignonB");
 		ChignonB.addBox(-2F, -7.2F, 4F, 4, 4, 2, f);
 		ChignonB.setRotationPoint(0.0F, -1.5F, 0.0F);
-		Tail = new ModelRenderer(this, 46, 20);
+		Tail = new ModelRenderer(this, 46, 20, "Tail");
 		Tail.addBox(-1.5F, -6.8F, 4F, 3, 9, 3, f);
 		Tail.setRotationPoint(0.0F, 0.0F, 0.0F);
-		SideTailR = new ModelRenderer(this, 58, 21);
+		SideTailR = new ModelRenderer(this, 58, 21, "SideTailR");
 		SideTailR.addBox(-5.5F, -6.8F, 0.9F, 1, 8, 2, f);
 		SideTailR.setRotationPoint(0.0F, 0.0F, 0.0F);
-		SideTailL = new ModelRenderer(this, 58, 21);
+		SideTailL = new ModelRenderer(this, 58, 21, "SideTailL");
 		SideTailL.mirror = true;
 		SideTailL.addBox(4.5F, -6.8F, 0.9F, 1, 8, 2, f);
-		SideTailL.setRotationPoint(0.0F, 0.0F, 0.0F);		mainFrame = new ModelRenderer(this);
+		SideTailL.setRotationPoint(0.0F, 0.0F, 0.0F);		mainFrame = new ModelRenderer(this, "mainFrame");
 		mainFrame.setRotationPoint(0F, 8F, 0F);		if (isAfterInit) afterInit(f, f1);
 	}	@Override
 	public void armsinit(float f, float f1) {
@@ -74,45 +74,45 @@ package littleMaidMobX.model.modchu;import littleMaidMobX.Helper;import littl
 	public void actionPartsInit(float f, float f1) {
 		rightArm = new ModelRenderer(this, 48, 0, "rightArm");
 		rightArm.addBox(-1.0F, 0.0F, -1.0F, 2, 4, 2, f);
-		rightArm.setRotationPoint(-3.0F, 9.5F, 0.0F);		rightArmPlus = new ModelRenderer(this);
+		rightArm.setRotationPoint(-3.0F, 9.5F, 0.0F);		rightArmPlus = new ModelRenderer(this, "rightArmPlus");
 		//rightArmPlus.setTextureOffset(52, 0.addPlate(-1.0F, -1.0F, -3.01F, 2, 2, 4, f);
-		rightArmPlus.rotateAngleX = 1.570796313F;		rightArm2 = new ModelRenderer(this, 48, 3);
+		rightArmPlus.rotateAngleX = 1.570796313F;		rightArm2 = new ModelRenderer(this, 48, 3, "rightArm2");
 		rightArm2.addBox(-1.0F, 0.0F, -1.0F, 2, 2, 2, f);
-		rightArm2.setRotationPoint(0.0F, 2.0F, 0.0F);		rightArmPlus2 = new ModelRenderer(this);
+		rightArm2.setRotationPoint(0.0F, 2.0F, 0.0F);		rightArmPlus2 = new ModelRenderer(this, "rightArmPlus2");
 		rightArmPlus2.setTextureOffset(52, 0).addPlate(-1.0F, -1.0F, 0.001F, 2, 2, 4, f);
 		rightArmPlus2.setTextureOffset(52, 0).addPlate(-1.0F, -1.0F, -2.001F, 2, 2, 0, f);
 		rightArmPlus2.rotateAngleX = 1.570796313F;		rightHand = new ModelRenderer(this, 48, 6, "rightHand");
 		rightHand.addBox(-1.0F, -1.0F, -1.0F, 2, 2, 2, f);
-		rightHand.setRotationPoint(0.0F, 3.0F, 0.0F);		leftArm = new ModelRenderer(this, 56, 0);
+		rightHand.setRotationPoint(0.0F, 3.0F, 0.0F);		leftArm = new ModelRenderer(this, 56, 0, "leftArm");
 		leftArm.addBox(-1.0F, 0.0F, -1.0F, 2, 4, 2, f);
-		leftArm.setRotationPoint(3.0F, 9.5F, 0.0F);		leftArmPlus = new ModelRenderer(this);
+		leftArm.setRotationPoint(3.0F, 9.5F, 0.0F);		leftArmPlus = new ModelRenderer(this, "leftArmPlus");
 		//leftArmPlus.setTextureOffset(60, 0.addPlate(-1.0F, -1.0F, -3.01F, 2, 2, 4, f);
-		leftArmPlus.rotateAngleX = 1.570796313F;		leftArm2 = new ModelRenderer(this, 56, 3);
+		leftArmPlus.rotateAngleX = 1.570796313F;		leftArm2 = new ModelRenderer(this, 56, 3, "leftArm2");
 		leftArm2.addBox(-1.0F, 0.0F, -1.0F, 2, 2, 2, f);
-		leftArm2.setRotationPoint(0.0F, 2.0F, 0.0F);		leftArmPlus2 = new ModelRenderer(this);
+		leftArm2.setRotationPoint(0.0F, 2.0F, 0.0F);		leftArmPlus2 = new ModelRenderer(this, "leftArmPlus2");
 		leftArmPlus2.setTextureOffset(60, 0).addPlate(-1.0F, -1.0F, 0.001F, 2, 2, 4, f);
 		leftArmPlus2.setTextureOffset(60, 0).addPlate(-1.0F, -1.0F, -2.001F, 2, 2, 0, f);
-		leftArmPlus2.rotateAngleX = 1.570796313F;		leftHand = new ModelRenderer(this, 56, 6);
+		leftArmPlus2.rotateAngleX = 1.570796313F;		leftHand = new ModelRenderer(this, 56, 6, "leftHand");
 		leftHand.addBox(-1.0F, -1.0F, -1.0F, 2, 2, 2, f);
-		leftHand.setRotationPoint(0.0F, 3.0F, 0.0F);		rightLeg = new ModelRenderer(this, 32, 19);
+		leftHand.setRotationPoint(0.0F, 3.0F, 0.0F);		rightLeg = new ModelRenderer(this, 32, 19, "rightLeg");
 		rightLeg.addBox(-1.5F, 0.0F, -2.0F, 3, 4, 4, f);
-		rightLeg.setRotationPoint(0.0F, 8.0F, 0.0F);		rightLegPlus = new ModelRenderer(this);
+		rightLeg.setRotationPoint(0.0F, 8.0F, 0.0F);		rightLegPlus = new ModelRenderer(this, "rightLegPlus");
 		rightLegPlus.setTextureOffset(36, 19).addPlate(-1.5F, -2.0F, -4.01F, 3, 4, 4, f);
-		rightLegPlus.rotateAngleX = 1.570796313F;		rightLeg2 = new ModelRenderer(this, 32, 23);
+		rightLegPlus.rotateAngleX = 1.570796313F;		rightLeg2 = new ModelRenderer(this, 32, 23, "rightLeg2");
 		rightLeg2.addBox(-1.5F, 0.0F, -2.0F, 3, 5, 4, f);
-		rightLeg2.setRotationPoint(0.0F, 8.0F, 0.0F);		rightLegPlus2 = new ModelRenderer(this);
+		rightLeg2.setRotationPoint(0.0F, 8.0F, 0.0F);		rightLegPlus2 = new ModelRenderer(this, "rightLegPlus2");
 		rightLegPlus2.setTextureOffset(36, 19).addPlate(-1.5F, -2.0F, 0.01F, 3, 4, 4, f);
 		rightLegPlus2.setTextureOffset(39, 19).addPlate(-1.5F, -2.0F, -5.01F, 3, 4, 4, f);
-		rightLegPlus2.rotateAngleX = 1.570796313F;		leftLeg = new ModelRenderer(this, 32, 19);
+		rightLegPlus2.rotateAngleX = 1.570796313F;		leftLeg = new ModelRenderer(this, 32, 19, "leftLeg");
 		leftLeg.mirror = true;
 		leftLeg.addBox(-1.5F, 0.0F, -2.0F, 3, 4, 4, f);
-		leftLeg.setRotationPoint(0.0F, 8.0F, 0.0F);		leftLegPlus = new ModelRenderer(this);
+		leftLeg.setRotationPoint(0.0F, 8.0F, 0.0F);		leftLegPlus = new ModelRenderer(this, "leftLegPlus");
 		leftLegPlus.mirror = true;
 		leftLegPlus.setTextureOffset(36, 19).addPlate(-1.5F, -2.0F, -4.01F, 3, 4, 4, f);
-		leftLegPlus.rotateAngleX = 1.570796313F;		leftLeg2 = new ModelRenderer(this, 32, 23);
+		leftLegPlus.rotateAngleX = 1.570796313F;		leftLeg2 = new ModelRenderer(this, 32, 23, "leftLeg2");
 		leftLeg2.mirror = true;
 		leftLeg2.addBox(-1.5F, 0.0F, -2.0F, 3, 5, 4, f);
-		leftLeg2.setRotationPoint(0.0F, 8.0F, 0.0F);		leftLegPlus2 = new ModelRenderer(this);
+		leftLeg2.setRotationPoint(0.0F, 8.0F, 0.0F);		leftLegPlus2 = new ModelRenderer(this, "leftLegPlus2");
 		leftLegPlus2.mirror = true;
 		leftLegPlus2.setTextureOffset(36, 19).addPlate(-1.5F, -2.0F, 0.01F, 3, 4, 4, f);
 		leftLegPlus2.setTextureOffset(39, 19).addPlate(-1.5F, -2.0F, -5.01F, 3, 4, 4, f);

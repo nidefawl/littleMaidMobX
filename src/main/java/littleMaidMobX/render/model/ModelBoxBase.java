@@ -14,6 +14,7 @@ public abstract class ModelBoxBase implements IRenderable {
 	public float posX2;
 	public float posY2;
 	public float posZ2;
+	public float pSizeAdj;
 	public String boxName;
 
 	public void render(Tessellator par1Tessellator, float par2) {
