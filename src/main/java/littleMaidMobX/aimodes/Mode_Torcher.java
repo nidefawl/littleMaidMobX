@@ -16,6 +16,9 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class Mode_Torcher extends ModeBase {
+	static {
+		TriggerSelect.appendTriggerItem(null, "Torch", "");
+	}
 	
 	public static final int mmode_Torcher = 0x0020;
 
@@ -31,8 +34,6 @@ public class Mode_Torcher extends ModeBase {
 
 	@Override
 	public void init() {
-		
-		TriggerSelect.appendTriggerItem(null, "Torch", "");
 	}
 
 	@Override

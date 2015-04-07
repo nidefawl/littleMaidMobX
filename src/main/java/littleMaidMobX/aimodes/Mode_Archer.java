@@ -18,6 +18,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class Mode_Archer extends ModeBase {
+	static {
+		TriggerSelect.appendTriggerItem(null, "Bow", "");
+		TriggerSelect.appendTriggerItem(null, "Arrow", "");
+	}
 
 	public static final int mmode_Archer		= 0x0083;
 	public static final int mmode_Blazingstar	= 0x00c3;
@@ -34,10 +38,6 @@ public class Mode_Archer extends ModeBase {
 
 	@Override
 	public void init() {
-		
-		
-		TriggerSelect.appendTriggerItem(null, "Bow", "");
-		TriggerSelect.appendTriggerItem(null, "Arrow", "");
 	}
 
 	@Override

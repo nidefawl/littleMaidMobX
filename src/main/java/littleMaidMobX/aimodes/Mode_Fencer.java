@@ -13,6 +13,10 @@ import net.minecraft.item.ItemSword;
 
 
 public class Mode_Fencer extends ModeBase {
+	static {
+		TriggerSelect.appendTriggerItem(null, "Sword", "");
+		TriggerSelect.appendTriggerItem(null, "Axe", "");
+	}
 
 	public static final int mmode_Fencer		= 0x0080;
 	public static final int mmode_Bloodsucker	= 0x00c0;
@@ -29,10 +33,6 @@ public class Mode_Fencer extends ModeBase {
 
 	@Override
 	public void init() {
-		
-		
-		TriggerSelect.appendTriggerItem(null, "Sword", "");
-		TriggerSelect.appendTriggerItem(null, "Axe", "");
 	}
 
 	@Override
