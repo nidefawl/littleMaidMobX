@@ -836,7 +836,7 @@ public class ModelRenderer {
 	public void removeChild(ModelRenderer par1ModelRenderer) {
 		if (this.childModels != null) {
 			this.childModels.remove(par1ModelRenderer);
-			if (par1ModelRenderer.pearent == this) {
+			if (par1ModelRenderer != null && par1ModelRenderer.pearent == this) {
 				par1ModelRenderer.pearent = null;
 			}
 			
