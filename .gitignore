@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 .gradle/
 eclipse/
 .classpath
@@ -9,6 +10,11 @@ logs/
 bin/
 build/
 
+=======
+/*
+!/.gitignore
+!/src
+>>>>>>> 64974607a144c955fadf7713b5db37386aa92375
 =======
 /*
 !/.gitignore
