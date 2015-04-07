@@ -14,12 +14,8 @@ public abstract class ModelBoxBase implements IRenderable {
 	public float posX2;
 	public float posY2;
 	public float posZ2;
+	public float pSizeAdj;
 	public String boxName;
-
-
-	
-	public ModelBoxBase(ModelRenderer pMRenderer, Object ... pArg) {
-	}
 
 	public void render(Tessellator par1Tessellator, float par2) {
 		for (int var3 = 0; var3 < quadList.length; ++var3) {

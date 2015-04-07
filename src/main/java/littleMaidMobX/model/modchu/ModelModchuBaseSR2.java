@@ -29,10 +29,10 @@ public class ModelModchuBaseSR2 extends ModelModchuBaseMulti {
 		super.initModel(psize, pyoffset, isAfterInit);
 		
 		
-		eyeR = new ModelRenderer(this, 32, 19);
+		eyeR = new ModelRenderer(this, 32, 19, "eyeR");
 		eyeR.addPlate(-4.0F, -5.0F, -4.001F, 4, 4, 0, psize);
 		eyeR.setRotationPoint(0.0F, 0.0F, 0.0F);
-		eyeL = new ModelRenderer(this, 42, 19);
+		eyeL = new ModelRenderer(this, 42, 19, "eyeL");
 		eyeL.addPlate(0.0F, -5.0F, -4.001F, 4, 4, 0, psize);
 		eyeL.setRotationPoint(0.0F, 0.0F, 0.0F);
 		bipedHead.addChild(eyeR);

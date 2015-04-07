@@ -575,7 +575,7 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 				ltasksExeDEST.clear();
 			} else {
 				ArrayList<EntityAITaskEntry> ltasksDoSRC = getEntityAITasks_taskEntries(pTasksSRC);
-				ArrayList<EntityAITaskEntry> ltasksExeSRC = getEntityAITasks_executingTaskEntries(pTasksSRC);
+//				ArrayList<EntityAITaskEntry> ltasksExeSRC = getEntityAITasks_executingTaskEntries(pTasksSRC);
 				
 				Iterator iterator;
 				iterator = ltasksExeDEST.iterator();
@@ -588,12 +588,12 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 				ltasksDoDEST.clear();
 				ltasksDoDEST.addAll(ltasksDoSRC);
 				
-				for (EntityAITaskEntry ltask : ltasksDoSRC) {
-					if (ltask instanceof IEntityAI)
-					{
-//						((LMM_IEntityAI)ltask).setDefaultEnable();
-					}
-				}
+//				for (EntityAITaskEntry ltask : ltasksDoSRC) {
+//					if (ltask instanceof IEntityAI)
+//					{
+////						((LMM_IEntityAI)ltask).setDefaultEnable();
+//					}
+//				}
 			}
 		} catch (Exception s) {
 		}

@@ -34,15 +34,7 @@ public class ModelBoxPlate extends ModelBoxBase {
 	 * @param pArg
 	 * textureX, textureY, posX, posY, posZ, width, height, facePlane, sizeAdjust
 	 */
-	public ModelBoxPlate(ModelRenderer pMRenderer, Object... pArg) {
-		super(pMRenderer, pArg);
-		init(pMRenderer, (Integer)pArg[0], (Integer)pArg[1],
-				(Float)pArg[2], (Float)pArg[3], (Float)pArg[4],
-				(Integer)pArg[5], (Integer)pArg[6], (Integer)pArg[7],
-				pArg.length < 9 ? 0.0F : (Float)pArg[8]);
-	}
-
-	private void init(ModelRenderer modelrenderer, int pTextureX, int pTextureY,
+	public ModelBoxPlate(ModelRenderer modelrenderer, int pTextureX, int pTextureY,
 			float pX, float pY, float pZ, int pWidth, int pHeight, int pPlane, float pZoom) {
 		float lx;
 		float ly;
