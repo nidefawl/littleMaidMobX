@@ -1,22 +1,4 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-.gradle/
-eclipse/
-.classpath
-.project
-drq
-.settings/
-logs/
-bin/
-build/
+/*
+!/.gitignore
+!/src
 
-=======
-/*
-!/.gitignore
-!/src
->>>>>>> 64974607a144c955fadf7713b5db37386aa92375
-=======
-/*
-!/.gitignore
-!/src
->>>>>>> 64974607a144c955fadf7713b5db37386aa92375
