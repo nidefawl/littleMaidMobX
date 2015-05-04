@@ -8,7 +8,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 	public ModelRenderer SkirtTopL;
 	public ModelRenderer SkirtFrontL;
 	public ModelRenderer SkirtLeftL;
-	public ModelRenderer SkirtBackL;	public MultiModel_Beverly4() {		super();	}	public MultiModel_Beverly4(float f) {		super(f);	}	public MultiModel_Beverly4(float f, float f1) {		this(f, f1, 64, 64);	}	public MultiModel_Beverly4(float f, float f1, int i, int j) {		super(f, f1, i < 0 ? 64 : i, j < 0 ? 32 : j);	}	@Override
+	public ModelRenderer SkirtBackL;		public MultiModel_Beverly4(StringBuilder hack) {		super(hack);	}	public MultiModel_Beverly4() {		super();	}	public MultiModel_Beverly4(float f) {		super(f);	}	public MultiModel_Beverly4(float f, float f1) {		this(f, f1, 64, 64);	}	public MultiModel_Beverly4(float f, float f1, int i, int j) {		super(f, f1, i < 0 ? 64 : i, j < 0 ? 32 : j);	}	@Override
 	public void initModel(float f, float f1, boolean isAfterInit) {
 		textureWidth = 64;
 		textureHeight = 64;

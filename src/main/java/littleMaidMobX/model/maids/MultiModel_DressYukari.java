@@ -2,7 +2,7 @@ package littleMaidMobX.model.maids;import net.minecraft.entity.Entity;import 
 	public ModelRenderer overHear;
 	public ModelRenderer Glass;
 	public ModelRenderer specialModel[];
-	public ModelRenderer pink;	private int IdOffset = 0;	public MultiModel_DressYukari() {
+	public ModelRenderer pink;	private int IdOffset = 0;		public MultiModel_DressYukari(StringBuilder hack) {		super(hack);	}	public MultiModel_DressYukari() {
 		this(0.0F);
 	}	public MultiModel_DressYukari(float f) {
 		this(f, 0.0F);

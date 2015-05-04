@@ -1,7 +1,11 @@
-/.gradle/
-/bin
+.gradle/
+bin
 run/
+eclipse/
+src_/
 
+
+src/main/java/littleMaidMobX/render/model/ModelRenderer.cc.java
 .classpath
 .settings/
 #.project

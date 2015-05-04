@@ -38,6 +38,9 @@ public class ModelLittleMaid_Chloe2 extends ModelLittleMaidBase {
 	protected byte legPosY;
 	protected Random rand = new Random();
 
+	public ModelLittleMaid_Chloe2(StringBuilder hack) {
+		super(hack);
+	}
 	
 	public ModelLittleMaid_Chloe2() {
 		this(0F);

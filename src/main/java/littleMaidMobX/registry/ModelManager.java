@@ -145,7 +145,7 @@ public class ModelManager {
 	}
 
 	boolean init = false;
-	public boolean loadTextures() {
+	public boolean loadTextures(boolean server) {
 		
 		if (Helper.isClient) {
 			getArmorPrefix();
@@ -154,9 +154,14 @@ public class ModelManager {
 		// this is called server and client side
 
 		// this can be simplified
+		StringBuilder hack = new StringBuilder();
 		for (Class c : ModelRegistry.list) {
 			try {
-				addModelClass(c);
+				if(server) {
+					addModelClassServer(c, hack);
+				} else {
+					addModelClass(c);
+				}
 			} catch (Throwable e) {
 				e.printStackTrace();
 			}
@@ -355,6 +360,24 @@ public class ModelManager {
 		mlm[2] = cm.newInstance(lsize[1]);
 		modelMap.put(modelName, mlm);
 	}
+	
+	private void addModelClassServer(Class lclass, StringBuilder hack) throws Throwable {
+		String modelName = lclass.getSimpleName();
+		int n = modelName.indexOf("_");
+		if (n > 0 && n < modelName.length()-1) {
+			modelName = modelName.substring(modelName.indexOf("_")+1);
+		}
+		ModelMultiBase mlm[] = new ModelMultiBase[3];
+		Constructor < ModelMultiBase > cm = lclass.getConstructor(StringBuilder.class);
+		mlm[0] = cm.newInstance(new Object[]{hack});
+//		float[] lsize = mlm[0].getArmorModelsSize();
+//		mlm[1] = cm.newInstance(lsize[0]);
+//		mlm[2] = cm.newInstance(lsize[1]);
+		mlm[1] = mlm[0];
+		mlm[2] = mlm[0];
+		modelMap.put(modelName, mlm);
+	}
+	
 	protected void addTexture(String path) {
 
 		String packageName3 = path.substring(0, path.lastIndexOf("/"));

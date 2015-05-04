@@ -32,7 +32,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 	public ModelRenderer Skirt10;
 	public ModelRenderer Skirt11;
 	public ModelRenderer Skirt12;
-	public ModelRenderer Prim;	public MultiModel_DogAngel()
+	public ModelRenderer Prim;		public MultiModel_DogAngel(StringBuilder hack) {		super(hack);	}	public MultiModel_DogAngel()
 	{
 		this(0.0F);
 	}	public MultiModel_DogAngel(float f)

@@ -7,6 +7,10 @@ import littleMaidMobX.render.model.ModelRenderer;
 public class ModelMulti_Stef extends ModelMulti_Steve {
 
 	public ModelRenderer bust;
+	
+	public ModelMulti_Stef(StringBuilder hack) {
+		super(hack);
+	}
 
 	public ModelMulti_Stef() {
 		super();

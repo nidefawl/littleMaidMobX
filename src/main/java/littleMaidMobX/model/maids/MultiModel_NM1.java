@@ -36,7 +36,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.entity.EntityLittleMa
 	public ModelRenderer eyeL1;
 	public ModelRenderer Breast;
 	public ModelRenderer Cachusya;
-	public ModelRenderer tie;	public MultiModel_NM1() {
+	public ModelRenderer tie;		public MultiModel_NM1(StringBuilder hack) {		super(hack);	}	public MultiModel_NM1() {
 		this(0.0F);
 	}	public MultiModel_NM1(float f) {
 		this(f, 0.0F);

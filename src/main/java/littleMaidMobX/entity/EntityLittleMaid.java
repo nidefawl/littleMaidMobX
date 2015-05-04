@@ -983,7 +983,9 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 		par1nbtTagCompound.setInteger("DominantArm", maidDominantArm);
 		par1nbtTagCompound.setInteger("Color", textureData.getColor());
 		par1nbtTagCompound.setString("texName", textureData.getTextureName(0));
+//		System.out.println("Save textureName: " + textureData.getTextureName(0));
 		par1nbtTagCompound.setString("texArmor", textureData.getTextureName(1));
+//		System.out.println("Save textureArmor: " + textureData.getTextureName(1));
 		// HomePosition
 		par1nbtTagCompound.setInteger("homeX", getHomePosition().posX);
 		par1nbtTagCompound.setInteger("homeY", getHomePosition().posY);
@@ -1031,7 +1033,9 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 			setFreedom(par1nbtTagCompound.getBoolean("Freedom"));
 			setTracer(par1nbtTagCompound.getBoolean("Tracer"));
 			textureData.textureIndex[0] = ModelManager.instance.getIndexTextureBoxServer(this, par1nbtTagCompound.getString("texName"));
+//			System.out.println("Get texName: " + par1nbtTagCompound.getString("texName"));
 			textureData.textureIndex[1] = ModelManager.instance.getIndexTextureBoxServer(this, par1nbtTagCompound.getString("texArmor"));
+//			System.out.println("Get texArmor: " + par1nbtTagCompound.getString("texArmor"));
 			textureData.textureBox[0] = ModelManager.instance.getTextureBoxServer(textureData.textureIndex[0]);
 			textureData.textureBox[1] = ModelManager.instance.getTextureBoxServer(textureData.textureIndex[1]);
 			byte b = par1nbtTagCompound.getByte("ModeColor");
@@ -1134,7 +1138,9 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 				maidDominantArm = 0;
 			}
 			textureData.textureIndex[0] = ModelManager.instance.getIndexTextureBoxServer(this, par1nbtTagCompound.getString("texName"));
+//			System.out.println("Get texName: " + par1nbtTagCompound.getString("texName"));
 			textureData.textureIndex[1] = ModelManager.instance.getIndexTextureBoxServer(this, par1nbtTagCompound.getString("texArmor"));
+//			System.out.println("Get texArmor: " + par1nbtTagCompound.getString("texArmor"));
 			textureData.textureBox[0] = ModelManager.instance.getTextureBoxServer(textureData.textureIndex[0]);
 			textureData.textureBox[1] = ModelManager.instance.getTextureBoxServer(textureData.textureIndex[1]);
 			textureData.setColor(par1nbtTagCompound.getInteger("Color"));
@@ -1183,6 +1189,7 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 				}
 			}
 		} else {
+//			System.out.println(String.format("Load ID:%d, MaidMaster:%s, x:%.1f, y:%.1f, z:%.1f, %d" ,getEntityId(), getMaidMaster(), posX, posY, posZ, maidAnniversary));
 			LittleMaidMobX.Debug(String.format("Load ID:%d, MaidMaster:%s, x:%.1f, y:%.1f, z:%.1f, %d" ,getEntityId(), getMaidMaster(), posX, posY, posZ, maidAnniversary));
 		}
 		
@@ -2124,8 +2131,6 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 				}
 				
 				
-				
-				
 				// http://forum.minecraftuser.jp/viewtopic.php?f=13&t=23347&p=212078#p211805
 				String lt = func_145748_c_().getUnformattedTextForChat();
 
@@ -2394,6 +2399,15 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 			GuiCommonHandler.maidServer = this;
 			pEntityPlayer.openGui(LittleMaidMobX.instance, GuiCommonHandler.GUI_ID_INVVENTORY, this.worldObj,
 					(int)this.posX, (int)this.posY, (int)this.posZ);
+//			System.out.println("Texture: " + textureData.getTextureName(0));
+//			System.out.println("Inv dump:");
+//			
+//			ItemStack stack;
+//			for(int i=0;i<maidInventory.getSizeInventory();i++) {
+//				stack = maidInventory.getStackInSlot(i);
+//				System.out.println("\t" + i + ": " + (stack == null ? "empty" : stack.getDisplayName()));
+//			}
+			
 		}
 		else
 		{

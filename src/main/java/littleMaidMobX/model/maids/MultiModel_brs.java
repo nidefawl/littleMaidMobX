@@ -9,7 +9,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 	public ModelRenderer Parkar;
 	public ModelRenderer Breast1;
 	public ModelRenderer Cheek_R;
-	public ModelRenderer Cheek_L;	public MultiModel_brs() {
+	public ModelRenderer Cheek_L;		public MultiModel_brs(StringBuilder hack) {		super(hack);	}	public MultiModel_brs() {
 		this(0.0F);
 	}	public MultiModel_brs(float f) {
 		this(f, 0.0F);

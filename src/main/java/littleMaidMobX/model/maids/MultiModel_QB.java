@@ -11,7 +11,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 	public ModelRenderer tail3;
 	public ModelRenderer ringR;
 	public ModelRenderer ringL;
-	private boolean sleepingInit;	public MultiModel_QB() {
+	private boolean sleepingInit;		public MultiModel_QB(StringBuilder hack) {		super(hack);	}	public MultiModel_QB() {
 		this(0.0F);
 	}	public MultiModel_QB(float f) {
 		this(f, 0.0F);

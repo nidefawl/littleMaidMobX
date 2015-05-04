@@ -12,6 +12,9 @@ public class ModelModchuBaseSR2 extends ModelModchuBaseMulti {
 	public ModelRenderer eyeR;
 	public ModelRenderer eyeL;
 
+	public ModelModchuBaseSR2(StringBuilder hack) {
+		super(hack);
+	}
 
 	public ModelModchuBaseSR2() {
 		super();

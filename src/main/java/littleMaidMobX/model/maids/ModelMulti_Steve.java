@@ -25,6 +25,10 @@ public class ModelMulti_Steve extends ModelMultiBase {
 	
 	public ModelRenderer eyeR;
 	public ModelRenderer eyeL;
+	
+	public ModelMulti_Steve(StringBuilder hack) {
+		super(hack);
+	}
 
 
 	public ModelMulti_Steve() {

@@ -44,7 +44,7 @@ public class MultiModel_Yukkuri extends ModelModchuBaseOkota {	public ModelRen
 	public ModelRenderer HaneL1;
 	public ModelRenderer HaneL2;
 	public ModelRenderer HaneR1;
-	public ModelRenderer HaneR2;	public MultiModel_Yukkuri() {
+	public ModelRenderer HaneR2;		public MultiModel_Yukkuri(StringBuilder hack) {		super(hack);	}	public MultiModel_Yukkuri() {
 		this(0.0F);
 	}	public MultiModel_Yukkuri(float f) {
 		this(f, 0.0F);

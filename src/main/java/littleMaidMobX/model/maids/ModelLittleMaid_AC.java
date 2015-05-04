@@ -22,6 +22,10 @@ public class ModelLittleMaid_AC extends ModelMultiMMMBase {
 	public ModelRenderer Tail;
 	public ModelRenderer SideTailR;
 	public ModelRenderer SideTailL;
+	
+	public ModelLittleMaid_AC(StringBuilder hack) {
+		super(hack);
+	}
 
 	public ModelLittleMaid_AC() {
 		super();

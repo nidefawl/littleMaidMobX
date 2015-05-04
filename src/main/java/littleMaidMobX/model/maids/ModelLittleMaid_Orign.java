@@ -5,6 +5,9 @@ import littleMaidMobX.model.lmm.ModelLittleMaidBase;
 
 public class ModelLittleMaid_Orign extends ModelLittleMaidBase {
 
+	public ModelLittleMaid_Orign(StringBuilder hack) {
+		super(hack);
+	}
 	
 	public ModelLittleMaid_Orign() {
 		super();

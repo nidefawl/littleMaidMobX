@@ -8,7 +8,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 	public ModelRenderer innerSkirtFront;
 	public ModelRenderer innerSkirtRight;
 	public ModelRenderer innerSkirtLeft;
-	public ModelRenderer innerSkirtBack;	public MultiModel_Mabel() {
+	public ModelRenderer innerSkirtBack;		public MultiModel_Mabel(StringBuilder hack) {		super(hack);	}	public MultiModel_Mabel() {
 		this(0.0F);
 	}	public MultiModel_Mabel(float f) {
 		this(f, 0.0F);

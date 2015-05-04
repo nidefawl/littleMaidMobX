@@ -76,7 +76,7 @@ public class MultiModel_VUD1 extends ModelModchuBaseAug {
 	public ModelRenderer Number;
 	public ModelRenderer Negi1;
 	public ModelRenderer Negi2;
-	public ModelRenderer Negi3;	public MultiModel_VUD1() {
+	public ModelRenderer Negi3;		public MultiModel_VUD1(StringBuilder hack) {		super(hack);	}	public MultiModel_VUD1() {
 		this(0.0F);
 	}	public MultiModel_VUD1(float f) {
 		this(f, 0.0F);

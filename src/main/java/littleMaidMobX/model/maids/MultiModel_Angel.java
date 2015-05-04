@@ -62,7 +62,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 	public ModelRenderer RibonRD2;
 	public ModelRenderer RibonRD3;
 	public ModelRenderer Circle;
-	public ModelRenderer Glass;	private int IdOffset;	public MultiModel_Angel()
+	public ModelRenderer Glass;	private int IdOffset;		public MultiModel_Angel(StringBuilder hack) {		super(hack);	}	public MultiModel_Angel()
 	{
 		this(0.0F);
 	}	public MultiModel_Angel(float f)

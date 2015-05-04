@@ -12,7 +12,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 	public ModelRenderer Bullet2;
 	public ModelRenderer Bullet3;
 	public ModelRenderer eyeL;
-	public ModelRenderer eyeR;	public MultiModel_ExtraArms() {
+	public ModelRenderer eyeR;		public MultiModel_ExtraArms(StringBuilder hack) {		super(hack);	}	public MultiModel_ExtraArms() {
 		this(0.0F);
 	}	public MultiModel_ExtraArms(float f) {
 		this(f, 0.0F);

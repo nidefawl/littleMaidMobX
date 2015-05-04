@@ -9,7 +9,7 @@ public class MultiModel_Elsa4 extends ModelModchuBaseSR2 {	public ModelRendere
 	protected byte offsetY;
 	protected byte headPosY;
 	protected byte bodyPosY;
-	protected byte legPosY;	public MultiModel_Elsa4() {
+	protected byte legPosY;		public MultiModel_Elsa4(StringBuilder hack) {		super(hack);	}	public MultiModel_Elsa4() {
 		this(0.0F);
 	}	public MultiModel_Elsa4(float f) {
 		this(f, 0.0F);

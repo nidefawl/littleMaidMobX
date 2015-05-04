@@ -2,7 +2,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 	public ModelRenderer FaceR;
 	public ModelRenderer FaceL;
 	public ModelRenderer rightHandPlus;
-	public ModelRenderer leftHandPlus;	public MultiModel_Petit() {
+	public ModelRenderer leftHandPlus;		public MultiModel_Petit(StringBuilder hack) {		super(hack);	}	public MultiModel_Petit() {
 		this(0.0F);
 	}	public MultiModel_Petit(float f) {
 		this(f, 0.0F);

@@ -10,7 +10,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 	public ModelRenderer Wansippo1;
 	public ModelRenderer Wansippo2;
 	public ModelRenderer Wansippo3;
-	public ModelRenderer Wansippo4;	public MultiModel_taremimi() {
+	public ModelRenderer Wansippo4;		public MultiModel_taremimi(StringBuilder hack) {		super(hack);	}	public MultiModel_taremimi() {
 		this(0.0F);
 	}	public MultiModel_taremimi(float f) {
 		this(f, 0.0F);

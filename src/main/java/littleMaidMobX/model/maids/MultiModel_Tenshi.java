@@ -91,7 +91,7 @@ package littleMaidMobX.model.maids;import net.minecraft.inventory.IInventory;
 	public ModelRenderer PlateL5;
 	public ModelRenderer PlateL6;	private float x1;
 	private float y1;
-	private float z1;	public MultiModel_Tenshi() {
+	private float z1;		public MultiModel_Tenshi(StringBuilder hack) {		super(hack);	}	public MultiModel_Tenshi() {
 		this(0.0F);
 	}	public MultiModel_Tenshi(float f) {
 		this(f, 0.0F);

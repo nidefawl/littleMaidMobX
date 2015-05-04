@@ -29,7 +29,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 	public ModelRenderer Cheek_R;
 	public ModelRenderer Cheek_L;
 	public ModelRenderer Breast1;
-	public ModelRenderer Breast2;	public MultiModel_SA() {
+	public ModelRenderer Breast2;		public MultiModel_SA(StringBuilder hack) {		super(hack);	}	public MultiModel_SA() {
 		this(0.0F);
 	}	public MultiModel_SA(float f) {
 		this(f, 0.0F);

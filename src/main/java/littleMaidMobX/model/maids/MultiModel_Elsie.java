@@ -5,7 +5,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.Helper;import little
 	public ModelRenderer SkirtFrontL;
 	public ModelRenderer SkirtLeftL;
 	public ModelRenderer SkirtBackL;
-	public ModelRenderer SkirtRightL;	public MultiModel_Elsie() {
+	public ModelRenderer SkirtRightL;		public MultiModel_Elsie(StringBuilder hack) {		super(hack);	}	public MultiModel_Elsie() {
 		this(0.0F);
 	}	public MultiModel_Elsie(float f) {
 		this(f, 0.0F);

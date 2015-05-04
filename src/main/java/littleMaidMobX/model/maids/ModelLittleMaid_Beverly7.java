@@ -36,7 +36,10 @@ public class ModelLittleMaid_Beverly7 extends ModelLittleMaidBase {
 	protected byte bodyPosY;
 	protected byte legPosY;
 	protected Random rand = new Random();
-
+	
+	public ModelLittleMaid_Beverly7(StringBuilder hack) {
+		super(hack);
+	}
 	
 	public ModelLittleMaid_Beverly7() {
 		this(0F);

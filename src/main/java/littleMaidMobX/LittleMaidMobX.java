@@ -121,7 +121,7 @@ public class LittleMaidMobX {
 	
 	@SidedProxy(
 			clientSide = "littleMaidMobX.ProxyClient",
-			serverSide = "littleMaidMobX.ProxyCommon")
+			serverSide = "littleMaidMobX.ProxyServer")
 	public static ProxyCommon proxy;
 
 	@Instance(DOMAIN)
@@ -161,8 +161,8 @@ public class LittleMaidMobX {
 			
 			lconf.save();
 			
-
-			ModelManager.instance.loadTextures();
+			proxy.loadTextures();
+//			ModelManager.instance.loadTextures();
 			if (Helper.isClient) {
 //				MMM_TextureManager.loadTextures();
 				Debug("Localmode: InitTextureList.");
@@ -309,19 +309,25 @@ public class LittleMaidMobX {
 		if ((lmode & 0x80) != 0) {
 			leid = Helper.getInt(var2.data, 1);
 			lentity = Helper.getEntity(var2.data, 1, playerEntity.worldObj);
-			if (lentity == null) return;
+			if (lentity == null) {
+				System.out.println("lentity == null");
+				return;
+			}
 		}
 		Debug("MMM|Upd Srv Call[%2x:%d].", lmode, leid);
 //		byte[] ldata;
 		
 		switch (lmode) {
 		case NetConstants.Server_SetTexturePackIndex:
+			System.out.println("SetTexturePackIndex");
 			ModelManager.instance.reciveFromClientSetTexturePackIndex(lentity, var2.data);
 			break;
 		case NetConstants.Server_GetTextureIndex:
 			ModelManager.instance.reciveFromClientGetTexturePackIndex(playerEntity, var2.data);
+			System.out.println("GetTextureIndex");
 			break;
 		case NetConstants.Server_GetTexturePackName:
+			System.out.println("GetTexturePackName");
 			ModelManager.instance.reciveFromClientGetTexturePackName(playerEntity, var2.data);
 			break;
 		}
@@ -329,6 +335,7 @@ public class LittleMaidMobX {
 
 	public static void sendToClient(EntityPlayer player, byte[] ldata)
 	{
+		System.out.println("SendToClient");
 		Network.sendPacketToPlayer(1, player, ldata);
 	}
 

@@ -41,8 +41,8 @@ public abstract class ModelMultiBase extends ModelBase implements IModelCaps {
 		put("entityIdFactor",	caps_entityIdFactor);
 		put("dominantArm",	caps_dominantArm);
 	}};
-
-
+	
+	public ModelMultiBase(StringBuilder hack) {}
 
 	public ModelMultiBase() {
 		this(0.0F);

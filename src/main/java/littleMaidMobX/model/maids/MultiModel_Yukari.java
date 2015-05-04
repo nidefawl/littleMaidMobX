@@ -96,7 +96,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 	public ModelRenderer Breast_RU;
 	public ModelRenderer Breast_LU;
 	public ModelRenderer Breast_RB;
-	public ModelRenderer Breast_LB;	public MultiModel_Yukari() {
+	public ModelRenderer Breast_LB;		public MultiModel_Yukari(StringBuilder hack) {		super(hack);	}	public MultiModel_Yukari() {
 		this(0.0F);
 	}	public MultiModel_Yukari(float f) {
 		this(f, 0.0F);
