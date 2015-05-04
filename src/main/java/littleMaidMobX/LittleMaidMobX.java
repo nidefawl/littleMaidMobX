@@ -310,7 +310,7 @@ public class LittleMaidMobX {
 			leid = Helper.getInt(var2.data, 1);
 			lentity = Helper.getEntity(var2.data, 1, playerEntity.worldObj);
 			if (lentity == null) {
-				System.out.println("lentity == null");
+//				System.out.println("lentity == null");
 				return;
 			}
 		}
@@ -319,15 +319,15 @@ public class LittleMaidMobX {
 		
 		switch (lmode) {
 		case NetConstants.Server_SetTexturePackIndex:
-			System.out.println("SetTexturePackIndex");
+//			System.out.println("SetTexturePackIndex");
 			ModelManager.instance.reciveFromClientSetTexturePackIndex(lentity, var2.data);
 			break;
 		case NetConstants.Server_GetTextureIndex:
 			ModelManager.instance.reciveFromClientGetTexturePackIndex(playerEntity, var2.data);
-			System.out.println("GetTextureIndex");
+//			System.out.println("GetTextureIndex");
 			break;
 		case NetConstants.Server_GetTexturePackName:
-			System.out.println("GetTexturePackName");
+//			System.out.println("GetTexturePackName");
 			ModelManager.instance.reciveFromClientGetTexturePackName(playerEntity, var2.data);
 			break;
 		}
@@ -335,7 +335,7 @@ public class LittleMaidMobX {
 
 	public static void sendToClient(EntityPlayer player, byte[] ldata)
 	{
-		System.out.println("SendToClient");
+//		System.out.println("SendToClient");
 		Network.sendPacketToPlayer(1, player, ldata);
 	}
 
