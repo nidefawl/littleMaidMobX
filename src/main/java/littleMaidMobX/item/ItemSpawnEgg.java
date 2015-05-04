@@ -49,14 +49,14 @@ public class ItemSpawnEgg extends Item
 			}
 
 			Entity entity = spawnMaid(par3World, par1ItemStack.getItemDamage(), (double)par4 + 0.5D, (double)par5 + d0, (double)par6 + 0.5D);
-			System.out.println("Spawn maid!");
+//			System.out.println("Spawn maid!");
 
 			if (entity != null)
 			{
 				if (entity instanceof EntityLivingBase && par1ItemStack.hasDisplayName())
 				{
 					((EntityLiving)entity).setCustomNameTag(par1ItemStack.getDisplayName());
-					System.out.println("\t ..with name: " + par1ItemStack.getDisplayName());
+//					System.out.println("\t ..with name: " + par1ItemStack.getDisplayName());
 				}
 
 				if (!par2EntityPlayer.capabilities.isCreativeMode)
@@ -105,14 +105,14 @@ public class ItemSpawnEgg extends Item
 					if (par2World.getBlock(i, j, k) instanceof BlockLiquid)
 					{
 						Entity entity = spawnMaid(par2World, par1ItemStack.getItemDamage(), (double)i, (double)j, (double)k);
-						System.out.println("Spawn maid!");
+//						System.out.println("Spawn maid!");
 
 						if (entity != null)
 						{
 							if (entity instanceof EntityLivingBase && par1ItemStack.hasDisplayName())
 							{
 								((EntityLiving)entity).setCustomNameTag(par1ItemStack.getDisplayName());
-								System.out.println("\t ..with name: " + par1ItemStack.getDisplayName());
+//								System.out.println("\t ..with name: " + par1ItemStack.getDisplayName());
 							}
 
 							if (!par3EntityPlayer.capabilities.isCreativeMode)
