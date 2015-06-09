@@ -5,7 +5,7 @@ eclipse/
 src_/
 
 
-src/main/java/littleMaidMobX/render/model/ModelRenderer.cc.java
+ModelRenderer.cc.java
 .classpath
 .settings/
 #.project
