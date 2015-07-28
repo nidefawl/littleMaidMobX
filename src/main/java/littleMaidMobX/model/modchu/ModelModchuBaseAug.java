@@ -4,7 +4,7 @@ package littleMaidMobX.model.modchu;import littleMaidMobX.model.caps.IModelCap
 	public ModelRenderer shaggyL;	public ModelRenderer sensor1;
 	public ModelRenderer sensor2;
 	public ModelRenderer sensor3;
-	public ModelRenderer sensor4;	public ModelModchuBaseAug() {
+	public ModelRenderer sensor4;		public ModelModchuBaseAug(StringBuilder hack) {		super(hack);	}	public ModelModchuBaseAug() {
 		this(0.0F);
 	}	public ModelModchuBaseAug(float f) {
 		this(f, 0.0F);

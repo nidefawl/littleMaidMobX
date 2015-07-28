@@ -1,4 +1,4 @@
-package littleMaidMobX.model.maids;import littleMaidMobX.render.model.ModelRenderer;public class MultiModel_Beverly3 extends MultiModel_Beverly4 {	public MultiModel_Beverly3() {		super();	}	public MultiModel_Beverly3(float f) {		super(f);	}	public MultiModel_Beverly3(float f, float f1) {		this(f, f1, 64, 64);	}	public MultiModel_Beverly3(float f, float f1, int i, int j) {		super(f, f1, i < 0 ? 64 : i, j < 0 ? 32 : j);	}	@Override
+package littleMaidMobX.model.maids;import littleMaidMobX.render.model.ModelRenderer;public class MultiModel_Beverly3 extends MultiModel_Beverly4 {		public MultiModel_Beverly3(StringBuilder hack) {		super(hack);	}	public MultiModel_Beverly3() {		super();	}	public MultiModel_Beverly3(float f) {		super(f);	}	public MultiModel_Beverly3(float f, float f1) {		this(f, f1, 64, 64);	}	public MultiModel_Beverly3(float f, float f1, int i, int j) {		super(f, f1, i < 0 ? 64 : i, j < 0 ? 32 : j);	}	@Override
 	public void initModel(float f, float f1, boolean isAfterInit) {
 		super.initModel(f, f1, false);
 		f = f > 0.0F ? 0.3F : 0.2F;

@@ -62,7 +62,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 	public ModelRenderer HipL;	private float x1;
 	private float y1;
 	private float z1;
-	private float IdOffset;	public MultiModel_Utsuho() {
+	private float IdOffset;		public MultiModel_Utsuho(StringBuilder hack) {		super(hack);	}	public MultiModel_Utsuho() {
 		this(0.0F);
 	}	public MultiModel_Utsuho(float f) {
 		this(f, 0.0F);

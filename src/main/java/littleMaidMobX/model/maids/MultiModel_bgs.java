@@ -30,7 +30,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 	public ModelRenderer bootR2;
 	public ModelRenderer bootL1;
 	public ModelRenderer bootL2;
-	public ModelRenderer Breast;	public MultiModel_bgs() {
+	public ModelRenderer Breast;		public MultiModel_bgs(StringBuilder hack) {		super(hack);	}	public MultiModel_bgs() {
 		this(0.0F);
 	}	public MultiModel_bgs(float f) {
 		this(f, 0.0F);

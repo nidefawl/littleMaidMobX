@@ -18,6 +18,10 @@ public class ModelLittleMaid_Archetype extends ModelLittleMaidBase {
 	public ModelRenderer Tail;
 	public ModelRenderer SideTailR;
 	public ModelRenderer SideTailL;
+	
+	public ModelLittleMaid_Archetype(StringBuilder hack) {
+		super(hack);
+	}
 
 	public ModelLittleMaid_Archetype() {
 		super();

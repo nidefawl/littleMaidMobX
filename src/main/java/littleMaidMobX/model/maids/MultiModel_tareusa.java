@@ -8,7 +8,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 	public ModelRenderer UsaER;
 	public ModelRenderer UsaEL1;
 	public ModelRenderer UsaER1;
-	public ModelRenderer Usasippo;	public MultiModel_tareusa() {
+	public ModelRenderer Usasippo;		public MultiModel_tareusa(StringBuilder hack) {		super(hack);	}	public MultiModel_tareusa() {
 		this(0.0F);
 	}	public MultiModel_tareusa(float f) {
 		this(f, 0.0F);

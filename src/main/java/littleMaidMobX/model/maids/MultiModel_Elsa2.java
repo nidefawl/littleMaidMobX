@@ -1,4 +1,4 @@
-package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.render.model.ModelBoxPlate;import littleMaidMobX.render.model.ModelRenderer;import littleMaidMobX.model.modchu.ModelModchuBaseSR2;public class MultiModel_Elsa2 extends ModelModchuBaseSR2 {	public MultiModel_Elsa2() {
+package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.render.model.ModelBoxPlate;import littleMaidMobX.render.model.ModelRenderer;import littleMaidMobX.model.modchu.ModelModchuBaseSR2;public class MultiModel_Elsa2 extends ModelModchuBaseSR2 {		public MultiModel_Elsa2(StringBuilder hack) {		super(hack);	}	public MultiModel_Elsa2() {
 		this(0.0F);
 	}	public MultiModel_Elsa2(float f) {
 		this(f, 0.0F);

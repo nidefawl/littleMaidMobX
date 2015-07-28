@@ -9,7 +9,7 @@ package littleMaidMobX.model.modchu;import littleMaidMobX.Helper;import littl
 	public ModelRenderer SkirtFront;
 	public ModelRenderer SkirtRight;
 	public ModelRenderer SkirtLeft;
-	public ModelRenderer SkirtBack;	public ModelModchuBaseMulti() {
+	public ModelRenderer SkirtBack;		public ModelModchuBaseMulti(StringBuilder hack) {		super(hack);	}	public ModelModchuBaseMulti() {
 		this(0.0F);
 	}	public ModelModchuBaseMulti(float f) {
 		this(f, 0.0F);

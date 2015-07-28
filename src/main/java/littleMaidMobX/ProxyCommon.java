@@ -2,6 +2,7 @@ package littleMaidMobX;
 
 import littleMaidMobX.entity.EntityLittleMaidAvatar;
 import littleMaidMobX.network.Message;
+import littleMaidMobX.registry.ModelManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
@@ -15,6 +16,10 @@ public class ProxyCommon
 	public void clientCustomPayload(Message var2) {}
 	public EntityPlayer getClientPlayer(){ return null; }
 	public void loadSounds(){}
+	
+	public void loadTextures() {
+		ModelManager.instance.loadTextures(false);
+	}
 	
 	public boolean isSinglePlayer()
 	{

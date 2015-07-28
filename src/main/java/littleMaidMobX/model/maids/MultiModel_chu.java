@@ -1,7 +1,7 @@
 package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.model.modchu.ModelModchuBaseOkota;import littleMaidMobX.render.model.ModelRenderer;public class MultiModel_chu extends ModelModchuBaseOkota {	public ModelRenderer CatEL;
 	public ModelRenderer CatER;
 	public ModelRenderer CatTail;
-	public ModelRenderer Prim;	public MultiModel_chu()
+	public ModelRenderer Prim;		public MultiModel_chu(StringBuilder hack) {		super(hack);	}	public MultiModel_chu()
 	{
 		this(0.0F);
 	}	public MultiModel_chu(float f)

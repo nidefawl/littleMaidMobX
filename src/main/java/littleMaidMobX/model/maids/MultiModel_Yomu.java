@@ -80,7 +80,7 @@ package littleMaidMobX.model.maids;import java.util.ArrayList;import java.uti
 	private float AY;
 	private float prevAY;	private float[] pastX = new float[10];
 	private float[] pastY = new float[10];
-	private float[] pastZ = new float[10];	public MultiModel_Yomu() {
+	private float[] pastZ = new float[10];		public MultiModel_Yomu(StringBuilder hack) {		super(hack);	}	public MultiModel_Yomu() {
 		this(0.0F);
 	}	public MultiModel_Yomu(float f) {
 		this(f, 0.0F);

@@ -21,7 +21,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.Helper;import little
 	public ModelRenderer osageLRib;
 	public ModelRenderer eyeL;
 	public ModelRenderer eyeR;
-	private boolean sneakSkirt;	public MultiModel_Shion() {
+	private boolean sneakSkirt;		public MultiModel_Shion(StringBuilder hack) {		super(hack);	}	public MultiModel_Shion() {
 		this(0.0F);
 	}	public MultiModel_Shion(float f) {
 		this(f, 0.0F);

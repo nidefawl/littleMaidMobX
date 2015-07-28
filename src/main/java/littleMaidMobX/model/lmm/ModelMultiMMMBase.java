@@ -18,6 +18,9 @@ public abstract class ModelMultiMMMBase extends ModelMultiBase {
 	@Deprecated
 	public float heldItemRight;
 
+	public ModelMultiMMMBase(StringBuilder hack) {
+		super(hack);
+	}
 
 	public ModelMultiMMMBase() {
 		super();

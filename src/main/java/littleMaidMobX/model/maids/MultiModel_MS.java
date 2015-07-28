@@ -1,4 +1,4 @@
-package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;public class MultiModel_MS extends MultiModel_MS1 {	public MultiModel_MS() {
+package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;public class MultiModel_MS extends MultiModel_MS1 {		public MultiModel_MS(StringBuilder hack) {		super(hack);	}	public MultiModel_MS() {
 		this(0.0F);
 	}	public MultiModel_MS(float f) {
 		this(f, 0.0F);

@@ -1,4 +1,4 @@
-package littleMaidMobX.model.maids;import littleMaidMobX.render.model.ModelRenderer;public class MultiModel_Elsa extends MultiModel_Elsa2 {	public MultiModel_Elsa() {
+package littleMaidMobX.model.maids;import littleMaidMobX.render.model.ModelRenderer;public class MultiModel_Elsa extends MultiModel_Elsa2 {		public MultiModel_Elsa(StringBuilder hack) {		super(hack);	}	public MultiModel_Elsa() {
 		this(0.0F);
 	}	public MultiModel_Elsa(float f) {
 		this(f, 0.0F);

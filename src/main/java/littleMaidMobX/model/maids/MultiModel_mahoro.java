@@ -9,7 +9,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 	public ModelRenderer ShoulderR;
 	public ModelRenderer ShoulderL;
 	public ModelRenderer eyeR;
-	public ModelRenderer eyeL;	public MultiModel_mahoro() {
+	public ModelRenderer eyeL;		public MultiModel_mahoro(StringBuilder hack) {		super(hack);	}	public MultiModel_mahoro() {
 		this(0.0F);
 	}	public MultiModel_mahoro(float f) {
 		this(f, 0.0F);

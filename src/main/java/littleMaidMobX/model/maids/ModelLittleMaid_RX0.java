@@ -42,7 +42,9 @@ public class ModelLittleMaid_RX0 extends ModelLittleMaidBase {
 	public ModelRenderer bipedRibbonLSensorB;
 	public ModelRenderer bipedSideTailL;
 
-
+	public ModelLittleMaid_RX0(StringBuilder hack) {
+		super(hack);
+	}
 
 	public ModelLittleMaid_RX0() {
 		this(0.0F);

@@ -17,7 +17,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 	public ModelRenderer KeloeyeL2;
 	public ModelRenderer KeloeyeR2;	public ModelRenderer headwear;
 	public ModelRenderer rightHandPlus;
-	public ModelRenderer leftHandPlus;	public MultiModel_Kelo() {
+	public ModelRenderer leftHandPlus;		public MultiModel_Kelo(StringBuilder hack) {		super(hack);	}	public MultiModel_Kelo() {
 		this(0.0F);
 	}	public MultiModel_Kelo(float f) {
 		this(f, 0.0F);

@@ -9,7 +9,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 	public ModelRenderer Tuno4;
 	public ModelRenderer Hyoutan1;
 	public ModelRenderer Hyoutan2;
-	private boolean initAimedBow;	public MultiModel_suika() {
+	private boolean initAimedBow;		public MultiModel_suika(StringBuilder hack) {		super(hack);	}	public MultiModel_suika() {
 		this(0.0F);
 	}	public MultiModel_suika(float f) {
 		this(f, 0.0F);

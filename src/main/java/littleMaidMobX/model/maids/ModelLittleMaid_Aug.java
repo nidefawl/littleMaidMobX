@@ -23,6 +23,9 @@ public class ModelLittleMaid_Aug extends ModelLittleMaid_SR2 {
 	public ModelRenderer sensor3;
 	public ModelRenderer sensor4;
 
+	public ModelLittleMaid_Aug(StringBuilder hack) {
+		super(hack);
+	}
 	
 	public ModelLittleMaid_Aug() {
 		super();

@@ -12,7 +12,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.render.model.ModelRen
 	public ModelRenderer kamidomeLB;
 	public ModelRenderer tailLFA;
 	public ModelRenderer tailLBA;
-	public ModelRenderer tailLBB;	public MultiModel_Kagami() {
+	public ModelRenderer tailLBB;		public MultiModel_Kagami(StringBuilder hack) {		super(hack);	}	public MultiModel_Kagami() {
 		this(0.0F);
 	}	public MultiModel_Kagami(float f) {
 		this(f, 0.0F);

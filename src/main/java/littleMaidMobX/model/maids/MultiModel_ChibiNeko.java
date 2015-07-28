@@ -42,7 +42,7 @@ package littleMaidMobX.model.maids;import java.util.Map;import littleMaidMob
 	public ModelRenderer DrowaR2;
 	public ModelRenderer DrowaL2;
 	public ModelRenderer pink;
-	private Map sizeMap;	private static final float Scale = 0.4F;	public MultiModel_ChibiNeko() {
+	private Map sizeMap;	private static final float Scale = 0.4F;		public MultiModel_ChibiNeko(StringBuilder hack) {		super(hack);	}	public MultiModel_ChibiNeko() {
 		this(0.0F);
 	}	public MultiModel_ChibiNeko(float f) {
 		this(f, 0.0F);

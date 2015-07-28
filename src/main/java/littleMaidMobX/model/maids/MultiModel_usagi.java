@@ -6,7 +6,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 	public ModelRenderer UsaEL;
 	public ModelRenderer UsaER;
 	private boolean isTaremimi = false;
-	private boolean isTareRightmimi;	public MultiModel_usagi() {
+	private boolean isTareRightmimi;		public MultiModel_usagi(StringBuilder hack) {		super(hack);	}	public MultiModel_usagi() {
 		this(0.0F);
 	}	public MultiModel_usagi(float f) {
 		this(f, 0.0F);

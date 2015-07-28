@@ -21,7 +21,9 @@ public abstract class ModelLittleMaidBase extends ModelMultiMMMBase {
 	public ModelRenderer bipedLeftLeg;
 	public ModelRenderer Skirt;
 
-
+	public ModelLittleMaidBase(StringBuilder hack) {
+		super(hack);
+	}
 	
 	public ModelLittleMaidBase() {
 		super();

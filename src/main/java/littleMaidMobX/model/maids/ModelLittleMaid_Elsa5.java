@@ -23,7 +23,10 @@ public class ModelLittleMaid_Elsa5 extends ModelLittleMaidBase {
 	protected byte bodyPosY;
 	protected byte legPosY;
 	protected Random rand = new Random();
-
+	
+	public ModelLittleMaid_Elsa5(StringBuilder hack) {
+		super(hack);
+	}
 	
 	public ModelLittleMaid_Elsa5()
 	{

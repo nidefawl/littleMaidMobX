@@ -13,7 +13,10 @@ public class ModelLittleMaid_SR2 extends ModelLittleMaidBase {
 	public ModelRenderer eyeR;
 	public ModelRenderer eyeL;
 
-
+	public ModelLittleMaid_SR2(StringBuilder hack) {
+		super(hack);
+	}
+	
 	public ModelLittleMaid_SR2() {
 		super();
 	}

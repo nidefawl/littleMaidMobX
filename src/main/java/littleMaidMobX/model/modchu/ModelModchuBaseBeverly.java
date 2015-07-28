@@ -9,6 +9,10 @@ import littleMaidMobX.render.model.ModelRenderer;
 
 public abstract class ModelModchuBaseBeverly extends ModelModchuBaseSR2 {
 
+	public ModelModchuBaseBeverly(StringBuilder hack) {
+		super(hack);
+	}
+	
 	public ModelModchuBaseBeverly() {
 		this(0.0F);
 	}

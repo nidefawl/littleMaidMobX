@@ -5,7 +5,11 @@ import littleMaidMobX.model.caps.ModelCapsHelper;
 import littleMaidMobX.render.model.ModelRenderer;
 
 public abstract class ModelModchuBaseOkota extends ModelModchuBaseSR2 {
-
+	
+	public ModelModchuBaseOkota(StringBuilder hack) {
+		super(hack);
+	}
+	
 	public ModelModchuBaseOkota()
 	{
 		this(0.0F);

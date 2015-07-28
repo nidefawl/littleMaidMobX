@@ -14,7 +14,7 @@ public class MultiModel_Beverly6 extends ModelModchuBaseBeverly {	//added fiel
 	protected byte headPosY;
 	protected byte bodyPosY;
 	protected byte legPosY;
-	protected boolean isRidingMaster = false;	public MultiModel_Beverly6() {
+	protected boolean isRidingMaster = false;		public MultiModel_Beverly6(StringBuilder hack) {		super(hack);	}	public MultiModel_Beverly6() {
 		super();
 	}	public MultiModel_Beverly6(float f) {
 		super(f);

@@ -59,7 +59,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 	public ModelRenderer Okan_e5;
 	public ModelRenderer Okan_e6;
 	public ModelRenderer Okan_e7;
-	public ModelRenderer Okan_e8;	public MultiModel_ch() {
+	public ModelRenderer Okan_e8;		public MultiModel_ch(StringBuilder hack) {		super(hack);	}	public MultiModel_ch() {
 		this(0.0F);
 	}	public MultiModel_ch(float f) {
 		this(f, 0.0F);
