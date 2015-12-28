@@ -38,7 +38,9 @@ public abstract class ModeBase {
 	}
 
 	
-	public void initEntity() {
+	public void initEntity()
+	{
+		init();
 	}
 
 	

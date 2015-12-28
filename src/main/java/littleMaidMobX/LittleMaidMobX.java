@@ -145,6 +145,7 @@ public class LittleMaidMobX {
 			cfg_DeathMessage = config.getBoolean("Print Death Message", Categories.CATEGORY_MAIDS, true, "Prints message on the death of your maid.");
 			cfg_Aggressive = config.getBoolean("Agressive", Categories.CATEGORY_MAIDS, true, "true: Will be hostile, false: Is a pacifist");
 			cfg_IgnoreItemList = config.getString("Ignore Item List", Categories.CATEGORY_MAIDS, "arsmagica2", "?");
+			cfg_makeNoise = config.getBoolean("Maids Make Sounds", Categories.CATEGORY_MAIDS, true, "Determines whether or not maids will make noises");
 			//Used to be Spawn Anywhere but I don't know what it does now.
 			cfg_Dominant = false;
 			
@@ -197,23 +198,18 @@ public class LittleMaidMobX {
 			});
 		}
 		
+		//Achievment Stuff
 		ac_Contract = new Achievement("achievement.contract", "contract", 0, 0, Items.cake, null).initIndependentStat().registerStat();
 		Achievement[] achievements = new Achievement[] { ac_Contract };
 		AchievementPage.registerAchievementPage(new AchievementPage("LittleMaidX", achievements));
 
-		if (Helper.isClient) {
-			
-			
-			
-			
+		if (Helper.isClient)
+		{
 			proxy.init();
 		}
 		
-		
-		
 		Network.init(DOMAIN);
 
-		
 		proxy.loadSounds();
 		
 //		Debug("GUID-sneak: %s", LMM_EntityLittleMaid.maidUUIDSneak.toString());
