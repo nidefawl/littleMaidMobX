@@ -622,7 +622,8 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 
 	
 	@Override
-	protected String getHurtSound() {
+	protected String getHurtSound()
+	{
 		playSound(maidDamegeSound, true);
 		return null;
 	}
@@ -634,36 +635,56 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 	}
 
 	@Override
-	protected String getLivingSound() {
-		
+	protected String getLivingSound()
+	{
 		EnumSound so = EnumSound.Null;
 		if (getHealth() < 10)
+		{
 			so = EnumSound.living_whine;
-		else if (rand.nextFloat() < maidSoundRate) {
-			if (mstatTime > 23500 || mstatTime < 1500) {
+		}
+		else if (rand.nextFloat() < maidSoundRate)
+		{
+			if (mstatTime > 23500 || mstatTime < 1500)
+			{
 				so = EnumSound.living_morning;
-			} else if (mstatTime < 12500) {
-				if (isContract()) {
+			}
+			else if (mstatTime < 12500)
+			{
+				if (isContract())
+				{
 					BiomeGenBase biomegenbase = worldObj.getBiomeGenForCoords(MathHelper.floor_double(posX + 0.5D), MathHelper.floor_double(posZ + 0.5D));
 					float ltemp = biomegenbase.getFloatTemperature((int)this.posX, (int)this.posY, (int)this.posZ);
-					if (ltemp <= 0.15F) {
+					if (ltemp <= 0.15F)
+					{
 						so = EnumSound.living_cold;
-					} else if (ltemp > 1.0F) {
+					}
+					else if (ltemp > 1.0F)
+					{
 						so = EnumSound.living_hot;
-					} else {
+					}
+					else
+					{
 						so = EnumSound.living_daytime;
 					}
-					if (worldObj.isRaining()) {
-						if (biomegenbase.canSpawnLightningBolt()) {
+					if (worldObj.isRaining())
+					{
+						if (biomegenbase.canSpawnLightningBolt())
+						{
 							so = EnumSound.living_rain;
-						} else if (biomegenbase.getEnableSnow()) {
+						}
+						else if (biomegenbase.getEnableSnow())
+						{
 							so = EnumSound.living_snow;
 						}
 					}
-				} else {
+				}
+				else
+				{
 					so = EnumSound.living_daytime;
 				}
-			} else {
+			}
+			else
+			{
 				so = EnumSound.living_night;
 			}
 		}
@@ -674,7 +695,8 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 	}
 
 	
-	public void playSound(String pname) {
+	public void playSound(String pname)
+	{
 		playSound(pname, 0.5F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
 	}
 
@@ -701,9 +723,12 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 	}
 
 	
-	public void playLittleMaidSound(EnumSound enumsound, boolean force) {
-		
-		if ((maidSoundInterval > 0 && !force) || enumsound == EnumSound.Null) return;
+	public void playLittleMaidSound(EnumSound enumsound, boolean force)
+	{
+		if (((maidSoundInterval > 0 && !force) || enumsound == EnumSound.Null) || !LittleMaidMobX.cfg_makeNoise)
+		{
+			return;
+		}
 		maidSoundInterval = 20;
 		if (worldObj.isRemote) {
 			// Client
@@ -735,8 +760,8 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 	}
 
 	@Override
-	protected boolean canDespawn() {
-		
+	protected boolean canDespawn()
+	{
 		return LittleMaidMobX.cfg_canDespawn || super.canDespawn();
 	}
 
