@@ -20,19 +20,20 @@ public class Mode_Fencer extends ModeBase {
 
 	public Mode_Fencer(EntityLittleMaid pEntity) {
 		super(pEntity);
+		TriggerSelect.appendTriggerItem(null, "Sword", "");
+		TriggerSelect.appendTriggerItem(null, "Axe", "");
 	}
 
 	@Override
-	public int priority() {
+	public int priority()
+	{
 		return 3000;
 	}
 
 	@Override
-	public void init() {
+	public void init()
+	{
 		
-		
-		TriggerSelect.appendTriggerItem(null, "Sword", "");
-		TriggerSelect.appendTriggerItem(null, "Axe", "");
 	}
 
 	@Override

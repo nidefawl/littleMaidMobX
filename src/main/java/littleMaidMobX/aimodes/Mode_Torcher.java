@@ -22,6 +22,7 @@ public class Mode_Torcher extends ModeBase {
 
 	public Mode_Torcher(EntityLittleMaid pEntity) {
 		super(pEntity);
+		TriggerSelect.appendTriggerItem(null, "Torch", "");
 	}
 
 	@Override
@@ -32,7 +33,7 @@ public class Mode_Torcher extends ModeBase {
 	@Override
 	public void init() {
 		
-		TriggerSelect.appendTriggerItem(null, "Torch", "");
+
 	}
 
 	@Override

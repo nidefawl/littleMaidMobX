@@ -30,14 +30,14 @@ public class Mode_Archer extends ModeBase {
 
 	public Mode_Archer(EntityLittleMaid pEntity) {
 		super(pEntity);
+		TriggerSelect.appendTriggerItem(null, "Bow", "");
+		TriggerSelect.appendTriggerItem(null, "Arrow", "");
 	}
 
 	@Override
-	public void init() {
-		
-		
-		TriggerSelect.appendTriggerItem(null, "Bow", "");
-		TriggerSelect.appendTriggerItem(null, "Arrow", "");
+	public void init()
+	{
+
 	}
 
 	@Override
