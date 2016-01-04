@@ -59,6 +59,7 @@ import littleMaidMobX.aimodes.Mode_Playing;
 import littleMaidMobX.aimodes.SwingStatus;
 import littleMaidMobX.gui.GuiCommonHandler;
 import littleMaidMobX.inventory.InventoryLittleMaid;
+import littleMaidMobX.io.Config;
 import littleMaidMobX.model.caps.EntityCapsMaid;
 import littleMaidMobX.model.caps.IModelCaps;
 import littleMaidMobX.network.Net;
@@ -313,10 +314,10 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 	public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData) {
 		
 		String ls;
-		if (LittleMaidMobX.cfg_defaultTexture.isEmpty()) {
+		if (Config.defaultTexture.isEmpty()) {
 			ls = ModelManager.instance.getRandomTextureString(rand);
 		} else {
-			ls = LittleMaidMobX.cfg_defaultTexture;
+			ls = Config.defaultTexture;
 		}
 		textureData.setTextureInitServer(ls);
 		LittleMaidMobX.Debug("init-ID:%d, %s:%d", getEntityId(), textureData.textureBox[0].textureName, textureData.getColor());
@@ -725,7 +726,7 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 	
 	public void playLittleMaidSound(EnumSound enumsound, boolean force)
 	{
-		if (((maidSoundInterval > 0 && !force) || enumsound == EnumSound.Null) || !LittleMaidMobX.cfg_makeNoise)
+		if (((maidSoundInterval > 0 && !force) || enumsound == EnumSound.Null) || !Config.makeNoise)
 		{
 			return;
 		}
@@ -741,7 +742,7 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 			LittleMaidMobX.Debug(String.format("id:%d, se:%04x-%s (%s)", getEntityId(), enumsound.index, enumsound.name(), s));
 			if(!s.isEmpty())
 			{
-				float lpitch = LittleMaidMobX.cfg_VoiceDistortion ? (rand.nextFloat() * 0.2F) + 0.95F : 1.0F;
+				float lpitch = Config.VoiceDistortion ? (rand.nextFloat() * 0.2F) + 0.95F : 1.0F;
 				worldObj.playSound(posX, posY, posZ, s, getSoundVolume(), lpitch, false);
 			}
 		}
@@ -762,21 +763,23 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 	@Override
 	protected boolean canDespawn()
 	{
-		return LittleMaidMobX.cfg_canDespawn || super.canDespawn();
+		return Config.canDespawn || super.canDespawn();
 	}
 
 	@Override
 	public boolean getCanSpawnHere() {
 		
-		if (LittleMaidMobX.cfg_spawnLimit <= getMaidCount()) {
-			LittleMaidMobX.Debug("Spawn Limit.");
+		if (Config.spawnLimit <= getMaidCount())
+		{
+			//LittleMaidMobX.Debug("Spawn Limit.");
+			System.out.println("Spawn Limit Hit.");
 			return false;
 		}
 		int lx = MathHelper.floor_double(this.posX);
 		int ly = MathHelper.floor_double(this.boundingBox.minY);
 		int lz = MathHelper.floor_double(this.posZ);
 		
-		if (LittleMaidMobX.cfg_Dominant) {
+		if (Config.Dominant) {
 			
 			return this.worldObj.checkNoEntityCollision(this.boundingBox) 
 					&& this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox).isEmpty() 
@@ -806,6 +809,7 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 				lj++;
 			}
 		}
+		//System.out.println("Current maid count is" + lj);
 		return lj;
 	}
 
@@ -1193,8 +1197,8 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 		}
 		onInventoryChanged();
 		
-		
-		if (LittleMaidMobX.cfg_antiDoppelganger && maidAnniversary > 0L) {
+		//What is this?
+		if (Config.antiDoppelganger && maidAnniversary > 0L) {
 			for (int i = 0; i < worldObj.loadedEntityList.size(); i++) {
 				Entity entity1 = (Entity)worldObj.loadedEntityList.get(i);
 				if (!entity1.isDead && entity1 instanceof EntityLittleMaid) {
@@ -2141,7 +2145,7 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 		
 		if (!worldObj.isRemote) {
 			
-			if (LittleMaidMobX.cfg_DeathMessage && mstatMasterEntity != null) {
+			if (Config.DeathMessage && mstatMasterEntity != null) {
 				String ls = par1DamageSource.getDamageType();
 				Entity lentity = par1DamageSource.getEntity();
 				if (lentity != null) {
@@ -2761,7 +2765,7 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 				EntityPlayer clientPlayer = LittleMaidMobX.proxy.getClientPlayer();
 
 				if (!LittleMaidMobX.proxy.isSinglePlayer()
-						|| LittleMaidMobX.cfg_checkOwnerName 
+						|| Config.checkOwnerName 
 						|| clientPlayer == null) {
 					lname = getMaidMaster();
 				} else {
