@@ -692,9 +692,10 @@ public class EntityLittleMaidAvatar extends EntityPlayer {
 		if (isSwingInProgress) avatar.setSwinging(EnumSound.Null);
 	}
 
-	protected void damageArmor(float par1){
+	/*protected void damageArmor(float par1)
+	{
 		super.damageArmor(par1);
-	}
+	}*/
 	
 	public float applyArmorCalculations(DamageSource par1DamageSource, float par2)
 	{
@@ -706,9 +707,9 @@ public class EntityLittleMaidAvatar extends EntityPlayer {
 		return super.applyPotionDamageCalculations(par1DamageSource, par2);
 	}
 
-	public void damageEntity(DamageSource par1DamageSource, float par2)
+	/*public void damageEntity(DamageSource par1DamageSource, float par2)
 	{
 		super.damageEntity(par1DamageSource, par2);
-	}
+	}*/
 	
 }

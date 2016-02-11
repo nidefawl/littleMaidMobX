@@ -19,9 +19,9 @@ import net.minecraftforge.common.config.Configuration;
 public class Config
 {
 
-        public static final String CATEGORY_MAIDS = "maids";
-		public static final String CATEGORY_MMMLIB = "mmmlib";
-		public static final String CATEGORY_ITEMS = "items";
+    public static final String CATEGORY_MAIDS = "maids";
+	public static final String CATEGORY_MMMLIB = "mmmlib";
+	public static final String CATEGORY_ITEMS = "items";
 	
 	public static Configuration config;
 	
@@ -41,9 +41,9 @@ public class Config
 	public static String IgnoreItemList;
 	public static boolean makeNoise;
 	
-	public static boolean isModelAlphaBlend = true;
+	public static boolean isModelAlphaBlend;
 	
-	public static boolean isDebugMessage = true;
+	public static boolean isDebugMessage;
 	public static boolean isDebugModels = false;
 
 	/*public static File configDir;
@@ -165,15 +165,15 @@ public class Config
 	public static void syncConfig()
 	{
 		//MMMLib
-		isDebugMessage		= true;//config.get("MMMLib", "isDebugMessage", false).getBoolean(false);
+		isDebugMessage		= config.getBoolean("Display Debug Messages", CATEGORY_MMMLIB, false, "true: Debug messages displayed in console, false: debug messages are hidden from console.");
 		isModelAlphaBlend	= config.getBoolean("Is Model Alpha Blend", CATEGORY_MMMLIB, true, "true: AlphaBlend(requires more power), false: AlphaTest(faster)");
 		//public static boolean AlphaBlend = true;
 		
 		//Maids
-		spawnWeight = config.getInt("Spawn Weight", CATEGORY_MAIDS, 5, 0, 10, "Relative spawn weight. The lower the less common. 10=pigs. 0=off");
-		spawnLimit = config.getInt("Spawn Limit", CATEGORY_MAIDS, 20, 10, 100, "Maximum spawn count in the World.");
-		minGroupSize = config.getInt("Minimum Group Size", CATEGORY_MAIDS, 1, 1, 10, "Minimum spawn group count.");
-		maxGroupSize = config.getInt("Maximum Group Size", CATEGORY_MAIDS, 3, 1, 10, "Maximum spawn group count.");
+		spawnWeight = config.getInt("Spawn Weight", CATEGORY_MAIDS, 5, 0, 10, "Relative spawn weight. The lower the less common. 10=pigs 0=off (Requires Restart)");
+		spawnLimit = config.getInt("Spawn Limit", CATEGORY_MAIDS, 20, 10, 100, "Maximum spawn count in the World. (Requires Restart)");
+		minGroupSize = config.getInt("Minimum Group Size", CATEGORY_MAIDS, 1, 1, 10, "Minimum spawn group count. (Requires Restart)");
+		maxGroupSize = config.getInt("Maximum Group Size", CATEGORY_MAIDS, 3, 1, 10, "Maximum spawn group count. (Requires Restart)");
 		canDespawn = config.getBoolean("Can Despawn", CATEGORY_MAIDS, false, "It will despawn, if it lets things go.");
 		checkOwnerName = config.getBoolean("Check Owner Name", CATEGORY_MAIDS, false, "At local, make sure the name of the owner.");
 		antiDoppelganger = config.getBoolean("Anti Doppelganger", CATEGORY_MAIDS, true, "Not to survive the doppelganger.");
@@ -183,10 +183,10 @@ public class Config
 		Aggressive = config.getBoolean("Agressive", CATEGORY_MAIDS, true, "true: Will be hostile, false: Is a pacifist");
 		IgnoreItemList = config.getString("Ignore Item List", CATEGORY_MAIDS, "arsmagica2", "?");
 		makeNoise = config.getBoolean("Maids Make Sounds", CATEGORY_MAIDS, true, "Determines whether or not maids will make noises");
-		Dominant = config.getBoolean("Maids Spawn Everywhere", CATEGORY_MAIDS, false, "If true maids will spawn in all biomes, if false maids will spawn in biomes of approved types.");
+		Dominant = config.getBoolean("Maids Spawn Everywhere", CATEGORY_MAIDS, false, "If true maids will spawn in all biomes, if false maids will spawn in biomes of approved types. (Requires Restart)");
 		
 		//Items
-		cfg_enableSpawnEgg = config.getBoolean("Enable Spawn Egg", CATEGORY_ITEMS, true, "Enables Little Maid SpawnEgg Recipe.");
+		cfg_enableSpawnEgg = config.getBoolean("Enable Spawn Egg", CATEGORY_ITEMS, true, "Enables Little Maid SpawnEgg Recipe. (Requires Restart)");
 	}
 	
 	public static void checkConfig() //(Class pClass)

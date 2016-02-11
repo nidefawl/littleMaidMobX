@@ -51,7 +51,8 @@ public class LittleMaidMobX {
 
 	public static Achievement ac_Contract;
 	
-	public static void Debug(String pText, Object... pData) {
+	public static void Debug(String pText, Object... pData)
+	{
 		if (Config.isDebugMessage)
 		{
 			// TODO: use Logger class instead with proper names and a way to enable/disable (one logger for sound, one for AI, one for models, etc)
@@ -61,7 +62,7 @@ public class LittleMaidMobX {
 //			if (pText.contains("daytime")) { 
 //				return;
 //			}
-//			System.out.println(String.format("MMMLib-" + pText, pData));
+			System.out.println(String.format("MMMLib-" + pText, pData));
 		}
 	}
 	public static void DebugModel(String string) {

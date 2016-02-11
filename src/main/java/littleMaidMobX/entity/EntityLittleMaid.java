@@ -212,7 +212,7 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 	
 	
 //	protected LMM_EnumSound maidAttackSound;
-	public EnumSound maidDamegeSound;
+	public EnumSound maidDamageSound;
 	protected int maidSoundInterval;
 	
 	//TODO: figure out if its required to set this value
@@ -279,7 +279,7 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 		
 		
 //		maidAttackSound = LMM_EnumSound.attack;
-		maidDamegeSound = EnumSound.hurt;
+		maidDamageSound = EnumSound.hurt;
 		maidSoundInterval = 0;
 		
 		
@@ -625,7 +625,7 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 	@Override
 	protected String getHurtSound()
 	{
-		playSound(maidDamegeSound, true);
+		playSound(maidDamageSound, true);
 		return null;
 	}
 
@@ -1431,9 +1431,11 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 	}
 
 	@Override
-	protected void damageArmor(float pDamage) {
+	protected void damageArmor(float pDamage)
+	{
+		LittleMaidMobX.Debug(String.format("Armor Damage being calculated" , this.getEntityId(), pDamage));
 		maidInventory.damageArmor(pDamage);
-		maidAvatar.damageArmor(pDamage);
+		//maidAvatar.damageArmor(pDamage);
 	}
 
 	@Override
@@ -1442,7 +1444,8 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 	}
 
 	@Override
-	protected float applyArmorCalculations(DamageSource par1DamageSource, float par2) {
+	protected float applyArmorCalculations(DamageSource par1DamageSource, float par2)
+	{
 		return maidAvatar.applyArmorCalculations(par1DamageSource, par2);
 	}
 
@@ -1454,30 +1457,32 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 	@Override
 	protected void damageEntity(DamageSource par1DamageSource, float par2) {
 		
-		if (par1DamageSource == DamageSource.fall) {
-			maidDamegeSound = EnumSound.hurt_fall;
-		}
-		if(!par1DamageSource.isUnblockable() && isBlocking()) {
-			
-//			par2 = (1.0F + par2) * 0.5F;
-			LittleMaidMobX.Debug(String.format("Blocking success ID:%d, %f -> %f" , this.getEntityId(), par2, (par2 = (1.0F + par2) * 0.5F)));
-			maidDamegeSound = EnumSound.hurt_guard;
+		if (par1DamageSource == DamageSource.fall)
+		{
+			maidDamageSound = EnumSound.hurt_fall;
 		}
 		
+		if(!par1DamageSource.isUnblockable() && isBlocking())
+		{
+//			par2 = (1.0F + par2) * 0.5F; //What is this for?
+			LittleMaidMobX.Debug(String.format("Blocking success ID:%d, %f -> %f" , this.getEntityId(), par2, (par2 = (1.0F + par2) * 0.5F)));
+			maidDamageSound = EnumSound.hurt_guard;
+		}
 		
 		float llasthealth = getHealth();
-		if (par2 > 0 && getActiveModeClass() != null && !getActiveModeClass().damageEntity(maidMode, par1DamageSource, par2)) {
-			maidAvatar.damageEntity(par1DamageSource, par2);
-			
-			
+		if (par2 > 0 && getActiveModeClass() != null && !getActiveModeClass().damageEntity(maidMode, par1DamageSource, par2))
+		{
+			//maidAvatar.damageEntity(par1DamageSource, par2);
+			super.damageEntity(par1DamageSource, par2);
 			setMaidWait(false);
 		}
 		
-		if (llasthealth == getHealth() && maidDamegeSound == EnumSound.hurt) {
-			maidDamegeSound = EnumSound.hurt_nodamege;
+		if (llasthealth == getHealth() && maidDamageSound == EnumSound.hurt)
+		{
+			maidDamageSound = EnumSound.hurt_nodamage;
 		}
 		LittleMaidMobX.Debug(String.format("GetDamage ID:%d, %s, %f/ %f" , this.getEntityId(), par1DamageSource.damageType, llasthealth - getHealth(), par2));
-//		super.damageEntity(par1DamageSource, par2);
+		//super.damageEntity(par1DamageSource, par2);
 	}
 
 	@Override
@@ -1495,9 +1500,9 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 		LittleMaidMobX.Debug("LMM_EntityLittleMaid.attackEntityFrom "+this+"("+this.maidAvatar+") <= "+entity);
 		
 		
-		maidDamegeSound = EnumSound.hurt;
+		maidDamageSound = EnumSound.hurt;
 		if (par1DamageSource == DamageSource.inFire || par1DamageSource == DamageSource.onFire || par1DamageSource == DamageSource.lava) {
-			maidDamegeSound = EnumSound.hurt_fire;
+			maidDamageSound = EnumSound.hurt_fire;
 		}
 		for (ModeBase lm : maidEntityModeList) {
 			float li = lm.attackEntityFrom(par1DamageSource, par2);
@@ -1527,10 +1532,10 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 //		if (par2 == 0 && maidMode != mmode_Detonator) {
 		if (par2 == 0) {
 			
-			if (maidDamegeSound == EnumSound.hurt) {
-				maidDamegeSound = EnumSound.hurt_nodamege;
+			if (maidDamageSound == EnumSound.hurt) {
+				maidDamageSound = EnumSound.hurt_nodamage;
 			}
-			playSound(maidDamegeSound, true);
+			playSound(maidDamageSound, true);
 			return false;
 		}
 		

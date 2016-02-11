@@ -299,9 +299,9 @@ public class Mode_Playing extends ModeBase {
 
 	@Override
 	public float attackEntityFrom(DamageSource par1DamageSource, float par2) {
-		if (par1DamageSource.getSourceOfDamage() instanceof EntitySnowball) {
-			
-			owner.maidDamegeSound = EnumSound.hurt_snow;
+		if (par1DamageSource.getSourceOfDamage() instanceof EntitySnowball)
+		{
+			owner.maidDamageSound = EnumSound.hurt_snow;
 			if (!owner.isContract() || owner.isFreedom()) {
 				owner.setPlayingRole(mpr_QuickShooter);
 				owner.setMaidWait(false);
