@@ -5,7 +5,7 @@ Will hopefully fix annoyances, improve mod compatability and add some new featur
 
 Downloads
 
-[1.7.10 (1.3.2)](https://www.dropbox.com/s/cgdmkeaqpzhlcbl/LittleMaidMobEnhanced-1.7.10-1.3.2.jar?dl=0)
+[1.7.10 (1.3.2)](http://adf.ly/1YYyXj)
 
 1.8.9 is now in the works stay tuned.
 
