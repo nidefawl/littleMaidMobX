@@ -18,8 +18,8 @@ buildscript {
 apply plugin: 'forge'
 
 version = "1.0"
-group= "com.yourname.LMMX" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "LittleMaidMob"
+group= "com.yourname.modid" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "modid"
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
