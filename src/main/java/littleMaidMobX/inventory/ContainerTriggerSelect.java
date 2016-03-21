@@ -39,8 +39,10 @@ public class ContainerTriggerSelect extends ContainerCreative {
 			}
 			
 		}
+		if (TriggerSelect.selector.size() > 0) {
+			setWeaponSelect(Helper.getPlayerName(entityplayer), TriggerSelect.selector.get(0));	
+		}
 		
-		setWeaponSelect(Helper.getPlayerName(entityplayer), TriggerSelect.selector.get(0));
 		
 		initAllSelections();
 		scrollTo(0.0F);

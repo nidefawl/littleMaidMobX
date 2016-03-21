@@ -26,6 +26,7 @@ public class ModelBoxPlate extends ModelBoxBase {
 	public static final int planeZYLeft		= 0x15;
 	public static final int planeXZTop		= 0x12;
 	public static final int planeXZBottom	= 0x16;
+	public Object[] args;
 
 
 
@@ -41,7 +42,9 @@ public class ModelBoxPlate extends ModelBoxBase {
 		float lz;
 		boolean lotherplane = (pPlane & 0x04) > 0;
 		int lPlane = pPlane & 0x03;
-		
+		this.args = new Object[] {
+				pX, pY, pZ, pWidth, pHeight, pPlane, pZoom
+		};
 		
 		switch (lPlane) {
 		case planeXY:
