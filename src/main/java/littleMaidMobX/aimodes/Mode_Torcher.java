@@ -95,8 +95,9 @@ public class Mode_Torcher extends ModeBase {
 	}
 
 	@Override
-	public boolean checkItemStack(ItemStack pItemStack) {
-		return pItemStack.getItem() == Item.getItemFromBlock(Blocks.torch);
+	public boolean checkItemStack(ItemStack pItemStack)
+	{
+		return pItemStack.getItem() == Item.getItemFromBlock(Blocks.torch) || TriggerSelect.checkWeapon(owner.getMaidMaster(), "Torch", pItemStack);
 	}
 
 	@Override

@@ -90,7 +90,8 @@ public abstract class ModeBase {
 	}
 	
 	
-	public boolean checkItemStack(ItemStack pItemStack) {
+	public boolean checkItemStack(ItemStack pItemStack)//This is used to determine wether or not a maid is allowed to pick up items.
+	{
 		
 		return false;
 	}
@@ -111,7 +112,7 @@ public abstract class ModeBase {
 		return false;
 	}
 
-	
+	//What does this do?
 	public boolean checkBlock(int pMode, int px, int py, int pz) {
 		return false;
 	}

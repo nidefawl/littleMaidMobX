@@ -14,8 +14,10 @@ import net.minecraft.entity.item.EntityTNTPrimed;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemShears;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemCloth;
 import net.minecraft.util.DamageSource;
 import cpw.mods.fml.common.ObfuscationReflectionHelper;
 
@@ -31,6 +33,7 @@ public class Mode_Ripper extends ModeBase {
 
 	public Mode_Ripper(EntityLittleMaid pEntity) {
 		super(pEntity);
+		TriggerSelect.appendTriggerItem(null, "Shears", "");
 		timeSinceIgnited = -1;
 	}
 
@@ -64,7 +67,7 @@ public class Mode_Ripper extends ModeBase {
 		ltasks[0].addTask(8, owner.aiAvoidPlayer);
 //		ltasks[0].addTask(7, pentitylittlemaid.aiCloseDoor);
 //		ltasks[0].addTask(8, pentitylittlemaid.aiOpenDoor);
-//		ltasks[0].addTask(9, pentitylittlemaid.aiCollectItem);
+		ltasks[0].addTask(9, owner.aiCollectItem);
 		ltasks[0].addTask(10, owner.aiFollow);
 //		ltasks[0].addTask(11, new EntityAILeapAtTarget(pentitylittlemaid, 0.3F));
 		ltasks[0].addTask(11, owner.aiWander);
@@ -340,6 +343,11 @@ public class Mode_Ripper extends ModeBase {
 		}
 		
 		return false;
+	}
+	@Override
+	public boolean checkItemStack(ItemStack pItemStack) {
+		
+		return /*pItemStack.getItem() instanceof ItemShears || TriggerSelect.checkWeapon(owner.getMaidMaster(), "Shears", pItemStack) ||*/ pItemStack.getItem() instanceof ItemCloth;
 	}
 
 }

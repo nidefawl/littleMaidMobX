@@ -89,7 +89,8 @@ public class Mode_Cooking extends ModeBlockBase {
 	}
 
 	@Override
-	public boolean checkItemStack(ItemStack pItemStack) {
+	public boolean checkItemStack(ItemStack pItemStack)
+	{
 		return InventoryLittleMaid.isItemBurned(pItemStack) || InventoryLittleMaid.isItemSmelting(pItemStack);
 	}
 

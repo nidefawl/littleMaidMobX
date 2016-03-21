@@ -35,7 +35,8 @@ public class AIFindBlock extends EntityAIBase implements IEntityAI {
 		if (!isEnable || theMaid.isMaidWait() || fmodeBase == null) {
 			return false;
 		}
-		if (!fmodeBase.isSearchBlock()) {
+		if (!fmodeBase.isSearchBlock())
+		{
 			return fmodeBase.shouldBlock(theMaid.maidMode);
 		}
 		
@@ -81,8 +82,10 @@ public class AIFindBlock extends EntityAIBase implements IEntityAI {
 				do {
 					for (int c = 0; c < 3; c++) {
 						yy = ly + (c == 2 ? -1 : c);
-						if (fmodeBase.checkBlock(theMaid.maidMode, xx, yy, zz)) {
-							if (fmodeBase.outrangeBlock(theMaid.maidMode, xx, yy, zz)) {
+						if (fmodeBase.checkBlock(theMaid.maidMode, xx, yy, zz))
+						{
+							if (fmodeBase.outrangeBlock(theMaid.maidMode, xx, yy, zz))
+							{
 								theMaid.setTilePos(xx, yy, zz);
 								// TODO:Dummay
 								EntityDummy.setDummyEntity(theMaid, 0x004fff4f, xx, yy, zz);
