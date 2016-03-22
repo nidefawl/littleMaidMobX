@@ -42,7 +42,8 @@ import net.minecraftforge.common.BiomeDictionary;
 import static net.minecraftforge.common.BiomeDictionary.Type;
 
 @Mod(	modid = LittleMaidMobX.DOMAIN,
-		name  = LittleMaidMobX.DOMAIN, version = "2",
+		name  = LittleMaidMobX.DOMAIN,
+		version = "7",
 		guiFactory = "littleMaidMobX.gui.LittleMaidMobGuiFactory")
 		
 public class LittleMaidMobX {
@@ -65,12 +66,15 @@ public class LittleMaidMobX {
 			System.out.println(String.format("MMMLib-" + pText, pData));
 		}
 	}
-	public static void DebugModel(String string) {
+	public static void DebugModel(String string)
+	{
 		System.out.println("LMM Models: " + string);
 	}
-	public static void Debug(boolean isRemote, String pText, Object... pData) {
-		if (Config.isDebugMessage) {
-//			System.out.println(String.format("["+(isRemote? "Client":"Server")+"]MMMLib-" + pText, pData));
+	public static void Debug(boolean isRemote, String pText, Object... pData)
+	{
+		if (Config.isDebugMessage)
+		{
+			System.out.println(String.format("["+(isRemote? "Client":"Server")+"]MMMLib-" + pText, pData));
 		}
 	}
 	
@@ -88,8 +92,9 @@ public class LittleMaidMobX {
 
 	public static boolean isForge = true;
 
-	public String getName() {
-		return "littleMaidMobX";
+	public String getName()
+	{
+		return "littleMaidMobEnhanced";
 	}
 
 	public String getPriorities() {
@@ -99,7 +104,7 @@ public class LittleMaidMobX {
 
 	public String getVersion()
 	{
-		return "1.7.10-x";
+		return "1.7.10-E";
 	}
 
 	
@@ -151,7 +156,7 @@ public class LittleMaidMobX {
 		//Achievment Stuff
 		ac_Contract = new Achievement("achievement.contract", "contract", 0, 0, Items.cake, null).initIndependentStat().registerStat();
 		Achievement[] achievements = new Achievement[] { ac_Contract };
-		AchievementPage.registerAchievementPage(new AchievementPage("LittleMaidX", achievements));
+		AchievementPage.registerAchievementPage(new AchievementPage("LittleMaidMob", achievements));
 
 		if (Helper.isClient)
 		{
@@ -196,25 +201,64 @@ public class LittleMaidMobX {
 					if(biome!=null)
 					{
 						EntityRegistry.addSpawn(EntityLittleMaid.class, Config.spawnWeight, Config.minGroupSize, Config.maxGroupSize, EnumCreatureType.creature, biome);
-						//System.out.println("Registering spawn in " + biome.biomeName);
+						Debug("Registering spawn in " + biome.biomeName);
 					}
 				}
 			}
-			/*else
-			{
-				
-				biomeList = new BiomeGenBase[]{
-						BiomeGenBase.desert,
-						BiomeGenBase.plains,
-						BiomeGenBase.savanna,
-						BiomeGenBase.mushroomIsland,
-						BiomeGenBase.forest,
-						BiomeGenBase.birchForest,
-						BiomeGenBase.swampland,
-						BiomeGenBase.taiga,
-				};
-			}*/
 			else
+			{
+				BiomeGenBase[] biomeList = BiomeGenBase.getBiomeGenArray();
+				for(BiomeGenBase biome : biomeList)
+				{
+					if(biome!=null &&(
+						!BiomeDictionary.isBiomeOfType(biome, Type.OCEAN) &&
+						!BiomeDictionary.isBiomeOfType(biome, Type.MOUNTAIN) &&
+						!BiomeDictionary.isBiomeOfType(biome, Type.HILLS) &&
+						!BiomeDictionary.isBiomeOfType(biome, Type.RIVER) &&
+						!BiomeDictionary.isBiomeOfType(biome, Type.MAGICAL) &&
+						!BiomeDictionary.isBiomeOfType(biome, Type.END) &&
+						!BiomeDictionary.isBiomeOfType(biome, Type.NETHER) &&
+						!BiomeDictionary.isBiomeOfType(biome, Type.JUNGLE) &&
+						!BiomeDictionary.isBiomeOfType(biome, Type.DEAD) &&
+						!BiomeDictionary.isBiomeOfType(biome, Type.SPOOKY) &&
+						!BiomeDictionary.isBiomeOfType(biome, Type.MESA)
+						))
+						{
+							if(
+								BiomeDictionary.isBiomeOfType(biome, Type.HOT)||
+								BiomeDictionary.isBiomeOfType(biome, Type.COLD)||				
+								BiomeDictionary.isBiomeOfType(biome, Type.WET)||
+								BiomeDictionary.isBiomeOfType(biome, Type.DRY)||								
+								BiomeDictionary.isBiomeOfType(biome, Type.SAVANNA)||
+								BiomeDictionary.isBiomeOfType(biome, Type.CONIFEROUS)||								
+								BiomeDictionary.isBiomeOfType(biome, Type.LUSH)||
+								BiomeDictionary.isBiomeOfType(biome, Type.MUSHROOM)||							
+								BiomeDictionary.isBiomeOfType(biome, Type.FOREST)||
+								BiomeDictionary.isBiomeOfType(biome, Type.PLAINS)||
+								BiomeDictionary.isBiomeOfType(biome, Type.SANDY)||
+								BiomeDictionary.isBiomeOfType(biome, Type.SNOWY)||
+								BiomeDictionary.isBiomeOfType(biome, Type.BEACH));
+							{
+								EntityRegistry.addSpawn(EntityLittleMaid.class, Config.spawnWeight, Config.minGroupSize, Config.maxGroupSize, EnumCreatureType.creature, biome);
+								System.out.println("Registering spawn in " + biome.biomeName);
+								Debug("Registering maids to spawn in " + biome.biomeName);
+					}
+				}
+			}
+			/* Original Spawning:
+				X:
+			 		desert,
+					plains,
+					savanna,
+					mushroomIsland,
+					forest,
+					birchForest,
+					swampland,
+					taiga,
+				NX:
+					icePlains
+			 */
+			/*else
 			{
 				BiomeDictionary.registerAllBiomes();
 				BiomeGenBase[] biomeList = new BiomeGenBase[256];
@@ -286,18 +330,18 @@ public class LittleMaidMobX {
 					for(BiomeGenBase biome : biomeList)
 					{
 						if (biome!=null &&
-								(!BiomeDictionary.isBiomeOfType(biome, Type.OCEAN) &&
-									!BiomeDictionary.isBiomeOfType(biome, Type.MOUNTAIN) &&
-									!BiomeDictionary.isBiomeOfType(biome, Type.HILLS) &&
-									!BiomeDictionary.isBiomeOfType(biome, Type.RIVER) &&
-									!BiomeDictionary.isBiomeOfType(biome, Type.BEACH) &&
-									!BiomeDictionary.isBiomeOfType(biome, Type.END) &&
-									!BiomeDictionary.isBiomeOfType(biome, Type.NETHER) &&
-									!BiomeDictionary.isBiomeOfType(biome, Type.JUNGLE) &&
-									!BiomeDictionary.isBiomeOfType(biome, Type.SNOWY) &&
-									!BiomeDictionary.isBiomeOfType(biome, Type.MESA) &&
-									!BiomeDictionary.isBiomeOfType(biome, Type.DEAD) &&
-									!BiomeDictionary.isBiomeOfType(biome, Type.SPOOKY)))
+							!BiomeDictionary.isBiomeOfType(biome, Type.OCEAN) &&
+							!BiomeDictionary.isBiomeOfType(biome, Type.MOUNTAIN) &&
+							!BiomeDictionary.isBiomeOfType(biome, Type.HILLS) &&
+							!BiomeDictionary.isBiomeOfType(biome, Type.RIVER) &&
+							!BiomeDictionary.isBiomeOfType(biome, Type.BEACH) &&
+							!BiomeDictionary.isBiomeOfType(biome, Type.END) &&
+							!BiomeDictionary.isBiomeOfType(biome, Type.NETHER) &&
+							!BiomeDictionary.isBiomeOfType(biome, Type.JUNGLE) &&
+							!BiomeDictionary.isBiomeOfType(biome, Type.SNOWY) &&
+							!BiomeDictionary.isBiomeOfType(biome, Type.MESA) &&
+							!BiomeDictionary.isBiomeOfType(biome, Type.DEAD) &&
+							!BiomeDictionary.isBiomeOfType(biome, Type.SPOOKY))
 						{
 							List<SpawnListEntry> spawns = biome.getSpawnableList(EnumCreatureType.creature);
 							Boolean spawnHere = true;
@@ -318,7 +362,7 @@ public class LittleMaidMobX {
 							}
 						}
 					}
-				}
+				}*/
 			}
 		}
 		IFF.loadIFFs();
