@@ -9,6 +9,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAITasks;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -97,7 +98,7 @@ public class Mode_Torcher extends ModeBase {
 	@Override
 	public boolean checkItemStack(ItemStack pItemStack)
 	{
-		return pItemStack.getItem() == Item.getItemFromBlock(Blocks.torch) || TriggerSelect.checkWeapon(owner.getMaidMaster(), "Torch", pItemStack);
+		return (pItemStack.getItem() == Items.sugar || pItemStack.getItem() == Item.getItemFromBlock(Blocks.torch) || TriggerSelect.checkWeapon(owner.getMaidMaster(), "Torch", pItemStack));
 	}
 
 	@Override

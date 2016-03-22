@@ -421,7 +421,7 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 		ltasks[0].addTask(4, aiFindBlock);
 		ltasks[0].addTask(6, aiAttack);
 		ltasks[0].addTask(7, aiShooting);
-//		ltasks[0].addTask(8, aiPanic);
+		ltasks[0].addTask(8, aiPanic);
 		ltasks[0].addTask(10, aiBeg);
 		ltasks[0].addTask(11, aiBegMove);
 		ltasks[0].addTask(20, aiAvoidPlayer);
@@ -458,17 +458,27 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 	}
 
 	public String getMaidModeString() {
-		if (!isContract()) {
+		if (!isContract())
+		{
 			return getMaidModeString(maidMode);
-		} else if (!isRemainsContract()) {
+		}
+		else if (!isRemainsContract())
+		{
 			return "Strike";
-		} else if (isMaidWait()) {
+		}
+		else if (isMaidWait())
+		{
 			return "Wait";
-		} else if (isPlaying()) {
+		}
+		else if (isPlaying())
+		{
 			return "Playing";
-		} else {
+		}
+		else
+		{
 			String ls = getMaidModeString(maidMode);
-			if (maidOverDriveTime.isEnable()) {
+			if (maidOverDriveTime.isEnable())
+			{
 				ls = "D-" + ls;
 			} else
 			if (isTracer()) {
@@ -484,8 +494,10 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 	public String getMaidModeString(int pindex) {
 		
 		String ls = "";
-		for (Entry<String, Integer> le : maidModeIndexList.entrySet()) {
-			if (le.getValue() == pindex) {
+		for (Entry<String, Integer> le : maidModeIndexList.entrySet())
+		{
+			if (le.getValue() == pindex)
+			{
 				ls = le.getKey();
 				break;
 			}
@@ -526,18 +538,23 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 		EntityAITasks[] ltasks = maidModeList.get(pindex);
 		
 		
-		if (ltasks.length > 0 && ltasks[0] != null) {
+		if (ltasks.length > 0 && ltasks[0] != null)
+		{
 			setMaidModeAITasks(ltasks[0], tasks);
-		} else {
+		}
+		else
+		{
 			setMaidModeAITasks(null, tasks);
 		}
-		if (ltasks.length > 1 && ltasks[1] != null) {
+		if (ltasks.length > 1 && ltasks[1] != null)
+		{
 			setMaidModeAITasks(ltasks[1], targetTasks);
-		} else {
+		}
+		else
+		{
 			setMaidModeAITasks(null, targetTasks);
 		}
 
-		
 		maidAvatar.stopUsingItem();
 		setSitting(false);
 		setSneaking(false);
@@ -1109,6 +1126,9 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 			case 15:
 				setMaidMode(0x0000);	// Pharmacist
 				break;
+			/*case ??:
+				setMaidMode(0x0023);	//Miner
+				break;*/
 			default :
 				setMaidMode(0x0000);	// Wild
 			}
@@ -2168,7 +2188,7 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 				// http://forum.minecraftuser.jp/viewtopic.php?f=13&t=23347&p=212078#p211805
 				String lt = func_145748_c_().getUnformattedTextForChat();
 
-				ChatComponentText text = new ChatComponentText(String.format("your %s killed by %s", lt, ls));
+				ChatComponentText text = new ChatComponentText(String.format("Your maid %s was killed by %s", lt, ls));
 				mstatMasterEntity.addChatMessage(text);
 			}
 		}

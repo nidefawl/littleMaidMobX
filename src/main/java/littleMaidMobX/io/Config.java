@@ -178,12 +178,12 @@ public class Config
 		checkOwnerName = config.getBoolean("Check Owner Name", CATEGORY_MAIDS, false, "At local, make sure the name of the owner.");
 		antiDoppelganger = config.getBoolean("Anti Doppelganger", CATEGORY_MAIDS, true, "Not to survive the doppelganger.");
 		VoiceDistortion = config.getBoolean("Voice Distortion", CATEGORY_MAIDS, true, "Enables Maid voices to distort based of hair color");
-		defaultTexture = config.getString("Default Texture", CATEGORY_MAIDS, "", "Default selected Texture Packege. Null is Random");
+		defaultTexture = config.getString("Default Texture", CATEGORY_MAIDS, "", "Default selected Texture Package. Null is Random");
 		DeathMessage = config.getBoolean("Print Death Message", CATEGORY_MAIDS, true, "Prints message on the death of your maid.");
 		Aggressive = config.getBoolean("Agressive", CATEGORY_MAIDS, true, "true: Will be hostile, false: Is a pacifist");
 		IgnoreItemList = config.getString("Ignore Item List", CATEGORY_MAIDS, "arsmagica2", "?");
 		makeNoise = config.getBoolean("Maids Make Sounds", CATEGORY_MAIDS, true, "Determines whether or not maids will make noises");
-		Dominant = config.getBoolean("Maids Spawn Everywhere", CATEGORY_MAIDS, false, "If true maids will spawn in all biomes, if false maids will spawn in biomes of approved types. (Requires Restart)");
+		Dominant = config.getBoolean("Maids Spawn Everywhere", CATEGORY_MAIDS, false, "If true maids will spawn in all biomes, if false maids will only spawn in biomes of approved types. (Requires Restart)");
 		
 		//Items
 		cfg_enableSpawnEgg = config.getBoolean("Enable Spawn Egg", CATEGORY_ITEMS, true, "Enables Little Maid SpawnEgg Recipe. (Requires Restart)");

@@ -7,6 +7,7 @@ import littleMaidMobX.entity.EntityLittleMaid;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAITasks;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
@@ -132,8 +133,8 @@ public class Mode_Fencer extends ModeBase {
 				litemstack = owner.maidInventory.getStackInSlot(li);
 				if (litemstack == null) continue;
 				
-				
-				if (litemstack.getItem() instanceof ItemAxe || TriggerSelect.checkWeapon(owner.getMaidMaster(), "Axe", litemstack)) {
+				if (litemstack.getItem() instanceof ItemAxe || TriggerSelect.checkWeapon(owner.getMaidMaster(), "Axe", litemstack))
+				{
 					return li;
 				}
 				
@@ -156,9 +157,13 @@ public class Mode_Fencer extends ModeBase {
 	}
 
 	@Override
-	public boolean checkItemStack(ItemStack pItemStack) {
-		
-		return pItemStack.getItem() instanceof ItemSword || pItemStack.getItem() instanceof ItemAxe;
+	public boolean checkItemStack(ItemStack pItemStack)
+	{
+		return (pItemStack.getItem() == Items.sugar
+				|| pItemStack.getItem() instanceof ItemSword
+				|| TriggerSelect.checkWeapon(owner.getMaidMaster(), "Sword", pItemStack)
+				|| pItemStack.getItem() instanceof ItemAxe
+				|| TriggerSelect.checkWeapon(owner.getMaidMaster(), "Axe", pItemStack));
 	}
 
 }

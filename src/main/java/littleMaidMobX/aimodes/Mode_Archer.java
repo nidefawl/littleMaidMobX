@@ -106,29 +106,33 @@ public class Mode_Archer extends ModeBase {
 		ItemStack litemstack;
 
 		
-		switch (pMode) {
+		switch (pMode)
+		{
 		case mmode_Archer :
 		case mmode_Blazingstar :
-			for (li = 0; li < owner.maidInventory.maxInventorySize; li++) {
+			for (li = 0; li < owner.maidInventory.maxInventorySize; li++)
+			{
 				litemstack = owner.maidInventory.getStackInSlot(li);
 				if (litemstack == null) continue;
-
 				
-				if (litemstack.getItem() instanceof ItemBow || TriggerSelect.checkWeapon(owner.getMaidMaster(), "Bow", litemstack)) {
+				if (litemstack.getItem() instanceof ItemBow || TriggerSelect.checkWeapon(owner.getMaidMaster(), "Bow", litemstack))
+				{
 					return li;
 				}
 			}
 			break;
 		}
-
 		return -1;
 	}
 	
 	@Override
 	public boolean checkItemStack(ItemStack pItemStack) {
 		String ls = owner.getMaidMaster();
-		return (pItemStack.getItem() instanceof ItemBow) || (pItemStack.getItem() == Items.arrow) 
-				|| TriggerSelect.checkWeapon(ls, "Bow", pItemStack) || TriggerSelect.checkWeapon(ls, "Arrow", pItemStack);
+		return (pItemStack.getItem() == Items.sugar
+				|| pItemStack.getItem() instanceof ItemBow
+				|| pItemStack.getItem() == Items.arrow
+				|| TriggerSelect.checkWeapon(ls, "Bow", pItemStack)
+				|| TriggerSelect.checkWeapon(ls, "Arrow", pItemStack));
 	}
 
 	@Override

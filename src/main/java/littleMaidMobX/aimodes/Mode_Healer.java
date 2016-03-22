@@ -9,6 +9,7 @@ import littleMaidMobX.sound.EnumSound;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAITasks;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemStack;
@@ -27,12 +28,6 @@ public class Mode_Healer extends ModeBase {
 	@Override
 	public int priority() {
 		return 3300;
-	}
-
-	@Override
-	public void init() {
-		
-		
 	}
 
 	@Override
@@ -91,8 +86,9 @@ public class Mode_Healer extends ModeBase {
 	}
 
 	@Override
-	public boolean checkItemStack(ItemStack pItemStack) {
-		return pItemStack.getItem() instanceof ItemFood || pItemStack.getItem() instanceof ItemPotion;
+	public boolean checkItemStack(ItemStack pItemStack)
+	{
+		return (pItemStack.getItem() == Items.sugar || pItemStack.getItem() instanceof ItemFood || pItemStack.getItem() instanceof ItemPotion);
 	}
 
 	@Override

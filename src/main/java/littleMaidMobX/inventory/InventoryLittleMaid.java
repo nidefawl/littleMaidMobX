@@ -22,6 +22,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntityFurnace;
+import net.minecraft.tileentity.TileEntityBrewingStand;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.Explosion;
 
@@ -146,7 +147,7 @@ public class InventoryLittleMaid extends InventoryPlayer {
 		for (int i = 0; i < getSizeInventory(); i++) {
 			ItemStack it = getStackInSlot(i);
 			if (it != null) {
-				if (detonator && isItemExplord(i)) {
+				if (detonator && isItemExplosive(i)) {
 					Item j = it.getItem();
 					for (int l = 0; l < it.stackSize; l++) {
 						
@@ -348,22 +349,33 @@ public class InventoryLittleMaid extends InventoryPlayer {
 		return isItemSmelting(getStackInSlot(index));
 	}
 
-	public static boolean isItemSmelting(ItemStack pItemstack) {
+	public static boolean isItemSmelting(ItemStack pItemstack)
+	{
 		return (pItemstack != null && Helper.getSmeltingResult(pItemstack) != null);
 	}
 
-	public boolean isItemExplord(int index) {
-		
-		return (index >= 0) && isItemExplord(getStackInSlot(index));
+	public boolean isItemExplosive(int index)
+	{
+		return (index >= 0) && isItemExplosive(getStackInSlot(index));
 	}
 
-	public static boolean isItemExplord(ItemStack pItemstack) {
+	public static boolean isItemExplosive(ItemStack pItemstack)
+	{
 		if (pItemstack == null)
 			return false;
 		Item li = pItemstack.getItem();
-		return (pItemstack != null && li instanceof ItemBlock && Block.getBlockFromItem(li).getMaterial() == Material.tnt);
+		return (li instanceof ItemBlock && Block.getBlockFromItem(li).getMaterial() == Material.tnt);
 	}
-
+	
+	public boolean isItemBrewable(int index)
+	{
+		return (index >= 0) && isItemBrewable(getStackInSlot(index));
+	}
+	
+	public static boolean isItemBrewable(ItemStack pItemstack)
+	{
+		return (pItemstack != null && pItemstack.getItem().isPotionIngredient(pItemstack));
+	}
 	
 	public boolean isChanged(int pIndex) {
 		

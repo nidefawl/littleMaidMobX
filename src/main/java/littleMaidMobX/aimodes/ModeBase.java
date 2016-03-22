@@ -9,6 +9,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAITasks;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -92,8 +93,7 @@ public abstract class ModeBase {
 	
 	public boolean checkItemStack(ItemStack pItemStack)//This is used to determine wether or not a maid is allowed to pick up items.
 	{
-		
-		return false;
+		return (pItemStack.getItem() == Items.sugar);
 	}
 
 	

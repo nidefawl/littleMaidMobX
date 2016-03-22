@@ -14,6 +14,7 @@ import net.minecraft.entity.item.EntityTNTPrimed;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemShears;
 import net.minecraft.item.ItemStack;
@@ -140,7 +141,7 @@ public class Mode_Ripper extends ModeBase {
 				}
 				LittleMaidMobX.Debug(String.format("ID:%d(%s)-dom:%d(%d)", owner.getEntityId(), owner.worldObj.isRemote ? "C" : "W", owner.maidDominantArm, owner.maidInventory.currentItem));
 				
-				if (owner.maidInventory.isItemExplord(owner.maidInventory.currentItem) && timeSinceIgnited++ > 30) {
+				if (owner.maidInventory.isItemExplosive(owner.maidInventory.currentItem) && timeSinceIgnited++ > 30) {
 					
 					owner.maidInventory.decrStackSize(owner.maidInventory.currentItem, 1);
 					
@@ -163,7 +164,7 @@ public class Mode_Ripper extends ModeBase {
 				owner.setMaidMode("Ripper");
 				return true;
 			}
-			if (owner.maidInventory.isItemExplord(0)) {
+			if (owner.maidInventory.isItemExplosive(0)) {
 				owner.setMaidMode("Detonator");
 				return true;
 			}
@@ -213,7 +214,7 @@ public class Mode_Ripper extends ModeBase {
 		case mmode_Detonator :
 			for (li = 0; li < owner.maidInventory.maxInventorySize; li++) {
 				
-				if (owner.maidInventory.isItemExplord(li)) {
+				if (owner.maidInventory.isItemExplosive(li)) {
 					return li;
 				}
 			}
@@ -331,10 +332,12 @@ public class Mode_Ripper extends ModeBase {
 	}
 	
 	@Override
-	public boolean damageEntity(int pMode, DamageSource par1DamageSource, float par2) {
-		
-		if (pMode == mmode_Detonator && owner.maidInventory.isItemExplord(owner.getCurrentEquippedItem())) {
-			if (timeSinceIgnited == -1) {
+	public boolean damageEntity(int pMode, DamageSource par1DamageSource, float par2)
+	{
+		if (pMode == mmode_Detonator && owner.maidInventory.isItemExplosive(owner.getCurrentEquippedItem()))
+		{
+			if (timeSinceIgnited == -1)
+			{
 				owner.playSound("random.fuse", 1.0F, 0.5F);
 				owner.getDataWatcher().updateObject(Statics.dataWatch_Free, Integer.valueOf(1));
 			}
@@ -345,9 +348,12 @@ public class Mode_Ripper extends ModeBase {
 		return false;
 	}
 	@Override
-	public boolean checkItemStack(ItemStack pItemStack) {
-		
-		return /*pItemStack.getItem() instanceof ItemShears || TriggerSelect.checkWeapon(owner.getMaidMaster(), "Shears", pItemStack) ||*/ pItemStack.getItem() instanceof ItemCloth;
+	public boolean checkItemStack(ItemStack pItemStack)
+	{
+		return (pItemStack.getItem() == Items.sugar
+				||  pItemStack.getItem() instanceof ItemShears
+				|| TriggerSelect.checkWeapon(owner.getMaidMaster(), "Shears", pItemStack)
+				|| pItemStack.getItem() instanceof ItemCloth);
 	}
 
 }

@@ -6,6 +6,7 @@ import littleMaidMobX.sound.EnumSound;
 import net.minecraft.entity.ai.EntityAITasks;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
@@ -91,7 +92,7 @@ public class Mode_Cooking extends ModeBlockBase {
 	@Override
 	public boolean checkItemStack(ItemStack pItemStack)
 	{
-		return InventoryLittleMaid.isItemBurned(pItemStack) || InventoryLittleMaid.isItemSmelting(pItemStack);
+		return (pItemStack.getItem() == Items.sugar || InventoryLittleMaid.isItemBurned(pItemStack) || InventoryLittleMaid.isItemSmelting(pItemStack));
 	}
 
 	@Override
