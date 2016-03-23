@@ -352,7 +352,7 @@ public class Mode_Ripper extends ModeBase {
 	{
 		return (pItemStack.getItem() == Items.sugar
 				||  pItemStack.getItem() instanceof ItemShears
-				|| TriggerSelect.checkWeapon(owner.getMaidMaster(), "Shears", pItemStack)
+				|| TriggerSelect.checkItem(owner.getMaidMaster(), "Shears", pItemStack)
 				|| pItemStack.getItem() instanceof ItemCloth);
 	}
 

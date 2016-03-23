@@ -51,7 +51,7 @@ public class Mode_Torcher extends ModeBase {
 	public boolean changeMode(EntityPlayer pentityplayer) {
 		ItemStack litemstack = owner.maidInventory.getStackInSlot(0);
 		if (litemstack != null) {
-			if (litemstack.getItem() == Item.getItemFromBlock(Blocks.torch) || TriggerSelect.checkWeapon(owner.getMaidMaster(), "Torch", litemstack)) {
+			if (litemstack.getItem() == Item.getItemFromBlock(Blocks.torch) || TriggerSelect.checkItem(owner.getMaidMaster(), "Torch", litemstack)) {
 				owner.setMaidMode("Torcher");
 				return true;
 			}
@@ -77,28 +77,29 @@ public class Mode_Torcher extends ModeBase {
 		int li;
 		ItemStack litemstack;
 		
-		
-		switch (pMode) {
+		switch (pMode)
+		{
 		case mmode_Torcher : 
-			for (li = 0; li < owner.maidInventory.maxInventorySize; li++) {
+			for (li = 0; li < owner.maidInventory.maxInventorySize; li++)
+			{
 				litemstack = owner.maidInventory.getStackInSlot(li);
 				if (litemstack == null) continue;
 				
 				
-				if (litemstack.getItem() == Item.getItemFromBlock(Blocks.torch) || TriggerSelect.checkWeapon(owner.getMaidMaster(), "Torch", litemstack)) {
+				if (litemstack.getItem() == Item.getItemFromBlock(Blocks.torch) || TriggerSelect.checkItem(owner.getMaidMaster(), "Torch", litemstack))
+				{
 					return li;
 				}
 			}
 			break;
 		}
-		
 		return -1;
 	}
 
 	@Override
 	public boolean checkItemStack(ItemStack pItemStack)
 	{
-		return (pItemStack.getItem() == Items.sugar || pItemStack.getItem() == Item.getItemFromBlock(Blocks.torch) || TriggerSelect.checkWeapon(owner.getMaidMaster(), "Torch", pItemStack));
+		return (pItemStack.getItem() == Items.sugar || pItemStack.getItem() == Item.getItemFromBlock(Blocks.torch) || TriggerSelect.checkItem(owner.getMaidMaster(), "Torch", pItemStack));
 	}
 
 	@Override
@@ -108,7 +109,7 @@ public class Mode_Torcher extends ModeBase {
 
 	@Override
 	public boolean shouldBlock(int pMode) {
-		return !(owner.getCurrentEquippedItem() == null);
+		return owner.getCurrentEquippedItem() != null;
 	}
 
 	protected int getBlockLighting(int i, int j, int k) {
@@ -131,15 +132,8 @@ public class Mode_Torcher extends ModeBase {
 		return false;
 	}
 
-	@Override
-	public boolean executeBlock(int pMode, int px, int py, int pz) {
-		
-		return false;
-	}
-
-	public boolean canPlaceItemBlockOnSide(World par1World, int par2, int par3, int par4, int par5,
-			EntityPlayer par6EntityPlayer, ItemStack par7ItemStack, ItemBlock pItemBlock) {
-		
+	public boolean canPlaceItemBlockOnSide(World par1World, int par2, int par3, int par4, int par5, EntityPlayer par6EntityPlayer, ItemStack par7ItemStack, ItemBlock pItemBlock)
+	{
 		Block var8 = par1World.getBlock(par2, par3, par4);
 		
 		if (Block.isEqualTo(var8, Blocks.snow)) {
@@ -175,9 +169,10 @@ public class Mode_Torcher extends ModeBase {
 	}
 
 	@Override
-	public void updateAITick(int pMode) {
-		
-		if (pMode == mmode_Torcher && owner.getNextEquipItem()) {
+	public void updateAITick(int pMode)
+	{
+		if (pMode == mmode_Torcher && owner.getNextEquipItem())
+		{
 			ItemStack lis = owner.getCurrentEquippedItem();
 			int lic = lis.stackSize;
 			Item lii = lis.getItem();

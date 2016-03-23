@@ -421,7 +421,7 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 		ltasks[0].addTask(4, aiFindBlock);
 		ltasks[0].addTask(6, aiAttack);
 		ltasks[0].addTask(7, aiShooting);
-		ltasks[0].addTask(8, aiPanic);
+		//ltasks[0].addTask(8, aiPanic);
 		ltasks[0].addTask(10, aiBeg);
 		ltasks[0].addTask(11, aiBegMove);
 		ltasks[0].addTask(20, aiAvoidPlayer);

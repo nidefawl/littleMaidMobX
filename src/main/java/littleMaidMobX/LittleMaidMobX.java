@@ -224,9 +224,8 @@ public class LittleMaidMobX {
 						!BiomeDictionary.isBiomeOfType(biome, Type.MESA)
 						))
 						{
-							if(
-								BiomeDictionary.isBiomeOfType(biome, Type.HOT)||
-								BiomeDictionary.isBiomeOfType(biome, Type.COLD)||				
+							if(BiomeDictionary.isBiomeOfType(biome, Type.HOT)||
+								BiomeDictionary.isBiomeOfType(biome, Type.COLD)||
 								BiomeDictionary.isBiomeOfType(biome, Type.WET)||
 								BiomeDictionary.isBiomeOfType(biome, Type.DRY)||								
 								BiomeDictionary.isBiomeOfType(biome, Type.SAVANNA)||
@@ -258,111 +257,6 @@ public class LittleMaidMobX {
 				NX:
 					icePlains
 			 */
-			/*else
-			{
-				BiomeDictionary.registerAllBiomes();
-				BiomeGenBase[] biomeList = new BiomeGenBase[256];
-				for(int i = 1; i<=12; i++)
-				{
-					switch (i)
-					{
-						case 1:
-						{
-							biomeList = BiomeDictionary.getBiomesForType(Type.HOT);
-							break;
-						}
-						case 2:
-						{
-							biomeList = BiomeDictionary.getBiomesForType(Type.DRY);
-							break;
-						}
-						case 3:
-						{
-							biomeList = BiomeDictionary.getBiomesForType(Type.SANDY);
-							break;
-						}
-						case 4:
-						{
-							biomeList = BiomeDictionary.getBiomesForType(Type.PLAINS);
-							break;
-						}
-						case 5:
-						{
-							biomeList = BiomeDictionary.getBiomesForType(Type.SAVANNA);
-							break;
-						}
-						case 6:
-						{
-							biomeList = BiomeDictionary.getBiomesForType(Type.SPARSE);
-							break;
-						}
-						case 7:
-						{
-							biomeList = BiomeDictionary.getBiomesForType(Type.MUSHROOM);
-							break;
-						}
-						case 8:
-						{
-							biomeList = BiomeDictionary.getBiomesForType(Type.FOREST);
-							break;
-						}
-						case 9:
-						{
-							biomeList = BiomeDictionary.getBiomesForType(Type.WET);
-							break;
-						}
-						case 10:
-						{
-							biomeList = BiomeDictionary.getBiomesForType(Type.SWAMP);
-							break;
-						}
-						case 11:
-						{
-							biomeList = BiomeDictionary.getBiomesForType(Type.COLD);
-							break;
-						}
-						case 12:
-						{
-							biomeList = BiomeDictionary.getBiomesForType(Type.CONIFEROUS);
-							break;
-						}
-					}
-					for(BiomeGenBase biome : biomeList)
-					{
-						if (biome!=null &&
-							!BiomeDictionary.isBiomeOfType(biome, Type.OCEAN) &&
-							!BiomeDictionary.isBiomeOfType(biome, Type.MOUNTAIN) &&
-							!BiomeDictionary.isBiomeOfType(biome, Type.HILLS) &&
-							!BiomeDictionary.isBiomeOfType(biome, Type.RIVER) &&
-							!BiomeDictionary.isBiomeOfType(biome, Type.BEACH) &&
-							!BiomeDictionary.isBiomeOfType(biome, Type.END) &&
-							!BiomeDictionary.isBiomeOfType(biome, Type.NETHER) &&
-							!BiomeDictionary.isBiomeOfType(biome, Type.JUNGLE) &&
-							!BiomeDictionary.isBiomeOfType(biome, Type.SNOWY) &&
-							!BiomeDictionary.isBiomeOfType(biome, Type.MESA) &&
-							!BiomeDictionary.isBiomeOfType(biome, Type.DEAD) &&
-							!BiomeDictionary.isBiomeOfType(biome, Type.SPOOKY))
-						{
-							List<SpawnListEntry> spawns = biome.getSpawnableList(EnumCreatureType.creature);
-							Boolean spawnHere = true;
-				            for (SpawnListEntry entry : spawns)
-				            {
-				                //Adjusting an existing spawn entry
-				                if (entry.entityClass == EntityLittleMaid.class)
-				                {
-				                	spawnHere = false;
-				                    break;
-				                }
-				                
-				            }
-							if (spawnHere)
-							{
-								EntityRegistry.addSpawn(EntityLittleMaid.class, Config.spawnWeight, Config.minGroupSize, Config.maxGroupSize, EnumCreatureType.creature, biome);
-								//System.out.println("Registering spawn in " + biome.biomeName);
-							}
-						}
-					}
-				}*/
 			}
 		}
 		IFF.loadIFFs();

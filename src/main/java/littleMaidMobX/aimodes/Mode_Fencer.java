@@ -67,10 +67,10 @@ public class Mode_Fencer extends ModeBase {
 	public boolean changeMode(EntityPlayer pentityplayer) {
 		ItemStack litemstack = owner.maidInventory.getStackInSlot(0);
 		if (litemstack != null) {
-			if (litemstack.getItem() instanceof ItemSword || TriggerSelect.checkWeapon(owner.getMaidMaster(), "Sword", litemstack)) {
+			if (litemstack.getItem() instanceof ItemSword || TriggerSelect.checkItem(owner.getMaidMaster(), "Sword", litemstack)) {
 				owner.setMaidMode("Fencer");
 				return true;
-			} else  if (litemstack.getItem() instanceof ItemAxe || TriggerSelect.checkWeapon(owner.getMaidMaster(), "Axe", litemstack)) {
+			} else  if (litemstack.getItem() instanceof ItemAxe || TriggerSelect.checkItem(owner.getMaidMaster(), "Axe", litemstack)) {
 				owner.setMaidMode("Bloodsucker");
 				return true;
 			}
@@ -111,7 +111,7 @@ public class Mode_Fencer extends ModeBase {
 				if (litemstack == null) continue;
 				
 				
-				if (litemstack.getItem() instanceof ItemSword || TriggerSelect.checkWeapon(owner.getMaidMaster(), "Sword", litemstack)) {
+				if (litemstack.getItem() instanceof ItemSword || TriggerSelect.checkItem(owner.getMaidMaster(), "Sword", litemstack)) {
 					return li;
 				}
 				
@@ -133,7 +133,7 @@ public class Mode_Fencer extends ModeBase {
 				litemstack = owner.maidInventory.getStackInSlot(li);
 				if (litemstack == null) continue;
 				
-				if (litemstack.getItem() instanceof ItemAxe || TriggerSelect.checkWeapon(owner.getMaidMaster(), "Axe", litemstack))
+				if (litemstack.getItem() instanceof ItemAxe || TriggerSelect.checkItem(owner.getMaidMaster(), "Axe", litemstack))
 				{
 					return li;
 				}
@@ -161,9 +161,9 @@ public class Mode_Fencer extends ModeBase {
 	{
 		return (pItemStack.getItem() == Items.sugar
 				|| pItemStack.getItem() instanceof ItemSword
-				|| TriggerSelect.checkWeapon(owner.getMaidMaster(), "Sword", pItemStack)
+				|| TriggerSelect.checkItem(owner.getMaidMaster(), "Sword", pItemStack)
 				|| pItemStack.getItem() instanceof ItemAxe
-				|| TriggerSelect.checkWeapon(owner.getMaidMaster(), "Axe", pItemStack));
+				|| TriggerSelect.checkItem(owner.getMaidMaster(), "Axe", pItemStack));
 	}
 
 }
