@@ -8,5 +8,5 @@ The LittleMaidMob mod for Minecraft is a very fun and useful mod that for many v
 Coming soon
 
 ###1.7.10
-* [1.3.3](http://adf.ly/1YdroI)  
+* [1.3.3](http://adf.ly/1YdroI)  (Warning: Maids may be messed up in this one)
 * [1.3.2](http://adf.ly/1YYyXj)
