@@ -94,7 +94,7 @@ public class AIFindBlock extends EntityAIBase implements IEntityAI {
 							}
 						}
 					}
-					// TODO:Dummay
+					// TODO:Dummy
 					if (!flagdammy) {
 						EntityDummy.setDummyEntity(theMaid, 0x00ffffcf, xx, ly, zz);
 						flagdammy = true;

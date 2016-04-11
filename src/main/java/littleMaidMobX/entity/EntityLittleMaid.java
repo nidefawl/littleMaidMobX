@@ -237,7 +237,7 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 	public AIAttackArrow aiShooting;
 	public AICollectItem aiCollectItem;
 	public AIRestrictRain aiRestrictRain;
-	public AIFleeRain aiFreeRain;
+	public AIFleeRain aiFleeRain;
 	public AIWander aiWander;
 	public AIJumpToMaster aiJumpTo;
 	public AIFindBlock aiFindBlock;
@@ -397,7 +397,7 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 		aiShooting = new AIAttackArrow(this);
 		aiCollectItem = new AICollectItem(this, 1.0F);
 		aiRestrictRain = new AIRestrictRain(this);
-		aiFreeRain = new AIFleeRain(this, 1.0F);
+		aiFleeRain = new AIFleeRain(this, 1.0F);
 		aiWander = new AIWander(this, 1.0F);
 		aiJumpTo = new AIJumpToMaster(this);
 		aiFindBlock = new AIFindBlock(this);
@@ -425,7 +425,7 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 		ltasks[0].addTask(10, aiBeg);
 		ltasks[0].addTask(11, aiBegMove);
 		ltasks[0].addTask(20, aiAvoidPlayer);
-		ltasks[0].addTask(21, aiFreeRain);
+		ltasks[0].addTask(21, aiFleeRain);
 		ltasks[0].addTask(22, aiCollectItem);
 		
 		ltasks[0].addTask(30, aiTracer);
@@ -3031,7 +3031,7 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 		
 		maidFreedom = pFlag;
 		aiRestrictRain.setEnable(pFlag);
-		aiFreeRain.setEnable(pFlag);
+		aiFleeRain.setEnable(pFlag);
 		aiWander.setEnable(pFlag);
 //		aiJumpTo.setEnable(!pFlag);
 		aiAvoidPlayer.setEnable(!pFlag);

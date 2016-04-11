@@ -62,18 +62,20 @@ public class Mode_Ripper extends ModeBase {
 		ltasks[0].addTask(2, owner.func_70907_r());
 		ltasks[0].addTask(3, owner.aiJumpTo);
 		ltasks[0].addTask(4, owner.aiAttack);
-		ltasks[0].addTask(5, owner.aiPanic);
+		//ltasks[0].addTask(5, owner.aiPanic);
 		ltasks[0].addTask(6, owner.aiBeg);
 		ltasks[0].addTask(7, owner.aiBegMove);
 		ltasks[0].addTask(8, owner.aiAvoidPlayer);
-//		ltasks[0].addTask(7, pentitylittlemaid.aiCloseDoor);
-//		ltasks[0].addTask(8, pentitylittlemaid.aiOpenDoor);
 		ltasks[0].addTask(9, owner.aiCollectItem);
 		ltasks[0].addTask(10, owner.aiFollow);
 //		ltasks[0].addTask(11, new EntityAILeapAtTarget(pentitylittlemaid, 0.3F));
 		ltasks[0].addTask(11, owner.aiWander);
-		ltasks[0].addTask(12, new EntityAIWatchClosest(owner, EntityLivingBase.class, 10F));
-		ltasks[0].addTask(12, new EntityAILookIdle(owner));
+		ltasks[0].addTask(12, owner.aiOpenDoor);
+		ltasks[0].addTask(13, owner.aiCloseDoor);
+		ltasks[0].addTask(13, owner.aiFleeRain);
+		//ltasks[0].addTask(14, owner.aiRestrictRain);
+		ltasks[0].addTask(15, new EntityAIWatchClosest(owner, EntityLivingBase.class, 10F));
+		ltasks[0].addTask(15, new EntityAILookIdle(owner));
 
 		ltasks[1].addTask(1, new AINearestAttackableTarget(owner, EntityCreeper.class, 0, true));
 		ltasks[1].addTask(2, new AINearestAttackableTarget(owner, EntityTNTPrimed.class, 0, true));
