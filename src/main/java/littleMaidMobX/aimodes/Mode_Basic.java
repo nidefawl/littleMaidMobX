@@ -71,8 +71,8 @@ public class Mode_Basic extends ModeBlockBase {
 		ltasks[0].addTask(4, owner.aiBegMove);
 		ltasks[0].addTask(4, owner.aiBeg);
 		ltasks[0].addTask(5, owner.aiRestrictRain);
-		ltasks[0].addTask(6, owner.aiFreeRain);
-//        ltasks[0].addTask(4, new EntityAIMoveIndoors(this));
+		ltasks[0].addTask(6, owner.aiFleeRain);
+//      ltasks[0].addTask(4, new EntityAIMoveIndoors(this));
 //		ltasks[0].addTask(7, owner.aiCloseDoor);
 //		ltasks[0].addTask(8, owner.aiOpenDoor);
 		ltasks[0].addTask(9, owner.aiCollectItem);
@@ -126,7 +126,8 @@ public class Mode_Basic extends ModeBlockBase {
 	}
 	
 	@Override
-	public boolean checkItemStack(ItemStack pItemStack) {
+	public boolean checkItemStack(ItemStack pItemStack)
+	{
 		return true;
 	}
 

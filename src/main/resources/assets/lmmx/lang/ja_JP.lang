@@ -18,6 +18,10 @@ littleMaidMob.mode.F-Ripper=自由毛狩り隊
 littleMaidMob.mode.D-Ripper=神速毛狩り隊
 littleMaidMob.mode.T-Ripper=赤石探知毛狩り隊
 //littleMaidMob.mode.TNT-D=TNT-D
+littleMaidMob.mode.Miner=坑夫
+littleMaidMob.mode.F-Miner=F-坑夫
+littleMaidMob.mode.D-Miner=D-坑夫
+littleMaidMob.mode.T-Miner=T-坑夫
 
 littleMaidMob.text.AP=メイド装甲
 littleMaidMob.text.Health=メイド強度

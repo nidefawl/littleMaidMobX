@@ -482,10 +482,6 @@ public class Helper {
 		}
 		return false;
 	}
-
-	
-	
-
 	
 	public static int getHexToInt(String pValue) {
 		String ls = "00000000".concat(pValue);
@@ -583,5 +579,11 @@ public class Helper {
 
 	public static float degToRad(float deg) {
 		return deg / 180F * (float) Math.PI;
+	}
+	
+	//Returns time in ticks
+	public static float getMineTime(World worldObj, int pX, int pY, int pZ, ItemStack item)
+	{
+		return worldObj.getBlock(pX, pY, pZ).getBlockHardness(worldObj, pX, pY, pZ) * 1.5f * 20.0f;
 	}
 }

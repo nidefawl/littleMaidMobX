@@ -22,6 +22,7 @@ public class ModeManager {
 		maidModeList.add(Mode_Torcher.class);
 		maidModeList.add(Mode_Cooking.class);
 		maidModeList.add(Mode_Pharmacist.class);
+		maidModeList.add(Mode_Miner.class);
 		maidModeList.add(Mode_Basic.class);
 	}
 
