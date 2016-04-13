@@ -352,10 +352,12 @@ public class Mode_Ripper extends ModeBase {
 	@Override
 	public boolean checkItemStack(ItemStack pItemStack)
 	{
+		String ls = owner.getMaidMaster();
 		return (pItemStack.getItem() == Items.sugar
 				||  pItemStack.getItem() instanceof ItemShears
-				|| TriggerSelect.checkItem(owner.getMaidMaster(), "Shears", pItemStack)
-				|| pItemStack.getItem() instanceof ItemCloth);
+				|| TriggerSelect.checkItem(ls, "Shears", pItemStack)
+				|| pItemStack.getItem() instanceof ItemCloth
+				|| TriggerSelect.checkItem(ls, "Pickup", pItemStack));
 	}
 
 }

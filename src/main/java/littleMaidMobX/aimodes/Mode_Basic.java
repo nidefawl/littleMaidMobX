@@ -44,6 +44,7 @@ public class Mode_Basic extends ModeBlockBase {
 	public Mode_Basic(EntityLittleMaid pEntity) {
 		super(pEntity);
 		fusedTiles = new ArrayList<IInventory>();
+		TriggerSelect.appendTriggerItem(null, "Pickup", "");
 //		myTile = null;
 	}
 
@@ -238,9 +239,11 @@ public class Mode_Basic extends ModeBlockBase {
 			if (!lchest.isInvalid()) {
 				
 				if (Helper.canBlockBeSeen(owner, lchest.xCoord, lchest.yCoord, lchest.zCoord, false, true, false)) {
-					if (myChest == null) {
+					if (myChest == null)
+					{
 						getChest();
-						if (myChest != null) {
+						if (myChest != null)
+						{
 							myChest.openInventory();
 						} else {
 							

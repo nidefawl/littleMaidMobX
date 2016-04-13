@@ -159,11 +159,13 @@ public class Mode_Fencer extends ModeBase {
 	@Override
 	public boolean checkItemStack(ItemStack pItemStack)
 	{
+		String ls = owner.getMaidMaster();
 		return (pItemStack.getItem() == Items.sugar
 				|| pItemStack.getItem() instanceof ItemSword
-				|| TriggerSelect.checkItem(owner.getMaidMaster(), "Sword", pItemStack)
+				|| TriggerSelect.checkItem(ls, "Sword", pItemStack)
 				|| pItemStack.getItem() instanceof ItemAxe
-				|| TriggerSelect.checkItem(owner.getMaidMaster(), "Axe", pItemStack));
+				|| TriggerSelect.checkItem(ls, "Axe", pItemStack)
+				|| TriggerSelect.checkItem(ls, "Pickup", pItemStack));
 	}
 
 }

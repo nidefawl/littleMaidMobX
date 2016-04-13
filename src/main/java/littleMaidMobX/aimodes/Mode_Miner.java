@@ -75,7 +75,7 @@ public class Mode_Miner extends ModeBase
 		ltasks[0].addTask(1, owner.aiSwiming);
 		ltasks[0].addTask(2, owner.func_70907_r());
 		ltasks[0].addTask(3, owner.aiJumpTo);
-		ltasks[1].addTask(4, owner.aiFindBlock);
+		//ltasks[1].addTask(4, owner.aiFindBlock);
 		//ltasks[0].addTask(5, owner.aiPanic);
 		
 		ltasks[0].addTask(10, owner.aiBeg);
@@ -85,7 +85,7 @@ public class Mode_Miner extends ModeBase
 		
 		ltasks[0].addTask(30, owner.aiTracer);
 		ltasks[0].addTask(31, owner.aiFollow);
-		//ltasks[1].addTask(32, owner.aiFindBlock);
+		ltasks[1].addTask(32, owner.aiFindBlock);
 		ltasks[0].addTask(33, owner.aiFleeRain);
 		ltasks[0].addTask(34, owner.aiWander);
 		
@@ -122,7 +122,6 @@ public class Mode_Miner extends ModeBase
 				owner.setBloodsuck(false);
 				owner.aiAttack.setEnable(false);
 				owner.aiShooting.setEnable(false);
-				//owner.aiMine.setEnable(true);
 				return true;
 		}
 		return false;
@@ -157,7 +156,13 @@ public class Mode_Miner extends ModeBase
 	@Override
 	public boolean checkItemStack(ItemStack pItemStack)
 	{
-		return true;//(pItemStack.getItem() == Items.sugar || pItemStack.getItem() instanceof ItemPickaxe || TriggerSelect.checkItem(owner.getMaidMaster(), "Pickaxe", pItemStack) || TriggerSelect.checkItem(owner.getMaidMaster(), "Ore", pItemStack));
+		String ls = owner.getMaidMaster();
+		return true;/*(pItemStack.getItem() == Items.sugar
+				|| pItemStack.getItem() instanceof ItemPickaxe
+				|| TriggerSelect.checkItem(ls, "Pickaxe", pItemStack)
+				|| TriggerSelect.checkItem(ls, "Ore", pItemStack)
+				|| TriggerSelect.checkItem(ls, "Pickup", pItemStack)
+				);*/
 	}
 	
 	@Override
@@ -198,7 +203,7 @@ public class Mode_Miner extends ModeBase
 	public boolean checkBlock(int pMode, int px, int py, int pz)
 	{
 		boolean ore = shouldBlockBeMined(px, py, pz);
-		if (ore && canBlockBeSeen(px, py, pz, true, true, false))
+		if (ore && canBlockBeSeen(px, py, pz, true, true, false) && shouldMine())
 		{
 			if (owner.getNavigator().tryMoveToXYZ(px, py, pz, 1.0F))
 			{
@@ -212,7 +217,7 @@ public class Mode_Miner extends ModeBase
 	@Override
 	public void updateAITick(int pMode)
 	{
-		if (pMode == mmode_Miner && owner.getNextEquipItem())
+		if (pMode == mmode_Miner && owner.getNextEquipItem() && shouldMine())
 		{
 			boolean doMine = true;
 			ItemStack tool = owner.getCurrentEquippedItem();
@@ -232,7 +237,7 @@ public class Mode_Miner extends ModeBase
 			if (!shouldBlockBeMined(targetX, targetY, targetZ) || Math.abs(ltx-lxx)>2 || Math.abs(lty-lyy)>3 || Math.abs(ltz-lzz)>2 || !canBlockBeSeen(targetX, targetY, targetZ, true, true, false))
 			{
 				owner.aiFindBlock.setEnable(true);
-				
+				owner.aiWander.setEnable(true);
 				doMine = false;
 
 				ltx = lxx;
@@ -269,7 +274,8 @@ public class Mode_Miner extends ModeBase
 					
 					owner.getLookHelper().setLookPosition(targetX, targetY, targetZ, 10F, owner.getVerticalFaceSpeed());
 					owner.setSwing(10, EnumSound.installation);
-					worldObj.playSoundEffect((double)targetX+0.5D, (double)targetY+0.5D, (double)targetZ+0.5D, theBlock.stepSound.soundName, 0.1f, worldObj.rand.nextFloat() * 0.1F + 0.9F);
+					//worldObj.playSoundEffect((double)targetX+0.5D, (double)targetY+0.5D, (double)targetZ+0.5D, theBlock.stepSound.soundName, 10000.0F, 0.8F + worldObj.rand.nextFloat() * 0.2F);
+					worldObj.playSound((double)targetX+0.5D, (double)targetY+0.5D, (double)targetZ+0.5D, "dig.stone", 1.0f, (worldObj.rand.nextFloat() * 0.2F) + 0.95F, false);
 					worldObj.destroyBlockInWorldPartially(owner.getEntityId(), targetX, targetY, targetZ, completed);
 					
 					if(completed >= 8)
@@ -291,6 +297,7 @@ public class Mode_Miner extends ModeBase
 						timeMined = 0.0f;
 						owner.getNavigator().clearPathEntity();
 						owner.aiFindBlock.setEnable(true);
+						owner.aiWander.setEnable(true);
 					}
 					else
 					{
@@ -310,6 +317,7 @@ public class Mode_Miner extends ModeBase
 					mineTime = Helper.getMineTime(worldObj, targetX, targetY, targetZ, tool);
 					
 					owner.aiFindBlock.setEnable(false);
+					owner.aiWander.setEnable(false);
 				}
 				
 				if (owner.getCurrentEquippedItem().stackSize <= 0)
@@ -319,6 +327,17 @@ public class Mode_Miner extends ModeBase
 				}
 			}
 
+		}
+	}
+	private boolean shouldMine()
+	{
+		if (owner.maidInventory.getFirstEmptyStack() == -1)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
 		}
 	}
 }

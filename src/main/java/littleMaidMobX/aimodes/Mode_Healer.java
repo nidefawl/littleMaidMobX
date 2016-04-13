@@ -88,7 +88,10 @@ public class Mode_Healer extends ModeBase {
 	@Override
 	public boolean checkItemStack(ItemStack pItemStack)
 	{
-		return (pItemStack.getItem() == Items.sugar || pItemStack.getItem() instanceof ItemFood || pItemStack.getItem() instanceof ItemPotion);
+		return (pItemStack.getItem() == Items.sugar
+				|| pItemStack.getItem() instanceof ItemFood
+				|| pItemStack.getItem() instanceof ItemPotion
+				|| TriggerSelect.checkItem(owner.getMaidMaster(), "Pickup", pItemStack));
 	}
 
 	@Override

@@ -132,7 +132,8 @@ public class Mode_Archer extends ModeBase {
 				|| pItemStack.getItem() instanceof ItemBow
 				|| pItemStack.getItem() == Items.arrow
 				|| TriggerSelect.checkItem(ls, "Bow", pItemStack)
-				|| TriggerSelect.checkItem(ls, "Arrow", pItemStack));
+				|| TriggerSelect.checkItem(ls, "Arrow", pItemStack)
+				|| TriggerSelect.checkItem(ls, "Pickup", pItemStack));
 	}
 
 	@Override

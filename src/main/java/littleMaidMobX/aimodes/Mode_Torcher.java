@@ -99,7 +99,11 @@ public class Mode_Torcher extends ModeBase {
 	@Override
 	public boolean checkItemStack(ItemStack pItemStack)
 	{
-		return (pItemStack.getItem() == Items.sugar || pItemStack.getItem() == Item.getItemFromBlock(Blocks.torch) || TriggerSelect.checkItem(owner.getMaidMaster(), "Torch", pItemStack));
+		String ls = owner.getMaidMaster();
+		return (pItemStack.getItem() == Items.sugar
+				|| pItemStack.getItem() == Item.getItemFromBlock(Blocks.torch)
+				|| TriggerSelect.checkItem(ls, "Torch", pItemStack)
+				|| TriggerSelect.checkItem(ls, "Pickup", pItemStack));
 	}
 
 	@Override
@@ -123,8 +127,10 @@ public class Mode_Torcher extends ModeBase {
 	@Override
 	public boolean checkBlock(int pMode, int px, int py, int pz) {
 		int v = getBlockLighting(px, py, pz);
-		if (v < 8 && canBlockBeSeen(px, py - 1, pz, true, true, false)) {
-			if (owner.getNavigator().tryMoveToXYZ(px, py, pz, 1.0F) ) {
+		if (v < 8 && canBlockBeSeen(px, py - 1, pz, true, true, false))
+		{
+			if (owner.getNavigator().tryMoveToXYZ(px, py, pz, 1.0F) )
+			{
 				owner.playSound(EnumSound.findTarget_D, false);
 				return true;
 			}

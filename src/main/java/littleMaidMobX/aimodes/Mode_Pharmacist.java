@@ -103,7 +103,11 @@ public class Mode_Pharmacist extends ModeBlockBase {
 	@Override
 	public boolean checkItemStack(ItemStack pItemStack)
 	{
-		return (pItemStack.getItem() == Items.sugar || InventoryLittleMaid.isItemBrewable(pItemStack) || pItemStack.getItem() instanceof ItemGlassBottle || pItemStack.getItem() instanceof ItemPotion);
+		return (pItemStack.getItem() == Items.sugar
+				|| InventoryLittleMaid.isItemBrewable(pItemStack)
+				|| pItemStack.getItem() instanceof ItemGlassBottle
+				|| pItemStack.getItem() instanceof ItemPotion
+				|| TriggerSelect.checkItem(owner.getMaidMaster(), "Pickup", pItemStack));
 	}
 
 	@Override

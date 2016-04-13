@@ -27,7 +27,8 @@ public class Mode_Cooking extends ModeBlockBase {
 	}
 
 	@Override
-	public void init() {
+	public void init()
+	{
 		
 	}
 
@@ -92,7 +93,10 @@ public class Mode_Cooking extends ModeBlockBase {
 	@Override
 	public boolean checkItemStack(ItemStack pItemStack)
 	{
-		return (pItemStack.getItem() == Items.sugar || InventoryLittleMaid.isItemBurned(pItemStack) || InventoryLittleMaid.isItemSmelting(pItemStack));
+		return (pItemStack.getItem() == Items.sugar
+				|| InventoryLittleMaid.isItemBurned(pItemStack)
+				|| InventoryLittleMaid.isItemSmelting(pItemStack)
+				|| TriggerSelect.checkItem(owner.getMaidMaster(), "Pickup", pItemStack));
 	}
 
 	@Override

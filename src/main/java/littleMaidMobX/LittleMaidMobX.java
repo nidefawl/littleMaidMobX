@@ -43,7 +43,7 @@ import static net.minecraftforge.common.BiomeDictionary.Type;
 
 @Mod(	modid = LittleMaidMobX.DOMAIN,
 		name  = LittleMaidMobX.DOMAIN,
-		version = "7",
+		version = "8",
 		guiFactory = "littleMaidMobX.gui.LittleMaidMobGuiFactory")
 		
 public class LittleMaidMobX {
