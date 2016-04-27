@@ -6,12 +6,18 @@ import java.util.List;
 import littleMaidMobX.aimodes.IFF;
 import littleMaidMobX.entity.EntityLittleMaid;
 import littleMaidMobX.gui.GuiCommonHandler;
+import littleMaidMobX.helper.Helper;
 import littleMaidMobX.io.Config;
+import littleMaidMobX.io.FileManager;
+import littleMaidMobX.io.ZipTexturesLoader;
 import littleMaidMobX.item.ItemSpawnEgg;
+import littleMaidMobX.model.Transformer;
 import littleMaidMobX.network.Message;
 import littleMaidMobX.network.NetConstants;
 import littleMaidMobX.network.Network;
 import littleMaidMobX.registry.ModelManager;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.IResourcePack;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,16 +26,16 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
 import net.minecraftforge.common.AchievementPage;
-import net.minecraftforge.common.BiomeManager;
+import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.config.Configuration;
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.ObfuscationReflectionHelper;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -38,8 +44,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraftforge.common.BiomeDictionary;
-import static net.minecraftforge.common.BiomeDictionary.Type;
+import cpw.mods.fml.relauncher.ReflectionHelper;
 
 @Mod(	modid = LittleMaidMobX.DOMAIN,
 		name  = LittleMaidMobX.DOMAIN,
@@ -49,6 +54,7 @@ import static net.minecraftforge.common.BiomeDictionary.Type;
 public class LittleMaidMobX {
 	
 	public static final String DOMAIN = "lmmx";
+	public static final String VERSION = "1.4.2";
 
 	public static Achievement ac_Contract;
 	
@@ -111,20 +117,25 @@ public class LittleMaidMobX {
 	@EventHandler
 	public void PreInit(FMLPreInitializationEvent event)
 	{
+		FileManager.init();
+		Transformer.isEnable = true;
 		Config.init(event);
 		Config.checkConfig();
-			proxy.loadTextures();
-//			ModelManager.instance.loadTextures();
-			if (Helper.isClient)
-			{
-//				MMM_TextureManager.loadTextures();
-				Debug("Localmode: InitTextureList.");
-				ModelManager.instance.initTextureList(true);
-			}
-			else
-			{
-				ModelManager.instance.loadTextureServer();
-			}
+		
+		//ZipTextureLoader.run();
+		ModelManager.instance.init();
+		proxy.loadTextures();
+		
+		if (Helper.isClient)
+		{
+//			MMM_TextureManager.loadTextures();
+			Debug("Localmode: InitTextureList.");
+			ModelManager.instance.initTextureList(true);
+		}
+		else
+		{
+			ModelManager.instance.loadTextureServer();
+		}
 		
 //		MMM_Helper.checkRevision("6");
 		//Config.checkConfig(this.getClass());
@@ -158,10 +169,10 @@ public class LittleMaidMobX {
 		Achievement[] achievements = new Achievement[] { ac_Contract };
 		AchievementPage.registerAchievementPage(new AchievementPage("LittleMaidMob", achievements));
 
-		if (Helper.isClient)
+		/*if (Helper.isClient)
 		{
 			proxy.init();
-		}
+		}*/
 		
 		Network.init(DOMAIN);
 
@@ -174,6 +185,13 @@ public class LittleMaidMobX {
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event)
 	{
+		if (Helper.isClient)
+		{
+			List<IResourcePack> defaultResourcePacks = ObfuscationReflectionHelper.getPrivateValue(Minecraft.class, Minecraft.getMinecraft(), "defaultResourcePacks", "field_110449_ao");
+			defaultResourcePacks.add(new ZipTexturesLoader());
+			
+			proxy.init();
+		}
 		FMLCommonHandler.instance().bus().register(instance);
 	}
 	
@@ -260,6 +278,31 @@ public class LittleMaidMobX {
 			}
 		}
 		IFF.loadIFFs();
+	}
+	
+	@Mod.EventHandler
+	public void loaded(FMLPostInitializationEvent pEvent) {
+//		EzRecipes.init();
+		// 
+//		GunsBase.initAppend();
+		
+		Transformer.isEnable = true;
+//		MultiModelManager.instance.execute();
+		
+		// TODO test
+		List<File> llist = FileManager.getAllmodsFiles(FileManager.COMMON_CLASS_LOADER, true);
+		for (File lf : llist) {
+			Debug("targetFiles: %s", lf.getAbsolutePath());
+		}
+		
+		
+		try {
+			Class<?> lc = ReflectionHelper.getClass(FileManager.COMMON_CLASS_LOADER, "net.minecraft.entity.EntityLivingBase");
+			Debug("test-getClass: %s", lc.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	@SubscribeEvent

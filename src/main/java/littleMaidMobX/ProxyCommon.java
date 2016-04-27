@@ -17,7 +17,8 @@ public class ProxyCommon
 	public EntityPlayer getClientPlayer(){ return null; }
 	public void loadSounds(){}
 	
-	public void loadTextures() {
+	public void loadTextures()
+	{
 		ModelManager.instance.loadTextures(false);
 	}
 	

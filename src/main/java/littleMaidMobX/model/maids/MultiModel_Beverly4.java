@@ -259,8 +259,8 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 			// 腕振り
 			float f15;
 			float f16, f17;
-			f16 = littleMaidMobX.Helper.sin(littleMaidMobX.Helper.sqrt(onGrounds[0]) * (float) Math.PI * 2.0F);
-			f17 = littleMaidMobX.Helper.sin(littleMaidMobX.Helper.sqrt(onGrounds[1]) * (float) Math.PI * 2.0F);
+			f16 = littleMaidMobX.helper.Helper.sin(littleMaidMobX.helper.Helper.sqrt(onGrounds[0]) * (float) Math.PI * 2.0F);
+			f17 = littleMaidMobX.helper.Helper.sin(littleMaidMobX.helper.Helper.sqrt(onGrounds[1]) * (float) Math.PI * 2.0F);
 			bipedBody.rotateAngleY = (f16 - f17) * 0.2F;
 			rightArm.rotateAngleY = bipedBody.rotateAngleY;
 			leftArm.rotateAngleY = bipedBody.rotateAngleY;			// R

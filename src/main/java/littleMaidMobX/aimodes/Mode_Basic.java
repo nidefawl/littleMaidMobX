@@ -3,10 +3,10 @@ package littleMaidMobX.aimodes;
 import java.util.ArrayList;
 import java.util.List;
 
-import littleMaidMobX.Helper;
 import littleMaidMobX.LittleMaidMobX;
 import littleMaidMobX.ai.AIHurtByTarget;
 import littleMaidMobX.entity.EntityLittleMaid;
+import littleMaidMobX.helper.Helper;
 import littleMaidMobX.sound.EnumSound;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;

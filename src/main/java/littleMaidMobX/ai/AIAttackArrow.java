@@ -1,17 +1,13 @@
 package littleMaidMobX.ai;
 
-import java.lang.reflect.Field;
-import java.util.List;
-
-import littleMaidMobX.Helper;
 import littleMaidMobX.LittleMaidMobX;
 import littleMaidMobX.aimodes.SwingStatus;
 import littleMaidMobX.entity.EntityLittleMaid;
 import littleMaidMobX.entity.EntityLittleMaidAvatar;
+import littleMaidMobX.helper.Helper;
 import littleMaidMobX.inventory.InventoryLittleMaid;
 import littleMaidMobX.sound.EnumSound;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.player.EntityPlayer;

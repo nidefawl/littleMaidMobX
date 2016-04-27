@@ -1,11 +1,11 @@
 package littleMaidMobX.textures;
 
-import littleMaidMobX.Helper;
 import littleMaidMobX.LittleMaidMobX;
 import littleMaidMobX.entity.EntityLittleMaid;
 import littleMaidMobX.entity.EntitySelect;
-import littleMaidMobX.model.ModelMultiBase;
+import littleMaidMobX.helper.Helper;
 import littleMaidMobX.model.caps.IModelCaps;
+import littleMaidMobX.model.maid.ModelMultiBase;
 import littleMaidMobX.registry.ModelManager;
 import net.minecraft.entity.DataWatcher;
 import net.minecraft.entity.EntityAgeable;
@@ -175,7 +175,7 @@ public class TextureData {
 		return lf;
 	}
 
-	public void setNextTexturePackege(int pTargetTexture) {
+	public void setNextTexturePackage(int pTargetTexture) {
 		if (pTargetTexture == 0) {
 			int lc = getColor() + (isContract() ? 0 : ModelManager.tx_wild);
 			

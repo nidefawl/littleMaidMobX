@@ -33,7 +33,6 @@ import java.util.Map.Entry;
 import java.util.UUID;
 
 import littleMaidMobX.Counter;
-import littleMaidMobX.Helper;
 import littleMaidMobX.LittleMaidMobX;
 import littleMaidMobX.Statics;
 import littleMaidMobX.ai.AIAttackArrow;
@@ -51,13 +50,13 @@ import littleMaidMobX.ai.AISwimming;
 import littleMaidMobX.ai.AITracerMove;
 import littleMaidMobX.ai.AIWait;
 import littleMaidMobX.ai.AIWander;
-import littleMaidMobX.ai.IEntityAI;
 import littleMaidMobX.aimodes.IFF;
 import littleMaidMobX.aimodes.ModeBase;
 import littleMaidMobX.aimodes.ModeManager;
 import littleMaidMobX.aimodes.Mode_Playing;
 import littleMaidMobX.aimodes.SwingStatus;
 import littleMaidMobX.gui.GuiCommonHandler;
+import littleMaidMobX.helper.Helper;
 import littleMaidMobX.inventory.InventoryLittleMaid;
 import littleMaidMobX.io.Config;
 import littleMaidMobX.model.caps.EntityCapsMaid;
@@ -3227,13 +3226,13 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 		if (!textureData.setTextureNames()) {
 			// TODO:setDefaultTexture
 //			if (worldObj.isRemote) {
-				setNextTexturePackege(0);
+				setNextTexturePackage(0);
 //			}
 		}
 	}
 
-	public void setNextTexturePackege(int pTargetTexture) {
-		textureData.setNextTexturePackege(pTargetTexture);
+	public void setNextTexturePackage(int pTargetTexture) {
+		textureData.setNextTexturePackage(pTargetTexture);
 	}
 
 	public void setPrevTexturePackege(int pTargetTexture) {

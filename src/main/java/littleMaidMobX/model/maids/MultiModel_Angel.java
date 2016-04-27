@@ -499,8 +499,8 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 		HeadTop.setRotationPoint(0.0F, -7.0F, 0.0F);
 		Ribon0.setRotationPoint(0F, 0.8F, 1.5F);		WingLroot.rotateAngleX=1.570796313F;
 		WingRroot.rotateAngleX=1.570796313F;
-		WingLroot.rotateAngleY=littleMaidMobX.Helper.cos(f2 * 0.5F) * 0.22F + 0.35F;
-		WingRroot.rotateAngleY=-WingLroot.rotateAngleY;		Ahoge.rotateAngleY = littleMaidMobX.Helper.cos(f2 * 0.2F + littleMaidMobX.Helper.cos(f2 * 0.05F + IdOffset) * 1.0F) * 0.2F;
+		WingLroot.rotateAngleY=littleMaidMobX.helper.Helper.cos(f2 * 0.5F) * 0.22F + 0.35F;
+		WingRroot.rotateAngleY=-WingLroot.rotateAngleY;		Ahoge.rotateAngleY = littleMaidMobX.helper.Helper.cos(f2 * 0.2F + littleMaidMobX.helper.Helper.cos(f2 * 0.05F + IdOffset) * 1.0F) * 0.2F;
 		Ahoge.rotateAngleX=2.9F;		Tail3.rotateAngleX=-bipedHead.rotateAngleX;
 		Tail4.rotateAngleX=-bipedHead.rotateAngleX;
 		Tail5.rotateAngleX=-bipedHead.rotateAngleX;

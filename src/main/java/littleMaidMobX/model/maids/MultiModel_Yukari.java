@@ -529,7 +529,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 		super.setLivingAnimationsLM(entityCaps, f, f1, f2);
 		Object entityliving = entityCaps.getCapsValue(entityCaps.caps_Entity);
 		if (entityliving != null); else return;
-		int ticksExisted = littleMaidMobX.Helper.getEntityTicksExisted(entityliving);
+		int ticksExisted = littleMaidMobX.helper.Helper.getEntityTicksExisted(entityliving);
 		float f3 = (float)ticksExisted + f2 + ModelCapsHelper.getCapsValueFloat(this, entityCaps, caps_entityIdFactor);
 		if (ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isLookSuger)) {
 			setCapsValue(entityCaps, caps_visible, Cheek_R, true);

@@ -15,10 +15,9 @@ import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.item.ItemPickaxe;
+import net.minecraft.item.ItemCloth;
 import net.minecraft.item.ItemShears;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemCloth;
 import net.minecraft.util.DamageSource;
 import cpw.mods.fml.common.ObfuscationReflectionHelper;
 

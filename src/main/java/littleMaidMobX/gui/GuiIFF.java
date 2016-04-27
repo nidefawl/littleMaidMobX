@@ -1,11 +1,11 @@
 package littleMaidMobX.gui;
 
-import littleMaidMobX.ClientHelper;
-import littleMaidMobX.Helper;
 import littleMaidMobX.LittleMaidMobX;
 import littleMaidMobX.Statics;
 import littleMaidMobX.aimodes.IFF;
 import littleMaidMobX.entity.EntityLittleMaid;
+import littleMaidMobX.helper.ClientHelper;
+import littleMaidMobX.helper.Helper;
 import littleMaidMobX.network.Net;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.Tessellator;

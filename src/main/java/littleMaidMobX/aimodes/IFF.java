@@ -12,9 +12,9 @@ import java.util.Map.Entry;
 import java.util.Random;
 import java.util.TreeMap;
 
-import littleMaidMobX.Helper;
 import littleMaidMobX.LittleMaidMobX;
 import littleMaidMobX.entity.EntityLittleMaid;
+import littleMaidMobX.helper.Helper;
 import littleMaidMobX.io.Config;
 import littleMaidMobX.wrapper.MinecraftWrapper;
 import net.minecraft.entity.Entity;
