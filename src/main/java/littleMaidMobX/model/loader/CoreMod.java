@@ -1,4 +1,4 @@
-package littleMaidMobX.model;
+package littleMaidMobX.model.loader;
 
 import java.util.Map;
 
@@ -8,12 +8,12 @@ public class CoreMod implements IFMLLoadingPlugin{
 
 	@Override
 	public String[] getASMTransformerClass() {
-		return new String[] {"littleMaidMobX.model.Transformer"};
+		return new String[] {"littleMaidMobX.model.loader.Transformer"};
 	}
 
 	@Override
 	public String getModContainerClass() {
-		return "littleMaidMobX.model.ModContainer";
+		return "littleMaidMobX.model.loader.ModContainer";
 	}
 
 	@Override

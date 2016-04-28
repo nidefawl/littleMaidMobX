@@ -60,7 +60,17 @@ processResources
     }
         
     // copy everything else, thats not the mcmod.info
-    from(sourceSets.main.resources.srcDirs) {
+    from(sourceSets.main.resources.srcDirs)
+	{
         exclude 'mcmod.info'
+    }
+}
+
+jar 
+{
+        manifest
+		{
+        attributes 'FMLCorePlugin': 'littleMaidMobX.model.loader.CoreMod',
+                        'FMLCorePluginContainsFMLMod': 'true'
     }
 }

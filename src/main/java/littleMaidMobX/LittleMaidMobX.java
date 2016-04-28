@@ -11,7 +11,7 @@ import littleMaidMobX.io.Config;
 import littleMaidMobX.io.FileManager;
 import littleMaidMobX.io.ZipTexturesLoader;
 import littleMaidMobX.item.ItemSpawnEgg;
-import littleMaidMobX.model.Transformer;
+import littleMaidMobX.model.loader.Transformer;
 import littleMaidMobX.network.Message;
 import littleMaidMobX.network.NetConstants;
 import littleMaidMobX.network.Network;

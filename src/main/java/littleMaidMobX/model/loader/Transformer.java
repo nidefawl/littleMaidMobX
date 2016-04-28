@@ -1,4 +1,4 @@
-package littleMaidMobX.model;
+package littleMaidMobX.model.loader;
 
 import java.util.HashMap;
 import java.util.List;
@@ -24,6 +24,12 @@ import org.objectweb.asm.tree.TypeInsnNode;
 
 import com.google.common.collect.Lists;
 
+
+/**
+ * 古いマルチモデルのロード用。<br>
+ * 使用しているクラスを置換えて新しいものへ対応。
+ *
+ */
 public class Transformer implements IClassTransformer, Opcodes
 {
 	static String modelPackage = "littleMaidMobX/model/";
@@ -110,7 +116,6 @@ public class Transformer implements IClassTransformer, Opcodes
 		final String superName = lcreader.getSuperName();
 		final boolean replaceSuper = targets.containsKey(superName);
 		
-
 		isChange = false;
 		
 		ClassNode lcnode = new ClassNode();

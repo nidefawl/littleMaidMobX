@@ -1,4 +1,4 @@
-package littleMaidMobX.model;
+package littleMaidMobX.model.loader;
 
 import java.util.Arrays;
 
