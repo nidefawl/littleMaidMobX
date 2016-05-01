@@ -32,6 +32,11 @@ public abstract class ModeBase {
 
 	public int fpriority;
 	
+	/**
+	 * 優先順位。
+	 * 番号が若いほうが先に処理される。
+	 * 下二桁が00のものはシステム予約。
+	 */
 	public abstract int priority();
 
 	

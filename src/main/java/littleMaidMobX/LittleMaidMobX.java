@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.List;
 
 import littleMaidMobX.aimodes.IFF;
+import littleMaidMobX.aimodes.ModeManager;
 import littleMaidMobX.entity.EntityLittleMaid;
 import littleMaidMobX.gui.GuiCommonHandler;
 import littleMaidMobX.helper.Helper;
@@ -169,6 +170,8 @@ public class LittleMaidMobX {
 		Achievement[] achievements = new Achievement[] { ac_Contract };
 		AchievementPage.registerAchievementPage(new AchievementPage("LittleMaidMob", achievements));
 
+		ModeManager.init();
+		
 		/*if (Helper.isClient)
 		{
 			proxy.init();
@@ -277,6 +280,9 @@ public class LittleMaidMobX {
 			 */
 			}
 		}
+		ModeManager.loadEntityMode();
+		ModeManager.showLoadedModes();
+		
 		IFF.loadIFFs();
 	}
 	

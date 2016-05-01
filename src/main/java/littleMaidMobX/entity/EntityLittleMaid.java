@@ -295,7 +295,7 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 		
 		
 		
-		maidEntityModeList = ModeManager.instance.createMaidModes(this);
+		maidEntityModeList = ModeManager.instance.getModeList(this);
 		
 		maidActiveModeClass = null;
 		maidModeList = new HashMap<Integer, EntityAITasks[]>();
