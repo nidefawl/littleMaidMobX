@@ -116,16 +116,16 @@ public class ModelManager {
 	public void init() {
 		// 検索対象ファイル名を登録します。
 		// パターンを登録しない場合、独自名称のMODファイル、テクスチャディレクトリ、クラスが読み込まれません。
-		FileManager.getModFile("littleMaidMobX", "littleMaidMob");
-		FileManager.getModFile("littleMaidMobX", "mmmlibx");
-		FileManager.getModFile("littleMaidMobX", "ModelMulti");
-		FileManager.getModFile("littleMaidMobX", "LittleMaidMob");
+		FileManager.getModFile("mmmlibx", "littleMaidMob");
+		FileManager.getModFile("mmmlibx", "mmmlibx");
+		FileManager.getModFile("mmmlibx", "ModelMulti");
+		FileManager.getModFile("mmmlibx", "LittleMaidMob");
 		
-		addSearch("littleMaidMobX", "/assets/minecraft/textures/entity/ModelMulti/", "ModelMulti_");
-		addSearch("littleMaidMobX", "/assets/minecraft/textures/entity/littleMaid/", "ModelMulti_");
-		addSearch("littleMaidMobX", "/assets/minecraft/textures/entity/littleMaid/", "ModelLittleMaid_");
-		addSearch("littleMaidMobX", "/mob/ModelMulti/", "ModelMulti_");
-		addSearch("littleMaidMobX", "/mob/littleMaid/", "ModelLittleMaid_");
+		addSearch("mmmlibx", "/assets/minecraft/textures/entity/ModelMulti/", "ModelMulti_");
+		addSearch("mmmlibx", "/assets/minecraft/textures/entity/littleMaid/", "ModelMulti_");
+		addSearch("mmmlibx", "/assets/minecraft/textures/entity/littleMaid/", "ModelLittleMaid_");
+		addSearch("mmmlibx", "/mob/ModelMulti/", "ModelMulti_");
+		addSearch("mmmlibx", "/mob/littleMaid/", "ModelLittleMaid_");
 	}
 	
 	/**
