@@ -33,7 +33,6 @@ import java.util.Map.Entry;
 import java.util.UUID;
 
 import littleMaidMobX.Counter;
-import littleMaidMobX.Helper;
 import littleMaidMobX.LittleMaidMobX;
 import littleMaidMobX.Statics;
 import littleMaidMobX.ai.AIAttackArrow;
@@ -51,14 +50,15 @@ import littleMaidMobX.ai.AISwimming;
 import littleMaidMobX.ai.AITracerMove;
 import littleMaidMobX.ai.AIWait;
 import littleMaidMobX.ai.AIWander;
-import littleMaidMobX.ai.IEntityAI;
 import littleMaidMobX.aimodes.IFF;
 import littleMaidMobX.aimodes.ModeBase;
 import littleMaidMobX.aimodes.ModeManager;
 import littleMaidMobX.aimodes.Mode_Playing;
 import littleMaidMobX.aimodes.SwingStatus;
 import littleMaidMobX.gui.GuiCommonHandler;
+import littleMaidMobX.helper.Helper;
 import littleMaidMobX.inventory.InventoryLittleMaid;
+import littleMaidMobX.io.Config;
 import littleMaidMobX.model.caps.EntityCapsMaid;
 import littleMaidMobX.model.caps.IModelCaps;
 import littleMaidMobX.network.Net;
@@ -211,7 +211,7 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 	
 	
 //	protected LMM_EnumSound maidAttackSound;
-	public EnumSound maidDamegeSound;
+	public EnumSound maidDamageSound;
 	protected int maidSoundInterval;
 	
 	//TODO: figure out if its required to set this value
@@ -236,7 +236,7 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 	public AIAttackArrow aiShooting;
 	public AICollectItem aiCollectItem;
 	public AIRestrictRain aiRestrictRain;
-	public AIFleeRain aiFreeRain;
+	public AIFleeRain aiFleeRain;
 	public AIWander aiWander;
 	public AIJumpToMaster aiJumpTo;
 	public AIFindBlock aiFindBlock;
@@ -278,7 +278,7 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 		
 		
 //		maidAttackSound = LMM_EnumSound.attack;
-		maidDamegeSound = EnumSound.hurt;
+		maidDamageSound = EnumSound.hurt;
 		maidSoundInterval = 0;
 		
 		
@@ -295,7 +295,7 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 		
 		
 		
-		maidEntityModeList = ModeManager.instance.createMaidModes(this);
+		maidEntityModeList = ModeManager.instance.getModeList(this);
 		
 		maidActiveModeClass = null;
 		maidModeList = new HashMap<Integer, EntityAITasks[]>();
@@ -313,10 +313,10 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 	public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData) {
 		
 		String ls;
-		if (LittleMaidMobX.cfg_defaultTexture.isEmpty()) {
+		if (Config.defaultTexture.isEmpty()) {
 			ls = ModelManager.instance.getRandomTextureString(rand);
 		} else {
-			ls = LittleMaidMobX.cfg_defaultTexture;
+			ls = Config.defaultTexture;
 		}
 		textureData.setTextureInitServer(ls);
 		LittleMaidMobX.Debug("init-ID:%d, %s:%d", getEntityId(), textureData.textureBox[0].textureName, textureData.getColor());
@@ -396,7 +396,7 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 		aiShooting = new AIAttackArrow(this);
 		aiCollectItem = new AICollectItem(this, 1.0F);
 		aiRestrictRain = new AIRestrictRain(this);
-		aiFreeRain = new AIFleeRain(this, 1.0F);
+		aiFleeRain = new AIFleeRain(this, 1.0F);
 		aiWander = new AIWander(this, 1.0F);
 		aiJumpTo = new AIJumpToMaster(this);
 		aiFindBlock = new AIFindBlock(this);
@@ -420,11 +420,11 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 		ltasks[0].addTask(4, aiFindBlock);
 		ltasks[0].addTask(6, aiAttack);
 		ltasks[0].addTask(7, aiShooting);
-//		ltasks[0].addTask(8, aiPanic);
+		//ltasks[0].addTask(8, aiPanic);
 		ltasks[0].addTask(10, aiBeg);
 		ltasks[0].addTask(11, aiBegMove);
 		ltasks[0].addTask(20, aiAvoidPlayer);
-		ltasks[0].addTask(21, aiFreeRain);
+		ltasks[0].addTask(21, aiFleeRain);
 		ltasks[0].addTask(22, aiCollectItem);
 		
 		ltasks[0].addTask(30, aiTracer);
@@ -457,17 +457,27 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 	}
 
 	public String getMaidModeString() {
-		if (!isContract()) {
+		if (!isContract())
+		{
 			return getMaidModeString(maidMode);
-		} else if (!isRemainsContract()) {
+		}
+		else if (!isRemainsContract())
+		{
 			return "Strike";
-		} else if (isMaidWait()) {
+		}
+		else if (isMaidWait())
+		{
 			return "Wait";
-		} else if (isPlaying()) {
+		}
+		else if (isPlaying())
+		{
 			return "Playing";
-		} else {
+		}
+		else
+		{
 			String ls = getMaidModeString(maidMode);
-			if (maidOverDriveTime.isEnable()) {
+			if (maidOverDriveTime.isEnable())
+			{
 				ls = "D-" + ls;
 			} else
 			if (isTracer()) {
@@ -483,8 +493,10 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 	public String getMaidModeString(int pindex) {
 		
 		String ls = "";
-		for (Entry<String, Integer> le : maidModeIndexList.entrySet()) {
-			if (le.getValue() == pindex) {
+		for (Entry<String, Integer> le : maidModeIndexList.entrySet())
+		{
+			if (le.getValue() == pindex)
+			{
 				ls = le.getKey();
 				break;
 			}
@@ -525,18 +537,23 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 		EntityAITasks[] ltasks = maidModeList.get(pindex);
 		
 		
-		if (ltasks.length > 0 && ltasks[0] != null) {
+		if (ltasks.length > 0 && ltasks[0] != null)
+		{
 			setMaidModeAITasks(ltasks[0], tasks);
-		} else {
+		}
+		else
+		{
 			setMaidModeAITasks(null, tasks);
 		}
-		if (ltasks.length > 1 && ltasks[1] != null) {
+		if (ltasks.length > 1 && ltasks[1] != null)
+		{
 			setMaidModeAITasks(ltasks[1], targetTasks);
-		} else {
+		}
+		else
+		{
 			setMaidModeAITasks(null, targetTasks);
 		}
 
-		
 		maidAvatar.stopUsingItem();
 		setSitting(false);
 		setSneaking(false);
@@ -622,8 +639,9 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 
 	
 	@Override
-	protected String getHurtSound() {
-		playSound(maidDamegeSound, true);
+	protected String getHurtSound()
+	{
+		playSound(maidDamageSound, true);
 		return null;
 	}
 
@@ -634,36 +652,56 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 	}
 
 	@Override
-	protected String getLivingSound() {
-		
+	protected String getLivingSound()
+	{
 		EnumSound so = EnumSound.Null;
 		if (getHealth() < 10)
+		{
 			so = EnumSound.living_whine;
-		else if (rand.nextFloat() < maidSoundRate) {
-			if (mstatTime > 23500 || mstatTime < 1500) {
+		}
+		else if (rand.nextFloat() < maidSoundRate)
+		{
+			if (mstatTime > 23500 || mstatTime < 1500)
+			{
 				so = EnumSound.living_morning;
-			} else if (mstatTime < 12500) {
-				if (isContract()) {
+			}
+			else if (mstatTime < 12500)
+			{
+				if (isContract())
+				{
 					BiomeGenBase biomegenbase = worldObj.getBiomeGenForCoords(MathHelper.floor_double(posX + 0.5D), MathHelper.floor_double(posZ + 0.5D));
 					float ltemp = biomegenbase.getFloatTemperature((int)this.posX, (int)this.posY, (int)this.posZ);
-					if (ltemp <= 0.15F) {
+					if (ltemp <= 0.15F)
+					{
 						so = EnumSound.living_cold;
-					} else if (ltemp > 1.0F) {
+					}
+					else if (ltemp > 1.0F)
+					{
 						so = EnumSound.living_hot;
-					} else {
+					}
+					else
+					{
 						so = EnumSound.living_daytime;
 					}
-					if (worldObj.isRaining()) {
-						if (biomegenbase.canSpawnLightningBolt()) {
+					if (worldObj.isRaining())
+					{
+						if (biomegenbase.canSpawnLightningBolt())
+						{
 							so = EnumSound.living_rain;
-						} else if (biomegenbase.getEnableSnow()) {
+						}
+						else if (biomegenbase.getEnableSnow())
+						{
 							so = EnumSound.living_snow;
 						}
 					}
-				} else {
+				}
+				else
+				{
 					so = EnumSound.living_daytime;
 				}
-			} else {
+			}
+			else
+			{
 				so = EnumSound.living_night;
 			}
 		}
@@ -674,7 +712,8 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 	}
 
 	
-	public void playSound(String pname) {
+	public void playSound(String pname)
+	{
 		playSound(pname, 0.5F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
 	}
 
@@ -701,9 +740,12 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 	}
 
 	
-	public void playLittleMaidSound(EnumSound enumsound, boolean force) {
-		
-		if ((maidSoundInterval > 0 && !force) || enumsound == EnumSound.Null) return;
+	public void playLittleMaidSound(EnumSound enumsound, boolean force)
+	{
+		if (((maidSoundInterval > 0 && !force) || enumsound == EnumSound.Null) || !Config.makeNoise)
+		{
+			return;
+		}
 		maidSoundInterval = 20;
 		if (worldObj.isRemote) {
 			// Client
@@ -716,7 +758,7 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 			LittleMaidMobX.Debug(String.format("id:%d, se:%04x-%s (%s)", getEntityId(), enumsound.index, enumsound.name(), s));
 			if(!s.isEmpty())
 			{
-				float lpitch = LittleMaidMobX.cfg_VoiceDistortion ? (rand.nextFloat() * 0.2F) + 0.95F : 1.0F;
+				float lpitch = Config.VoiceDistortion ? (rand.nextFloat() * 0.2F) + 0.95F : 1.0F;
 				worldObj.playSound(posX, posY, posZ, s, getSoundVolume(), lpitch, false);
 			}
 		}
@@ -735,23 +777,25 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 	}
 
 	@Override
-	protected boolean canDespawn() {
-		
-		return LittleMaidMobX.cfg_canDespawn || super.canDespawn();
+	protected boolean canDespawn()
+	{
+		return Config.canDespawn || super.canDespawn();
 	}
 
 	@Override
 	public boolean getCanSpawnHere() {
 		
-		if (LittleMaidMobX.cfg_spawnLimit <= getMaidCount()) {
-			LittleMaidMobX.Debug("Spawn Limit.");
+		if (Config.spawnLimit <= getMaidCount())
+		{
+			//LittleMaidMobX.Debug("Spawn Limit.");
+			System.out.println("Spawn Limit Hit.");
 			return false;
 		}
 		int lx = MathHelper.floor_double(this.posX);
 		int ly = MathHelper.floor_double(this.boundingBox.minY);
 		int lz = MathHelper.floor_double(this.posZ);
 		
-		if (LittleMaidMobX.cfg_Dominant) {
+		if (Config.Dominant) {
 			
 			return this.worldObj.checkNoEntityCollision(this.boundingBox) 
 					&& this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox).isEmpty() 
@@ -781,6 +825,7 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 				lj++;
 			}
 		}
+		//System.out.println("Current maid count is" + lj);
 		return lj;
 	}
 
@@ -983,7 +1028,9 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 		par1nbtTagCompound.setInteger("DominantArm", maidDominantArm);
 		par1nbtTagCompound.setInteger("Color", textureData.getColor());
 		par1nbtTagCompound.setString("texName", textureData.getTextureName(0));
+//		System.out.println("Save textureName: " + textureData.getTextureName(0));
 		par1nbtTagCompound.setString("texArmor", textureData.getTextureName(1));
+//		System.out.println("Save textureArmor: " + textureData.getTextureName(1));
 		// HomePosition
 		par1nbtTagCompound.setInteger("homeX", getHomePosition().posX);
 		par1nbtTagCompound.setInteger("homeY", getHomePosition().posY);
@@ -1031,7 +1078,9 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 			setFreedom(par1nbtTagCompound.getBoolean("Freedom"));
 			setTracer(par1nbtTagCompound.getBoolean("Tracer"));
 			textureData.textureIndex[0] = ModelManager.instance.getIndexTextureBoxServer(this, par1nbtTagCompound.getString("texName"));
+//			System.out.println("Get texName: " + par1nbtTagCompound.getString("texName"));
 			textureData.textureIndex[1] = ModelManager.instance.getIndexTextureBoxServer(this, par1nbtTagCompound.getString("texArmor"));
+//			System.out.println("Get texArmor: " + par1nbtTagCompound.getString("texArmor"));
 			textureData.textureBox[0] = ModelManager.instance.getTextureBoxServer(textureData.textureIndex[0]);
 			textureData.textureBox[1] = ModelManager.instance.getTextureBoxServer(textureData.textureIndex[1]);
 			byte b = par1nbtTagCompound.getByte("ModeColor");
@@ -1076,6 +1125,9 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 			case 15:
 				setMaidMode(0x0000);	// Pharmacist
 				break;
+			/*case ??:
+				setMaidMode(0x0023);	//Miner
+				break;*/
 			default :
 				setMaidMode(0x0000);	// Wild
 			}
@@ -1134,7 +1186,9 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 				maidDominantArm = 0;
 			}
 			textureData.textureIndex[0] = ModelManager.instance.getIndexTextureBoxServer(this, par1nbtTagCompound.getString("texName"));
+//			System.out.println("Get texName: " + par1nbtTagCompound.getString("texName"));
 			textureData.textureIndex[1] = ModelManager.instance.getIndexTextureBoxServer(this, par1nbtTagCompound.getString("texArmor"));
+//			System.out.println("Get texArmor: " + par1nbtTagCompound.getString("texArmor"));
 			textureData.textureBox[0] = ModelManager.instance.getTextureBoxServer(textureData.textureIndex[0]);
 			textureData.textureBox[1] = ModelManager.instance.getTextureBoxServer(textureData.textureIndex[1]);
 			textureData.setColor(par1nbtTagCompound.getInteger("Color"));
@@ -1162,8 +1216,8 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 		}
 		onInventoryChanged();
 		
-		
-		if (LittleMaidMobX.cfg_antiDoppelganger && maidAnniversary > 0L) {
+		//What is this?
+		if (Config.antiDoppelganger && maidAnniversary > 0L) {
 			for (int i = 0; i < worldObj.loadedEntityList.size(); i++) {
 				Entity entity1 = (Entity)worldObj.loadedEntityList.get(i);
 				if (!entity1.isDead && entity1 instanceof EntityLittleMaid) {
@@ -1183,6 +1237,7 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 				}
 			}
 		} else {
+//			System.out.println(String.format("Load ID:%d, MaidMaster:%s, x:%.1f, y:%.1f, z:%.1f, %d" ,getEntityId(), getMaidMaster(), posX, posY, posZ, maidAnniversary));
 			LittleMaidMobX.Debug(String.format("Load ID:%d, MaidMaster:%s, x:%.1f, y:%.1f, z:%.1f, %d" ,getEntityId(), getMaidMaster(), posX, posY, posZ, maidAnniversary));
 		}
 		
@@ -1395,9 +1450,11 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 	}
 
 	@Override
-	protected void damageArmor(float pDamage) {
+	protected void damageArmor(float pDamage)
+	{
+		LittleMaidMobX.Debug(String.format("Armor Damage being calculated" , this.getEntityId(), pDamage));
 		maidInventory.damageArmor(pDamage);
-		maidAvatar.damageArmor(pDamage);
+		//maidAvatar.damageArmor(pDamage);
 	}
 
 	@Override
@@ -1406,7 +1463,8 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 	}
 
 	@Override
-	protected float applyArmorCalculations(DamageSource par1DamageSource, float par2) {
+	protected float applyArmorCalculations(DamageSource par1DamageSource, float par2)
+	{
 		return maidAvatar.applyArmorCalculations(par1DamageSource, par2);
 	}
 
@@ -1418,30 +1476,32 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 	@Override
 	protected void damageEntity(DamageSource par1DamageSource, float par2) {
 		
-		if (par1DamageSource == DamageSource.fall) {
-			maidDamegeSound = EnumSound.hurt_fall;
-		}
-		if(!par1DamageSource.isUnblockable() && isBlocking()) {
-			
-//			par2 = (1.0F + par2) * 0.5F;
-			LittleMaidMobX.Debug(String.format("Blocking success ID:%d, %f -> %f" , this.getEntityId(), par2, (par2 = (1.0F + par2) * 0.5F)));
-			maidDamegeSound = EnumSound.hurt_guard;
+		if (par1DamageSource == DamageSource.fall)
+		{
+			maidDamageSound = EnumSound.hurt_fall;
 		}
 		
+		if(!par1DamageSource.isUnblockable() && isBlocking())
+		{
+//			par2 = (1.0F + par2) * 0.5F; //What is this for?
+			LittleMaidMobX.Debug(String.format("Blocking success ID:%d, %f -> %f" , this.getEntityId(), par2, (par2 = (1.0F + par2) * 0.5F)));
+			maidDamageSound = EnumSound.hurt_guard;
+		}
 		
 		float llasthealth = getHealth();
-		if (par2 > 0 && getActiveModeClass() != null && !getActiveModeClass().damageEntity(maidMode, par1DamageSource, par2)) {
-			maidAvatar.damageEntity(par1DamageSource, par2);
-			
-			
+		if (par2 > 0 && getActiveModeClass() != null && !getActiveModeClass().damageEntity(maidMode, par1DamageSource, par2))
+		{
+			//maidAvatar.damageEntity(par1DamageSource, par2);
+			super.damageEntity(par1DamageSource, par2);
 			setMaidWait(false);
 		}
 		
-		if (llasthealth == getHealth() && maidDamegeSound == EnumSound.hurt) {
-			maidDamegeSound = EnumSound.hurt_nodamege;
+		if (llasthealth == getHealth() && maidDamageSound == EnumSound.hurt)
+		{
+			maidDamageSound = EnumSound.hurt_nodamage;
 		}
 		LittleMaidMobX.Debug(String.format("GetDamage ID:%d, %s, %f/ %f" , this.getEntityId(), par1DamageSource.damageType, llasthealth - getHealth(), par2));
-//		super.damageEntity(par1DamageSource, par2);
+		//super.damageEntity(par1DamageSource, par2);
 	}
 
 	@Override
@@ -1459,9 +1519,9 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 		LittleMaidMobX.Debug("LMM_EntityLittleMaid.attackEntityFrom "+this+"("+this.maidAvatar+") <= "+entity);
 		
 		
-		maidDamegeSound = EnumSound.hurt;
+		maidDamageSound = EnumSound.hurt;
 		if (par1DamageSource == DamageSource.inFire || par1DamageSource == DamageSource.onFire || par1DamageSource == DamageSource.lava) {
-			maidDamegeSound = EnumSound.hurt_fire;
+			maidDamageSound = EnumSound.hurt_fire;
 		}
 		for (ModeBase lm : maidEntityModeList) {
 			float li = lm.attackEntityFrom(par1DamageSource, par2);
@@ -1491,10 +1551,10 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 //		if (par2 == 0 && maidMode != mmode_Detonator) {
 		if (par2 == 0) {
 			
-			if (maidDamegeSound == EnumSound.hurt) {
-				maidDamegeSound = EnumSound.hurt_nodamege;
+			if (maidDamageSound == EnumSound.hurt) {
+				maidDamageSound = EnumSound.hurt_nodamage;
 			}
-			playSound(maidDamegeSound, true);
+			playSound(maidDamageSound, true);
 			return false;
 		}
 		
@@ -2109,7 +2169,7 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 		
 		if (!worldObj.isRemote) {
 			
-			if (LittleMaidMobX.cfg_DeathMessage && mstatMasterEntity != null) {
+			if (Config.DeathMessage && mstatMasterEntity != null) {
 				String ls = par1DamageSource.getDamageType();
 				Entity lentity = par1DamageSource.getEntity();
 				if (lentity != null) {
@@ -2124,12 +2184,10 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 				}
 				
 				
-				
-				
 				// http://forum.minecraftuser.jp/viewtopic.php?f=13&t=23347&p=212078#p211805
 				String lt = func_145748_c_().getUnformattedTextForChat();
 
-				ChatComponentText text = new ChatComponentText(String.format("your %s killed by %s", lt, ls));
+				ChatComponentText text = new ChatComponentText(String.format("Your maid %s was killed by %s", lt, ls));
 				mstatMasterEntity.addChatMessage(text);
 			}
 		}
@@ -2394,6 +2452,15 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 			GuiCommonHandler.maidServer = this;
 			pEntityPlayer.openGui(LittleMaidMobX.instance, GuiCommonHandler.GUI_ID_INVVENTORY, this.worldObj,
 					(int)this.posX, (int)this.posY, (int)this.posZ);
+//			System.out.println("Texture: " + textureData.getTextureName(0));
+//			System.out.println("Inv dump:");
+//			
+//			ItemStack stack;
+//			for(int i=0;i<maidInventory.getSizeInventory();i++) {
+//				stack = maidInventory.getStackInSlot(i);
+//				System.out.println("\t" + i + ": " + (stack == null ? "empty" : stack.getDisplayName()));
+//			}
+			
 		}
 		else
 		{
@@ -2722,7 +2789,7 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 				EntityPlayer clientPlayer = LittleMaidMobX.proxy.getClientPlayer();
 
 				if (!LittleMaidMobX.proxy.isSinglePlayer()
-						|| LittleMaidMobX.cfg_checkOwnerName 
+						|| Config.checkOwnerName 
 						|| clientPlayer == null) {
 					lname = getMaidMaster();
 				} else {
@@ -2963,7 +3030,7 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 		
 		maidFreedom = pFlag;
 		aiRestrictRain.setEnable(pFlag);
-		aiFreeRain.setEnable(pFlag);
+		aiFleeRain.setEnable(pFlag);
 		aiWander.setEnable(pFlag);
 //		aiJumpTo.setEnable(!pFlag);
 		aiAvoidPlayer.setEnable(!pFlag);
@@ -3159,13 +3226,13 @@ public class EntityLittleMaid extends EntityTameable implements ITextureEntity {
 		if (!textureData.setTextureNames()) {
 			// TODO:setDefaultTexture
 //			if (worldObj.isRemote) {
-				setNextTexturePackege(0);
+				setNextTexturePackage(0);
 //			}
 		}
 	}
 
-	public void setNextTexturePackege(int pTargetTexture) {
-		textureData.setNextTexturePackege(pTargetTexture);
+	public void setNextTexturePackage(int pTargetTexture) {
+		textureData.setNextTexturePackage(pTargetTexture);
 	}
 
 	public void setPrevTexturePackege(int pTargetTexture) {

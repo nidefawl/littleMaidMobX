@@ -31,10 +31,13 @@ public class AICollectItem extends EntityAIBase {
 
 
 	@Override
-	public boolean shouldExecute() {
-		if (theMaid.maidInventory.getFirstEmptyStack() > -1) {
+	public boolean shouldExecute()
+	{
+		if (theMaid.maidInventory.getFirstEmptyStack() > -1)//If maid inventory is not full
+		{
 			List llist = theMaid.worldObj.getEntitiesWithinAABB(EntityItem.class, theMaid.boundingBox.expand(8F, 2D, 8F));
-			if (!llist.isEmpty()) {
+			if (!llist.isEmpty())//If their are item entities
+			{
 				int li = theMaid.getRNG().nextInt(llist.size());
 				EntityItem ei = (EntityItem)llist.get(li);
 				EntityPlayer ep = theMaid.mstatMasterEntity != null ? theMaid.mstatMasterEntity : theMaid.worldObj.getClosestPlayerToEntity(theMaid, 16F);
@@ -47,11 +50,14 @@ public class AICollectItem extends EntityAIBase {
 								ei.posZ - MathHelper.cos(ep.rotationYaw * 0.01745329252F) * 2.0D) > 7.5D))
 				{
 					ItemStack lstack = ei.getEntityItem();
-					if ((lstack.getItem() != Items.sugar)) {
-						if ((theMaid.maidActiveModeClass == null)) {
+					if ((lstack.getItem() != Items.sugar))
+					{
+						if ((theMaid.maidActiveModeClass == null))
+						{
 							return false;
 						}
-						if ((!theMaid.maidActiveModeClass.checkItemStack(lstack))) {
+						if ((!theMaid.maidActiveModeClass.checkItemStack(lstack)))
+						{
 							return false;
 						}
 					}

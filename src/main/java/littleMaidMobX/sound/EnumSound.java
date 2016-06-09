@@ -29,7 +29,7 @@ public enum EnumSound {
 	hurt_fire(0x302,		"Dameged Voice from fire. Null is no Voice",			""),
 	hurt_guard(0x303,		"Dameged Voice on Guard. Null is no Voice",				"minecraft:mob.blaze.hit"),
 	hurt_fall(0x304,		"Dameged Voice from Fall. Null is no Voice",			""),
-	hurt_nodamege(0x309,	"No Dameged Voice. Null is no Voice",					"minecraft:mob.blaze.hit"),
+	hurt_nodamage(0x309,	"No Dameged Voice. Null is no Voice",					"minecraft:mob.blaze.hit"),
 
 	findTarget_N(0x400,		"Find target Normal Voice. Null is no Voice",			""),
 	findTarget_B(0x401,		"Find target Bloodsuck Voice. Null is no Voice",		""),

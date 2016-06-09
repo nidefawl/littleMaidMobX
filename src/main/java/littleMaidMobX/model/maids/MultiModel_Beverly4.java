@@ -8,7 +8,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 	public ModelRenderer SkirtTopL;
 	public ModelRenderer SkirtFrontL;
 	public ModelRenderer SkirtLeftL;
-	public ModelRenderer SkirtBackL;	public MultiModel_Beverly4() {		super();	}	public MultiModel_Beverly4(float f) {		super(f);	}	public MultiModel_Beverly4(float f, float f1) {		this(f, f1, 64, 64);	}	public MultiModel_Beverly4(float f, float f1, int i, int j) {		super(f, f1, i < 0 ? 64 : i, j < 0 ? 32 : j);	}	@Override
+	public ModelRenderer SkirtBackL;		public MultiModel_Beverly4(StringBuilder hack) {		super(hack);	}	public MultiModel_Beverly4() {		super();	}	public MultiModel_Beverly4(float f) {		super(f);	}	public MultiModel_Beverly4(float f, float f1) {		this(f, f1, 64, 64);	}	public MultiModel_Beverly4(float f, float f1, int i, int j) {		super(f, f1, i < 0 ? 64 : i, j < 0 ? 32 : j);	}	@Override
 	public void initModel(float f, float f1, boolean isAfterInit) {
 		textureWidth = 64;
 		textureHeight = 64;
@@ -259,8 +259,8 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 			// 腕振り
 			float f15;
 			float f16, f17;
-			f16 = littleMaidMobX.Helper.sin(littleMaidMobX.Helper.sqrt(onGrounds[0]) * (float) Math.PI * 2.0F);
-			f17 = littleMaidMobX.Helper.sin(littleMaidMobX.Helper.sqrt(onGrounds[1]) * (float) Math.PI * 2.0F);
+			f16 = littleMaidMobX.helper.Helper.sin(littleMaidMobX.helper.Helper.sqrt(onGrounds[0]) * (float) Math.PI * 2.0F);
+			f17 = littleMaidMobX.helper.Helper.sin(littleMaidMobX.helper.Helper.sqrt(onGrounds[1]) * (float) Math.PI * 2.0F);
 			bipedBody.rotateAngleY = (f16 - f17) * 0.2F;
 			rightArm.rotateAngleY = bipedBody.rotateAngleY;
 			leftArm.rotateAngleY = bipedBody.rotateAngleY;			// R

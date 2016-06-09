@@ -12,7 +12,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 	public ModelRenderer Rightarm1;
 	public ModelRenderer Rightarm2;
 	public ModelRenderer Leftarm1;
-	public ModelRenderer Leftarm2;	public MultiModel_chrno() {
+	public ModelRenderer Leftarm2;		public MultiModel_chrno(StringBuilder hack) {		super(hack);	}	public MultiModel_chrno() {
 		this(0.0F);
 	}	public MultiModel_chrno(float f) {
 		this(f, 0.0F);

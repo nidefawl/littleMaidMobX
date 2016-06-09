@@ -1,6 +1,6 @@
 package littleMaidMobX.model.modchu;
 
-import littleMaidMobX.Helper;
+import littleMaidMobX.helper.Helper;
 import littleMaidMobX.model.caps.IModelCaps;
 import littleMaidMobX.model.caps.ModelCapsHelper;
 import littleMaidMobX.render.model.ModelRenderer;
@@ -12,6 +12,9 @@ public class ModelModchuBaseSR2 extends ModelModchuBaseMulti {
 	public ModelRenderer eyeR;
 	public ModelRenderer eyeL;
 
+	public ModelModchuBaseSR2(StringBuilder hack) {
+		super(hack);
+	}
 
 	public ModelModchuBaseSR2() {
 		super();

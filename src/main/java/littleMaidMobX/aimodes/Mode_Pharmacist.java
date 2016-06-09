@@ -1,10 +1,13 @@
 package littleMaidMobX.aimodes;
 
-import littleMaidMobX.Helper;
 import littleMaidMobX.entity.EntityLittleMaid;
+import littleMaidMobX.helper.Helper;
+import littleMaidMobX.inventory.InventoryLittleMaid;
 import littleMaidMobX.sound.EnumSound;
 import net.minecraft.entity.ai.EntityAITasks;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemGlassBottle;
 import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -75,16 +78,16 @@ public class Mode_Pharmacist extends ModeBlockBase {
 		int li;
 		ItemStack litemstack;
 		
-		
 		switch (pMode) {
 		case mmode_Pharmacist :
 			litemstack = owner.getCurrentEquippedItem();
-			if (!(inventryPos > 0 && litemstack != null && !litemstack.getItem().isPotionIngredient(litemstack))) {
+			if (!(inventryPos > 0 && litemstack != null && !InventoryLittleMaid.isItemBrewable(litemstack))) {
 				for (li = 0; li < owner.maidInventory.maxInventorySize; li++) {
 					litemstack = owner.maidInventory.getStackInSlot(li);
 					if (litemstack != null) {
 						
-						if (litemstack.getItem() instanceof ItemPotion && !Helper.hasEffect(litemstack)) {
+						if (litemstack.getItem() instanceof ItemPotion && !Helper.hasEffect(litemstack))
+						{
 							return li;
 						}
 					}
@@ -97,8 +100,13 @@ public class Mode_Pharmacist extends ModeBlockBase {
 	}
 
 	@Override
-	public boolean checkItemStack(ItemStack pItemStack) {
-		return false;
+	public boolean checkItemStack(ItemStack pItemStack)
+	{
+		return (pItemStack.getItem() == Items.sugar
+				|| InventoryLittleMaid.isItemBrewable(pItemStack)
+				|| pItemStack.getItem() instanceof ItemGlassBottle
+				|| pItemStack.getItem() instanceof ItemPotion
+				|| TriggerSelect.checkItem(owner.getMaidMaster(), "Pickup", pItemStack));
 	}
 
 	@Override

@@ -12,7 +12,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 	public ModelRenderer Bullet2;
 	public ModelRenderer Bullet3;
 	public ModelRenderer eyeL;
-	public ModelRenderer eyeR;	public MultiModel_ExtraArms() {
+	public ModelRenderer eyeR;		public MultiModel_ExtraArms(StringBuilder hack) {		super(hack);	}	public MultiModel_ExtraArms() {
 		this(0.0F);
 	}	public MultiModel_ExtraArms(float f) {
 		this(f, 0.0F);
@@ -95,10 +95,10 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 		super.setLivingAnimationsLM(entityCaps, f, f1, f2);
 		Object entityliving = entityCaps.getCapsValue(entityCaps.caps_Entity);
 		if (entityliving != null); else return;
-		int ticksExisted = littleMaidMobX.Helper.getEntityTicksExisted(entityliving);
+		int ticksExisted = littleMaidMobX.helper.Helper.getEntityTicksExisted(entityliving);
 		float f3 = (float)ticksExisted + f2 + ModelCapsHelper.getCapsValueFloat(this, entityCaps, caps_entityIdFactor);
 		// 目パチ
-		if (0 > littleMaidMobX.Helper.sin(f3 * 0.05F) + littleMaidMobX.Helper.sin(f3 * 0.13F) + littleMaidMobX.Helper.sin(f3 * 0.7F) + 2.55F) {
+		if (0 > littleMaidMobX.helper.Helper.sin(f3 * 0.05F) + littleMaidMobX.helper.Helper.sin(f3 * 0.13F) + littleMaidMobX.helper.Helper.sin(f3 * 0.7F) + 2.55F) {
 			setCapsValue(entityCaps, caps_visible, eyeR, false);
 			setCapsValue(entityCaps, caps_visible, eyeL, false);
 		} else {

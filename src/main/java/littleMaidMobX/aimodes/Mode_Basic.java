@@ -3,10 +3,10 @@ package littleMaidMobX.aimodes;
 import java.util.ArrayList;
 import java.util.List;
 
-import littleMaidMobX.Helper;
 import littleMaidMobX.LittleMaidMobX;
 import littleMaidMobX.ai.AIHurtByTarget;
 import littleMaidMobX.entity.EntityLittleMaid;
+import littleMaidMobX.helper.Helper;
 import littleMaidMobX.sound.EnumSound;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
@@ -44,6 +44,7 @@ public class Mode_Basic extends ModeBlockBase {
 	public Mode_Basic(EntityLittleMaid pEntity) {
 		super(pEntity);
 		fusedTiles = new ArrayList<IInventory>();
+		TriggerSelect.appendTriggerItem(null, "Pickup", "");
 //		myTile = null;
 	}
 
@@ -71,8 +72,8 @@ public class Mode_Basic extends ModeBlockBase {
 		ltasks[0].addTask(4, owner.aiBegMove);
 		ltasks[0].addTask(4, owner.aiBeg);
 		ltasks[0].addTask(5, owner.aiRestrictRain);
-		ltasks[0].addTask(6, owner.aiFreeRain);
-//        ltasks[0].addTask(4, new EntityAIMoveIndoors(this));
+		ltasks[0].addTask(6, owner.aiFleeRain);
+//      ltasks[0].addTask(4, new EntityAIMoveIndoors(this));
 //		ltasks[0].addTask(7, owner.aiCloseDoor);
 //		ltasks[0].addTask(8, owner.aiOpenDoor);
 		ltasks[0].addTask(9, owner.aiCollectItem);
@@ -126,7 +127,8 @@ public class Mode_Basic extends ModeBlockBase {
 	}
 	
 	@Override
-	public boolean checkItemStack(ItemStack pItemStack) {
+	public boolean checkItemStack(ItemStack pItemStack)
+	{
 		return true;
 	}
 
@@ -237,9 +239,11 @@ public class Mode_Basic extends ModeBlockBase {
 			if (!lchest.isInvalid()) {
 				
 				if (Helper.canBlockBeSeen(owner, lchest.xCoord, lchest.yCoord, lchest.zCoord, false, true, false)) {
-					if (myChest == null) {
+					if (myChest == null)
+					{
 						getChest();
-						if (myChest != null) {
+						if (myChest != null)
+						{
 							myChest.openInventory();
 						} else {
 							

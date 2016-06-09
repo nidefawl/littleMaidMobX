@@ -1,6 +1,9 @@
 entity.lmmx.LittleMaidX.name=Little Maid
 
-item.lmmx:spawn_lmmx_egg.name=Little Maid
+item.lmmx:spawn_lmmx_egg.name=Spawn Little Maid
+
+achievement.contract=Understanding.
+achievement.contract.desc=Obtain a Maid.
 
 littleMaidMob.mode.Torcher=Torcher
 littleMaidMob.mode.F-Torcher=F-Torcher
@@ -24,7 +27,7 @@ littleMaidMob.mode.Playing=Playing
 littleMaidMob.mode.Pharmacist=Pharmacist
 littleMaidMob.mode.T-Pharmacist=T-Pharmacist
 littleMaidMob.mode.F-Pharmacist=F-Pharmacist
-littleMaidMob.mode.F-Pharmacist=D-Pharmacist
+littleMaidMob.mode.D-Pharmacist=D-Pharmacist
 
 littleMaidMob.mode.Healer=Healer
 littleMaidMob.mode.F-Healer=F-Healer
@@ -66,6 +69,11 @@ littleMaidMob.mode.Detonator=Detonator
 littleMaidMob.mode.F-Detonator=F-Detonator
 littleMaidMob.mode.D-Detonator=D-Detonator
 littleMaidMob.mode.T-Detonator=T-Detonator
+
+littleMaidMob.mode.Miner=Miner
+littleMaidMob.mode.F-Miner=F-Miner
+littleMaidMob.mode.D-Miner=D-Miner
+littleMaidMob.mode.T-Miner=T-Miner
 
 littleMaidMob.text.Health=Health
 littleMaidMob.text.AP=AP

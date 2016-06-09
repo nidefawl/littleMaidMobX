@@ -96,7 +96,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 	public ModelRenderer Breast_RU;
 	public ModelRenderer Breast_LU;
 	public ModelRenderer Breast_RB;
-	public ModelRenderer Breast_LB;	public MultiModel_Yukari() {
+	public ModelRenderer Breast_LB;		public MultiModel_Yukari(StringBuilder hack) {		super(hack);	}	public MultiModel_Yukari() {
 		this(0.0F);
 	}	public MultiModel_Yukari(float f) {
 		this(f, 0.0F);
@@ -529,7 +529,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 		super.setLivingAnimationsLM(entityCaps, f, f1, f2);
 		Object entityliving = entityCaps.getCapsValue(entityCaps.caps_Entity);
 		if (entityliving != null); else return;
-		int ticksExisted = littleMaidMobX.Helper.getEntityTicksExisted(entityliving);
+		int ticksExisted = littleMaidMobX.helper.Helper.getEntityTicksExisted(entityliving);
 		float f3 = (float)ticksExisted + f2 + ModelCapsHelper.getCapsValueFloat(this, entityCaps, caps_entityIdFactor);
 		if (ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isLookSuger)) {
 			setCapsValue(entityCaps, caps_visible, Cheek_R, true);

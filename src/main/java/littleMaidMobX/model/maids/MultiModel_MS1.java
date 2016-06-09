@@ -1,4 +1,4 @@
-package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.render.model.ModelBoxPlate;import littleMaidMobX.render.model.ModelRenderer;import littleMaidMobX.model.modchu.ModelModchuBaseSR2;public class MultiModel_MS1 extends ModelModchuBaseSR2 {
+package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.model.modchu.ModelModchuBaseSR2;import littleMaidMobX.render.model.ModelBoxPlate;import littleMaidMobX.render.model.ModelRenderer;public class MultiModel_MS1 extends ModelModchuBaseSR2 {
 	public ModelRenderer Goggles1;
 	public ModelRenderer Goggles2;
 	public ModelRenderer Goggles3;
@@ -10,7 +10,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 	public ModelRenderer GogglesRA;
 	public ModelRenderer GogglesLA;
 	public ModelRenderer Cheek_R;
-	public ModelRenderer Cheek_L;	public MultiModel_MS1() {
+	public ModelRenderer Cheek_L;		public MultiModel_MS1(StringBuilder hack) {		super(hack);	}	public MultiModel_MS1() {
 		this(0.0F);
 	}	public MultiModel_MS1(float f) {
 		this(f, 0.0F);

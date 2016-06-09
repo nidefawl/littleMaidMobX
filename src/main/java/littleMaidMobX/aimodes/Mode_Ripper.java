@@ -14,6 +14,8 @@ import net.minecraft.entity.item.EntityTNTPrimed;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemCloth;
 import net.minecraft.item.ItemShears;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
@@ -31,6 +33,7 @@ public class Mode_Ripper extends ModeBase {
 
 	public Mode_Ripper(EntityLittleMaid pEntity) {
 		super(pEntity);
+		TriggerSelect.appendTriggerItem(null, "Shears", "");
 		timeSinceIgnited = -1;
 	}
 
@@ -58,18 +61,20 @@ public class Mode_Ripper extends ModeBase {
 		ltasks[0].addTask(2, owner.func_70907_r());
 		ltasks[0].addTask(3, owner.aiJumpTo);
 		ltasks[0].addTask(4, owner.aiAttack);
-		ltasks[0].addTask(5, owner.aiPanic);
+		//ltasks[0].addTask(5, owner.aiPanic);
 		ltasks[0].addTask(6, owner.aiBeg);
 		ltasks[0].addTask(7, owner.aiBegMove);
 		ltasks[0].addTask(8, owner.aiAvoidPlayer);
-//		ltasks[0].addTask(7, pentitylittlemaid.aiCloseDoor);
-//		ltasks[0].addTask(8, pentitylittlemaid.aiOpenDoor);
-//		ltasks[0].addTask(9, pentitylittlemaid.aiCollectItem);
+		ltasks[0].addTask(9, owner.aiCollectItem);
 		ltasks[0].addTask(10, owner.aiFollow);
 //		ltasks[0].addTask(11, new EntityAILeapAtTarget(pentitylittlemaid, 0.3F));
 		ltasks[0].addTask(11, owner.aiWander);
-		ltasks[0].addTask(12, new EntityAIWatchClosest(owner, EntityLivingBase.class, 10F));
-		ltasks[0].addTask(12, new EntityAILookIdle(owner));
+		ltasks[0].addTask(12, owner.aiOpenDoor);
+		ltasks[0].addTask(13, owner.aiCloseDoor);
+		ltasks[0].addTask(13, owner.aiFleeRain);
+		//ltasks[0].addTask(14, owner.aiRestrictRain);
+		ltasks[0].addTask(15, new EntityAIWatchClosest(owner, EntityLivingBase.class, 10F));
+		ltasks[0].addTask(15, new EntityAILookIdle(owner));
 
 		ltasks[1].addTask(1, new AINearestAttackableTarget(owner, EntityCreeper.class, 0, true));
 		ltasks[1].addTask(2, new AINearestAttackableTarget(owner, EntityTNTPrimed.class, 0, true));
@@ -137,7 +142,7 @@ public class Mode_Ripper extends ModeBase {
 				}
 				LittleMaidMobX.Debug(String.format("ID:%d(%s)-dom:%d(%d)", owner.getEntityId(), owner.worldObj.isRemote ? "C" : "W", owner.maidDominantArm, owner.maidInventory.currentItem));
 				
-				if (owner.maidInventory.isItemExplord(owner.maidInventory.currentItem) && timeSinceIgnited++ > 30) {
+				if (owner.maidInventory.isItemExplosive(owner.maidInventory.currentItem) && timeSinceIgnited++ > 30) {
 					
 					owner.maidInventory.decrStackSize(owner.maidInventory.currentItem, 1);
 					
@@ -160,7 +165,7 @@ public class Mode_Ripper extends ModeBase {
 				owner.setMaidMode("Ripper");
 				return true;
 			}
-			if (owner.maidInventory.isItemExplord(0)) {
+			if (owner.maidInventory.isItemExplosive(0)) {
 				owner.setMaidMode("Detonator");
 				return true;
 			}
@@ -210,7 +215,7 @@ public class Mode_Ripper extends ModeBase {
 		case mmode_Detonator :
 			for (li = 0; li < owner.maidInventory.maxInventorySize; li++) {
 				
-				if (owner.maidInventory.isItemExplord(li)) {
+				if (owner.maidInventory.isItemExplosive(li)) {
 					return li;
 				}
 			}
@@ -328,10 +333,12 @@ public class Mode_Ripper extends ModeBase {
 	}
 	
 	@Override
-	public boolean damageEntity(int pMode, DamageSource par1DamageSource, float par2) {
-		
-		if (pMode == mmode_Detonator && owner.maidInventory.isItemExplord(owner.getCurrentEquippedItem())) {
-			if (timeSinceIgnited == -1) {
+	public boolean damageEntity(int pMode, DamageSource par1DamageSource, float par2)
+	{
+		if (pMode == mmode_Detonator && owner.maidInventory.isItemExplosive(owner.getCurrentEquippedItem()))
+		{
+			if (timeSinceIgnited == -1)
+			{
 				owner.playSound("random.fuse", 1.0F, 0.5F);
 				owner.getDataWatcher().updateObject(Statics.dataWatch_Free, Integer.valueOf(1));
 			}
@@ -340,6 +347,16 @@ public class Mode_Ripper extends ModeBase {
 		}
 		
 		return false;
+	}
+	@Override
+	public boolean checkItemStack(ItemStack pItemStack)
+	{
+		String ls = owner.getMaidMaster();
+		return (pItemStack.getItem() == Items.sugar
+				||  pItemStack.getItem() instanceof ItemShears
+				|| TriggerSelect.checkItem(ls, "Shears", pItemStack)
+				|| pItemStack.getItem() instanceof ItemCloth
+				|| TriggerSelect.checkItem(ls, "Pickup", pItemStack));
 	}
 
 }

@@ -1,8 +1,8 @@
-package littleMaidMobX.model.maids;import littleMaidMobX.render.model.ModelRenderer;import littleMaidMobX.model.modchu.ModelModchuBaseSR2;public class MultiModel_twinD extends ModelModchuBaseSR2 {
+package littleMaidMobX.model.maids;import littleMaidMobX.model.modchu.ModelModchuBaseSR2;import littleMaidMobX.render.model.ModelRenderer;public class MultiModel_twinD extends ModelModchuBaseSR2 {
 	public ModelRenderer longhearR;
 	public ModelRenderer longhearL;
 	public ModelRenderer kamidomeR;
-	public ModelRenderer kamidomeL;	public MultiModel_twinD() {
+	public ModelRenderer kamidomeL;		public MultiModel_twinD(StringBuilder hack) {		super(hack);	}	public MultiModel_twinD() {
 		this(0.0F);
 	}	public MultiModel_twinD(float f) {
 		this(f, 0.0F);

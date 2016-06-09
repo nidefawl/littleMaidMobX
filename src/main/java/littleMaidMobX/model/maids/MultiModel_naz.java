@@ -1,7 +1,7 @@
 package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.model.modchu.ModelModchuBaseOkota;import littleMaidMobX.render.model.ModelRenderer;public class MultiModel_naz extends ModelModchuBaseOkota {	public ModelRenderer CatEL;
 	public ModelRenderer CatER;
 	public ModelRenderer CatTail;
-	public ModelRenderer Prim;	public MultiModel_naz() {
+	public ModelRenderer Prim;		public MultiModel_naz(StringBuilder hack) {		super(hack);	}	public MultiModel_naz() {
 		this(0.0F);
 	}	public MultiModel_naz(float f) {
 		this(f, 0.0F);

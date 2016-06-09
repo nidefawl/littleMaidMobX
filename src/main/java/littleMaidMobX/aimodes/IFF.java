@@ -12,9 +12,10 @@ import java.util.Map.Entry;
 import java.util.Random;
 import java.util.TreeMap;
 
-import littleMaidMobX.Helper;
 import littleMaidMobX.LittleMaidMobX;
 import littleMaidMobX.entity.EntityLittleMaid;
+import littleMaidMobX.helper.Helper;
+import littleMaidMobX.io.Config;
 import littleMaidMobX.wrapper.MinecraftWrapper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -40,7 +41,8 @@ public class IFF {
 	public static Map<String, Map<String, Integer>> UserIFF = new HashMap<String, Map<String, Integer>>();
 
 	
-	public static Map<String, Integer> getUserIFF(String pUsername) {
+	public static Map<String, Integer> getUserIFF(String pUsername)
+	{
 		if (pUsername == null) {
 			return DefaultIFF;
 		}
@@ -48,8 +50,8 @@ public class IFF {
 			pUsername = "";
 		}
 		
-		if (!UserIFF.containsKey(pUsername)) {
-			
+		if (!UserIFF.containsKey(pUsername))
+		{	
 			if (pUsername.isEmpty()) {
 				UserIFF.put(pUsername, DefaultIFF);
 			} else {
@@ -139,7 +141,7 @@ public class IFF {
 	
 	public static int getIFF(String pUsername, String entityname, World world) {
 		if (entityname == null) {
-			return LittleMaidMobX.cfg_Aggressive ? iff_Enemy : iff_Friendry;
+			return Config.Aggressive ? iff_Enemy : iff_Friendry;
 		}
 		int lt = iff_Enemy;
 		Map<String, Integer> lmap = getUserIFF(pUsername);
@@ -178,7 +180,7 @@ public class IFF {
 	
 	public static int getIFF(String pUsername, Entity entity) {
 		if (entity == null || !(entity instanceof EntityLivingBase)) {
-			return LittleMaidMobX.cfg_Aggressive ? iff_Enemy : iff_Friendry;
+			return Config.Aggressive ? iff_Enemy : iff_Friendry;
 		}
 		String lename = EntityList.getEntityString(entity);
 		String lcname = lename;

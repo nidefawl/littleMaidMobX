@@ -9,6 +9,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAITasks;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -31,6 +32,11 @@ public abstract class ModeBase {
 
 	public int fpriority;
 	
+	/**
+	 * 優先順位。
+	 * 番号が若いほうが先に処理される。
+	 * 下二桁が00のものはシステム予約。
+	 */
 	public abstract int priority();
 
 	
@@ -38,7 +44,8 @@ public abstract class ModeBase {
 	}
 
 	
-	public void initEntity() {
+	public void initEntity()
+	{
 	}
 
 	
@@ -89,9 +96,9 @@ public abstract class ModeBase {
 	}
 	
 	
-	public boolean checkItemStack(ItemStack pItemStack) {
-		
-		return false;
+	public boolean checkItemStack(ItemStack pItemStack)//This is used to determine wether or not a maid is allowed to pick up items.
+	{
+		return (pItemStack.getItem() == Items.sugar);
 	}
 
 	
@@ -110,7 +117,7 @@ public abstract class ModeBase {
 		return false;
 	}
 
-	
+	//What does this do?
 	public boolean checkBlock(int pMode, int px, int py, int pz) {
 		return false;
 	}

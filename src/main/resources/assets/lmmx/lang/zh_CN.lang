@@ -66,6 +66,10 @@ littleMaidMob.mode.Detonator=自爆模式
 littleMaidMob.mode.F-Detonator=自由-自爆模式
 littleMaidMob.mode.D-Detonator=兴奋-自爆模式
 littleMaidMob.mode.T-Detonator=巡逻-自爆模式
+littleMaidMob.mode.Miner=矿工
+littleMaidMob.mode.F-Miner=F-矿工
+littleMaidMob.mode.D-Miner=D-矿工
+littleMaidMob.mode.T-Miner=T-矿工
 
 littleMaidMob.text.Health=健康值
 littleMaidMob.text.AP=装甲值

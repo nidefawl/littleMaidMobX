@@ -3,9 +3,9 @@ package littleMaidMobX.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import littleMaidMobX.ClientHelper;
-import littleMaidMobX.Helper;
 import littleMaidMobX.LittleMaidMobX;
+import littleMaidMobX.helper.ClientHelper;
+import littleMaidMobX.helper.Helper;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;

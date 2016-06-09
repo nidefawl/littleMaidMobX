@@ -1,16 +1,24 @@
 package littleMaidMobX;
 
 import java.io.File;
+import java.util.List;
 
 import littleMaidMobX.aimodes.IFF;
+import littleMaidMobX.aimodes.ModeManager;
 import littleMaidMobX.entity.EntityLittleMaid;
 import littleMaidMobX.gui.GuiCommonHandler;
+import littleMaidMobX.helper.Helper;
 import littleMaidMobX.io.Config;
+import littleMaidMobX.io.FileManager;
+import littleMaidMobX.io.ZipTexturesLoader;
 import littleMaidMobX.item.ItemSpawnEgg;
+import littleMaidMobX.model.loader.Transformer;
 import littleMaidMobX.network.Message;
 import littleMaidMobX.network.NetConstants;
 import littleMaidMobX.network.Network;
 import littleMaidMobX.registry.ModelManager;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.IResourcePack;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,86 +28,41 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.AchievementPage;
+import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.config.Configuration;
+import cpw.mods.fml.client.event.ConfigChangedEvent;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.ObfuscationReflectionHelper;
 import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.ReflectionHelper;
 
 @Mod(	modid = LittleMaidMobX.DOMAIN,
-		name  = LittleMaidMobX.DOMAIN, version = "2")
+		name  = LittleMaidMobX.DOMAIN,
+		version = "9",
+		guiFactory = "littleMaidMobX.gui.LittleMaidMobGuiFactory")
+		
 public class LittleMaidMobX {
 	
 	public static final String DOMAIN = "lmmx";
-
-	public static String[] cfg_comment = {
-		"spawnWeight = Relative spawn weight. The lower the less common. 10=pigs. 0=off",
-		"spawnLimit = Maximum spawn count in the World.",
-		"minGroupSize = Minimum spawn group count.",
-		"maxGroupSize = Maximum spawn group count.",
-		"canDespawn = It will despawn, if it lets things go. ",
-		"checkOwnerName = At local, make sure the name of the owner. ",
-		"antiDoppelganger = Not to survive the doppelganger. ",
-		"enableSpawnEgg = Enable LMM SpawnEgg Recipe. ",
-		"VoiceDistortion = LittleMaid Voice distortion.",
-		"defaultTexture = Default selected Texture Packege. Null is Random",
-		"DebugMessage = Print Debug Massages.",
-		"DeathMessage = Print Death Massages.",
-		"Dominant = Spawn Anywhere.",
-		"Aggressive = true: Will be hostile, false: Is a pacifist",
-		"IgnoreItemList = aaa, bbb, ccc: Items little maid to ignore",
-//		"AchievementID = used Achievement index.(0 = Disable)",
-//		"UniqueEntityId = UniqueEntityId(0 is AutoAssigned. max 255)"
-	};
-	
-//	@MLProp(info="Relative spawn weight. The lower the less common. 10=pigs. 0=off")
-	public static int cfg_spawnWeight = 5;
-//	@MLProp(info="Maximum spawn count in the World.")
-	public static int cfg_spawnLimit = 20;
-//	@MLProp(info="Minimum spawn group count.")
-	public static int cfg_minGroupSize = 1;
-//	@MLProp(info="Maximum spawn group count.")
-	public static int cfg_maxGroupSize = 3;
-//	@MLProp(info="It will despawn, if it lets things go. ")
-	public static boolean cfg_canDespawn = false;
-//	@MLProp(info="At local, make sure the name of the owner. ")
-	public static boolean cfg_checkOwnerName = false;
-//	@MLProp(info="Not to survive the doppelganger. ")
-	public static boolean cfg_antiDoppelganger = true;
-//	@MLProp(info="Enable LMM SpawnEgg Recipe. ")
-	public static boolean cfg_enableSpawnEgg = true;
-	
-	
-//	@MLProp(info="LittleMaid Voice distortion.")
-	public static boolean cfg_VoiceDistortion = true;
-	
-//	@MLProp(info="Default selected Texture Packege. Null is Random")
-	public static String cfg_defaultTexture = "";
-//	@MLProp(info="Print Death Massages.")
-	public static boolean cfg_DeathMessage = true;
-//	@MLProp(info="Spawn Anywhere.")
-	public static boolean cfg_Dominant = false;
-//	@MLProp(info="true: AlphaBlend(request power), false: AlphaTest(more fast)")
-//	public static boolean AlphaBlend = true;
-//	@MLProp(info="true: Will be hostile, false: Is a pacifist")
-	public static boolean cfg_Aggressive = true;
-	public static String cfg_IgnoreItemList = "arsmagica2";
+	public static final String VERSION = "1.4.3";
 
 	public static Achievement ac_Contract;
-	public static boolean cfg_isModelAlphaBlend = true;
-
-	public static boolean isDebugMessage = true;
-	public static boolean isDebugModels = false;
-	public static boolean isModelAlphaBlend = true;
 	
-	public static void Debug(String pText, Object... pData) {
-		if (isDebugMessage) {
+	public static void Debug(String pText, Object... pData)
+	{
+		if (Config.isDebugMessage)
+		{
 			// TODO: use Logger class instead with proper names and a way to enable/disable (one logger for sound, one for AI, one for models, etc)
 //			if (pText.contains("Sound")) { 
 //				return;
@@ -107,21 +70,24 @@ public class LittleMaidMobX {
 //			if (pText.contains("daytime")) { 
 //				return;
 //			}
-//			System.out.println(String.format("MMMLib-" + pText, pData));
+			System.out.println(String.format("MMMLib-" + pText, pData));
 		}
 	}
-	public static void DebugModel(String string) {
+	public static void DebugModel(String string)
+	{
 		System.out.println("LMM Models: " + string);
 	}
-	public static void Debug(boolean isRemote, String pText, Object... pData) {
-		if (isDebugMessage) {
-//			System.out.println(String.format("["+(isRemote? "Client":"Server")+"]MMMLib-" + pText, pData));
+	public static void Debug(boolean isRemote, String pText, Object... pData)
+	{
+		if (Config.isDebugMessage)
+		{
+			System.out.println(String.format("["+(isRemote? "Client":"Server")+"]MMMLib-" + pText, pData));
 		}
 	}
 	
 	@SidedProxy(
 			clientSide = "littleMaidMobX.ProxyClient",
-			serverSide = "littleMaidMobX.ProxyCommon")
+			serverSide = "littleMaidMobX.ProxyServer")
 	public static ProxyCommon proxy;
 
 	@Instance(DOMAIN)
@@ -133,8 +99,9 @@ public class LittleMaidMobX {
 
 	public static boolean isForge = true;
 
-	public String getName() {
-		return "littleMaidMobX";
+	public String getName()
+	{
+		return "littleMaidMobEnhanced";
 	}
 
 	public String getPriorities() {
@@ -142,55 +109,50 @@ public class LittleMaidMobX {
 		return "required-after:mod_MMM_MMMLib";
 	}
 
-	public String getVersion() {
-		return "1.7.2-x";
+	public String getVersion()
+	{
+		return "1.7.10-E";
 	}
 
 	
 	@EventHandler
-	public void PreInit(FMLPreInitializationEvent evt)
+	public void PreInit(FMLPreInitializationEvent event)
 	{
-		{
-
-			File configFile = evt.getSuggestedConfigurationFile();
-			Configuration lconf = new Configuration(configFile);
-			lconf.load();
-			isDebugMessage		= true;//lconf.get("MMMLib", "isDebugMessage", false).getBoolean(false);
-			isModelAlphaBlend	= lconf.get("MMMLib", "isModelAlphaBlend", true).getBoolean(true);
-			cfg_isModelAlphaBlend = isModelAlphaBlend;
-			
-			lconf.save();
-			
-
-			ModelManager.instance.loadTextures();
-			if (Helper.isClient) {
-//				MMM_TextureManager.loadTextures();
-				Debug("Localmode: InitTextureList.");
-				ModelManager.instance.initTextureList(true);
-			} else {
-				ModelManager.instance.loadTextureServer();
-			}
-		}
-		Config.init();
+		FileManager.init();
+		Transformer.isEnable = true;
+		Config.init(event);
+		Config.checkConfig();
 		
+		//ZipTextureLoader.run();
+		ModelManager.instance.init();
+		proxy.loadTextures();
+		
+		if (Helper.isClient)
+		{
+//			MMM_TextureManager.loadTextures();
+			Debug("Localmode: InitTextureList.");
+			ModelManager.instance.initTextureList(true);
+		}
+		else
+		{
+			ModelManager.instance.loadTextureServer();
+		}
 		
 //		MMM_Helper.checkRevision("6");
-		Config.checkConfig(this.getClass());
+		//Config.checkConfig(this.getClass());
 		
-		cfg_defaultTexture = cfg_defaultTexture.trim();
+		Config.defaultTexture = Config.defaultTexture.trim();
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiCommonHandler());
-		
 
-		EntityRegistry.registerModEntity(EntityLittleMaid.class, "LittleMaidX", 0, instance, 80, 3, true);
-
-		
+		EntityRegistry.registerModEntity(EntityLittleMaid.class, "LittleMaid", 0, instance, 80, 3, true);		
 		
 		spawnEgg = new ItemSpawnEgg();
 		spawnEgg.setUnlocalizedName(DOMAIN + ":spawn_lmmx_egg");
 		spawnEgg.setTextureName(DOMAIN + ":spawn_lmmx_egg");
 		GameRegistry.registerItem(spawnEgg, "spawn_lmmx_egg");
-		if (cfg_enableSpawnEgg) {
+		if (Config.cfg_enableSpawnEgg)
+		{
 			
 			GameRegistry.addRecipe(new ItemStack(spawnEgg, 1), new Object[] {
 				"scs",
@@ -203,81 +165,161 @@ public class LittleMaidMobX {
 			});
 		}
 		
+		//Achievment Stuff
 		ac_Contract = new Achievement("achievement.contract", "contract", 0, 0, Items.cake, null).initIndependentStat().registerStat();
 		Achievement[] achievements = new Achievement[] { ac_Contract };
-		AchievementPage.registerAchievementPage(new AchievementPage("LittleMaidX", achievements));
+		AchievementPage.registerAchievementPage(new AchievementPage("LittleMaidMob", achievements));
 
-		if (Helper.isClient) {
-			
-			
-			
-			
+		ModeManager.init();
+		
+		/*if (Helper.isClient)
+		{
 			proxy.init();
-		}
-		
-		
+		}*/
 		
 		Network.init(DOMAIN);
 
-		
 		proxy.loadSounds();
 		
-//		Debug("GUID-sneak: %s", LMM_EntityLittleMaid.maidUUIDSneak.toString());
+		//Debug("GUID-sneak: %s", LMM_EntityLittleMaid.maidUUIDSneak.toString());
 
 	}
+	
+	@Mod.EventHandler
+	public void init(FMLInitializationEvent event)
+	{
+		if (Helper.isClient)
+		{
+			List<IResourcePack> defaultResourcePacks = ObfuscationReflectionHelper.getPrivateValue(Minecraft.class, Minecraft.getMinecraft(), "defaultResourcePacks", "field_110449_ao");
+			defaultResourcePacks.add(new ZipTexturesLoader());
+			
+			proxy.init();
+		}
+		FMLCommonHandler.instance().bus().register(instance);
+	}
+	
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent evt)
 	{
 		
 		// "aaa, bbb,ccc  " -> "aaa" "bbb" "ccc"
-		ignoreItemList = cfg_IgnoreItemList.trim().split("\\s*,\\s*");
+		ignoreItemList = Config.IgnoreItemList.trim().split("\\s*,\\s*");
 		
 		MinecraftForge.EVENT_BUS.register(new EventHook());
 		
 		
 		ModelManager.instance.setDefaultTexture(EntityLittleMaid.class, ModelManager.instance.getTextureBox("default_Orign"));
 		
-		// Dominant
-		BiomeGenBase[] biomeList = null;
-		if(cfg_spawnWeight > 0) {
-			if (cfg_Dominant)
+		//Determine Biomes to generate in (There has to be a better way)
+		if (Config.spawnWeight > 0)
+		{
+			if (Config.Dominant)
 			{
-				biomeList = BiomeGenBase.getBiomeGenArray();
+				BiomeGenBase[] biomeList = BiomeGenBase.getBiomeGenArray();
+				for(BiomeGenBase biome : biomeList)
+				{
+					if(biome!=null)
+					{
+						EntityRegistry.addSpawn(EntityLittleMaid.class, Config.spawnWeight, Config.minGroupSize, Config.maxGroupSize, EnumCreatureType.creature, biome);
+						Debug("Registering spawn in " + biome.biomeName);
+					}
+				}
 			}
 			else
 			{
-				
-				biomeList = new BiomeGenBase[]{
-						BiomeGenBase.desert,
-						BiomeGenBase.plains,
-						BiomeGenBase.savanna,
-						BiomeGenBase.mushroomIsland,
-						BiomeGenBase.forest,
-						BiomeGenBase.birchForest,
-						BiomeGenBase.swampland,
-						BiomeGenBase.taiga,
-				};
-			}
-			for(BiomeGenBase biome : biomeList)
-			{
-				if(biome!=null)
+				BiomeGenBase[] biomeList = BiomeGenBase.getBiomeGenArray();
+				for(BiomeGenBase biome : biomeList)
 				{
-					EntityRegistry.addSpawn(EntityLittleMaid.class,
-							cfg_spawnWeight, cfg_minGroupSize, cfg_maxGroupSize, EnumCreatureType.creature, biome);
+					if(biome!=null &&(
+						!BiomeDictionary.isBiomeOfType(biome, Type.OCEAN) &&
+						!BiomeDictionary.isBiomeOfType(biome, Type.MOUNTAIN) &&
+						!BiomeDictionary.isBiomeOfType(biome, Type.HILLS) &&
+						!BiomeDictionary.isBiomeOfType(biome, Type.RIVER) &&
+						!BiomeDictionary.isBiomeOfType(biome, Type.MAGICAL) &&
+						!BiomeDictionary.isBiomeOfType(biome, Type.END) &&
+						!BiomeDictionary.isBiomeOfType(biome, Type.NETHER) &&
+						!BiomeDictionary.isBiomeOfType(biome, Type.JUNGLE) &&
+						!BiomeDictionary.isBiomeOfType(biome, Type.DEAD) &&
+						!BiomeDictionary.isBiomeOfType(biome, Type.SPOOKY) &&
+						!BiomeDictionary.isBiomeOfType(biome, Type.MESA)
+						))
+						{
+							if(BiomeDictionary.isBiomeOfType(biome, Type.HOT)||
+								BiomeDictionary.isBiomeOfType(biome, Type.COLD)||
+								BiomeDictionary.isBiomeOfType(biome, Type.WET)||
+								BiomeDictionary.isBiomeOfType(biome, Type.DRY)||								
+								BiomeDictionary.isBiomeOfType(biome, Type.SAVANNA)||
+								BiomeDictionary.isBiomeOfType(biome, Type.CONIFEROUS)||								
+								BiomeDictionary.isBiomeOfType(biome, Type.LUSH)||
+								BiomeDictionary.isBiomeOfType(biome, Type.MUSHROOM)||							
+								BiomeDictionary.isBiomeOfType(biome, Type.FOREST)||
+								BiomeDictionary.isBiomeOfType(biome, Type.PLAINS)||
+								BiomeDictionary.isBiomeOfType(biome, Type.SANDY)||
+								BiomeDictionary.isBiomeOfType(biome, Type.SNOWY)||
+								BiomeDictionary.isBiomeOfType(biome, Type.BEACH));
+							{
+								EntityRegistry.addSpawn(EntityLittleMaid.class, Config.spawnWeight, Config.minGroupSize, Config.maxGroupSize, EnumCreatureType.creature, biome);
+								System.out.println("Registering spawn in " + biome.biomeName);
+								Debug("Registering maids to spawn in " + biome.biomeName);
+					}
 				}
 			}
+			/* Original Spawning:
+				X:
+			 		desert,
+					plains,
+					savanna,
+					mushroomIsland,
+					forest,
+					birchForest,
+					swampland,
+					taiga,
+				NX:
+					icePlains
+			 */
+			}
 		}
-		
-		
-		
-
-		
+		ModeManager.loadEntityMode();
+		ModeManager.showLoadedModes();
 		
 		IFF.loadIFFs();
 	}
 	
-
+	@Mod.EventHandler
+	public void loaded(FMLPostInitializationEvent pEvent) {
+//		EzRecipes.init();
+		// 
+//		GunsBase.initAppend();
+		
+		Transformer.isEnable = true;
+//		MultiModelManager.instance.execute();
+		
+		// TODO test
+		List<File> llist = FileManager.getAllmodsFiles(FileManager.COMMON_CLASS_LOADER, true);
+		for (File lf : llist) {
+			Debug("targetFiles: %s", lf.getAbsolutePath());
+		}
+		
+		
+		try {
+			Class<?> lc = ReflectionHelper.getClass(FileManager.COMMON_CLASS_LOADER, "net.minecraft.entity.EntityLivingBase");
+			Debug("test-getClass: %s", lc.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	@SubscribeEvent
+	public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent eventArgs)
+	{
+		if(eventArgs.modID.equals(LittleMaidMobX.DOMAIN))
+		{
+			Config.syncConfig();
+			Config.saveConfig();
+		}
+	}
 	
 	private static String ignoreItemList[] = new String[]{};
 
@@ -309,19 +351,25 @@ public class LittleMaidMobX {
 		if ((lmode & 0x80) != 0) {
 			leid = Helper.getInt(var2.data, 1);
 			lentity = Helper.getEntity(var2.data, 1, playerEntity.worldObj);
-			if (lentity == null) return;
+			if (lentity == null) {
+//				System.out.println("lentity == null");
+				return;
+			}
 		}
 		Debug("MMM|Upd Srv Call[%2x:%d].", lmode, leid);
 //		byte[] ldata;
 		
 		switch (lmode) {
 		case NetConstants.Server_SetTexturePackIndex:
+//			System.out.println("SetTexturePackIndex");
 			ModelManager.instance.reciveFromClientSetTexturePackIndex(lentity, var2.data);
 			break;
 		case NetConstants.Server_GetTextureIndex:
 			ModelManager.instance.reciveFromClientGetTexturePackIndex(playerEntity, var2.data);
+//			System.out.println("GetTextureIndex");
 			break;
 		case NetConstants.Server_GetTexturePackName:
+//			System.out.println("GetTexturePackName");
 			ModelManager.instance.reciveFromClientGetTexturePackName(playerEntity, var2.data);
 			break;
 		}
@@ -329,6 +377,7 @@ public class LittleMaidMobX {
 
 	public static void sendToClient(EntityPlayer player, byte[] ldata)
 	{
+//		System.out.println("SendToClient");
 		Network.sendPacketToPlayer(1, player, ldata);
 	}
 

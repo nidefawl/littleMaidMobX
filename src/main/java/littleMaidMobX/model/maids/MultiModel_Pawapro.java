@@ -9,7 +9,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 	public ModelRenderer eyeRFire;
 	public ModelRenderer eyeLFire;
 	public ModelRenderer Logo1;
-	public ModelRenderer Logo2;	public MultiModel_Pawapro() {
+	public ModelRenderer Logo2;		public MultiModel_Pawapro(StringBuilder hack) {		super(hack);	}	public MultiModel_Pawapro() {
 		this(0.0F);
 	}	public MultiModel_Pawapro(float f) {
 		this(f, 0.0F);

@@ -1,3 +1,12 @@
-/*
-!/.gitignore
-!/src
+.gradle/
+bin
+run/
+eclipse/
+src_/
+
+
+ModelRenderer.cc.java
+.classpath
+.settings/
+.project
+Thumbs.db

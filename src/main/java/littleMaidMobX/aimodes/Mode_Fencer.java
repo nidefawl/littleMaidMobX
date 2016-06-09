@@ -1,22 +1,19 @@
 package littleMaidMobX.aimodes;
 
-import littleMaidMobX.Helper;
 import littleMaidMobX.ai.AIHurtByTarget;
 import littleMaidMobX.ai.AINearestAttackableTarget;
 import littleMaidMobX.entity.EntityLittleMaid;
+import littleMaidMobX.helper.Helper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAITasks;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 
 
 public class Mode_Fencer extends ModeBase {
-	static {
-		TriggerSelect.appendTriggerItem(null, "Sword", "");
-		TriggerSelect.appendTriggerItem(null, "Axe", "");
-	}
 
 	public static final int mmode_Fencer		= 0x0080;
 	public static final int mmode_Bloodsucker	= 0x00c0;
@@ -24,15 +21,20 @@ public class Mode_Fencer extends ModeBase {
 
 	public Mode_Fencer(EntityLittleMaid pEntity) {
 		super(pEntity);
+		TriggerSelect.appendTriggerItem(null, "Sword", "");
+		TriggerSelect.appendTriggerItem(null, "Axe", "");
 	}
 
 	@Override
-	public int priority() {
+	public int priority()
+	{
 		return 3000;
 	}
 
 	@Override
-	public void init() {
+	public void init()
+	{
+		
 	}
 
 	@Override
@@ -65,10 +67,10 @@ public class Mode_Fencer extends ModeBase {
 	public boolean changeMode(EntityPlayer pentityplayer) {
 		ItemStack litemstack = owner.maidInventory.getStackInSlot(0);
 		if (litemstack != null) {
-			if (litemstack.getItem() instanceof ItemSword || TriggerSelect.checkWeapon(owner.getMaidMaster(), "Sword", litemstack)) {
+			if (litemstack.getItem() instanceof ItemSword || TriggerSelect.checkItem(owner.getMaidMaster(), "Sword", litemstack)) {
 				owner.setMaidMode("Fencer");
 				return true;
-			} else  if (litemstack.getItem() instanceof ItemAxe || TriggerSelect.checkWeapon(owner.getMaidMaster(), "Axe", litemstack)) {
+			} else  if (litemstack.getItem() instanceof ItemAxe || TriggerSelect.checkItem(owner.getMaidMaster(), "Axe", litemstack)) {
 				owner.setMaidMode("Bloodsucker");
 				return true;
 			}
@@ -109,7 +111,7 @@ public class Mode_Fencer extends ModeBase {
 				if (litemstack == null) continue;
 				
 				
-				if (litemstack.getItem() instanceof ItemSword || TriggerSelect.checkWeapon(owner.getMaidMaster(), "Sword", litemstack)) {
+				if (litemstack.getItem() instanceof ItemSword || TriggerSelect.checkItem(owner.getMaidMaster(), "Sword", litemstack)) {
 					return li;
 				}
 				
@@ -131,8 +133,8 @@ public class Mode_Fencer extends ModeBase {
 				litemstack = owner.maidInventory.getStackInSlot(li);
 				if (litemstack == null) continue;
 				
-				
-				if (litemstack.getItem() instanceof ItemAxe || TriggerSelect.checkWeapon(owner.getMaidMaster(), "Axe", litemstack)) {
+				if (litemstack.getItem() instanceof ItemAxe || TriggerSelect.checkItem(owner.getMaidMaster(), "Axe", litemstack))
+				{
 					return li;
 				}
 				
@@ -155,9 +157,15 @@ public class Mode_Fencer extends ModeBase {
 	}
 
 	@Override
-	public boolean checkItemStack(ItemStack pItemStack) {
-		
-		return pItemStack.getItem() instanceof ItemSword || pItemStack.getItem() instanceof ItemAxe;
+	public boolean checkItemStack(ItemStack pItemStack)
+	{
+		String ls = owner.getMaidMaster();
+		return (pItemStack.getItem() == Items.sugar
+				|| pItemStack.getItem() instanceof ItemSword
+				|| TriggerSelect.checkItem(ls, "Sword", pItemStack)
+				|| pItemStack.getItem() instanceof ItemAxe
+				|| TriggerSelect.checkItem(ls, "Axe", pItemStack)
+				|| TriggerSelect.checkItem(ls, "Pickup", pItemStack));
 	}
 
 }

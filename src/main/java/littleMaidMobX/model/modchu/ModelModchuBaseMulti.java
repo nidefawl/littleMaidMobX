@@ -1,4 +1,4 @@
-package littleMaidMobX.model.modchu;import littleMaidMobX.Helper;import littleMaidMobX.LittleMaidMobX;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.render.model.ModelBoxPlate;import littleMaidMobX.render.model.ModelRenderer;public class ModelModchuBaseMulti extends ModelModchuBaseSkirt {	public ModelRenderer ChignonR;
+package littleMaidMobX.model.modchu;import littleMaidMobX.helper.Helper;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.render.model.ModelBoxPlate;import littleMaidMobX.render.model.ModelRenderer;public class ModelModchuBaseMulti extends ModelModchuBaseSkirt {	public ModelRenderer ChignonR;
 	public ModelRenderer ChignonL;
 	public ModelRenderer ChignonB;
 	public ModelRenderer Tail;
@@ -9,7 +9,7 @@ package littleMaidMobX.model.modchu;import littleMaidMobX.Helper;import littl
 	public ModelRenderer SkirtFront;
 	public ModelRenderer SkirtRight;
 	public ModelRenderer SkirtLeft;
-	public ModelRenderer SkirtBack;	public ModelModchuBaseMulti() {
+	public ModelRenderer SkirtBack;		public ModelModchuBaseMulti(StringBuilder hack) {		super(hack);	}	public ModelModchuBaseMulti() {
 		this(0.0F);
 	}	public ModelModchuBaseMulti(float f) {
 		this(f, 0.0F);
@@ -17,7 +17,7 @@ package littleMaidMobX.model.modchu;import littleMaidMobX.Helper;import littl
 		this(f, f1, 64, 32);
 	}	public ModelModchuBaseMulti(float f, float f1, int i, int j) {
 		super(f, f1, i < 0 ? 64 : i, j < 0 ? 32 : j);
-	}	@Override
+	}		@Override	public void initModel(float f, float f1)	{		initModel(f, f1, true);	}	
 	public void initModel(float f, float f1, boolean isAfterInit) {
 		bipedCloak = new ModelRenderer(this, "bipedCloak");
 		bipedEars = new ModelRenderer(this, "bipedEars");

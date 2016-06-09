@@ -1,18 +1,26 @@
 package littleMaidMobX.gui;
 
+import java.util.Iterator;
 import java.util.List;
 
-import littleMaidMobX.ClientHelper;
-import littleMaidMobX.Helper;
 import littleMaidMobX.LittleMaidMobX;
 import littleMaidMobX.aimodes.TriggerSelect;
+import littleMaidMobX.helper.ClientHelper;
+import littleMaidMobX.helper.Helper;
 import littleMaidMobX.inventory.ContainerTriggerSelect;
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.gui.inventory.GuiContainerCreative;
+import net.minecraft.client.settings.GameSettings;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -23,15 +31,16 @@ public class GuiTriggerSelect extends GuiContainer {
 
 	protected float scrolleWeaponset;
 	protected float scrolleContainer;
+	private GuiTextField searchField;
 	private static InventoryBasic inventory1 = new InventoryBasic("tmpsel", false, 40);
 	private static InventoryBasic inventory2 = new InventoryBasic("tmpwep", false, 32);
 	private int lastX;
 	private int lastY;
-	private boolean ismousePress;
+	private boolean isMousePress;
 	private int isScrolled;
 	public GuiIFF owner;
 	private GuiButton[] guiButton = new GuiButton[3];
-	private ContainerTriggerSelect inventoryTrigger;
+	private ContainerTriggerSelect containerTrigger;
 	private int selectPage;
 	protected EntityPlayer target;
 	protected static final ResourceLocation fguiTex =
@@ -42,14 +51,14 @@ public class GuiTriggerSelect extends GuiContainer {
 		super(new ContainerTriggerSelect(entityplayer));
 		ySize = 216;
 		owner = guiowner;
-		inventoryTrigger = (ContainerTriggerSelect) inventorySlots;
+		containerTrigger = (ContainerTriggerSelect) inventorySlots;
 		target = entityplayer;
+		
 	}
 
 	@Override
 	public void initGui() {
 		super.initGui();
-
 		guiButton[0] = new GuiButton(100, guiLeft + 7, guiTop + 193, 20, 20, "<");
 		guiButton[1] = new GuiButton(101, guiLeft + 35, guiTop + 193, 106, 20, TriggerSelect.selector.get(0));
 		guiButton[2] = new GuiButton(102, guiLeft + 149, guiTop + 193, 20, 20, ">");
@@ -58,14 +67,99 @@ public class GuiTriggerSelect extends GuiContainer {
 		buttonList.add(guiButton[2]);
 		guiButton[1].enabled = false;
 		selectPage = 0;
+		searchField = new GuiTextField(fontRendererObj, guiLeft + 82, guiTop + 6, 89, fontRendererObj.FONT_HEIGHT);
+		searchField.setMaxStringLength(15);
+        searchField.setEnableBackgroundDrawing(false);
+        searchField.setVisible(false);
+        searchField.setTextColor(16777215);
 	}
 
 	@Override
-	protected void keyTyped(char c, int i) {
-		if (i == 1) {
+	protected void keyTyped(char c, int i)
+	{
+		if (i == 1)
+		{
 			mc.displayGuiScreen(owner);
 		}
-	}
+        else
+        {
+            if (isMousePress)
+            {
+                isMousePress = false;
+                searchField.setText("");
+            }
+
+            if (!this.checkHotbarKeys(i))
+            {
+                if (this.searchField.textboxKeyTyped(c, i))
+                {
+                    this.updateSearch();
+                }
+                else
+                {
+                    super.keyTyped(c, i);
+                }
+            }
+        }
+    }
+
+    private void updateSearch()
+    {
+    	ContainerTriggerSelect containerTrigger = (ContainerTriggerSelect)inventorySlots;
+        containerTrigger.itemList.clear();
+
+        Iterator iterator = Item.itemRegistry.iterator();
+
+        while (iterator.hasNext())
+        {
+            Item item = (Item)iterator.next();
+
+            if (item != null)
+            {
+                item.getSubItems(item, (CreativeTabs)null, containerTrigger.itemList);
+            }
+        }
+        updateFilteredItems(containerTrigger);
+    }
+    
+    private void updateFilteredItems(ContainerTriggerSelect containerTrigger2)
+    {
+        Iterator iterator = containerTrigger2.itemList.iterator();
+        String s1 = this.searchField.getText().toLowerCase();
+
+        while (iterator.hasNext())
+        {
+            ItemStack itemstack = (ItemStack)iterator.next();
+            boolean flag = false;
+            Iterator iterator1 = itemstack.getTooltip(this.mc.thePlayer, this.mc.gameSettings.advancedItemTooltips).iterator();
+
+            while (true)
+            {
+                if (iterator1.hasNext())
+                {
+                    String s = (String)iterator1.next();
+
+                    if (!s.toLowerCase().contains(s1))
+                    {
+                        continue;
+                    }
+
+                    flag = true;
+                }
+
+                if (!flag)
+                {
+                    iterator.remove();
+                }
+
+                break;
+            }
+        }
+
+        this.scrolleContainer = 0.0F;
+        containerTrigger2.scrollTo(0.0F);
+    }
+
 
 	@Override
 	public void onGuiClosed() {
@@ -98,12 +192,14 @@ public class GuiTriggerSelect extends GuiContainer {
 		}
 		String ls = TriggerSelect.selector.get(selectPage);
 		guiButton[1].displayString = ls;
-		inventoryTrigger.setWeaponSelect(Helper.getPlayerName(target), ls);
-		inventoryTrigger.setWeaponlist(0.0F);
+		containerTrigger.setWeaponSelect(Helper.getPlayerName(target), ls);
+		containerTrigger.setWeaponlist(0.0F);
 	}
 
 	@Override
-	protected void handleMouseClick(Slot slot, int i, int j, int flag) {
+	protected void handleMouseClick(Slot slot, int i, int j, int flag)
+	{
+		isMousePress = true;
 		boolean var5 = flag == 1;
 		flag = i == -999 && flag == 0 ? 4 : flag;
 		if (slot != null) {
@@ -149,7 +245,7 @@ public class GuiTriggerSelect extends GuiContainer {
 		int i = Mouse.getEventDWheel();
 		if (i != 0) {
 			if (lastY < height / 2) {
-				int j = (inventoryTrigger.itemList.size() / 8 - 5) + 1;
+				int j = (containerTrigger.itemList.size() / 8 - 5) + 1;
 				if (i > 0) {
 					i = 1;
 				}
@@ -163,9 +259,9 @@ public class GuiTriggerSelect extends GuiContainer {
 				if (scrolleContainer > 1.0F) {
 					scrolleContainer = 1.0F;
 				}
-				inventoryTrigger.scrollTo(scrolleContainer);
+				containerTrigger.scrollTo(scrolleContainer);
 			} else {
-				int j = (inventoryTrigger.weaponSelect.size() / 8 - 4) + 1;
+				int j = (containerTrigger.weaponSelect.size() / 8 - 4) + 1;
 				if (i > 0) {
 					i = 1;
 				}
@@ -183,7 +279,7 @@ public class GuiTriggerSelect extends GuiContainer {
 				if (scrolleWeaponset > 1.0F) {
 					scrolleWeaponset = 1.0F;
 				}
-				inventoryTrigger.setWeaponlist(scrolleWeaponset);
+				containerTrigger.setWeaponlist(scrolleWeaponset);
 			}
 		}
 	}
@@ -202,7 +298,7 @@ public class GuiTriggerSelect extends GuiContainer {
 		if (!flag) {
 			isScrolled = 0;
 		}
-		if (!ismousePress && flag && i >= i1 && j >= j1 && i < k1 && j < l1) {
+		if (!isMousePress && flag && i >= i1 && j >= j1 && i < k1 && j < l1) {
 			isScrolled = 1;
 		}
 		if (isScrolled == 1) {
@@ -213,11 +309,11 @@ public class GuiTriggerSelect extends GuiContainer {
 			if (scrolleContainer > 1.0F) {
 				scrolleContainer = 1.0F;
 			}
-			inventoryTrigger.scrollTo(scrolleContainer);
+			containerTrigger.scrollTo(scrolleContainer);
 		}
 		j1 = l + 120;
 		l1 = j1 + 72;
-		if (!ismousePress && flag && i >= i1 && j >= j1 && i < k1 && j < l1) {
+		if (!isMousePress && flag && i >= i1 && j >= j1 && i < k1 && j < l1) {
 			isScrolled = 2;
 		}
 		if (isScrolled == 2) {
@@ -228,22 +324,23 @@ public class GuiTriggerSelect extends GuiContainer {
 			if (scrolleWeaponset > 1.0F) {
 				scrolleWeaponset = 1.0F;
 			}
-			inventoryTrigger.setWeaponlist(scrolleWeaponset);
+			containerTrigger.setWeaponlist(scrolleWeaponset);
 		}
-		ismousePress = flag;
+		isMousePress = flag;
 		super.drawScreen(i, j, f);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		GL11.glDisable(2896 /* GL_LIGHTING */);
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float f, int i, int j) {
+	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
+	{
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		ClientHelper.setTexture(fguiTex);
 		int l = guiLeft;
 		int i1 = guiTop;
 		drawTexturedModalRect(l, i1, 0, 0, xSize, ySize);
-
+		
 		int j1 = l + 155;
 		int k1 = i1 + 17;
 		int l1 = k1 + 88 + 2;
@@ -255,13 +352,14 @@ public class GuiTriggerSelect extends GuiContainer {
 		drawTexturedModalRect(l + 154,
 				i1 + 120 + (int) ((float) (l1 - k1 - 35) * scrolleWeaponset),
 				176, 0, 16, 16);
+		searchField.drawTextBox();
 	}
 
 	private void setItemList() {
-		List list1 = inventoryTrigger.getItemList();
+		List list1 = containerTrigger.getItemList();
 		list1.clear();
-		for (int i = 0; i < inventoryTrigger.weaponSelect.size(); i++) {
-			ItemStack is = inventoryTrigger.weaponSelect.get(i);
+		for (int i = 0; i < containerTrigger.weaponSelect.size(); i++) {
+			ItemStack is = containerTrigger.weaponSelect.get(i);
 			if (is != null && !list1.contains(is.getItem())) {
 				list1.add(is.getItem());
 			}
@@ -275,5 +373,6 @@ public class GuiTriggerSelect extends GuiContainer {
 	public static InventoryBasic getInventory2() {
 		return inventory2;
 	}
-
+	
+	
 }

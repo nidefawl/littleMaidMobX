@@ -18,10 +18,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class Mode_Archer extends ModeBase {
-	static {
-		TriggerSelect.appendTriggerItem(null, "Bow", "");
-		TriggerSelect.appendTriggerItem(null, "Arrow", "");
-	}
 
 	public static final int mmode_Archer		= 0x0083;
 	public static final int mmode_Blazingstar	= 0x00c3;
@@ -34,10 +30,14 @@ public class Mode_Archer extends ModeBase {
 
 	public Mode_Archer(EntityLittleMaid pEntity) {
 		super(pEntity);
+		TriggerSelect.appendTriggerItem(null, "Bow", "");
+		TriggerSelect.appendTriggerItem(null, "Arrow", "");
 	}
 
 	@Override
-	public void init() {
+	public void init()
+	{
+
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class Mode_Archer extends ModeBase {
 	public boolean changeMode(EntityPlayer pentityplayer) {
 		ItemStack litemstack = owner.maidInventory.getStackInSlot(0);
 		if (litemstack != null) {
-			if (litemstack.getItem() instanceof ItemBow || TriggerSelect.checkWeapon(owner.getMaidMaster(), "Bow", litemstack)) {
+			if (litemstack.getItem() instanceof ItemBow || TriggerSelect.checkItem(owner.getMaidMaster(), "Bow", litemstack)) {
 				if (owner.maidInventory.getInventorySlotContainItem(ItemFlintAndSteel.class) > -1) {
 					owner.setMaidMode("Blazingstar");
 				} else {
@@ -106,29 +106,34 @@ public class Mode_Archer extends ModeBase {
 		ItemStack litemstack;
 
 		
-		switch (pMode) {
+		switch (pMode)
+		{
 		case mmode_Archer :
 		case mmode_Blazingstar :
-			for (li = 0; li < owner.maidInventory.maxInventorySize; li++) {
+			for (li = 0; li < owner.maidInventory.maxInventorySize; li++)
+			{
 				litemstack = owner.maidInventory.getStackInSlot(li);
 				if (litemstack == null) continue;
-
 				
-				if (litemstack.getItem() instanceof ItemBow || TriggerSelect.checkWeapon(owner.getMaidMaster(), "Bow", litemstack)) {
+				if (litemstack.getItem() instanceof ItemBow || TriggerSelect.checkItem(owner.getMaidMaster(), "Bow", litemstack))
+				{
 					return li;
 				}
 			}
 			break;
 		}
-
 		return -1;
 	}
 	
 	@Override
 	public boolean checkItemStack(ItemStack pItemStack) {
 		String ls = owner.getMaidMaster();
-		return (pItemStack.getItem() instanceof ItemBow) || (pItemStack.getItem() == Items.arrow) 
-				|| TriggerSelect.checkWeapon(ls, "Bow", pItemStack) || TriggerSelect.checkWeapon(ls, "Arrow", pItemStack);
+		return (pItemStack.getItem() == Items.sugar
+				|| pItemStack.getItem() instanceof ItemBow
+				|| pItemStack.getItem() == Items.arrow
+				|| TriggerSelect.checkItem(ls, "Bow", pItemStack)
+				|| TriggerSelect.checkItem(ls, "Arrow", pItemStack)
+				|| TriggerSelect.checkItem(ls, "Pickup", pItemStack));
 	}
 
 	@Override

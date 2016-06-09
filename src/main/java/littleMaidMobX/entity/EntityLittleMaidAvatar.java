@@ -27,8 +27,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.player.AttackEntityEvent;
 
 
 
@@ -692,9 +690,10 @@ public class EntityLittleMaidAvatar extends EntityPlayer {
 		if (isSwingInProgress) avatar.setSwinging(EnumSound.Null);
 	}
 
-	protected void damageArmor(float par1){
+	/*protected void damageArmor(float par1)
+	{
 		super.damageArmor(par1);
-	}
+	}*/
 	
 	public float applyArmorCalculations(DamageSource par1DamageSource, float par2)
 	{
@@ -706,9 +705,9 @@ public class EntityLittleMaidAvatar extends EntityPlayer {
 		return super.applyPotionDamageCalculations(par1DamageSource, par2);
 	}
 
-	public void damageEntity(DamageSource par1DamageSource, float par2)
+	/*public void damageEntity(DamageSource par1DamageSource, float par2)
 	{
 		super.damageEntity(par1DamageSource, par2);
-	}
+	}*/
 	
 }

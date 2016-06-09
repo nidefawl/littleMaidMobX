@@ -1,7 +1,7 @@
 package littleMaidMobX.render;
 
-import littleMaidMobX.ClientHelper;
-import littleMaidMobX.LittleMaidMobX;
+import littleMaidMobX.helper.ClientHelper;
+import littleMaidMobX.io.Config;
 import littleMaidMobX.model.caps.IModelCaps;
 import littleMaidMobX.render.model.ModelMCArmor;
 import littleMaidMobX.render.model.ModelMCMain;
@@ -26,10 +26,10 @@ public class RenderModelMulti extends RenderLiving {
 	public RenderModelMulti(float pShadowSize) {
 		super(null, pShadowSize);
 		modelFATT = new ModelMCArmor(this);
-		modelFATT.isModelAlphablend = LittleMaidMobX.cfg_isModelAlphaBlend;
+		modelFATT.isModelAlphablend = Config.isModelAlphaBlend;
 		modelFATT.isRendering = true;
 		modelMain = new ModelMCMain(this);
-		modelMain.isModelAlphablend = LittleMaidMobX.cfg_isModelAlphaBlend;
+		modelMain.isModelAlphablend = Config.isModelAlphaBlend;
 		modelMain.capsLink = modelFATT;
 		mainModel = modelMain;
 		setRenderPassModel(modelFATT);

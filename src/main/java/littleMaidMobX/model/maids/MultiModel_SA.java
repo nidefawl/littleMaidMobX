@@ -29,7 +29,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 	public ModelRenderer Cheek_R;
 	public ModelRenderer Cheek_L;
 	public ModelRenderer Breast1;
-	public ModelRenderer Breast2;	public MultiModel_SA() {
+	public ModelRenderer Breast2;		public MultiModel_SA(StringBuilder hack) {		super(hack);	}	public MultiModel_SA() {
 		this(0.0F);
 	}	public MultiModel_SA(float f) {
 		this(f, 0.0F);
@@ -290,7 +290,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 			Cheek_R.setVisible(false);
 			Cheek_L.setVisible(false);
 		}
-		int ticksExisted = littleMaidMobX.Helper.getEntityTicksExisted(entityliving);
+		int ticksExisted = littleMaidMobX.helper.Helper.getEntityTicksExisted(entityliving);
 		float f3 = (float)ticksExisted + f2 + ModelCapsHelper.getCapsValueFloat(this, entityCaps, caps_entityIdFactor);
 		float f4 = 0.0F;
 		if (ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_isLookSuger)) {

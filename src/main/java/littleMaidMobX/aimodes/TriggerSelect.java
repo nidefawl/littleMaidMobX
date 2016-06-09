@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import littleMaidMobX.Helper;
+import littleMaidMobX.helper.Helper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -77,7 +77,7 @@ public class TriggerSelect {
 	}
 
 	
-	public static boolean checkWeapon(String pUsername, String pSelector, ItemStack pItemStack) {
+	public static boolean checkItem(String pUsername, String pSelector, ItemStack pItemStack) {
 		if (!selector.contains(pSelector)) {
 			return false;
 		}

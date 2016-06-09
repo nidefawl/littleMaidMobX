@@ -5,7 +5,7 @@ import java.util.Random;
 import littleMaidMobX.entity.EntityLittleMaid;
 import littleMaidMobX.model.caps.IModelCaps;
 import littleMaidMobX.model.caps.ModelCapsHelper;
-import littleMaidMobX.model.lmm.ModelLittleMaidBase;
+import littleMaidMobX.model.maid.ModelLittleMaidBase;
 import littleMaidMobX.render.model.ModelRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityAnimal;
@@ -36,7 +36,10 @@ public class ModelLittleMaid_Beverly7 extends ModelLittleMaidBase {
 	protected byte bodyPosY;
 	protected byte legPosY;
 	protected Random rand = new Random();
-
+	
+	public ModelLittleMaid_Beverly7(StringBuilder hack) {
+		super(hack);
+	}
 	
 	public ModelLittleMaid_Beverly7() {
 		this(0F);
@@ -51,7 +54,7 @@ public class ModelLittleMaid_Beverly7 extends ModelLittleMaidBase {
 	}
 
 	@Override
-	public void initModel(float psize, float pyoffset, boolean isAfterInit)
+	public void initModel(float psize, float pyoffset)
 	{
 		offsetY = (byte)(pyoffset + 5); //Global to Local
 

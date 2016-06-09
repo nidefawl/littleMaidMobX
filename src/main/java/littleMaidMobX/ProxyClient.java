@@ -8,6 +8,7 @@ import littleMaidMobX.entity.EntityDummy;
 import littleMaidMobX.entity.EntityLittleMaid;
 import littleMaidMobX.entity.EntityLittleMaidAvatar;
 import littleMaidMobX.entity.EntitySelect;
+import littleMaidMobX.helper.Helper;
 import littleMaidMobX.network.Message;
 import littleMaidMobX.network.Net;
 import littleMaidMobX.render.RenderDummy;
@@ -31,7 +32,6 @@ public class ProxyClient extends ProxyCommon
 		RenderingRegistry.registerEntityRenderingHandler(EntityDummy.class,		new RenderDummy());
 
 	}
-
 	
 
 // Avatarr

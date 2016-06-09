@@ -3,12 +3,13 @@ package littleMaidMobX.aimodes;
 import java.util.Iterator;
 import java.util.List;
 
-import littleMaidMobX.Helper;
 import littleMaidMobX.entity.EntityLittleMaid;
+import littleMaidMobX.helper.Helper;
 import littleMaidMobX.sound.EnumSound;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAITasks;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemStack;
@@ -27,12 +28,6 @@ public class Mode_Healer extends ModeBase {
 	@Override
 	public int priority() {
 		return 3300;
-	}
-
-	@Override
-	public void init() {
-		
-		
 	}
 
 	@Override
@@ -91,8 +86,12 @@ public class Mode_Healer extends ModeBase {
 	}
 
 	@Override
-	public boolean checkItemStack(ItemStack pItemStack) {
-		return pItemStack.getItem() instanceof ItemFood || pItemStack.getItem() instanceof ItemPotion;
+	public boolean checkItemStack(ItemStack pItemStack)
+	{
+		return (pItemStack.getItem() == Items.sugar
+				|| pItemStack.getItem() instanceof ItemFood
+				|| pItemStack.getItem() instanceof ItemPotion
+				|| TriggerSelect.checkItem(owner.getMaidMaster(), "Pickup", pItemStack));
 	}
 
 	@Override

@@ -1,8 +1,8 @@
 package littleMaidMobX.model.maids;
 
-import littleMaidMobX.model.ModelMultiBase;
 import littleMaidMobX.model.caps.IModelCaps;
 import littleMaidMobX.model.caps.ModelCapsHelper;
+import littleMaidMobX.model.maid.ModelMultiBase;
 import littleMaidMobX.render.model.ModelRenderer;
 
 import org.lwjgl.opengl.GL11;
@@ -25,23 +25,27 @@ public class ModelMulti_Steve extends ModelMultiBase {
 	
 	public ModelRenderer eyeR;
 	public ModelRenderer eyeL;
+	
+	public ModelMulti_Steve(StringBuilder hack) {
+		super(hack);
+	}
 
 
 	public ModelMulti_Steve() {
 		super();
-		initModel(1, 0, true);
+		initModel(1, 0);
 	}
 	public ModelMulti_Steve(float psize) {
 		super(psize);
-		initModel(psize, 0, true);
+		initModel(psize, 0);
 	}
 	public ModelMulti_Steve(float psize, float pyoffset, int pTextureWidth, int pTextureHeight) {
 		super(psize, pyoffset, pTextureWidth, pTextureHeight);
-		initModel(psize, pyoffset, true);
+		initModel(psize, pyoffset);
 	}
 
 	@Override
-	public void initModel(float psize, float pyoffset, boolean isAfterInit) {
+	public void initModel(float psize, float pyoffset) {
 		bipedCloak = new ModelRenderer(this, 0, 0);
 		bipedCloak.addBox(-5.0F, 0.0F, -1.0F, 10, 16, 1, psize);
 		bipedEars = new ModelRenderer(this, 24, 0);

@@ -18,7 +18,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 	//public ModchuModel_ModelRenderer akuse1;
 	//public ModchuModel_ModelRenderer akuse2;
 	public ModelRenderer kataR;
-	public ModelRenderer kataL;	public MultiModel_Aokise() {
+	public ModelRenderer kataL;		public MultiModel_Aokise(StringBuilder hack) {		super(hack);	}	public MultiModel_Aokise() {
 		this(0.0F);
 	}	public MultiModel_Aokise(float f) {
 		this(f, 0.0F);

@@ -1,4 +1,4 @@
-package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.render.model.ModelRenderer;import littleMaidMobX.model.modchu.ModelModchuBaseSR2;public class MultiModel_dm extends ModelModchuBaseSR2 {
+package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.model.modchu.ModelModchuBaseSR2;import littleMaidMobX.render.model.ModelRenderer;public class MultiModel_dm extends ModelModchuBaseSR2 {
 	public ModelRenderer HornR1;
 	public ModelRenderer HornR2;
 	public ModelRenderer HornR3;
@@ -37,7 +37,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 	public ModelRenderer BribonL;
 	public ModelRenderer Breast1;
 	public ModelRenderer Cheek_R;
-	public ModelRenderer Cheek_L;	public MultiModel_dm() {
+	public ModelRenderer Cheek_L;		public MultiModel_dm(StringBuilder hack) {		super(hack);	}	public MultiModel_dm() {
 		this(0.0F);
 	}	public MultiModel_dm(float f) {
 		this(f, 0.0F);

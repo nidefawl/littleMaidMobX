@@ -1,4 +1,4 @@
-package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.render.model.ModelRenderer;import littleMaidMobX.model.modchu.ModelModchuBaseSR2;public class MultiModel_ch extends ModelModchuBaseSR2 {
+package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.model.modchu.ModelModchuBaseSR2;import littleMaidMobX.render.model.ModelRenderer;public class MultiModel_ch extends ModelModchuBaseSR2 {
 	public ModelRenderer Headwear;
 	public ModelRenderer HairR1;
 	public ModelRenderer HairR2;
@@ -59,7 +59,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 	public ModelRenderer Okan_e5;
 	public ModelRenderer Okan_e6;
 	public ModelRenderer Okan_e7;
-	public ModelRenderer Okan_e8;	public MultiModel_ch() {
+	public ModelRenderer Okan_e8;		public MultiModel_ch(StringBuilder hack) {		super(hack);	}	public MultiModel_ch() {
 		this(0.0F);
 	}	public MultiModel_ch(float f) {
 		this(f, 0.0F);

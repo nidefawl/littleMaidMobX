@@ -1,4 +1,4 @@
-package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.render.model.ModelRenderer;import littleMaidMobX.model.modchu.ModelModchuBaseSR2;public class MultiModel_Utsuho extends ModelModchuBaseSR2 {	public ModelRenderer Prim;
+package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.model.modchu.ModelModchuBaseSR2;import littleMaidMobX.render.model.ModelRenderer;public class MultiModel_Utsuho extends ModelModchuBaseSR2 {	public ModelRenderer Prim;
 	public ModelRenderer WingLroot;
 	public ModelRenderer WingL2;
 	public ModelRenderer WingL3;
@@ -62,7 +62,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 	public ModelRenderer HipL;	private float x1;
 	private float y1;
 	private float z1;
-	private float IdOffset;	public MultiModel_Utsuho() {
+	private float IdOffset;		public MultiModel_Utsuho(StringBuilder hack) {		super(hack);	}	public MultiModel_Utsuho() {
 		this(0.0F);
 	}	public MultiModel_Utsuho(float f) {
 		this(f, 0.0F);
@@ -456,16 +456,16 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 		HeadTop.setRotationPoint(0.0F, -7.0F, 0.0F);
 		WingLroot.rotateAngleX = 1.570796313F;
 		WingRroot.rotateAngleX = 1.570796313F;
-		WingLroot.rotateAngleY = littleMaidMobX.Helper.cos(f2 * 0.5F) * 0.22F + 0.35F;
+		WingLroot.rotateAngleY = littleMaidMobX.helper.Helper.cos(f2 * 0.5F) * 0.22F + 0.35F;
 		WingRroot.rotateAngleY = -WingLroot.rotateAngleY;
-		Ahoge.rotateAngleY = littleMaidMobX.Helper.cos(f2 * 0.2F + littleMaidMobX.Helper.cos(f2 * 0.05F + IdOffset) * 1.0F) * 0.2F;
+		Ahoge.rotateAngleY = littleMaidMobX.helper.Helper.cos(f2 * 0.2F + littleMaidMobX.helper.Helper.cos(f2 * 0.05F + IdOffset) * 1.0F) * 0.2F;
 		Ahoge.rotateAngleX = 2.9F;
-		Circle1.rotationPointX = x1 + littleMaidMobX.Helper.cos(f2 * 0.3F + IdOffset) * 3F;
-		Circle1.rotationPointZ = z1 + littleMaidMobX.Helper.cos(f2 * 0.3F + ((float) Math.PI / 2F) + IdOffset) * 3F;
-		Circle1.rotationPointY = y1 + littleMaidMobX.Helper.cos(f2 * 0.37F + IdOffset) * 1.5F;
-		Circle2.rotationPointX = x1 + littleMaidMobX.Helper.cos(f2 * 0.3F + 2.5F + IdOffset) * 3F;
-		Circle2.rotationPointZ = z1 + littleMaidMobX.Helper.cos(f2 * 0.3F + 2.5F + ((float) Math.PI / 2F) + IdOffset) * 3F;
-		Circle2.rotationPointY = y1 - littleMaidMobX.Helper.cos(f2 * 0.37F + 2.5F + IdOffset) * 1.5F;		if (ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_aimedBow)) {
+		Circle1.rotationPointX = x1 + littleMaidMobX.helper.Helper.cos(f2 * 0.3F + IdOffset) * 3F;
+		Circle1.rotationPointZ = z1 + littleMaidMobX.helper.Helper.cos(f2 * 0.3F + ((float) Math.PI / 2F) + IdOffset) * 3F;
+		Circle1.rotationPointY = y1 + littleMaidMobX.helper.Helper.cos(f2 * 0.37F + IdOffset) * 1.5F;
+		Circle2.rotationPointX = x1 + littleMaidMobX.helper.Helper.cos(f2 * 0.3F + 2.5F + IdOffset) * 3F;
+		Circle2.rotationPointZ = z1 + littleMaidMobX.helper.Helper.cos(f2 * 0.3F + 2.5F + ((float) Math.PI / 2F) + IdOffset) * 3F;
+		Circle2.rotationPointY = y1 - littleMaidMobX.helper.Helper.cos(f2 * 0.37F + 2.5F + IdOffset) * 1.5F;		if (ModelCapsHelper.getCapsValueBoolean(this, entityCaps, caps_aimedBow)) {
 			WingLroot.rotateAngleX += 0.5F;
 			WingRroot.rotateAngleX += 0.5F;
 			WingLroot.rotateAngleY = -0.3F;

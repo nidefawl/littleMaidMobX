@@ -17,7 +17,7 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 	public ModelRenderer KeloeyeL2;
 	public ModelRenderer KeloeyeR2;	public ModelRenderer headwear;
 	public ModelRenderer rightHandPlus;
-	public ModelRenderer leftHandPlus;	public MultiModel_Kelo() {
+	public ModelRenderer leftHandPlus;		public MultiModel_Kelo(StringBuilder hack) {		super(hack);	}	public MultiModel_Kelo() {
 		this(0.0F);
 	}	public MultiModel_Kelo(float f) {
 		this(f, 0.0F);
@@ -221,8 +221,8 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 	public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, IModelCaps entityCaps) {
 		super.setRotationAnglesLM(f, f1, f2, f3, f4, f5, entityCaps);
 		mainFrame.setRotationPoint(0F, 0F, 0F);
-		bipedRightLeg.rotateAngleX = (littleMaidMobX.Helper.cos(f * 0.6662F) * 1.4F * f1) / 1.5F;
-		bipedLeftLeg.rotateAngleX = (littleMaidMobX.Helper.cos(f * 0.6662F + 3.141593F) * 1.4F * f1) / 1.5F;
+		bipedRightLeg.rotateAngleX = (littleMaidMobX.helper.Helper.cos(f * 0.6662F) * 1.4F * f1) / 1.5F;
+		bipedLeftLeg.rotateAngleX = (littleMaidMobX.helper.Helper.cos(f * 0.6662F + 3.141593F) * 1.4F * f1) / 1.5F;
 		setCapsValue(entityCaps, caps_visible, KeloeyeL1, true);
 		setCapsValue(entityCaps, caps_visible, KeloeyeR1, true);
 		setCapsValue(entityCaps, caps_visible, KeloeyeL2, false);
@@ -235,10 +235,10 @@ package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps
 //			setRotationAnglesGulliverBefore(f, f1, f2, f3, f4, f5, entityCaps);
 		}
 		if (armSwingFlag(entityCaps)) {
-			bipedRightArm.rotationPointZ = littleMaidMobX.Helper.sin(bipedBody.rotateAngleY) * 4F;
-			bipedRightArm.rotationPointX = -littleMaidMobX.Helper.cos(bipedBody.rotateAngleY) * 3.5F + 1.0F;
-			bipedLeftArm.rotationPointZ = -littleMaidMobX.Helper.sin(bipedBody.rotateAngleY) * 4F;
-			bipedLeftArm.rotationPointX = littleMaidMobX.Helper.cos(bipedBody.rotateAngleY) * 3.5F - 1.0F;
+			bipedRightArm.rotationPointZ = littleMaidMobX.helper.Helper.sin(bipedBody.rotateAngleY) * 4F;
+			bipedRightArm.rotationPointX = -littleMaidMobX.helper.Helper.cos(bipedBody.rotateAngleY) * 3.5F + 1.0F;
+			bipedLeftArm.rotationPointZ = -littleMaidMobX.helper.Helper.sin(bipedBody.rotateAngleY) * 4F;
+			bipedLeftArm.rotationPointX = littleMaidMobX.helper.Helper.cos(bipedBody.rotateAngleY) * 3.5F - 1.0F;
 		}
 		Skirt.rotationPointY = 10.0F;
 		bipedHead.rotationPointY =

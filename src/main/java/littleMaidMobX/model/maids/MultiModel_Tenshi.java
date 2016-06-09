@@ -1,4 +1,4 @@
-package littleMaidMobX.model.maids;import net.minecraft.inventory.IInventory;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.render.model.ModelRenderer;import littleMaidMobX.model.modchu.ModelModchuBaseSR2;public class MultiModel_Tenshi extends ModelModchuBaseSR2 {	public ModelRenderer Skirt1;
+package littleMaidMobX.model.maids;import littleMaidMobX.model.caps.IModelCaps;import littleMaidMobX.model.caps.ModelCapsHelper;import littleMaidMobX.model.modchu.ModelModchuBaseSR2;import littleMaidMobX.render.model.ModelRenderer;public class MultiModel_Tenshi extends ModelModchuBaseSR2 {	public ModelRenderer Skirt1;
 	public ModelRenderer Skirt2;
 	public ModelRenderer Skirt3;
 	public ModelRenderer Skirt4;
@@ -91,7 +91,7 @@ package littleMaidMobX.model.maids;import net.minecraft.inventory.IInventory;
 	public ModelRenderer PlateL5;
 	public ModelRenderer PlateL6;	private float x1;
 	private float y1;
-	private float z1;	public MultiModel_Tenshi() {
+	private float z1;		public MultiModel_Tenshi(StringBuilder hack) {		super(hack);	}	public MultiModel_Tenshi() {
 		this(0.0F);
 	}	public MultiModel_Tenshi(float f) {
 		this(f, 0.0F);
